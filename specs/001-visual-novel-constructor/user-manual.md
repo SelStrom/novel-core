@@ -43,6 +43,22 @@ Let's get started! 🎮
 
 ## Getting Started
 
+### Unity Project Location
+
+Your Unity project is located in the `novel-core` folder. This is where all your game files, scripts, and assets are stored.
+
+```
+novel-core/                 # Your Unity project (repository root)
+├── Assets/                 # Game assets and code
+│   ├── Scripts/            # C# scripts
+│   ├── Content/            # Your visual novel content
+│   └── Resources/          # Game resources
+├── Packages/               # Unity packages
+└── ProjectSettings/        # Project configuration
+```
+
+**For Developers**: Ask your developer to set up the Unity project if not already done.
+
 ### Opening the Constructor
 
 1. **Launch Unity** (the program your developer installed for you)

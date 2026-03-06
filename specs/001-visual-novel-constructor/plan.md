@@ -11,6 +11,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 
 ## Technical Context
 
+**Unity Project Location**: `./novel-core` (repository root)  
 **Language/Version**: C# 9.0+ / Unity 2022.3 LTS (Long Term Support)  
 **Primary Dependencies**: Unity Addressables 1.21+, VContainer 1.14+, Spine-Unity 4.1+, Steamworks.NET 20.2+, Unity Localization 1.4+  
 **Rendering Pipeline**: Built-in Render Pipeline (per user requirement)  

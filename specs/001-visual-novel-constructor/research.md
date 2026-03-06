@@ -10,6 +10,36 @@ This document captures research findings and technical decisions for building a 
 
 ## Technology Stack Decisions
 
+### Project Structure & Location
+
+**Decision**: Unity project located at repository root (`./novel-core`)
+
+**Rationale**:
+- Unity expects `Assets/`, `Packages/`, and `ProjectSettings/` folders at project root
+- Simplifies path references (no nested project folder)
+- Standard Unity project structure
+- `.specify/` and `specs/` folders coexist with Unity folders at root level
+
+**Project Layout**:
+```
+novel-core/                 # Repository & Unity project root
+├── .specify/               # Spec system files
+├── specs/                  # Feature specifications
+├── Assets/                 # Unity assets folder
+│   ├── Scripts/            # All C# code (AI can modify)
+│   ├── Content/            # User content (Addressables)
+│   └── Resources/          # Runtime-loaded resources
+├── Packages/               # Unity packages
+├── ProjectSettings/        # Unity project settings
+├── Library/                # Unity cache (gitignored)
+├── Temp/                   # Unity temp files (gitignored)
+└── Builds/                 # Build output (gitignored)
+```
+
+**Alternatives Considered**:
+- Nested Unity project (e.g., `novel-core/UnityProject/`): Rejected - adds unnecessary path complexity
+- Separate repositories: Rejected - harder to maintain docs + code synchronization
+
 ### Unity Version & Rendering
 
 **Decision**: Unity 2022.3 LTS with Built-in Render Pipeline
