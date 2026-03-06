@@ -86,6 +86,7 @@ git checkout 001-visual-novel-constructor
 
 1. Click "+" → "Add package by name"
 2. Enter each package:
+   - `com.unity.render-pipelines.universal` (URP - add first!)
    - `com.unity.addressables`
    - `com.unity.localization`
    - `com.unity.inputsystem`
@@ -109,12 +110,17 @@ git checkout 001-visual-novel-constructor
 
 ### 4. Configure Project Settings
 
+**Rendering Pipeline** (Edit → Project Settings → Graphics):
+- Install URP package via Package Manager first (see step 3)
+- Create URP Asset: Right-click Project → Create → Rendering → URP Asset (2D Renderer)
+- Go to Edit → Project Settings → Graphics
+- Set "Scriptable Render Pipeline Settings" to your new URP Asset
+
 **Scripting Backend** (Edit → Project Settings → Player):
-- Switch to IL2CPP for all platforms (constitution requirement)
-- Windows: Player → Other Settings → Scripting Backend → IL2CPP
-- macOS: Same as Windows
-- iOS: IL2CPP (default, required by Apple)
-- Android: IL2CPP
+- **Windows**: Player → Other Settings → Scripting Backend → **Mono**
+- **macOS**: Player → Other Settings → Scripting Backend → IL2CPP
+- **iOS**: IL2CPP (default, required by Apple)
+- **Android**: IL2CPP
 
 **Input System** (Edit → Project Settings → Player):
 - Active Input Handling: "Input System Package (New)"

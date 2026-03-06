@@ -9,6 +9,7 @@ alwaysApply: true
 Auto-generated from all feature plans. Last updated: 2026-03-06
 
 ## Active Technologies
+- JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings (001-visual-novel-constructor)
 
 - C# 9.0+ / Unity 2022.3 LTS (Long Term Support) + Unity Addressables 1.21+, VContainer 1.14+, Spine-Unity 4.1+, Steamworks.NET 20.2+, Unity Localization 1.4+ (001-visual-novel-constructor)
 
@@ -28,6 +29,7 @@ tests/
 C# 9.0+ / Unity 2022.3 LTS (Long Term Support): Follow standard conventions
 
 ## Recent Changes
+- 001-visual-novel-constructor: Added C# 9.0+ / Unity 2022.3 LTS (Long Term Support) + Unity Addressables 1.21+, VContainer 1.14+, Spine-Unity 4.1+, Steamworks.NET 20.2+, Unity Localization 1.4+
 
 - 001-visual-novel-constructor: Added C# 9.0+ / Unity 2022.3 LTS (Long Term Support) + Unity Addressables 1.21+, VContainer 1.14+, Spine-Unity 4.1+, Steamworks.NET 20.2+, Unity Localization 1.4+
 

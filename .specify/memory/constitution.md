@@ -1,14 +1,15 @@
 <!--
 Sync Impact Report:
-- Version: 1.1.0 → 1.1.1 (Added C# code style standards)
+- Version: 1.1.1 → 1.1.2 (Technical requirements clarification)
 - Modified Principles: None
 - Added Principles: None
 - Removed Principles: None
-- Added Sections:
-  - Code Style Standards (C# formatting rules)
+- Modified Sections:
+  - Technical Requirements: Updated rendering (Built-in → URP 2D) and scripting backend (IL2CPP all → Mono for Windows, IL2CPP for others)
+- Added Sections: None
 - Removed Sections: None
 - Templates Status:
-  ✅ plan-template.md - no changes needed (style enforcement at code level)
+  ✅ plan-template.md - no changes needed
   ✅ spec-template.md - no changes needed
   ✅ tasks-template.md - no changes needed
 - Follow-up TODOs: None (all updates complete)
@@ -123,9 +124,9 @@ AI-assisted development tools MUST operate within strict boundaries to prevent U
 ### Technical Requirements
 
 - **Unity Version**: Target Unity LTS version (currently 2022.3 LTS or later)
-- **Rendering**: Universal Render Pipeline (URP) for cross-platform performance
-- **Scripting Backend**: IL2CPP for iOS, desktop and Android. Mono not allowed
-- **Asset Optimization**: Automatic texture compression, audio compression, mesh optimization per platform.
+- **Rendering**: Universal Render Pipeline (URP) 2D for cross-platform performance
+- **Scripting Backend**: Mono for Windows, IL2CPP for macOS/iOS/Android
+- **Asset Optimization**: Automatic texture compression, audio compression, mesh optimization per platform
 - **Build Size**: Target < 50MB initial download for mobile (streaming additional assets)
 
 ## Quality Assurance Standards
@@ -331,4 +332,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.1.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
+**Version**: 1.1.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06

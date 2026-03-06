@@ -66,12 +66,13 @@ Read the developer guide: `specs/001-visual-novel-constructor/quickstart.md`
 
 - **Engine**: Unity 2022.3 LTS
 - **Language**: C# 9.0+
-- **Rendering**: Built-in Render Pipeline
+- **Rendering**: Universal Render Pipeline (URP) 2D
 - **Asset Management**: Unity Addressables 1.21+
 - **Dependency Injection**: VContainer 1.14+
 - **Animation**: Unity Animator + Spine-Unity 4.1+
 - **Localization**: Unity Localization 1.4+
 - **Platform SDKs**: Steamworks.NET 20.2+ (Steam), iOS/Android native
+- **Scripting Backend**: Mono (Windows), IL2CPP (macOS/iOS/Android)
 
 ## Code Style
 

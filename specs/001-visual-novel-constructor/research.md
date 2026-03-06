@@ -42,18 +42,27 @@ novel-core/                 # Repository & Unity project root
 
 ### Unity Version & Rendering
 
-**Decision**: Unity 2022.3 LTS with Built-in Render Pipeline
+**Decision**: Unity 2022.3 LTS with Universal Render Pipeline (URP) 2D
 
 **Rationale**:
 - LTS ensures 2+ years of support and bug fixes without forced upgrades
-- Built-in pipeline specified by user requirement
-- Lower overhead than URP/HDRP for 2D visual novel rendering
-- Broader device compatibility (older mobile devices, integrated GPUs)
-- Established tooling and documentation for 2D workflows
+- URP is Unity's modern rendering solution with better performance than Built-in
+- URP 2D specifically optimized for 2D games and visual novels
+- Better batching and performance on mobile devices
+- Future-proof: Unity is deprecating Built-in pipeline in favor of URP/HDRP
+- Consistent rendering behavior across all platforms
+- Better shader graph support for custom effects
 
 **Alternatives Considered**:
-- URP: Constitution requires URP, but user explicitly requested Built-in pipeline. User requirement takes precedence for this decision. Will monitor performance and reconsider if cross-platform parity suffers.
+- Built-in Pipeline: Older, less optimized, being phased out by Unity
+- HDRP: Overkill for 2D visual novels, heavier performance cost
 - Unity 6 (latest): Too new, lacks LTS stability guarantees
+
+**URP 2D Benefits for Visual Novels**:
+- 2D Lights support for atmospheric effects (optional)
+- Sprite batching optimizations
+- Post-processing stack for screen effects (fade, blur, etc.)
+- Lower draw call overhead compared to Built-in
 
 ### Asset Management System
 
@@ -158,17 +167,37 @@ public interface IAudioService {
 
 ### Scripting Backend
 
-**Decision**: IL2CPP for all platforms
+**Decision**: Mono for Windows, IL2CPP for macOS/iOS/Android
 
 **Rationale**:
-- Constitution requires IL2CPP (Principle II - cross-platform parity)
-- iOS requires IL2CPP (Apple App Store policy)
-- Better performance than Mono on mobile (AOT compilation)
-- Reduces platform-specific bugs (consistent bytecode across platforms)
+- **Mono (Windows)**: Faster iteration and build times during development
+  - JIT compilation enables faster startup and hot reload
+  - Better debugging experience (edit-and-continue support)
+  - Reflection works without restrictions
+  - No pre-compilation delay
+  - Steam Windows builds work perfectly with Mono
+  
+- **IL2CPP (Other platforms)**:
+  - iOS requires IL2CPP (Apple App Store policy, no JIT allowed)
+  - Better performance on mobile (AOT compilation)
+  - Smaller binary size on mobile
+  - More consistent behavior across mobile platforms
+
+**Platform-Specific Rationale**:
+- Windows (Steam): Mono preferred for development speed, no security concerns on PC
+- macOS (Steam): IL2CPP for consistency with mobile, smaller build size
+- iOS: IL2CPP mandatory (Apple requirement)
+- Android: IL2CPP for performance parity with iOS
 
 **Trade-offs**:
-- Slower build times (acceptable for release builds)
-- Limited reflection (acceptable - we use interfaces and ScriptableObjects)
+- Slower IL2CPP builds acceptable for release builds (not during daily development)
+- Limited reflection on IL2CPP platforms (acceptable - we use interfaces and ScriptableObjects)
+- Must test on both Mono and IL2CPP to catch platform-specific issues
+
+**Testing Strategy**:
+- Development: Use Mono for fast iteration on Windows
+- CI/CD: Build with IL2CPP for all platforms to catch compatibility issues
+- Pre-release: Full testing on IL2CPP builds for all platforms
 
 ### Testing Framework
 
@@ -273,11 +302,21 @@ public interface ISaveUpgrader {
 **Target**: 60 FPS on iPhone 12 / Intel HD 620 (Principle IV)
 
 **Strategies**:
-1. **Sprite Atlasing**: Batch character sprites + UI into atlases (reduce draw calls)
-2. **Layer Culling**: Only render visible UI layers
-3. **Overdraw Minimization**: Z-ordering backgrounds behind characters, transparent pixel discard
-4. **Shader Simplicity**: Unlit shaders for sprites (no lighting calculations)
-5. **Resolution Scaling**: Dynamic resolution on low-end devices (maintain 60 FPS)
+1. **URP 2D Optimizations**:
+   - 2D Renderer profile with sprite batching
+   - Single Camera setup (no camera stacking overhead)
+   - Post-processing disabled by default (enable only for transitions)
+   - 2D Light disabled by default (optional atmospheric effects)
+2. **Sprite Atlasing**: Batch character sprites + UI into atlases (reduce draw calls)
+3. **Layer Culling**: Only render visible UI layers
+4. **Overdraw Minimization**: Z-ordering backgrounds behind characters, transparent pixel discard
+5. **Shader Simplicity**: Unlit shaders for sprites (no lighting calculations)
+6. **Resolution Scaling**: Dynamic resolution on low-end devices (maintain 60 FPS)
+
+**URP Benefits**:
+- Better sprite batching than Built-in pipeline
+- SRP Batcher for consistent draw call performance
+- Faster culling and rendering on mobile GPUs
 
 ### Build Size Optimization
 
