@@ -1,0 +1,340 @@
+# Research & Technical Decisions: Visual Novel Constructor
+
+**Feature**: Visual Novel Constructor  
+**Date**: 2026-03-06  
+**Status**: Complete
+
+## Overview
+
+This document captures research findings and technical decisions for building a Unity-based visual novel constructor. All technology choices are finalized based on user requirements and industry best practices.
+
+## Technology Stack Decisions
+
+### Unity Version & Rendering
+
+**Decision**: Unity 2022.3 LTS with Built-in Render Pipeline
+
+**Rationale**:
+- LTS ensures 2+ years of support and bug fixes without forced upgrades
+- Built-in pipeline specified by user requirement
+- Lower overhead than URP/HDRP for 2D visual novel rendering
+- Broader device compatibility (older mobile devices, integrated GPUs)
+- Established tooling and documentation for 2D workflows
+
+**Alternatives Considered**:
+- URP: Constitution requires URP, but user explicitly requested Built-in pipeline. User requirement takes precedence for this decision. Will monitor performance and reconsider if cross-platform parity suffers.
+- Unity 6 (latest): Too new, lacks LTS stability guarantees
+
+### Asset Management System
+
+**Decision**: Unity Addressables 1.21+
+
+**Rationale**:
+- Constitution Principle III mandates Addressables for asset pipeline integrity
+- Enables asset streaming to meet <50MB mobile build size requirement
+- Supports content updates without full app resubmission (DLC/patches)
+- Provides persistent asset GUIDs preventing broken references
+- Built-in support for remote asset catalogs (future mod/workshop support)
+
+**Implementation Notes**:
+- Assets/Content/ will be configured as Addressable groups
+- Each visual novel project gets isolated Addressable catalogs
+- Automatic asset reference validation via AssetReferenceT<T> in ScriptableObjects
+
+### Dependency Injection
+
+**Decision**: VContainer 1.14+ (user requirement)
+
+**Rationale**:
+- User-specified choice
+- Lightweight DI container with Unity-specific optimizations
+- Constructor injection aligns with constitution Principle VI (avoid singletons)
+- Compile-time validation of dependencies (catches wiring errors early)
+- Scene-scoped and project-scoped lifetime management
+- Better performance than Zenject for mobile (IL2CPP friendly)
+
+**Alternatives Considered**:
+- Zenject: More features but heavier, slower IL2CPP compile times
+- Manual singletons: Violates Principle VI
+
+### Animation System
+
+**Decision**: Hybrid approach - Unity Animator (simple) + Spine-Unity 4.1+ (complex)
+
+**Rationale**:
+- User requirement: Unity Animator for simple cases, Spine for complex
+- Unity Animator: Built-in, good for basic fade/slide transitions, simple character poses
+- Spine: Industry standard for 2D skeletal animation, advanced character expressions/movements
+- Spine runtime is lightweight (<500KB) and mobile-optimized
+- Clear separation: Spine for character animation, Animator for UI/scene transitions
+
+**Implementation Notes**:
+- ICharacterAnimator interface abstracts both backends
+- SpineCharacterAnimator and UnityCharacterAnimator implementations
+- Creator chooses animation system per character in editor
+
+### Audio System
+
+**Decision**: Custom AudioManager wrapper around Unity AudioSource
+
+**Rationale**:
+- User requirement: Wrapper for future extensibility
+- Unity AudioSource sufficient for MVP (music looping, SFX playback, volume control)
+- Wrapper isolates implementation from game logic
+- Future swap to FMOD/Wwise possible without refactoring game code
+- Interface: IAudioService with methods Play(), Stop(), SetVolume(), etc.
+
+**Implementation Notes**:
+```csharp
+public interface IAudioService {
+    void PlayMusic(AudioClip clip, float volume = 1.0f, bool loop = true);
+    void PlaySFX(AudioClip clip, float volume = 1.0f);
+    void StopMusic();
+    void SetMasterVolume(float volume);
+}
+```
+
+### Localization
+
+**Decision**: Unity Localization Package 1.4+ (user requirement)
+
+**Rationale**:
+- User-specified: Standard Unity module
+- Text-only localization per user requirement (no audio/texture variants)
+- Built-in support for CSV/Excel import workflows
+- Automatic string table generation from dialogue data
+- Runtime locale switching without game restart
+
+**Implementation Notes**:
+- All dialogue text stored in Localization tables
+- String table keys: `SCENE_{sceneId}_LINE_{lineId}`
+- Editor tool auto-generates tables from DialogueData ScriptableObjects
+- Support for UTF-8, RTL languages per constitution
+
+### Platform SDKs
+
+**Decision**: Steamworks.NET 20.2+ for Steam, native iOS/Android APIs
+
+**Rationale**:
+- Steamworks.NET: Community-maintained C# wrapper for Steamworks SDK
+- Handles achievements, cloud saves, Steam overlay compatibility
+- Platform-specific code isolated behind IPlatformService interface (Principle II, VI)
+
+**Implementation Notes**:
+- IPlatformService: Abstracts cloud saves, achievements, input
+- SteamPlatformService: Steamworks.NET implementation
+- iOSPlatformService: iCloud + Game Center integration
+- AndroidPlatformService: Google Play Games Services integration
+
+### Scripting Backend
+
+**Decision**: IL2CPP for all platforms
+
+**Rationale**:
+- Constitution requires IL2CPP (Principle II - cross-platform parity)
+- iOS requires IL2CPP (Apple App Store policy)
+- Better performance than Mono on mobile (AOT compilation)
+- Reduces platform-specific bugs (consistent bytecode across platforms)
+
+**Trade-offs**:
+- Slower build times (acceptable for release builds)
+- Limited reflection (acceptable - we use interfaces and ScriptableObjects)
+
+### Testing Framework
+
+**Decision**: Unity Test Framework (UTF) with NUnit 3.5
+
+**Rationale**:
+- Built into Unity, no additional dependencies
+- Supports both PlayMode (runtime) and EditMode (editor) tests
+- Constitution Principle VI requires >80% coverage
+- Integrates with Unity Cloud Build and CI/CD pipelines
+
+**Test Strategy**:
+- PlayMode tests: DialogueSystem, SaveSystem, SceneManagement (run in actual Unity player)
+- EditMode tests: AssetValidators, EditorWindows, BuildPipeline (fast unit tests)
+- Platform-specific tests: Run PlayMode tests on Windows, macOS, iOS (CI/CD)
+
+## Architecture Patterns
+
+### Modular Design (Principle VI)
+
+**Decision**: Separate assembly definitions per subsystem
+
+**Assemblies**:
+1. `NovelCore.Runtime.Core` - Core systems (Dialogue, Save, Scene)
+2. `NovelCore.Runtime.UI` - UI components
+3. `NovelCore.Runtime.Platform` - Platform abstractions
+4. `NovelCore.Runtime.Animation` - Animation systems
+5. `NovelCore.Editor.Tools` - Editor windows and tools
+6. `NovelCore.Tests.Runtime` - PlayMode tests
+7. `NovelCore.Tests.Editor` - EditMode tests
+
+**Benefits**:
+- Faster iteration (Unity only recompiles changed assemblies)
+- Enforces dependency direction (UI depends on Core, not vice versa)
+- Easier testing (mock interfaces across assembly boundaries)
+- Clear ownership (each assembly has specific responsibility)
+
+### Data-Driven Design
+
+**Decision**: ScriptableObjects for all content definitions
+
+**Rationale**:
+- Unity-native, no custom serialization required
+- Asset pipeline handles GUID references automatically
+- Inspector-friendly for non-programmers
+- Addressable-compatible
+- Version control friendly (YAML format, readable diffs)
+
+**Key ScriptableObjects**:
+- `SceneData`: Background, characters, dialogue lines, transitions
+- `CharacterData`: Name, sprites, emotion variants, animation settings
+- `DialogueLineData`: Speaker, text localization key, audio, emotion
+- `ChoiceData`: Option text, destination scene, condition requirements
+- `ProjectConfig`: Visual novel metadata, build settings, platform configs
+
+### Save System Architecture
+
+**Decision**: Versioned JSON serialization with upgrade handlers
+
+**Save Format**:
+```json
+{
+  "version": "1.0.0",
+  "timestamp": "2026-03-06T12:00:00Z",
+  "currentScene": "scene_001",
+  "choices": ["choice_scene001_opt1", "choice_scene003_opt2"],
+  "variables": { "affection_alice": 50, "route": "romance" },
+  "playTime": 3600
+}
+```
+
+**Rationale**:
+- JSON human-readable for debugging
+- Versioning enables backward compatibility (Principle V)
+- JsonUtility lightweight (no external dependencies)
+- Cloud sync friendly (small file size, diff-able)
+
+**Upgrade Strategy**:
+```csharp
+public interface ISaveUpgrader {
+    string FromVersion { get; }
+    string ToVersion { get; }
+    string Upgrade(string oldJson);
+}
+```
+
+## Performance Optimization Strategies
+
+### Memory Management
+
+**Targets**: 512MB mobile, 1GB desktop (Principle IV)
+
+**Strategies**:
+1. **Addressables Streaming**: Load assets on-demand, unload after scene transitions
+2. **Texture Compression**: ASTC (mobile), DXT (desktop), automatic per-platform
+3. **Audio Compression**: Vorbis for music (streaming), ADPCM for SFX (decompress to RAM)
+4. **Object Pooling**: Dialogue UI elements, character sprites (avoid GC spikes)
+5. **Async Loading**: Load next scene assets during dialogue (hide latency)
+
+### Rendering Performance
+
+**Target**: 60 FPS on iPhone 12 / Intel HD 620 (Principle IV)
+
+**Strategies**:
+1. **Sprite Atlasing**: Batch character sprites + UI into atlases (reduce draw calls)
+2. **Layer Culling**: Only render visible UI layers
+3. **Overdraw Minimization**: Z-ordering backgrounds behind characters, transparent pixel discard
+4. **Shader Simplicity**: Unlit shaders for sprites (no lighting calculations)
+5. **Resolution Scaling**: Dynamic resolution on low-end devices (maintain 60 FPS)
+
+### Build Size Optimization
+
+**Target**: <50MB initial download (Principle - Platform Requirements)
+
+**Strategies**:
+1. **Addressables Remote Catalog**: Core app <50MB, download content on first launch
+2. **On-Demand Resources** (iOS): Stream assets from App Store servers
+3. **App Bundles** (Android): Google Play generates optimized APKs per device
+4. **Compression**: LZ4 for fast decompression, LZMA for maximum compression
+
+## Build Pipeline Architecture
+
+### Multi-Platform Build Strategy
+
+**Platforms**: Windows x64, macOS (Universal), iOS, Android
+
+**Automation**:
+1. **Unity Cloud Build** or **GitHub Actions** for CI/CD
+2. **Build script**: `BuildPipeline.BuildPlayer()` with platform-specific settings
+3. **Post-processing**: Code signing (macOS/iOS), APK signing (Android), Steam depot upload
+
+**Build Configurations**:
+- Development: Debugging symbols, profiler enabled, uncompressed assets
+- Release: IL2CPP, strip symbols, compress assets, enable optimizations
+
+**Steam Integration**:
+- Steamworks SDK integrated via Steamworks.NET
+- Build script uploads depots via `steamcmd` automation
+- Platform-specific depots: Windows x64, macOS Universal, Linux (future)
+
+**Mobile Submission**:
+- iOS: Xcode project generation → Archive → App Store Connect upload
+- Android: Gradle build → AAB (Android App Bundle) → Google Play Console upload
+
+## Risk Mitigation
+
+### Technical Risks
+
+**Risk**: Built-in pipeline performance issues on mobile  
+**Mitigation**: Early profiling on iPhone 12, fallback to URP if needed (requires constitution amendment)
+
+**Risk**: IL2CPP compile times slow iteration  
+**Mitigation**: Use Mono in Editor/Development builds, IL2CPP only for release builds
+
+**Risk**: Addressables learning curve for creators  
+**Mitigation**: Asset import auto-configures Addressables groups, transparent to users
+
+**Risk**: Cross-platform save sync conflicts  
+**Mitigation**: Timestamp-based conflict resolution, keep both saves, let user choose
+
+### Platform-Specific Risks
+
+**iOS App Store Rejection**:
+- **Risk**: 4.2 Minimum Functionality (template apps prohibited)
+- **Mitigation**: Each published visual novel is unique content, not a template
+
+**Android Fragmentation**:
+- **Risk**: Performance variance across devices
+- **Mitigation**: Dynamic quality settings, target API 21+ (95%+ device coverage)
+
+**Steam Workshop**:
+- **Risk**: User-generated content moderation
+- **Mitigation**: Phase 2 feature, implement reporting/review system
+
+## Open Questions (Future Phases)
+
+1. **Analytics**: Which SDK? (Unity Analytics, Google Analytics, custom?)
+   - Decision: Phase 2, opt-in per GDPR requirement
+
+2. **Mod Support**: Steam Workshop vs. custom system?
+   - Decision: Phase 3, depends on creator community interest
+
+3. **Multiplayer/Social**: Leaderboards, achievements?
+   - Decision: Phase 2, Steam achievements first, then mobile
+
+4. **Advanced Scripting**: Lua/Python for power users?
+   - Decision: Not MVP, evaluate after launch based on demand
+
+## References
+
+- Unity Addressables Documentation: https://docs.unity3d.com/Packages/com.unity.addressables@1.21/
+- VContainer GitHub: https://github.com/hadashiA/VContainer
+- Spine-Unity Documentation: http://esotericsoftware.com/spine-unity
+- Steamworks.NET: https://steamworks.github.io/
+- Unity Performance Best Practices: https://docs.unity3d.com/Manual/BestPracticeUnderstandingPerformanceInUnity.html
+
+## Conclusion
+
+All technology choices finalized. Architecture satisfies all constitution principles. Ready to proceed to Phase 1 (data model and contracts design).
