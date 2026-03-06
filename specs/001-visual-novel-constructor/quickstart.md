@@ -37,7 +37,29 @@ jp.hadashikick.vcontainer (1.14+) - Install via OpenUPM or git URL
 
 ## Project Setup
 
-### 1. Clone Repository
+### 1. Unity Project Location
+
+The Unity project is located at the repository root:
+
+```
+novel-core/                 # Repository root = Unity project root
+├── Assets/                 # Unity Assets folder
+│   ├── Scripts/            # All C# code (AI-modifiable)
+│   ├── Content/            # User content (Addressables source)
+│   ├── Resources/          # Runtime-loaded assets
+│   └── StreamingAssets/    # Addressables catalog
+├── Packages/               # Unity packages
+├── ProjectSettings/        # Unity project settings
+├── .specify/               # Spec documentation
+├── specs/                  # Feature specifications
+└── README.md               # Project readme
+```
+
+**Important**: When opening in Unity, select the `novel-core` folder (repository root), not a subfolder.
+
+### 2. Clone Repository
+
+### 2. Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/novel-core.git
@@ -45,14 +67,20 @@ cd novel-core
 git checkout 001-visual-novel-constructor
 ```
 
-### 2. Open in Unity
+### 3. Open in Unity
+
+### 3. Open in Unity
 
 1. Launch Unity Hub
-2. Click "Add" → select `novel-core` folder
+2. Click "Add" → select `novel-core` folder (repository root, not a subfolder)
 3. Select Unity 2022.3 LTS version
 4. Click project to open
 
-### 3. Install Dependencies
+**Note**: Unity will recognize the `Assets/`, `Packages/`, and `ProjectSettings/` folders and open as a Unity project.
+
+### 4. Install Dependencies
+
+### 4. Install Dependencies
 
 **Via Package Manager** (Window → Package Manager):
 
@@ -136,6 +164,70 @@ Assets/Content/           # User-created content (Addressables source)
 ---
 
 ## Development Workflow
+
+### Code Style Requirements
+
+**IMPORTANT**: This project enforces strict C# coding standards (constitution requirement).
+
+**Key Rules** (see `.specify/memory/constitution.md` for full details):
+
+1. **Allman Style Braces** - Opening brace on new line:
+   ```csharp
+   // ✅ CORRECT
+   if (condition)
+   {
+       DoSomething();
+   }
+   
+   // ❌ WRONG
+   if (condition) {
+       DoSomething();
+   }
+   ```
+
+2. **Always Use Braces** - Even for single-line statements:
+   ```csharp
+   // ✅ CORRECT
+   if (condition)
+   {
+       DoSomething();
+   }
+   
+   // ❌ WRONG
+   if (condition)
+       DoSomething();
+   ```
+
+3. **Var in Loops**:
+   ```csharp
+   // ✅ CORRECT
+   foreach (var item in collection)
+   {
+       ProcessItem(item);
+   }
+   
+   // ❌ WRONG
+   foreach (SceneData item in collection)
+   {
+       ProcessItem(item);
+   }
+   ```
+
+4. **Underscore Prefix for Private/Protected Fields**:
+   ```csharp
+   // ✅ CORRECT
+   private int _count;
+   protected IDialogueSystem _dialogueSystem;
+   
+   // ❌ WRONG
+   private int count;
+   protected IDialogueSystem dialogueSystem;
+   ```
+
+**Automatic Formatting**:
+- `.editorconfig` file is configured with these rules
+- Visual Studio / Rider will auto-format code on save
+- Press `Ctrl+K, Ctrl+D` (VS) or `Ctrl+Alt+L` (Rider) to format file
 
 ### Phase 1: Core Systems (P1 - Basic Scene Playback)
 

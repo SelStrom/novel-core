@@ -1,14 +1,14 @@
 <!--
 Sync Impact Report:
-- Version: 1.0.0 → 1.1.0 (Added AI development constraints principle)
+- Version: 1.1.0 → 1.1.1 (Added C# code style standards)
 - Modified Principles: None
-- Added Principles:
-  7. AI Development Constraints (NEW)
+- Added Principles: None
 - Removed Principles: None
-- Added Sections: None
+- Added Sections:
+  - Code Style Standards (C# formatting rules)
 - Removed Sections: None
 - Templates Status:
-  ✅ plan-template.md - updated with new principle VII checks
+  ✅ plan-template.md - no changes needed (style enforcement at code level)
   ✅ spec-template.md - no changes needed
   ✅ tasks-template.md - no changes needed
 - Follow-up TODOs: None (all updates complete)
@@ -154,6 +154,157 @@ Before major releases (0.X.0, X.0.0):
 - **Asset Compatibility**: New versions MUST load projects created in previous MINOR version without errors
 - **Editor Stability**: No crashes during 8-hour stress test of typical editing workflows
 
+## Code Style Standards
+
+All C# code MUST follow these formatting and naming conventions to ensure consistency and readability.
+
+### Formatting Rules
+
+**Braces (Allman Style)**:
+- Opening brace MUST always be on a new line
+- Braces MUST be used for all control structures (if, else, for, while, foreach), even single-line statements
+
+```csharp
+// ✅ CORRECT
+if (condition)
+{
+    DoSomething();
+}
+
+// ❌ INCORRECT (brace on same line)
+if (condition) {
+    DoSomething();
+}
+
+// ❌ INCORRECT (missing braces)
+if (condition)
+    DoSomething();
+```
+
+**Loops and Type Inference**:
+- Use `var` for type declaration in loops (foreach, for)
+- Use explicit types for clarity in other contexts (optional, but recommended for complex types)
+
+```csharp
+// ✅ CORRECT
+foreach (var item in collection)
+{
+    ProcessItem(item);
+}
+
+for (var i = 0; i < count; i++)
+{
+    ProcessIndex(i);
+}
+
+// ✅ ACCEPTABLE (explicit type if needed for clarity)
+IEnumerable<ComplexType> items = GetItems();
+```
+
+### Naming Conventions
+
+**Private and Protected Fields**:
+- MUST use underscore prefix: `_fieldName`
+- MUST use camelCase after underscore
+- Applies to both private and protected instance fields
+
+```csharp
+// ✅ CORRECT
+public class Example
+{
+    private int _count;
+    private string _userName;
+    protected IDialogueSystem _dialogueSystem;
+    
+    public Example(IDialogueSystem dialogueSystem)
+    {
+        _dialogueSystem = dialogueSystem;
+        _count = 0;
+    }
+}
+
+// ❌ INCORRECT (no underscore)
+private int count;
+private string userName;
+```
+
+**Other Naming Rules**:
+- Public properties: PascalCase (`PlayerName`, `SceneData`)
+- Methods: PascalCase (`LoadScene`, `SaveGame`)
+- Local variables: camelCase (`sceneId`, `dialogueLine`)
+- Constants: PascalCase (`MaxSceneCount`, `DefaultVolume`)
+- Interfaces: PascalCase with I prefix (`IDialogueSystem`, `ISaveSystem`)
+
+### Code Organization
+
+**Ordering**:
+1. Private fields (with underscore)
+2. Protected fields (with underscore)
+3. Public properties
+4. Constructors
+5. Public methods
+6. Protected methods
+7. Private methods
+
+**Example**:
+```csharp
+public class SceneManager : ISceneManager
+{
+    // Private fields
+    private readonly IAssetManager _assetManager;
+    private readonly IAudioService _audioService;
+    private SceneData _currentScene;
+    
+    // Protected fields
+    protected List<SceneData> _sceneHistory;
+    
+    // Public properties
+    public SceneData CurrentScene => _currentScene;
+    public bool IsLoading { get; private set; }
+    
+    // Constructor
+    public SceneManager(IAssetManager assetManager, IAudioService audioService)
+    {
+        _assetManager = assetManager;
+        _audioService = audioService;
+        _sceneHistory = new List<SceneData>();
+    }
+    
+    // Public methods
+    public void LoadScene(SceneData sceneData, TransitionType transition, Action onComplete)
+    {
+        if (sceneData == null)
+        {
+            throw new ArgumentNullException(nameof(sceneData));
+        }
+        
+        StartLoadingScene(sceneData, transition, onComplete);
+    }
+    
+    // Private methods
+    private void StartLoadingScene(SceneData sceneData, TransitionType transition, Action onComplete)
+    {
+        IsLoading = true;
+        _sceneHistory.Add(sceneData);
+        // ... implementation
+    }
+}
+```
+
+### Rationale
+
+- **Allman Braces**: Improves readability by clearly separating control structure from body, consistent with Unity C# conventions
+- **Mandatory Braces**: Prevents bugs from accidental scope misunderstanding, especially when adding statements later
+- **Underscore Prefix**: Immediately distinguishes fields from local variables and parameters, reducing naming conflicts
+- **Var in Loops**: Reduces verbosity without sacrificing clarity (loop variable type is obvious from context)
+- **Consistent Ordering**: Makes code predictable and easier to navigate in large files
+
+### Enforcement
+
+- Code reviews MUST verify adherence to these standards
+- `.editorconfig` file SHOULD be configured with these rules for automatic formatting
+- CI/CD pipeline MAY include linting step to flag violations (warning, not error)
+
 ## Governance
 
 This constitution defines the non-negotiable principles for Novel Core Constructor development. Any feature, refactor, or technical decision MUST comply with these principles.
@@ -180,4 +331,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.1.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
+**Version**: 1.1.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
