@@ -1,3 +1,7 @@
+using System;
+using UnityEngine;
+using System.Threading.Tasks;
+
 namespace NovelCore.Runtime.Platform.Interfaces
 {
 

@@ -1,4 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using NovelCore.Runtime.Core.AssetManagement;
+using NovelCore.Runtime.Core.AudioSystem;
+using NovelCore.Runtime.Data.Scenes;
+using NovelCore.Runtime.Data.Characters;
 using NovelCore.Runtime.Animation;
 
 namespace NovelCore.Runtime.Core.SceneManagement

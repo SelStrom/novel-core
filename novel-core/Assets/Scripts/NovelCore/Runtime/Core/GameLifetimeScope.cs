@@ -1,5 +1,12 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+using NovelCore.Runtime.Core.AssetManagement;
+using NovelCore.Runtime.Core.AudioSystem;
+using NovelCore.Runtime.Core.InputHandling;
+using NovelCore.Runtime.Core.DialogueSystem;
+using NovelCore.Runtime.Core.SceneManagement;
+using NovelCore.Runtime.Core.Localization;
 
 namespace NovelCore.Runtime.Core
 {
@@ -31,11 +38,11 @@ public class GameLifetimeScope : LifetimeScope
         // Scene Management
         builder.Register<ISceneManager, SceneManagement.SceneManager>(Lifetime.Singleton);
 
+        // Localization
+        builder.Register<ILocalizationService, BasicLocalizationService>(Lifetime.Singleton);
+
         // Save System (to be implemented)
         // builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
-
-        // Localization (to be implemented)
-        // builder.Register<ILocalizationService, UnityLocalizationService>(Lifetime.Singleton);
 
         // Platform Services (conditional registration based on build target)
         // RegisterPlatformService(builder);

@@ -1,5 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using UnityEngine;
 using Spine.Unity;
+using NovelCore.Runtime.Core.AssetManagement;
+using NovelCore.Runtime.Data.Characters;
 
 namespace NovelCore.Runtime.Animation
 {

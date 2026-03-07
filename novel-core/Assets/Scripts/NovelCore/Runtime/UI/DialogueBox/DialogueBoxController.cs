@@ -1,5 +1,14 @@
 using TMPro;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using NovelCore.Runtime.Core.DialogueSystem;
+using NovelCore.Runtime.Core.Localization;
+using NovelCore.Runtime.Data.Dialogue;
+using NovelCore.Runtime.Data.Choices;
+
 namespace NovelCore.Runtime.UI.DialogueBox
 {
 

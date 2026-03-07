@@ -1,3 +1,8 @@
+using System;
+using UnityEngine;
+using System.Threading.Tasks;
+using NovelCore.Runtime.Data.Scenes;
+
 namespace NovelCore.Runtime.Core.SceneManagement
 {
 

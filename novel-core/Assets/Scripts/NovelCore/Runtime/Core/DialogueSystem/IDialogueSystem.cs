@@ -1,3 +1,9 @@
+using System;
+using UnityEngine;
+using NovelCore.Runtime.Data.Scenes;
+using NovelCore.Runtime.Data.Dialogue;
+using NovelCore.Runtime.Data.Choices;
+
 namespace NovelCore.Runtime.Core.DialogueSystem
 {
 

@@ -1,3 +1,10 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using NovelCore.Runtime.Data.Characters;
+using NovelCore.Runtime.Data.Dialogue;
+using NovelCore.Runtime.Data.Choices;
+
 namespace NovelCore.Runtime.Data.Scenes
 {
 

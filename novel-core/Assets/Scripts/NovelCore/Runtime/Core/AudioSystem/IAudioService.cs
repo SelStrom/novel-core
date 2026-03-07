@@ -1,3 +1,6 @@
+using System;
+using UnityEngine;
+
 namespace NovelCore.Runtime.Core.AudioSystem
 {
     /// <summary>

@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using NovelCore.Runtime.Core.DialogueSystem;
+using NovelCore.Runtime.Core.Localization;
+using NovelCore.Runtime.Data.Choices;
+using NovelCore.Runtime.Data.Dialogue;
+
 namespace NovelCore.Runtime.UI.ChoiceButtons
 {
 
@@ -20,10 +29,6 @@ public class ChoiceUIController : MonoBehaviour
     private GameObject _choicePanel;
 
     [Header("Layout Settings")]
-    [SerializeField]
-    [Tooltip("Spacing between choice buttons")]
-    private float _buttonSpacing = 10f;
-
     [SerializeField]
     [Tooltip("Maximum buttons to display at once")]
     private int _maxVisibleButtons = 6;

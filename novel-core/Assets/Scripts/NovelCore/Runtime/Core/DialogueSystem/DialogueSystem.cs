@@ -1,3 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using UnityEngine;
+using NovelCore.Runtime.Core.AssetManagement;
+using NovelCore.Runtime.Core.AudioSystem;
+using NovelCore.Runtime.Core.InputHandling;
+using NovelCore.Runtime.Core.SceneManagement;
+using NovelCore.Runtime.Data.Scenes;
+using NovelCore.Runtime.Data.Dialogue;
+using NovelCore.Runtime.Data.Choices;
+
 namespace NovelCore.Runtime.Core.DialogueSystem
 {
 
