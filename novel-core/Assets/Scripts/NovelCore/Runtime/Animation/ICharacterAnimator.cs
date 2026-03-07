@@ -35,14 +35,16 @@ public interface ICharacterAnimator
     /// </summary>
     /// <param name="duration">Animation duration.</param>
     /// <param name="fromSide">Side to enter from (left/right).</param>
-    System.Threading.Tasks.Task PlayEntranceAsync(float duration, CharacterSide fromSide);
+    /// <param name="animType">Type of entrance animation (slide/fade).</param>
+    System.Threading.Tasks.Task PlayEntranceAsync(float duration, CharacterSide fromSide, CharacterAnimType animType = CharacterAnimType.Slide);
 
     /// <summary>
     /// Play exit animation.
     /// </summary>
     /// <param name="duration">Animation duration.</param>
     /// <param name="toSide">Side to exit to (left/right).</param>
-    System.Threading.Tasks.Task PlayExitAsync(float duration, CharacterSide toSide);
+    /// <param name="animType">Type of exit animation (slide/fade).</param>
+    System.Threading.Tasks.Task PlayExitAsync(float duration, CharacterSide toSide, CharacterAnimType animType = CharacterAnimType.Slide);
 
     /// <summary>
     /// Play idle animation/state.
@@ -78,6 +80,27 @@ public enum CharacterSide
     Left,
     Right,
     Center
+}
+
+/// <summary>
+/// Character entrance/exit animation type.
+/// </summary>
+public enum CharacterAnimType
+{
+    /// <summary>
+    /// Slide in/out from side.
+    /// </summary>
+    Slide,
+    
+    /// <summary>
+    /// Fade in/out with alpha transition.
+    /// </summary>
+    Fade,
+    
+    /// <summary>
+    /// No animation, instant appearance/disappearance.
+    /// </summary>
+    Instant
 }
 
 }

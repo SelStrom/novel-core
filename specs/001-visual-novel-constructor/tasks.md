@@ -357,10 +357,10 @@ Each iteration is a complete mini-milestone with:
 - Try different transition types (Slide, Cut)
 
 **Tasks**:
-- [ ] T072 [P] [US4] Create TransitionType enum in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/TransitionType.cs`
+- [X] T072 [P] [US4] Create TransitionType enum in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/TransitionType.cs`
 - [ ] T073 [P] [US4] Create transition shaders (Fade, Slide) in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/Transitions/`
 - [ ] T074 [US4] Implement scene transition effects in SceneManager
-- [ ] T075 [P] [US4] Create character entrance/exit animations (Slide, Fade) in UnityCharacterAnimator
+- [X] T075 [P] [US4] Create character entrance/exit animations (Slide, Fade) in UnityCharacterAnimator
 
 ---
 

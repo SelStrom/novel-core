@@ -4,6 +4,7 @@ using UnityEngine.AddressableAssets;
 using NovelCore.Runtime.Data.Characters;
 using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Data.Choices;
+using NovelCore.Runtime.Core.SceneManagement;
 
 namespace NovelCore.Runtime.Data.Scenes
 {
@@ -122,17 +123,6 @@ public struct CharacterPlacement
 
     [Tooltip("Sorting order (higher values render on top)")]
     public int sortingOrder;
-}
-
-/// <summary>
-/// Types of scene transitions.
-/// </summary>
-public enum TransitionType
-{
-    Cut,      // Instant transition
-    Fade,     // Fade to black then fade in
-    Slide,    // Slide transition
-    Custom    // Custom transition shader
 }
 
 }

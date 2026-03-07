@@ -93,7 +93,28 @@ public class UnityCharacterAnimator : ICharacterAnimator
         }
     }
 
-    public async Task PlayEntranceAsync(float duration, CharacterSide fromSide)
+    public async Task PlayEntranceAsync(float duration, CharacterSide fromSide, CharacterAnimType animType = CharacterAnimType.Slide)
+    {
+        if (_targetObject == null || _spriteRenderer == null)
+        {
+            return;
+        }
+
+        switch (animType)
+        {
+            case CharacterAnimType.Fade:
+                await PlayEntranceFadeAsync(duration);
+                break;
+            case CharacterAnimType.Slide:
+                await PlayEntranceSlideAsync(duration, fromSide);
+                break;
+            case CharacterAnimType.Instant:
+                _spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+                break;
+        }
+    }
+
+    private async Task PlayEntranceSlideAsync(float duration, CharacterSide fromSide)
     {
         if (_targetObject == null)
         {
@@ -126,7 +147,59 @@ public class UnityCharacterAnimator : ICharacterAnimator
         _targetObject.transform.position = startPos;
     }
 
-    public async Task PlayExitAsync(float duration, CharacterSide toSide)
+    private async Task PlayEntranceFadeAsync(float duration)
+    {
+        if (_spriteRenderer == null)
+        {
+            return;
+        }
+
+        // Start from transparent
+        Color startColor = _spriteRenderer.color;
+        startColor.a = 0f;
+        _spriteRenderer.color = startColor;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            
+            Color newColor = _spriteRenderer.color;
+            newColor.a = Mathf.Lerp(0f, 1f, t);
+            _spriteRenderer.color = newColor;
+            
+            await Task.Yield();
+        }
+
+        // Ensure fully visible
+        Color finalColor = _spriteRenderer.color;
+        finalColor.a = 1f;
+        _spriteRenderer.color = finalColor;
+    }
+
+    public async Task PlayExitAsync(float duration, CharacterSide toSide, CharacterAnimType animType = CharacterAnimType.Slide)
+    {
+        if (_targetObject == null || _spriteRenderer == null)
+        {
+            return;
+        }
+
+        switch (animType)
+        {
+            case CharacterAnimType.Fade:
+                await PlayExitFadeAsync(duration);
+                break;
+            case CharacterAnimType.Slide:
+                await PlayExitSlideAsync(duration, toSide);
+                break;
+            case CharacterAnimType.Instant:
+                _spriteRenderer.color = new Color(1f, 1f, 1f, 0f);
+                break;
+        }
+    }
+
+    private async Task PlayExitSlideAsync(float duration, CharacterSide toSide)
     {
         if (_targetObject == null)
         {
@@ -155,6 +228,32 @@ public class UnityCharacterAnimator : ICharacterAnimator
         }
 
         _targetObject.transform.position = offscreenPos;
+    }
+
+    private async Task PlayExitFadeAsync(float duration)
+    {
+        if (_spriteRenderer == null)
+        {
+            return;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            
+            Color newColor = _spriteRenderer.color;
+            newColor.a = Mathf.Lerp(1f, 0f, t);
+            _spriteRenderer.color = newColor;
+            
+            await Task.Yield();
+        }
+
+        // Ensure fully transparent
+        Color finalColor = _spriteRenderer.color;
+        finalColor.a = 0f;
+        _spriteRenderer.color = finalColor;
     }
 
     public void PlayIdle()

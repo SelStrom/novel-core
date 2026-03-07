@@ -108,14 +108,15 @@ public class SpineCharacterAnimator : ICharacterAnimator
         }
     }
 
-    public async Task PlayEntranceAsync(float duration, CharacterSide fromSide)
+    public async Task PlayEntranceAsync(float duration, CharacterSide fromSide, CharacterAnimType animType = CharacterAnimType.Slide)
     {
         if (_targetObject == null)
         {
             return;
         }
 
-        // Similar to Unity animator but with Spine
+        // Spine always uses slide animation (Spine has its own animation tracks for fade)
+        // For fade effect with Spine, rely on Spine's animation tracks
         Vector3 startPos = _targetObject.transform.position;
         Vector3 offscreenPos = startPos;
 
@@ -147,7 +148,7 @@ public class SpineCharacterAnimator : ICharacterAnimator
         SetEmotion(_currentEmotion);
     }
 
-    public async Task PlayExitAsync(float duration, CharacterSide toSide)
+    public async Task PlayExitAsync(float duration, CharacterSide toSide, CharacterAnimType animType = CharacterAnimType.Slide)
     {
         if (_targetObject == null)
         {
