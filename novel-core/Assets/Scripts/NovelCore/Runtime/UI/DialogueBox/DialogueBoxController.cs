@@ -209,13 +209,11 @@ public class DialogueBoxController : MonoBehaviour
     private string GetLocalizedText(DialogueLineData lineData)
     {
         // Try to get localized text
-        if (_localizationService != null && !string.IsNullOrEmpty(lineData.TextKey))
+        if (_localizationService != null && 
+            !string.IsNullOrEmpty(lineData.TextKey) && 
+            _localizationService.TryGetLocalizedString(lineData.TextKey, out string localizedText))
         {
-            string localizedText = _localizationService.GetLocalizedString(lineData.TextKey);
-            if (!string.IsNullOrEmpty(localizedText))
-            {
-                return localizedText;
-            }
+            return localizedText;
         }
 
         // Fallback to fallback text

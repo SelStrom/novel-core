@@ -92,9 +92,6 @@ namespace NovelCore.Editor.Tools.Generators
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
 
-            // Add DialogueBoxController component
-            dialogueBox.AddComponent<NovelCore.Runtime.UI.DialogueBox.DialogueBoxController>();
-
             // Create Background Panel
             GameObject background = CreateBackgroundPanel(dialogueBox.transform);
 
@@ -106,6 +103,29 @@ namespace NovelCore.Editor.Tools.Generators
 
             // Create ContinueIndicator
             GameObject continueIndicator = CreateContinueIndicator(dialogueBox.transform);
+
+            // Add DialogueBoxController component and assign references
+            var controller = dialogueBox.AddComponent<NovelCore.Runtime.UI.DialogueBox.DialogueBoxController>();
+            
+            // Use reflection to set private fields (SerializeField fields are private)
+            var controllerType = controller.GetType();
+            
+            var dialogueTextField = controllerType.GetField("_dialogueText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var speakerNameField = controllerType.GetField("_speakerNameText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var dialoguePanelField = controllerType.GetField("_dialoguePanel", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            var continueIndicatorField = controllerType.GetField("_continueIndicator", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            
+            if (dialogueTextField != null)
+                dialogueTextField.SetValue(controller, dialogueText.GetComponent<TextMeshProUGUI>());
+            
+            if (speakerNameField != null)
+                speakerNameField.SetValue(controller, speakerName.GetComponent<TextMeshProUGUI>());
+            
+            if (dialoguePanelField != null)
+                dialoguePanelField.SetValue(controller, background);
+            
+            if (continueIndicatorField != null)
+                continueIndicatorField.SetValue(controller, continueIndicator);
 
             return dialogueBox;
         }

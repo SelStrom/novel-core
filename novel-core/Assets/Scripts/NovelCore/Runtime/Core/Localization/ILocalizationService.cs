@@ -21,32 +21,27 @@ public interface ILocalizationService
     string CurrentLanguage { get; }
 
     /// <summary>
-    /// Gets a localized string by key.
+    /// Attempts to get a localized string by key.
     /// </summary>
     /// <param name="key">Localization key.</param>
-    /// <returns>Localized string or key if not found.</returns>
-    string GetLocalizedString(string key);
+    /// <param name="result">When this method returns true, contains the localized string; otherwise, null.</param>
+    /// <returns>true if the key exists in the current language dictionary; otherwise, false.</returns>
+    bool TryGetLocalizedString(string key, out string result);
 
     /// <summary>
-    /// Gets a localized string by key with formatting.
+    /// Attempts to get a localized string by key with formatting.
     /// </summary>
     /// <param name="key">Localization key.</param>
+    /// <param name="result">When this method returns true, contains the formatted localized string; otherwise, null.</param>
     /// <param name="args">Format arguments.</param>
-    /// <returns>Formatted localized string.</returns>
-    string GetLocalizedString(string key, params object[] args);
+    /// <returns>true if the key exists and formatting succeeded; otherwise, false.</returns>
+    bool TryGetLocalizedString(string key, out string result, params object[] args);
 
     /// <summary>
     /// Sets the current language.
     /// </summary>
     /// <param name="languageCode">Language code to set.</param>
     void SetLanguage(string languageCode);
-
-    /// <summary>
-    /// Checks if a localization key exists.
-    /// </summary>
-    /// <param name="key">Key to check.</param>
-    /// <returns>True if key exists, false otherwise.</returns>
-    bool HasKey(string key);
 }
 
 }

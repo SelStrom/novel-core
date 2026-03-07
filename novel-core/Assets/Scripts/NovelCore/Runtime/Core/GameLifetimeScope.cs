@@ -30,8 +30,9 @@ public class GameLifetimeScope : LifetimeScope
         // Audio System
         builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
 
-        // Input Handling
-        builder.Register<IInputService, UnityInputService>(Lifetime.Singleton);
+        // Input Handling (MonoBehaviour - will be created as GameObject)
+        builder.RegisterComponentOnNewGameObject<UnityInputService>(Lifetime.Singleton)
+            .AsImplementedInterfaces();
 
         // Dialogue System
         builder.Register<IDialogueSystem, DialogueSystem.DialogueSystem>(Lifetime.Singleton);

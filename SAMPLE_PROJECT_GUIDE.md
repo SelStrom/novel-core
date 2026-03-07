@@ -131,14 +131,17 @@ Assets/Content/Projects/Sample/
 
 ## ⚠️ Известные ограничения
 
-### 0. Нет автоматического запуска игры
+### ~~0. Нет автоматического запуска игры~~ ✅ FIXED (T040.3)
 
-**Проблема**: При нажатии Play ничего не происходит, потому что не настроен компонент для автоматической загрузки первой сцены.
+**Статус**: Исправлено. GameStarter теперь создаётся автоматически при генерации Sample Project.
 
-**Решение**: 
-- Добавьте GameObject `GameStarter` в Unity сцену (см. раздел "Как протестировать")
-- Назначьте стартовую сцену в Inspector
-- Убедитесь, что "Auto Start" включен
+### ~~Dialog Line Data missing~~ ✅ FIXED (2026-03-07)
+
+**Проблема** (старая версия): В Inspector SceneData показывались "Missing (ScriptableObject)" для диалоговых реплик.
+
+**Причина**: DialogueLineData создавались в памяти (`CreateInstance`), но не сохранялись на диск как ассеты.
+
+**Решение**: DialogueLineData теперь сохраняются как sub-assets SceneData через `AssetDatabase.AddObjectToAsset()`. Проблема устранена. См. `IMPLEMENTATION_SCRIPTABLEOBJECT_FIX.md` для деталей.
 
 ### 1. Addressables не настроены
 

@@ -8,6 +8,7 @@ using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Data.Choices;
 using NovelCore.Runtime.Core.SceneManagement;
 using NovelCore.Runtime.Core;
+using NovelCore.Runtime.UI;
 using VContainer.Unity;
 
 namespace NovelCore.Editor.Tools.Generators
@@ -67,9 +68,10 @@ public static class SampleProjectGenerator
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
-        // Setup Unity scene with GameStarter
+        // Setup Unity scene with GameStarter and UIManager
         var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
         SetupUnitySceneWithGameStarter(firstScene);
+        SetupUIManager();
 
         // Display success message
         Debug.Log($"[SampleProjectGenerator] ✅ Successfully created sample project at {SAMPLE_PROJECT_DIR}");
@@ -298,30 +300,40 @@ public static class SampleProjectGenerator
         SetPrivateField(scene, "_autoAdvance", false);
         SetPrivateField(scene, "_autoAdvanceDelay", 2.0f);
 
-        // Create dialogue lines
+        // Save scene asset FIRST (required before adding sub-assets)
+        string path = $"{SCENES_DIR}/{fileName}.asset";
+        AssetDatabase.CreateAsset(scene, path);
+
+        // Create dialogue lines as sub-assets
         var dialogueLines = new List<DialogueLineData>();
+        int lineIndex = 0;
         foreach (var content in dialogueContents)
         {
-            var line = CreateDialogueLine(content);
+            var line = CreateDialogueLine(content, fileName, lineIndex);
             dialogueLines.Add(line);
+            
+            // Add as sub-asset to the SceneData asset
+            AssetDatabase.AddObjectToAsset(line, scene);
+            lineIndex++;
         }
 
         SetPrivateField(scene, "_dialogueLines", dialogueLines);
         SetPrivateField(scene, "_characters", new List<CharacterPlacement>());
         SetPrivateField(scene, "_choices", new List<ChoiceData>());
 
-        // Save scene asset
-        string path = $"{SCENES_DIR}/{fileName}.asset";
-        AssetDatabase.CreateAsset(scene, path);
+        // Mark scene as dirty and save
+        EditorUtility.SetDirty(scene);
+        AssetDatabase.SaveAssets();
         
-        Debug.Log($"[SampleProjectGenerator] Created scene: {path}");
+        Debug.Log($"[SampleProjectGenerator] Created scene: {path} with {dialogueLines.Count} dialogue lines");
         
         return scene;
     }
 
-    private static DialogueLineData CreateDialogueLine(DialogueContent content)
+    private static DialogueLineData CreateDialogueLine(DialogueContent content, string sceneFileName, int lineIndex)
     {
         DialogueLineData line = ScriptableObject.CreateInstance<DialogueLineData>();
+        line.name = $"{sceneFileName}_Line{lineIndex:D2}";
         
         SetPrivateField(line, "_lineId", content.lineId);
         SetPrivateField(line, "_emotion", content.emotion);
@@ -337,6 +349,7 @@ public static class SampleProjectGenerator
     {
         // Create choice for Scene 2
         ChoiceData choice = ScriptableObject.CreateInstance<ChoiceData>();
+        choice.name = "Choice_MainDecision";
         
         SetPrivateField(choice, "_choiceId", "choice_main_001");
         SetPrivateField(choice, "_promptTextKey", "choice_prompt_001");
@@ -370,9 +383,10 @@ public static class SampleProjectGenerator
         SetPrivateField(choice, "_timerSeconds", 0f);
         SetPrivateField(choice, "_defaultOptionIndex", 0);
 
-        // Save choice asset
+        // Save choice as a separate asset (ChoiceData can be reused across scenes)
         string choicePath = $"{SCENES_DIR}/Choice_MainDecision.asset";
         AssetDatabase.CreateAsset(choice, choicePath);
+        AssetDatabase.SaveAssets();
         
         Debug.Log($"[SampleProjectGenerator] Created choice: {choicePath}");
 
@@ -381,6 +395,7 @@ public static class SampleProjectGenerator
         SetPrivateField(scenes["scene2"], "_choices", scene2Choices);
         
         EditorUtility.SetDirty(scenes["scene2"]);
+        AssetDatabase.SaveAssets();
     }
 
     private static void SetPrivateField(object obj, string fieldName, object value)
@@ -490,6 +505,46 @@ public static class SampleProjectGenerator
         Debug.Log($"[SampleProjectGenerator]    • Starting scene assigned: {(startingScene != null ? startingScene.SceneName : "None")}");
         Debug.Log($"[SampleProjectGenerator]    • Auto-start enabled: True");
         Debug.Log($"[SampleProjectGenerator]    • Start delay: 0.5s");
+    }
+
+    /// <summary>
+    /// Automatically configures Unity scene with UIManager for DialogueBox initialization
+    /// </summary>
+    private static void SetupUIManager()
+    {
+        Debug.Log("[SampleProjectGenerator] Setting up UIManager...");
+
+        // Scene should already be open from SetupUnitySceneWithGameStarter
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (!scene.IsValid())
+        {
+            Debug.LogError("[SampleProjectGenerator] No active scene found");
+            return;
+        }
+
+        // Find or create UIManager
+        var uiManager = GameObject.FindFirstObjectByType<UIManager>();
+        GameObject uiManagerObj;
+
+        if (uiManager == null)
+        {
+            Debug.Log("[SampleProjectGenerator] Creating UIManager GameObject...");
+            uiManagerObj = new GameObject("UIManager");
+            uiManager = uiManagerObj.AddComponent<UIManager>();
+            Undo.RegisterCreatedObjectUndo(uiManagerObj, "Create UIManager");
+        }
+        else
+        {
+            Debug.Log("[SampleProjectGenerator] UIManager already exists, skipping creation.");
+            uiManagerObj = uiManager.gameObject;
+        }
+
+        // Mark scene as dirty and save
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+
+        Debug.Log("[SampleProjectGenerator] ✅ UIManager setup complete!");
+        Debug.Log($"[SampleProjectGenerator]    • UIManager: {(uiManager != null ? "✓" : "✗")}");
     }
 
     private struct DialogueContent

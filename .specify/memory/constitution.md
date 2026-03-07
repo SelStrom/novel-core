@@ -1,36 +1,14 @@
 <!--
 Sync Impact Report:
-- Version: 1.11.1 → 1.12.0 (Added Editor-Runtime Bridge Principle)
-- Modified Principles:
-  - I. Creator-First Design: Expanded dual-mode preview definition to clarify GameStarter vs Scene Editor preview modes
-  - VI. Modular Architecture & Testing: Added explicit GameStarter initialization requirement for entry point
-- Added Principles:
-  - New Principle IX: Editor-Runtime Bridge (mandatory integration between editor tools and runtime preview)
-- Removed Principles: None
-- Modified Sections:
-  - Principle I: Clarified "Dual-Mode Preview" with technical implementation details (GameStarter for full start, Scene Editor preview for isolated testing)
-  - Principle VI: Added GameStarter entry point requirement to "Game Entry Point" bullet
-- Added Sections:
-  - New Principle IX with 6 requirements for Editor-Runtime bridge functionality
-  - Rationale explaining preview workflow importance for rapid iteration
-- Removed Sections: None
-- Templates Status:
-  ✅ Constitution updated with Editor-Runtime Bridge principle
-  ⚠ plan.md needs update: Add preview bridge architecture section
-  ⚠ tasks.md needs update: Add T041 iteration for PreviewManager implementation
-  ⚠ GameStarter.cs needs update: Add GetSceneToLoad() with EditorPrefs check
-  ⚠ SceneEditorWindow.cs validated: Already implements PreviewScene() correctly
-- Follow-up TODOs:
-  - Implement PreviewManager.cs in Runtime/Core/ for centralized preview state management
-  - Add GetSceneToLoad() method to GameStarter.cs with #if UNITY_EDITOR directive
-  - Update plan.md with preview architecture diagram
-  - Add integration tests for preview-режим workflow (post-MVP)
-  - Document preview workflow in user-manual.md
+- Version: 1.12.0 → 1.12.1 (PATCH: LocalizationService API refinement documentation)
+- Modified Principles: None (code-level refinement, no principle changes)
+- Changes: Documented TryGetLocalizedString API pattern in existing Call Stack Analysis requirement
+- Templates Status: ✅ No template updates required (code change only)
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.12.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
 
 ## Core Principles
 
@@ -654,4 +632,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.12.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

@@ -332,13 +332,11 @@ public class ChoiceUIController : MonoBehaviour
     private string GetLocalizedText(string textKey, string fallbackText)
     {
         // Try to get localized text
-        if (_localizationService != null && !string.IsNullOrEmpty(textKey))
+        if (_localizationService != null && 
+            !string.IsNullOrEmpty(textKey) && 
+            _localizationService.TryGetLocalizedString(textKey, out string localizedText))
         {
-            string localizedText = _localizationService.GetLocalizedString(textKey);
-            if (!string.IsNullOrEmpty(localizedText))
-            {
-                return localizedText;
-            }
+            return localizedText;
         }
 
         // Fallback to fallback text

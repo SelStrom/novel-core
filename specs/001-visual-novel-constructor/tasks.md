@@ -135,6 +135,13 @@ Each iteration is a complete mini-milestone with:
 - [X] T026 [US1] Implement DialogueSystem class in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [X] T027 [P] [US1] Create DialogueBox UI prefab in `Assets/Resources/NovelCore/UI/DialogueBox.prefab` (Generated via Editor script)
 - [X] T028 [P] [US1] Create DialogueBoxController script in `Assets/Scripts/NovelCore/Runtime/UI/DialogueBox/DialogueBoxController.cs`
+- [X] T028.1 [P] [US1] Create UIManager component in `Assets/Scripts/NovelCore/Runtime/UI/UIManager.cs`
+  - **Added 2026-03-07**: Bridge component between VContainer DI and Unity UI
+  - Finds/creates DialogueBoxController and calls Initialize()
+  - Handles input events → advance dialogue
+  - Calls DialogueSystem.Update() for auto-advance
+  - Auto-created by SampleProjectGenerator in Unity scene
+  - See `IMPLEMENTATION_UI_MANAGER_FIX.md` for architecture details
 - [X] T029 [US1] Implement dialogue text rendering with TextMeshPro in DialogueBoxController
 - [X] T039 [US1] Register DialogueSystem and SceneManager in VContainer
 
@@ -236,6 +243,9 @@ Each iteration is a complete mini-milestone with:
 **Tasks**:
 - [X] T038 [US1] Add "Preview Scene" button to SceneEditorWindow that enters Play mode
 - [X] T040 [US1] Create sample SceneData asset for testing in `Assets/Content/Projects/Sample/`
+  - **Important**: DialogueLineData must be saved as sub-assets of SceneData using `AssetDatabase.AddObjectToAsset()`. Do not use `CreateInstance` without saving to disk.
+  - **Fixed 2026-03-07**: DialogueLineData now correctly saved as sub-assets to prevent missing references
+  - See `IMPLEMENTATION_SCRIPTABLEOBJECT_FIX.md` for ScriptableObject asset creation patterns
 
 ---
 

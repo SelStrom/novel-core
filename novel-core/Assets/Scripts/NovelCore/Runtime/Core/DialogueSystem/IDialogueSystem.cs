@@ -88,6 +88,13 @@ public interface IDialogueSystem
     /// Check if there are more dialogue lines.
     /// </summary>
     bool HasNextLine();
+
+    /// <summary>
+    /// Update method for auto-advance functionality.
+    /// Should be called each frame (e.g., from MonoBehaviour Update).
+    /// </summary>
+    /// <param name="deltaTime">Time since last frame in seconds.</param>
+    void Update(float deltaTime);
 }
 
 }

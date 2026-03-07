@@ -50,24 +50,46 @@ public class BasicLocalizationService : ILocalizationService
         };
     }
 
-    public string GetLocalizedString(string key)
+    public bool TryGetLocalizedString(string key, out string result)
     {
+        result = null;
+
+        if (string.IsNullOrEmpty(key))
+        {
+            return false;
+        }
+
         if (_localizationData.TryGetValue(_currentLanguage, out var languageData))
         {
-            if (languageData.TryGetValue(key, out var value))
+            if (languageData.TryGetValue(key, out result))
             {
-                return value;
+                return true;
             }
         }
 
         Debug.LogWarning($"Localization key not found: {key} for language: {_currentLanguage}");
-        return key;
+        return false;
     }
 
-    public string GetLocalizedString(string key, params object[] args)
+    public bool TryGetLocalizedString(string key, out string result, params object[] args)
     {
-        var localizedString = GetLocalizedString(key);
-        return string.Format(localizedString, args);
+        if (!TryGetLocalizedString(key, out string baseString))
+        {
+            result = null;
+            return false;
+        }
+
+        try
+        {
+            result = string.Format(baseString, args);
+            return true;
+        }
+        catch (FormatException ex)
+        {
+            Debug.LogError($"Localization formatting error for key '{key}': {ex.Message}");
+            result = baseString;
+            return false;
+        }
     }
 
     public void SetLanguage(string languageCode)
@@ -81,12 +103,6 @@ public class BasicLocalizationService : ILocalizationService
         _currentLanguage = languageCode;
         OnLanguageChanged?.Invoke(_currentLanguage);
         Debug.Log($"Language changed to: {_currentLanguage}");
-    }
-
-    public bool HasKey(string key)
-    {
-        return _localizationData.TryGetValue(_currentLanguage, out var languageData) && 
-               languageData.ContainsKey(key);
     }
 }
 
