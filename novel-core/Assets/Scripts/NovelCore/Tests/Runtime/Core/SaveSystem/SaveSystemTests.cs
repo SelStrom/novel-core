@@ -33,7 +33,7 @@ public class SaveSystemTests : BaseTestFixture
         
         Directory.CreateDirectory(_testSaveDirectory);
 
-        _saveSystem = new SaveSystemImpl();
+        _saveSystem = new SaveSystemImpl(_testSaveDirectory);
     }
 
     [TearDown]

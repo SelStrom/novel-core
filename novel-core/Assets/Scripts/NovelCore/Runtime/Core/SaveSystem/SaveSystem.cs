@@ -17,9 +17,15 @@ namespace NovelCore.Runtime.Core.SaveSystem
         private const string AutoSaveSlotId = "autosave";
         private readonly string _saveDirectory;
         
-        public SaveSystem()
+        public SaveSystem() : this(null)
         {
-            _saveDirectory = Path.Combine(Application.persistentDataPath, "Saves");
+        }
+        
+        public SaveSystem(string customSaveDirectory)
+        {
+            _saveDirectory = string.IsNullOrEmpty(customSaveDirectory) 
+                ? Path.Combine(Application.persistentDataPath, "Saves")
+                : customSaveDirectory;
             
             // Ensure save directory exists
             if (!Directory.Exists(_saveDirectory))
