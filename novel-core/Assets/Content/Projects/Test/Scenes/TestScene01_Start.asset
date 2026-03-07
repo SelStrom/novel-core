@@ -1,89 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998c9fb7333504c2885a5dc89fda1bf8, type: 3}
-  m_Name: TestScene01_Start
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 61c9bb7d-5eae-4bdd-984b-f507b97d0b8e
-  _sceneId: test_scene_01
-  _sceneName: 'Test Scene 1: Start'
-  _backgroundImage:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _backgroundMusic:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _characters: []
-  _dialogueLines:
-  - {fileID: 4592262164823461167}
-  - {fileID: 7949530547401890759}
-  - {fileID: 6358844477863831983}
-  _choices: []
-  _transitionType: 1
-  _transitionDuration: 0.5
-  _nextScene:
-    m_AssetGUID: 230c01670be5a4d848b0f0762a8a1484
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _autoAdvance: 0
-  _autoAdvanceDelay: 2
---- !u!114 &4592262164823461167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: TestScene01_Start_Line00
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: fc46c0f7-ce80-4a51-be29-e68005e0011a
-  _lineId: test_line_TestScene01_Start_000
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: test_line_TestScene01_Start_000
-  _fallbackText: Welcome to the linear progression test!
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
---- !u!114 &6358844477863831983
+--- !u!114 &-5368749444096798828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +13,7 @@ MonoBehaviour:
   m_Name: TestScene01_Start_Line02
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 7ef0e9f8-2517-408d-bad2-3b82c13b59a0
+  _id: 990e6232-caab-4087-b842-2ebeaee263e1
   _lineId: test_line_TestScene01_Start_002
   _speaker:
     m_AssetGUID: 
@@ -122,7 +39,46 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
---- !u!114 &7949530547401890759
+--- !u!114 &-3803490490309792425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: TestScene01_Start_Line00
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 74ff3e0d-63df-48d3-97d1-0a57c7b3f822
+  _lineId: test_line_TestScene01_Start_000
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: test_line_TestScene01_Start_000
+  _fallbackText: Welcome to the linear progression test!
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-1644038418393056556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +91,7 @@ MonoBehaviour:
   m_Name: TestScene01_Start_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 8c16a610-eb2d-4001-819c-589091a65c59
+  _id: 05abc9b5-aa6c-4733-8a58-16aaa0d067a6
   _lineId: test_line_TestScene01_Start_001
   _speaker:
     m_AssetGUID: 
@@ -161,3 +117,47 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c9fb7333504c2885a5dc89fda1bf8, type: 3}
+  m_Name: TestScene01_Start
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 17701b98-b5b1-4b64-b256-f6d4f3d5e87e
+  _sceneId: test_scene_01
+  _sceneName: 'Test Scene 1: Start'
+  _backgroundImage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _backgroundMusic:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _characters: []
+  _dialogueLines:
+  - {fileID: -3803490490309792425}
+  - {fileID: -1644038418393056556}
+  - {fileID: -5368749444096798828}
+  _choices: []
+  _transitionType: 1
+  _transitionDuration: 0.5
+  _nextScene:
+    m_AssetGUID: 230c01670be5a4d848b0f0762a8a1484
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _autoAdvance: 0
+  _autoAdvanceDelay: 2

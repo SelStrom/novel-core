@@ -39,6 +39,7 @@ public class GameStarter : MonoBehaviour
     private ISceneManager _sceneManager;
 
     private bool _hasStarted = false;
+    private bool _isSubscribed = false;
 
     private void Start()
     {
@@ -46,6 +47,36 @@ public class GameStarter : MonoBehaviour
         {
             Invoke(nameof(StartGame), _startDelay);
         }
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe to prevent memory leaks
+        if (_dialogueSystem != null && _isSubscribed)
+        {
+            _dialogueSystem.OnSceneNavigationRequested -= HandleSceneNavigation;
+            _isSubscribed = false;
+        }
+    }
+
+    /// <summary>
+    /// Handles scene navigation requests from DialogueSystem (choice selection or linear progression).
+    /// </summary>
+    private void HandleSceneNavigation(SceneData targetScene)
+    {
+        if (targetScene == null)
+        {
+            Debug.LogError("GameStarter: Cannot navigate to null scene");
+            return;
+        }
+
+        Debug.Log($"GameStarter: Navigating to scene: {targetScene.SceneName}");
+
+        // Load the new scene visually (background, characters, music)
+        _sceneManager.LoadScene(targetScene);
+
+        // Start dialogue for the new scene
+        _dialogueSystem.StartScene(targetScene);
     }
 
     /// <summary>
@@ -78,6 +109,14 @@ public class GameStarter : MonoBehaviour
         {
             Debug.LogError("GameStarter: SceneManager not injected! Make sure GameLifetimeScope is present in the scene.");
             return;
+        }
+
+        // Subscribe to scene navigation events BEFORE starting the game
+        if (!_isSubscribed)
+        {
+            _dialogueSystem.OnSceneNavigationRequested += HandleSceneNavigation;
+            _isSubscribed = true;
+            Debug.Log("GameStarter: Subscribed to OnSceneNavigationRequested event");
         }
 
         _hasStarted = true;

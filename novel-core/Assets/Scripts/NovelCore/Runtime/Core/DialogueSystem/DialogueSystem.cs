@@ -284,40 +284,58 @@ public class DialogueSystem : IDialogueSystem
 
     private async void CompleteDialogue()
     {
-        Debug.Log("DialogueSystem: Dialogue complete");
-        _isPlaying = false;
+        Debug.Log("DialogueSystem: Dialogue complete - checking for nextScene");
+        
+        // Log current scene info
+        if (_currentScene != null)
+        {
+            Debug.Log($"DialogueSystem: Current scene = {_currentScene.SceneName}");
+            Debug.Log($"DialogueSystem: NextScene field = {(_currentScene.NextScene != null ? "SET" : "NULL")}");
+            
+            if (_currentScene.NextScene != null)
+            {
+                Debug.Log($"DialogueSystem: NextScene.RuntimeKeyIsValid() = {_currentScene.NextScene.RuntimeKeyIsValid()}");
+            }
+        }
         
         // Check if there's a next scene to load (linear progression)
         if (_currentScene != null && _currentScene.NextScene != null && _currentScene.NextScene.RuntimeKeyIsValid())
         {
+            Debug.Log($"DialogueSystem: ✓ nextScene is valid, attempting to load...");
+            
             try
             {
-                Debug.Log($"DialogueSystem: Loading next scene via nextScene reference");
-                
                 // Load the next scene
                 var nextScene = await _assetManager.LoadAssetAsync<SceneData>(_currentScene.NextScene);
                 
                 if (nextScene != null)
                 {
-                    Debug.Log($"DialogueSystem: Navigating to next scene: {nextScene.SceneName}");
+                    Debug.Log($"DialogueSystem: ✓ Successfully loaded next scene: {nextScene.SceneName}");
+                    Debug.Log($"DialogueSystem: Firing OnSceneNavigationRequested event...");
+                    
+                    _isPlaying = false; // Stop playing AFTER successful load
                     OnSceneNavigationRequested?.Invoke(nextScene);
                 }
                 else
                 {
-                    Debug.LogError($"DialogueSystem: Failed to load next scene");
+                    Debug.LogError($"DialogueSystem: ✗ Failed to load next scene (returned null)");
+                    _isPlaying = false;
                     OnDialogueComplete?.Invoke();
                 }
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"DialogueSystem: Error loading next scene: {ex.Message}");
+                Debug.LogError($"DialogueSystem: ✗ Exception loading next scene: {ex.Message}");
+                Debug.LogError($"DialogueSystem: Stack trace: {ex.StackTrace}");
+                _isPlaying = false;
                 OnDialogueComplete?.Invoke();
             }
         }
         else
         {
             // No next scene defined, complete normally
-            Debug.Log("DialogueSystem: No next scene defined, dialogue ending");
+            Debug.Log("DialogueSystem: No next scene defined (or invalid), dialogue ending normally");
+            _isPlaying = false;
             OnDialogueComplete?.Invoke();
         }
     }

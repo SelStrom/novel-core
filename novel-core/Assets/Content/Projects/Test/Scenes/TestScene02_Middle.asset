@@ -1,6 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7300672182877007560
+--- !u!114 &-6851891627925972932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: TestScene02_Middle_Line00
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: ef9be535-dc16-4020-8383-d162444f4659
+  _lineId: test_line_TestScene02_Middle_000
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: test_line_TestScene02_Middle_000
+  _fallbackText: Great! You've reached scene 2.
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-5192037106413383249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +52,7 @@ MonoBehaviour:
   m_Name: TestScene02_Middle_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: ffbcc028-ed16-40af-893f-d0b321e9a3fc
+  _id: f1dd80f9-6d64-4a98-ab5d-3d1604d11336
   _lineId: test_line_TestScene02_Middle_001
   _speaker:
     m_AssetGUID: 
@@ -39,7 +78,7 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
---- !u!114 &-421461776989178352
+--- !u!114 &-2250203345791033555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,7 +91,7 @@ MonoBehaviour:
   m_Name: TestScene02_Middle_Line02
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 1295a4a6-8efb-401d-9a2a-66b7cec22a5f
+  _id: 574a31cd-9dc8-4245-b66e-22f01fc9120b
   _lineId: test_line_TestScene02_Middle_002
   _speaker:
     m_AssetGUID: 
@@ -91,7 +130,7 @@ MonoBehaviour:
   m_Name: TestScene02_Middle
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 61c1fa58-3702-461a-a0ab-1dceb15d5bff
+  _id: f1d1dc6b-a299-4a86-83a6-f9fb3ecc21fd
   _sceneId: test_scene_02
   _sceneName: 'Test Scene 2: Middle'
   _backgroundImage:
@@ -108,9 +147,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: 9189687722700669124}
-  - {fileID: -7300672182877007560}
-  - {fileID: -421461776989178352}
+  - {fileID: -6851891627925972932}
+  - {fileID: -5192037106413383249}
+  - {fileID: -2250203345791033555}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -122,42 +161,3 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &9189687722700669124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: TestScene02_Middle_Line00
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 9cad05e9-7493-4722-94f4-c460934ee8d6
-  _lineId: test_line_TestScene02_Middle_000
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: test_line_TestScene02_Middle_000
-  _fallbackText: Great! You've reached scene 2.
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
