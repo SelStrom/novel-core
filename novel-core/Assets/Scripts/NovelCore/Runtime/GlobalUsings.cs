@@ -1,5 +1,5 @@
 // Global using directives for NovelCore.Runtime
-// This file enables C# 10.0+ features across the runtime assembly
+// This file enables C# 9.0 features across the runtime assembly
 
 global using System;
 global using System.Collections.Generic;

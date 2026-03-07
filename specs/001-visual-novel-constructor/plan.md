@@ -12,7 +12,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 ## Technical Context
 
 **Unity Project Location**: `./novel-core` (repository root)  
-**Language/Version**: C# 10.0+ / Unity 6 (Long Term Support)  
+**Language/Version**: C# 9.0 / Unity 6 (Long Term Support)  
 **Primary Dependencies**: Unity Addressables 2.0+, VContainer 1.14+, Spine-Unity 4.2+, Steamworks.NET 20.2+, Unity Localization 2.0+  
 **Rendering Pipeline**: Universal Render Pipeline (URP) 2D  
 **Storage**: JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings  

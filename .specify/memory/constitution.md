@@ -1,19 +1,22 @@
 <!--
 Sync Impact Report:
-- Version: 1.2.1 → 1.2.2 (MVP scope clarification)
+- Version: 1.2.2 → 1.2.3 (C# version correction)
 - Modified Principles: None
 - Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - Quality Assurance Standards: Added MVP Scope Guidance clarifying 80% functional requirement coverage acceptable for MVP releases
-  - MVP Testing Strategy: Added explicit coverage targets per release phase
+  - Technical Requirements: Corrected C# version from 10.0+ to 9.0 (Unity 6 supports C# 9)
+  - Code Style Standards: Updated C# feature references to reflect C# 9 capabilities
 - Added Sections: None
 - Removed Sections: None
 - Templates Status:
-  ✅ plan-template.md - no changes needed
-  ✅ spec-template.md - no changes needed
-  ✅ tasks-template.md - no changes needed
-- Follow-up TODOs: None (all updates complete)
+  ✅ plan-template.md - needs update (C# version reference)
+  ⚠️ Code files - needs update (GlobalUsings.cs and comments referencing C# 10)
+- Follow-up TODOs:
+  - Update plan.md to specify C# 9.0 instead of C# 10.0+
+  - Update GlobalUsings.cs comment from "C# 10.0+" to "C# 9.0"
+  - Review code for C# 10-specific features (file-scoped namespaces, global usings are C# 10)
+  - Note: Some C# 9 features available: records, init-only setters, pattern matching enhancements
 -->
 
 # Novel Core Constructor Constitution
@@ -358,4 +361,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.2.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
+**Version**: 1.2.3 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
