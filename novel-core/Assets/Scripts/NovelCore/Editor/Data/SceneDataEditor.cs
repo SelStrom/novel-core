@@ -79,8 +79,11 @@ public class SceneDataEditor : UnityEditor.Editor
         EditorGUILayout.PropertyField(_nextSceneProp, new GUIContent("Next Scene", 
             "Scene to load after dialogue completes (for linear progression). Ignored if choices are present."));
         
+        // Check if AssetReference has a valid asset set
+        bool hasNextScene = IsAssetReferenceValid(_nextSceneProp);
+        
         // Show warning if both choices and nextScene are defined
-        if (_choicesProp.arraySize > 0 && _nextSceneProp.objectReferenceValue != null)
+        if (_choicesProp.arraySize > 0 && hasNextScene)
         {
             EditorGUILayout.HelpBox(
                 "⚠️ Both choices and nextScene are defined. Choices will take priority, and nextScene will be ignored.",
@@ -89,7 +92,7 @@ public class SceneDataEditor : UnityEditor.Editor
         }
         
         // Show info if nextScene is set
-        if (_nextSceneProp.objectReferenceValue != null && _choicesProp.arraySize == 0)
+        if (hasNextScene && _choicesProp.arraySize == 0)
         {
             EditorGUILayout.HelpBox(
                 "✓ Linear progression enabled: This scene will automatically transition to the next scene after dialogue completes.",
@@ -98,7 +101,7 @@ public class SceneDataEditor : UnityEditor.Editor
         }
         
         // Show info if no next scene and no choices
-        if (_nextSceneProp.objectReferenceValue == null && _choicesProp.arraySize == 0 && _dialogueLinesProp.arraySize > 0)
+        if (!hasNextScene && _choicesProp.arraySize == 0 && _dialogueLinesProp.arraySize > 0)
         {
             EditorGUILayout.HelpBox(
                 "ℹ️ No nextScene or choices defined. Dialogue will end here with no automatic progression.",
@@ -133,6 +136,24 @@ public class SceneDataEditor : UnityEditor.Editor
         }
 
         serializedObject.ApplyModifiedProperties();
+    }
+
+    /// <summary>
+    /// Checks if an AssetReference SerializedProperty has a valid asset assigned.
+    /// </summary>
+    private bool IsAssetReferenceValid(SerializedProperty assetRefProperty)
+    {
+        if (assetRefProperty == null)
+            return false;
+
+        // AssetReference stores the asset GUID in a nested property
+        var assetGuidProp = assetRefProperty.FindPropertyRelative("m_AssetGUID");
+        if (assetGuidProp != null && !string.IsNullOrEmpty(assetGuidProp.stringValue))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
 
