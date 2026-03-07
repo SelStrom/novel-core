@@ -129,14 +129,14 @@ Each iteration is a complete mini-milestone with:
 - TextMeshPro renders text correctly
 
 **Tasks**:
-- [ ] T022 [P] [US1] Create SceneData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
-- [ ] T024 [P] [US1] Create DialogueLineData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Dialogue/DialogueLineData.cs`
-- [ ] T025 [P] [US1] Create IDialogueSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/IDialogueSystem.cs`
-- [ ] T026 [US1] Implement DialogueSystem class in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [X] T022 [P] [US1] Create SceneData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
+- [X] T024 [P] [US1] Create DialogueLineData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Dialogue/DialogueLineData.cs`
+- [X] T025 [P] [US1] Create IDialogueSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/IDialogueSystem.cs`
+- [X] T026 [US1] Implement DialogueSystem class in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [ ] T027 [P] [US1] Create DialogueBox UI prefab in `Assets/Resources/NovelCore/UI/DialogueBox.prefab` (manual in Unity Editor)
-- [ ] T028 [P] [US1] Create DialogueBoxController script in `Assets/Scripts/NovelCore/Runtime/UI/DialogueBox/DialogueBoxController.cs`
-- [ ] T029 [US1] Implement dialogue text rendering with TextMeshPro in DialogueBoxController
-- [ ] T039 [US1] Register DialogueSystem and SceneManager in VContainer
+- [X] T028 [P] [US1] Create DialogueBoxController script in `Assets/Scripts/NovelCore/Runtime/UI/DialogueBox/DialogueBoxController.cs`
+- [X] T029 [US1] Implement dialogue text rendering with TextMeshPro in DialogueBoxController
+- [X] T039 [US1] Register DialogueSystem and SceneManager in VContainer
 
 ---
 

@@ -13,28 +13,27 @@ public class GameLifetimeScope : LifetimeScope
     {
         Debug.Log("NovelCore: Initializing GameLifetimeScope...");
 
-        // Register core services (placeholder registrations for now)
-        // These will be updated as we implement each service
+        // Register core services
 
         // Asset Management
-        // builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
+        builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
 
         // Audio System
-        // builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
+        builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
 
         // Input Handling
-        // builder.Register<IInputService, UnityInputService>(Lifetime.Singleton);
+        builder.Register<IInputService, UnityInputService>(Lifetime.Singleton);
 
         // Dialogue System
-        // builder.Register<IDialogueSystem, DialogueSystem>(Lifetime.Singleton);
+        builder.Register<IDialogueSystem, DialogueSystem.DialogueSystem>(Lifetime.Singleton);
 
-        // Scene Management
+        // Scene Management (to be implemented)
         // builder.Register<ISceneManager, SceneManager>(Lifetime.Singleton);
 
-        // Save System
+        // Save System (to be implemented)
         // builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
 
-        // Localization
+        // Localization (to be implemented)
         // builder.Register<ILocalizationService, UnityLocalizationService>(Lifetime.Singleton);
 
         // Platform Services (conditional registration based on build target)
