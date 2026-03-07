@@ -118,10 +118,9 @@ git checkout 001-visual-novel-constructor
 - Set "Scriptable Render Pipeline Settings" to your new URP Asset
 
 **Scripting Backend** (Edit → Project Settings → Player):
-- **Windows**: Player → Other Settings → Scripting Backend → **Mono**
-- **macOS**: Player → Other Settings → Scripting Backend → IL2CPP
-- **iOS**: IL2CPP (default, required by Apple)
-- **Android**: IL2CPP
+- **All Platforms**: Player → Other Settings → Scripting Backend → **IL2CPP**
+- This ensures cross-platform parity (Constitution Principle II)
+- Windows, macOS, iOS, and Android all use IL2CPP for consistent behavior
 
 **Input System** (Edit → Project Settings → Player):
 - Active Input Handling: "Input System Package (New)"

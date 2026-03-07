@@ -176,40 +176,34 @@ public interface IAudioService {
 
 ### Scripting Backend
 
-**Decision**: Mono for Windows, IL2CPP for macOS/iOS/Android
+**Decision**: IL2CPP for all platforms (Windows, macOS, iOS, Android)
 
 **Rationale**:
-- **Mono (Windows)**: Faster iteration and build times during development
-  - JIT compilation enables faster startup and hot reload
-  - Better debugging experience (edit-and-continue support)
-  - Reflection works without restrictions
-  - No pre-compilation delay
-  - Steam Windows builds work perfectly with Mono
-  
-- **IL2CPP (Other platforms)**:
-  - iOS requires IL2CPP (Apple App Store policy, no JIT allowed)
-  - Better performance on mobile (AOT compilation)
-  - Smaller binary size on mobile
-  - More consistent behavior across mobile platforms
-  - **Unity 6 IL2CPP improvements**:
-    - 2x faster build times vs Unity 2022
-    - Better code generation (10-15% performance improvement)
-    - Improved debugging support
+- **Cross-Platform Parity** (Constitution Principle II): Using IL2CPP on all platforms ensures identical behavior and eliminates platform-specific bugs during development
+- **iOS Requirement**: IL2CPP mandatory (Apple App Store policy, no JIT allowed)
+- **Better Performance**: AOT compilation provides native code performance on all platforms
+- **Early Issue Detection**: IL2CPP-specific issues discovered during Windows development, not at final testing stage
+- **Smaller Binary Size**: IL2CPP produces smaller binaries compared to Mono
+- **Code Protection**: IL2CPP output is C++ code, harder to decompile than Mono bytecode
+- **Unity 6 IL2CPP improvements**:
+  - 2x faster build times vs Unity 2022
+  - Better code generation (10-15% performance improvement)
+  - Improved debugging support
 
 **Platform-Specific Rationale**:
-- Windows (Steam): Mono preferred for development speed, no security concerns on PC
+- Windows (Steam): IL2CPP ensures development environment matches production behavior on all other platforms
 - macOS (Steam): IL2CPP for consistency with mobile, smaller build size
 - iOS: IL2CPP mandatory (Apple requirement)
 - Android: IL2CPP for performance parity with iOS
 
 **Trade-offs**:
-- Slower IL2CPP builds acceptable for release builds (not during daily development)
-- Limited reflection on IL2CPP platforms (acceptable - we use interfaces and ScriptableObjects)
-- Must test on both Mono and IL2CPP to catch platform-specific issues
+- Slower build times acceptable for cross-platform reliability (Unity 6 IL2CPP builds 2x faster than Unity 2022)
+- Limited reflection usage (acceptable - we use interfaces and ScriptableObjects)
+- Single backend simplifies testing and reduces platform-specific edge cases
 
 **Testing Strategy**:
-- Development: Use Mono for fast iteration on Windows
-- CI/CD: Build with IL2CPP for all platforms to catch compatibility issues
+- Development: Use IL2CPP on all platforms for consistent behavior
+- CI/CD: Build with IL2CPP for all platforms (unified backend)
 - Pre-release: Full testing on IL2CPP builds for all platforms
 
 ### C# 10 Language Features
@@ -422,7 +416,7 @@ public interface ISaveUpgrader {
 **Mitigation**: Early profiling on iPhone 12, fallback to URP if needed (requires constitution amendment)
 
 **Risk**: IL2CPP compile times slow iteration  
-**Mitigation**: Use Mono in Editor/Development builds, IL2CPP only for release builds
+**Mitigation**: Unity 6 IL2CPP builds are 2x faster than Unity 2022, incremental builds enabled, development on all platforms uses same backend for consistency
 
 **Risk**: Addressables learning curve for creators  
 **Mitigation**: Asset import auto-configures Addressables groups, transparent to users

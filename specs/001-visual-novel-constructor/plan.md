@@ -18,7 +18,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 **Storage**: JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings  
 **Testing**: Unity Test Framework (UTF), NUnit, PlayMode tests for runtime validation, EditMode tests for editor tools  
 **Target Platforms**: Windows x64, macOS (Intel + Apple Silicon), iOS 15+, Android API 24+ (Nougat)  
-**Scripting Backend**: Mono (Windows), IL2CPP (macOS, iOS, Android)  
+**Scripting Backend**: IL2CPP (all platforms)  
 **Project Type**: Hybrid editor tool + runtime system (creator uses Unity Editor, end-users run published games)  
 **Performance Goals**: 60 FPS on iPhone 13/Intel HD 620, scene transitions <1 second, <512MB RAM mobile / <1GB desktop  
 **Constraints**: Steam/App Store/Google Play compliance, GDPR opt-in analytics, UTF-8 localization support  
@@ -65,7 +65,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
    - [x] AI modifications limited to Assets/Scripts/ directory only - All code in Assets/Scripts/NovelCore/
    - [x] No .meta file generation or modification by AI - Unity generates .meta files
    - [x] No direct asset file creation (prefabs, scenes, materials) - Created via Unity Editor only
-   - [x] No ProjectSettings/ or package manifest changes by AI - Manual configuration documented
+   - [x] Package management permitted when user-specified - AI can install/update packages via manifest.json modifications
 
 **GATE RESULT**: ✅ PASSED - All constitution principles satisfied
 

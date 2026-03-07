@@ -72,7 +72,7 @@ Read the developer guide: `specs/001-visual-novel-constructor/quickstart.md`
 - **Animation**: Unity Animator + Spine-Unity 4.2+
 - **Localization**: Unity Localization 2.0+
 - **Platform SDKs**: Steamworks.NET 20.2+ (Steam), iOS/Android native
-- **Scripting Backend**: Mono (Windows), IL2CPP (macOS/iOS/Android)
+- **Scripting Backend**: IL2CPP (all platforms)
 
 ## Code Style
 
@@ -106,7 +106,8 @@ This project follows strict design principles (see `.specify/memory/constitution
 4. **Runtime Performance**: 60 FPS on target hardware
 5. **Save System Reliability**: Auto-save, cloud sync, no data loss
 6. **Modular Architecture**: Independent, testable modules
-7. **AI Development Constraints**: AI only modifies `Assets/Scripts/`
+7. **AI Development Constraints**: AI only modifies `Assets/Scripts/` (exception: package management when user-specified)
+8. **User Documentation Language**: Russian as primary language for end-user documentation
 
 ## Branch Structure
 

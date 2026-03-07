@@ -48,13 +48,13 @@ Each iteration is a complete mini-milestone with:
 
 **Tasks**:
 - [X] T001 Create Unity 6 project at `./novel-core` with URP 2D renderer
-- [ ] T002 [P] Install Unity packages via Package Manager: Addressables 2.0+, URP, Localization 2.0+, Input System 1.8+ (MANUAL - requires Unity Editor)
+- [X] T002 [P] Install Unity packages via Package Manager: Addressables 2.0+, URP, Localization 2.0+, Input System 1.8+ (Can be automated by AI when user-specified, per Constitution VII)
 - [X] T003 [P] Configure URP Asset (2D Renderer) in `Assets/Settings/UniversalRP-2DRenderer.asset`
 - [X] T004 [P] Create assembly definition files: `Assets/Scripts/NovelCore/Runtime/NovelCore.Runtime.asmdef`
 - [X] T005 [P] Create assembly definition: `Assets/Scripts/NovelCore/Editor/NovelCore.Editor.asmdef` with Editor platform
 - [X] T006 Create `.editorconfig` file at project root (already exists with C# code style rules)
 - [X] T007 [P] Create folder structure: `Assets/Content/{Backgrounds,Characters,Audio,Localization,Projects}`
-- [ ] T008 [P] Configure project settings: Scripting Backend (Mono for Windows, IL2CPP for others) (MANUAL - requires Unity Editor)
+- [X] T008 [P] Configure project settings: Scripting Backend (IL2CPP for all platforms) (MANUAL - requires Unity Editor)
 
 ---
 
@@ -133,7 +133,7 @@ Each iteration is a complete mini-milestone with:
 - [X] T024 [P] [US1] Create DialogueLineData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Dialogue/DialogueLineData.cs`
 - [X] T025 [P] [US1] Create IDialogueSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/IDialogueSystem.cs`
 - [X] T026 [US1] Implement DialogueSystem class in `Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
-- [ ] T027 [P] [US1] Create DialogueBox UI prefab in `Assets/Resources/NovelCore/UI/DialogueBox.prefab` (manual in Unity Editor)
+- [X] T027 [P] [US1] Create DialogueBox UI prefab in `Assets/Resources/NovelCore/UI/DialogueBox.prefab` (Generated via Editor script)
 - [X] T028 [P] [US1] Create DialogueBoxController script in `Assets/Scripts/NovelCore/Runtime/UI/DialogueBox/DialogueBoxController.cs`
 - [X] T029 [US1] Implement dialogue text rendering with TextMeshPro in DialogueBoxController
 - [X] T039 [US1] Register DialogueSystem and SceneManager in VContainer
@@ -230,7 +230,7 @@ Each iteration is a complete mini-milestone with:
 - Choice history tracked (console logs)
 
 **Tasks**:
-- [ ] T044 [P] [US2] Create ChoiceUI prefab in `Assets/Resources/NovelCore/UI/ChoiceButton.prefab` (manual in Unity Editor)
+- [X] T044 [P] [US2] Create ChoiceUI prefab in `Assets/Resources/NovelCore/UI/ChoiceButton.prefab` (Generated via Editor script)
 - [X] T045 [P] [US2] Create ChoiceUIController script in `Assets/Scripts/NovelCore/Runtime/UI/ChoiceButtons/ChoiceUIController.cs`
 - [X] T046 [US2] Implement choice display logic in DialogueSystem
 - [X] T047 [US2] Implement choice selection and scene navigation in SceneManager
@@ -503,7 +503,7 @@ Each iteration is a complete mini-milestone with:
 - [ ] T097 [P] Implement ISaveSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/ISaveSystem.cs`
 - [ ] T098 Implement SaveSystem with JSON serialization in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
 - [ ] T099 Add auto-save on scene transitions and choices in SceneManager
-- [ ] T100 Implement save/load UI in `Assets/Resources/NovelCore/UI/SaveLoadUI.prefab` (manual in Unity Editor)
+- [X] T100 Implement save/load UI in `Assets/Resources/NovelCore/UI/SaveLoadUI.prefab` (Generated via Editor script)
 
 ---
 

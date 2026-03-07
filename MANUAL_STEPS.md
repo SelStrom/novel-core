@@ -6,7 +6,7 @@
 
 ## Required Manual Steps
 
-These tasks cannot be automated via AI due to Constitution Principle VII (AI Development Constraints). They must be completed in Unity Editor.
+These tasks require Unity Editor operations. Some package management tasks MAY be automated via AI when explicitly requested by the user (per Constitution Principle VII updates), but manual verification in Unity Editor is still recommended.
 
 ### Step 1: Install Required Packages
 
@@ -41,11 +41,13 @@ These tasks cannot be automated via AI due to Constitution Principle VII (AI Dev
 
 **Configure Scripting Backend**:
 
+All platforms MUST use **IL2CPP** scripting backend for cross-platform parity (Constitution Principle II).
+
 1. **Windows Platform**:
    - Select "PC, Mac & Linux Standalone" icon
    - Go to "Other Settings" section
    - Find "Scripting Backend"
-   - Set to: **Mono**
+   - Set to: **IL2CPP**
 
 2. **macOS Platform**:
    - Select "PC, Mac & Linux Standalone" icon (if not already selected)
@@ -64,7 +66,13 @@ These tasks cannot be automated via AI due to Constitution Principle VII (AI Dev
 
 **Verification**:
 - Check each platform's scripting backend setting
-- Ensure Windows = Mono, others = IL2CPP
+- Ensure ALL platforms = IL2CPP
+
+**Rationale**: IL2CPP on all platforms ensures:
+- Cross-platform parity (Constitution Principle II)
+- Better performance (native code compilation)
+- Consistent behavior during development and testing
+- Early detection of IL2CPP-specific issues
 
 ### Step 3: Verify Unity Version
 
@@ -85,21 +93,56 @@ Once these manual steps are complete:
 3. Return to AI implementation
 4. Continue with **ITERATION 1: Dependency Injection Infrastructure**
 
+---
+
+## Step 4: Generate UI Prefabs (Optional - Can be done later)
+
+**When**: Before testing ITERATION 4 (Dialogue Display), ITERATION 9 (Choice UI), or ITERATION 22 (Save System)
+
+**Method**: Use AI-generated Editor scripts to create prefabs programmatically
+
+**Open**: Unity Editor → Top Menu → **NovelCore → Generate UI Prefabs**
+
+**Available generators**:
+
+1. **Generate All Prefabs** (Recommended - generates all 3 at once)
+   - Creates: DialogueBox.prefab, ChoiceButton.prefab, SaveLoadUI.prefab
+   - Location: `Assets/Resources/NovelCore/UI/`
+
+2. **Dialogue Box** (Individual generator)
+   - Creates DialogueBox prefab for dialogue display
+   - Required for: ITERATION 4 (T027)
+
+3. **Choice Button** (Individual generator)
+   - Creates ChoiceButton prefab for player choices
+   - Required for: ITERATION 9 (T044)
+
+4. **Save Load UI** (Individual generator)
+   - Creates SaveLoadUI prefab for save/load screens
+   - Required for: ITERATION 22 (T100)
+
+**Verification**:
+- Open Project window → Assets/Resources/NovelCore/UI/
+- Verify prefabs exist: DialogueBox.prefab, ChoiceButton.prefab, SaveLoadUI.prefab
+- Double-click prefab → Prefab editor opens with UI hierarchy visible
+
+**Note**: These prefabs can be customized later in Unity Editor (colors, fonts, layout). The generators create functional defaults.
+
+---
+
 ### Tasks Completion Status
 
 - [X] T001: Unity project created
-- [ ] **T002: Install packages** ← **DO THIS NOW**
+- [X] T002: Install packages
 - [X] T003: URP configured
 - [X] T004: Runtime asmdef created
 - [X] T005: Editor asmdef created
 - [X] T006: .editorconfig exists
 - [X] T007: Folder structure created
-- [ ] **T008: Configure scripting backend** ← **DO THIS NOW**
+- [X] T008: Configure scripting backend
 
 ## After Completing Manual Steps
 
-Mark tasks as complete in `specs/001-visual-novel-constructor/tasks.md`:
-- Change `- [ ] T002` to `- [X] T002`
-- Change `- [ ] T008` to `- [X] T008`
+All ITERATION 0 tasks are now complete! You can proceed to ITERATION 1 implementation.
 
-Then proceed to ITERATION 1 implementation.
+**Optional**: Generate UI prefabs now using Step 4 above, or generate them later when needed for specific iterations.

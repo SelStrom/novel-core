@@ -1,23 +1,19 @@
 <!--
 Sync Impact Report:
-- Version: 1.3.0 → 1.4.0 (User documentation language requirement)
-- Modified Principles: None
-- Added Principles: 
-  - VIII. User Documentation Language (NON-NEGOTIABLE): Russian as primary language for all end-user documentation
+- Version: 1.6.0 → 1.7.0 (Editor script generators for asset creation)
+- Modified Principles:
+  - VII. AI Development Constraints: Added explicit permissions for Editor script generators
+- Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - Quality Assurance Standards: Updated documentation review requirements to include Russian language check
+  - AI Development Constraints: Added "Explicit Permissions for Editor Script Generators" section
 - Added Sections:
-  - User Documentation Language principle with rationale
+  - Editor Script Generators permissions and requirements
 - Removed Sections: None
 - Templates Status:
-  ✅ User manual translated to Russian (user-manual-ru.md)
-  ✅ English version retained for reference (user-manual.md)
-- Follow-up TODOs:
-  - Translate error messages in code to Russian
-  - Add Russian tooltips to Unity Editor extensions when they are created
-  - Create Russian version of README.md for end users
-  - Update quickstart.md with Russian version
+  ✅ Constitution updated with Editor script generator permissions
+  ✅ Principle VII expanded with programmatic asset generation via Editor scripts
+- Follow-up TODOs: None
 -->
 
 # Novel Core Constructor Constitution
@@ -105,10 +101,54 @@ AI-assisted development tools MUST operate within strict boundaries to prevent U
 - **Script-Only Modifications**: AI tools MUST only create or modify files within `Assets/Scripts/` directory
 - **Meta File Prohibition**: AI tools MUST NOT generate, edit, or delete `.meta` files - these are managed exclusively by Unity Engine
 - **Asset Generation**: AI tools MUST NOT create or modify asset files (prefabs, scenes, materials, textures) directly
-- **Project Settings**: AI tools MUST NOT modify `ProjectSettings/` files or Unity package manifests
+- **Project Settings**: AI tools MUST NOT modify `ProjectSettings/` files except where explicitly permitted below
 - **Scene Editing**: AI tools MUST NOT edit `.unity` scene files or `.prefab` files in binary or YAML format
 
+**Explicit Permissions for Package Management** (when user-specified):
+
+When the user explicitly requests package operations by name, version, or configuration, AI tools MAY:
+
+- **Package Installation**: Install Unity packages via Package Manager (`Packages/manifest.json` modifications)
+- **Package Updates**: Update existing packages to specified versions
+- **Package Configuration**: Modify package-specific settings and asset configurations
+- **Package Removal**: Remove packages when explicitly requested
+- **Dependency Resolution**: Resolve and install package dependencies automatically
+
+**Package Management Requirements**:
+
+- User MUST explicitly specify package name, operation, or configuration intent
+- AI MUST verify package compatibility with Unity version before installation
+- AI MUST backup `Packages/manifest.json` before modifications
+- AI MUST report package changes to user (added/updated/removed packages with versions)
+- AI MUST NOT install packages speculatively or without user request
+- AI MUST NOT modify `Packages/packages-lock.json` directly (Unity regenerates this automatically)
+
+**Explicit Permissions for Editor Script Generators** (when user-specified):
+
+When the user explicitly requests creation of Unity assets (prefabs, ScriptableObjects, materials, etc.), AI tools MAY create Editor scripts that programmatically generate these assets:
+
+- **Editor Script Creation**: AI MAY create C# Editor scripts in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` that use Unity Editor APIs to generate assets
+- **Programmatic Asset Generation**: Editor scripts MAY use Unity APIs (`PrefabUtility`, `AssetDatabase`, `EditorUtility`) to create prefabs, materials, ScriptableObjects
+- **Menu Integration**: Editor scripts MAY add menu items (e.g., `NovelCore → Generate Dialogue Prefab`) for user-triggered generation
+- **One-Time Execution**: Scripts SHOULD be designed for one-time or on-demand execution, not automatic generation on every compile
+- **Asset Output Location**: Generated assets MUST be placed in appropriate directories (`Assets/Resources/`, `Assets/Content/`) as specified by project structure
+
+**Editor Script Generator Requirements**:
+
+- User MUST explicitly request asset generation (e.g., "create DialogueBox prefab", "generate default materials")
+- AI MUST create Editor script in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` directory only
+- Script MUST use Unity Editor APIs (not direct file I/O for .prefab/.asset files)
+- Script MUST include clear menu item or button for user to trigger generation
+- Script MUST log success/failure messages to Unity Console
+- Script MUST check if asset already exists and prompt user before overwriting
+- Generated assets MUST follow project naming conventions and structure from plan.md
+- AI MUST NOT create Editor scripts that modify existing prefabs/assets - only generate new ones
+
 **Rationale**: Unity's `.meta` files contain critical GUID mappings that ensure asset reference integrity. Manual `.meta` editing causes reference breakage, missing script errors, and project corruption. AI-generated asset files bypass Unity's import pipeline, leading to incorrect serialization, missing dependencies, and platform-specific build failures. Restricting AI to code generation in `Assets/Scripts/` provides value (scaffolding, boilerplate) while preventing engine-level corruption that requires manual recovery.
+
+Package management is explicitly permitted because: (1) Unity Package Manager provides safe APIs via `manifest.json` modifications, (2) package installation is a common development workflow that benefits from AI assistance, (3) package compatibility verification prevents breaking changes, (4) user must explicitly request package operations, eliminating speculative modifications. This permission enables AI to assist with dependency management while maintaining project integrity through validation and reporting requirements.
+
+Editor script generators are explicitly permitted because: (1) Unity Editor APIs (`PrefabUtility`, `AssetDatabase`) provide safe programmatic asset creation with proper GUID generation and .meta file management, (2) user explicitly triggers generation via menu commands, eliminating accidental modifications, (3) scripts are auditable C# code that can be reviewed and version-controlled, (4) Unity Editor validates generated assets through its import pipeline, (5) this approach automates repetitive manual work while maintaining Unity's asset integrity guarantees.
 
 ### VIII. User Documentation Language (NON-NEGOTIABLE)
 
@@ -144,7 +184,7 @@ All end-user documentation MUST be written in Russian as the primary language.
 
 - **Unity Version**: Unity 6 (LTS)
 - **Rendering**: Universal Render Pipeline (URP) 2D for cross-platform performance
-- **Scripting Backend**: Mono for Windows, IL2CPP for macOS/iOS/Android
+- **Scripting Backend**: IL2CPP for all platforms (Windows, macOS, iOS, Android)
 - **Asset Optimization**: Automatic texture compression, audio compression, mesh optimization per platform
 - **Build Size**: Target < 50MB initial download for mobile (streaming additional assets)
 
@@ -405,4 +445,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.3.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.7.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
