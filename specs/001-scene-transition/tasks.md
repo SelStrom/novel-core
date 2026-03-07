@@ -28,9 +28,9 @@
 **Purpose**: Project initialization and documentation structure
 
 - [x] T001 Create `specs/001-scene-transition/research.md` documenting current implementation gaps
-- [ ] T002 Create `specs/001-scene-transition/data-model.md` defining data structures
-- [ ] T003 [P] Create `specs/001-scene-transition/quickstart.md` with usage guide for creators
-- [ ] T004 [P] Create `specs/001-scene-transition/contracts/` directory with interface definitions
+- [x] T002 Create `specs/001-scene-transition/data-model.md` defining data structures
+- [x] T003 [P] Create `specs/001-scene-transition/quickstart.md` with usage guide for creators
+- [x] T004 [P] Create `specs/001-scene-transition/contracts/` directory with interface definitions
 
 ---
 
