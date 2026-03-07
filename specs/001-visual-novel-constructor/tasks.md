@@ -298,7 +298,7 @@ Each iteration is a complete mini-milestone with:
 - [X] T060 [P] [US3] Implement SpineCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/SpineCharacterAnimator.cs`
 - [X] T061 [US3] Add emotion switching logic to DialogueSystem
 - [X] T062 [US3] Implement character sprite swapping in SceneManager
-- [ ] T067 [US3] Register character animators in VContainer with factory pattern
+- [X] T067 [US3] Register character animators in VContainer with factory pattern
 
 ---
 

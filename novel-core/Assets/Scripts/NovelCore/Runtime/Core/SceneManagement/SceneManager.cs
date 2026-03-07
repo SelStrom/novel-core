@@ -20,6 +20,7 @@ public class SceneManager : ISceneManager
 {
     private readonly IAssetManager _assetManager;
     private readonly IAudioService _audioService;
+    private readonly ICharacterAnimatorFactory _animatorFactory;
 
     private SceneData _currentScene;
     private bool _isLoading;
@@ -44,10 +45,14 @@ public class SceneManager : ISceneManager
     public event System.Action<SceneData> OnSceneTransitionStart;
     public event System.Action<SceneData> OnSceneTransitionComplete;
 
-    public SceneManager(IAssetManager assetManager, IAudioService audioService)
+    public SceneManager(
+        IAssetManager assetManager, 
+        IAudioService audioService,
+        ICharacterAnimatorFactory animatorFactory)
     {
         _assetManager = assetManager ?? throw new System.ArgumentNullException(nameof(assetManager));
         _audioService = audioService ?? throw new System.ArgumentNullException(nameof(audioService));
+        _animatorFactory = animatorFactory ?? throw new System.ArgumentNullException(nameof(animatorFactory));
 
         InitializeSceneHierarchy();
     }
@@ -296,7 +301,7 @@ public class SceneManager : ISceneManager
                 1f);
 
             // Create appropriate animator based on animation type
-            ICharacterAnimator animator = CreateCharacterAnimator(characterData.AnimationType);
+            ICharacterAnimator animator = _animatorFactory.Create(characterData.AnimationType);
             animator.Initialize(characterData, characterObj);
             animator.SetEmotion(placement.initialEmotion);
 
@@ -310,17 +315,6 @@ public class SceneManager : ISceneManager
         {
             Debug.LogError($"SceneManager: Error loading character: {ex.Message}");
         }
-    }
-
-    private ICharacterAnimator CreateCharacterAnimator(AnimationType animationType)
-    {
-        return animationType switch
-        {
-            AnimationType.Spine => new SpineCharacterAnimator(_assetManager),
-            AnimationType.Unity => new UnityCharacterAnimator(_assetManager),
-            AnimationType.Static => new UnityCharacterAnimator(_assetManager), // Use Unity animator for static sprites
-            _ => new UnityCharacterAnimator(_assetManager)
-        };
     }
 
     private void ScaleBackgroundToFitScreen()

@@ -7,6 +7,7 @@ using NovelCore.Runtime.Core.InputHandling;
 using NovelCore.Runtime.Core.DialogueSystem;
 using NovelCore.Runtime.Core.SceneManagement;
 using NovelCore.Runtime.Core.Localization;
+using NovelCore.Runtime.Animation;
 
 namespace NovelCore.Runtime.Core
 {
@@ -40,6 +41,9 @@ public class GameLifetimeScope : LifetimeScope
 
         // Localization
         builder.Register<ILocalizationService, BasicLocalizationService>(Lifetime.Singleton);
+
+        // Character Animation Factory
+        builder.Register<ICharacterAnimatorFactory, CharacterAnimatorFactory>(Lifetime.Singleton);
 
         // Save System (to be implemented)
         // builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
