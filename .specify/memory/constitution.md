@@ -1,11 +1,12 @@
 <!--
 Sync Impact Report:
-- Version: 1.1.2 → 1.2.0 (Unity version upgrade)
+- Version: 1.2.1 → 1.2.2 (MVP scope clarification)
 - Modified Principles: None
 - Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - Technical Requirements: Unity 2022.3 LTS → Unity 6 (LTS), updated minimum iOS/Android versions
+  - Quality Assurance Standards: Added MVP Scope Guidance clarifying 80% functional requirement coverage acceptable for MVP releases
+  - MVP Testing Strategy: Added explicit coverage targets per release phase
 - Added Sections: None
 - Removed Sections: None
 - Templates Status:
@@ -89,8 +90,9 @@ The constructor MUST be built as composable, independently testable modules.
 - **Platform Abstraction**: Platform-specific code (Steam, iOS, Android APIs) MUST be isolated behind interfaces
 - **Dependency Injection**: Systems MUST use constructor injection or ScriptableObject configuration, avoiding singletons
 - **Testing**: Each module MUST have unit tests achieving >80% code coverage and integration tests for cross-module contracts
+- **MVP Exception**: Initial MVP release (first working version of User Story 1) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with full coverage achieved before production release (1.0.0)
 
-**Rationale**: Monolithic architecture prevents parallel development, makes debugging difficult, and increases regression risk. Modular design enables: faster iteration, easier onboarding, isolated bug fixes, and potential open-source component extraction.
+**Rationale**: Modular architecture prevents parallel development, makes debugging difficult, and increases regression risk. Modular design enables: faster iteration, easier onboarding, isolated bug fixes, and potential open-source component extraction. MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
 ### VII. AI Development Constraints (NON-NEGOTIABLE)
 
@@ -135,11 +137,35 @@ AI-assisted development tools MUST operate within strict boundaries to prevent U
 
 Every release candidate MUST pass:
 
-1. **Automated Tests**: 100% pass rate on unit, integration, and UI automation tests
+1. **Automated Tests**: 100% pass rate on unit, integration, and UI automation tests *(MVP Exception: 0.1.0-0.3.0 may use manual testing only; automated tests required starting 0.4.0)*
 2. **Platform Builds**: Successful builds and smoke tests on all four target platforms
 3. **Performance Profiling**: No regressions vs. previous release (memory, FPS, load times)
 4. **Sample Project**: At least one complete demo visual novel builds and runs on all platforms
 5. **Documentation Review**: All new features documented with tutorials and API references
+
+### MVP Testing Strategy
+
+For initial MVP releases (0.1.0 through 0.3.0):
+
+- **Manual Testing**: Feature validation via manual testing of user stories in Unity Editor and builds
+- **Smoke Tests**: Basic "does it launch and run" validation on target platforms
+- **Creator Dogfooding**: Internal team creates sample visual novels to validate workflows
+- **Incremental Automation**: Test infrastructure MUST be implemented alongside feature development, targeting >80% coverage by 0.4.0
+
+### MVP Scope Guidance
+
+For initial MVP releases (0.1.0 through 0.3.0):
+
+- **Functional Requirement Coverage**: Minimum 80% coverage of functional requirements is acceptable for MVP validation
+- **Deferred Features**: Non-critical features (e.g., dialogue history, undo/redo, custom asset browsers) MAY be deferred to post-MVP iterations
+- **Core User Stories**: All P1 (Priority 1) user stories MUST be fully implemented and manually tested
+- **Edge Case Handling**: Critical edge cases (broken links, missing assets, empty projects) MUST be covered; minor edge cases (large images, Unicode rendering) MAY be deferred with explicit documentation
+- **Coverage Targets by Phase**:
+  - **MVP (v0.1.0-v0.3.0)**: ≥80% functional requirement coverage, 100% P1 user story coverage, manual testing
+  - **Post-MVP (v0.4.0-v0.9.0)**: ≥95% functional requirement coverage, >80% automated test coverage, all edge cases addressed
+  - **Production (v1.0.0+)**: 100% functional requirement coverage, >80% automated test coverage, all documented edge cases handled
+
+**Rationale**: MVP focuses on proving core value proposition (creators can build visual novels without code) rather than feature completeness. 80% coverage ensures essential workflows work while acknowledging that perfect feature parity is iterative. Explicit deferred feature tracking prevents scope creep and enables rapid stakeholder validation.
 
 ### Content Creator Testing
 
@@ -332,4 +358,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.2.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
+**Version**: 1.2.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06

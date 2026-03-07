@@ -7,7 +7,7 @@
 
 ## Summary
 
-Build a Unity-based visual novel constructor enabling non-programmers to create professional visual novels with branching narratives, character emotions, audio, and cross-platform publishing to Steam and mobile. The system will provide a visual editor for scene creation, dialogue management, and story flow design, with a build pipeline generating standalone executables and mobile packages. Technical approach uses Unity 2022.3 LTS with Built-in Render Pipeline, Addressables for asset management, VContainer for dependency injection, and Spine for advanced character animations.
+Build a Unity-based visual novel constructor enabling non-programmers to create professional visual novels with branching narratives, character emotions, audio, and cross-platform publishing to Steam and mobile. The system will provide a visual editor for scene creation, dialogue management, and story flow design, with a build pipeline generating standalone executables and mobile packages. Technical approach uses Unity 6 (LTS) with Universal Render Pipeline (URP) 2D, Addressables for asset management, VContainer for dependency injection, and Spine for advanced character animations.
 
 ## Technical Context
 

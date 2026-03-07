@@ -260,7 +260,7 @@ Platform-specific build settings.
 - `productName`: string (app name)
 - `version`: string (semantic version)
 - `bundleIdentifier`: string (reverse DNS, e.g., "com.author.novelname")
-- `scriptingBackend`: ScriptingImplementation (IL2CPP required)
+- `scriptingBackend`: ScriptingImplementation (Mono for Windows, IL2CPP for macOS/iOS/Android)
 - `compressionMethod`: Compression (LZ4 for dev, LZMA for release)
 - `strippingLevel`: ManagedStrippingLevel (Low/Medium/High)
 - `steamAppId`: uint (Steam app ID, if targeting Steam)
