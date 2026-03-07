@@ -1,36 +1,30 @@
 <!--
 Sync Impact Report:
-- Version: 1.10.0 → 1.11.0 (Added Game Entry Point Architecture)
+- Version: 1.11.0 → 1.11.1 (Added Call Stack Analysis Requirement)
 - Modified Principles:
-  - VI. Modular Architecture & Testing: Added requirement for explicit game entry point (GameStarter) to initialize runtime systems
-  - I. Creator-First Design: Expanded with requirement for dual-mode preview (Play Mode full game start vs Scene Editor preview)
-- Added Principles: None (expanded existing principles)
+  - VI. Modular Architecture & Testing: Added mandatory call stack analysis requirement when modifying existing logic
+- Added Principles: None (expanded existing principle)
 - Removed Principles: None
 - Modified Sections:
-  - Principle I: Added requirement for preview mode flexibility (full game start from current scene OR selected scene preview)
-  - Principle VI: Added GameStarter component as mandatory entry point for dependency injection and system initialization
-  - Architecture: Added Game Entry Point section defining GameStarter responsibilities
-- Added Sections:
-  - Game Entry Point Architecture (Principle VI) defining GameStarter component, initialization sequence, and preview modes
-  - Dual-Mode Preview Strategy (Principle I) for Play Mode vs Scene Editor preview
+  - Principle VI: Added "Call Stack Analysis" bullet requiring analysis of all callers and side effects before modifying existing code
+  - Rationale updated to explain why call stack analysis prevents regression bugs and unintended side effects
+- Added Sections: None (inline addition to existing principle)
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with game entry point architecture
-  ✅ plan.md needs update: Add GameStarter component to Project Structure
-  ✅ tasks.md needs update: Add task for implementing GameStarter component (T050, T051)
-  ✅ spec.md needs review: Verify preview mode requirements align with GameStarter architecture
-  ⚠ User documentation needs update: SAMPLE_PROJECT_QUICKSTART.md, SAMPLE_PROJECT_GUIDE.md (already updated)
+  ✅ Constitution updated with call stack analysis requirement
+  ⚠ plan.md may need update: Consider adding call stack analysis to development workflow guidance
+  ⚠ tasks.md may need update: Add call stack analysis as checklist item for refactoring tasks
+  ⚠ Code review checklist should include call stack analysis verification
 - Follow-up TODOs:
-  - Update plan.md Project Structure to include GameStarter in Runtime/Core/
-  - Update tasks.md to add T050 (Implement GameStarter) and T051 (Add Scene Editor preview integration)
-  - Add integration test for GameStarter initialization sequence
-  - Document GameStarter setup requirements in user manual
-  - Verify VContainer injection works correctly in GameStarter
+  - Update code review guidelines to include call stack analysis verification
+  - Consider adding automated tools (e.g., static analysis, call graph visualization) to aid in call stack analysis
+  - Document call stack analysis workflow in developer onboarding materials
+  - Add examples of call stack analysis in architecture documentation
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.11.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.11.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
 
 ## Core Principles
 
@@ -108,6 +102,12 @@ The constructor MUST be built as composable, independently testable modules with
   - Loads starting scene from configuration
   - Starts DialogueSystem and SceneManager
   - Supports both Play Mode full start and Scene Editor preview mode
+- **Call Stack Analysis** (MANDATORY for modifications): When modifying existing logic, developers MUST:
+  - Analyze the complete call stack (all callers of the modified method/class)
+  - Identify all systems that depend on the current behavior
+  - Verify that changes do not break dependent logic or introduce unintended side effects
+  - Update all affected call sites if method signatures or behavior contracts change
+  - Run integration tests covering all identified call paths before committing
 - **Editor Extensions**: Custom editors MUST be optional and not required for runtime functionality
 - **Platform Abstraction**: Platform-specific code (Steam, iOS, Android APIs) MUST be isolated behind interfaces
 - **Dependency Injection**: Systems MUST use constructor injection or ScriptableObject configuration, avoiding singletons
@@ -129,7 +129,7 @@ The constructor MUST be built as composable, independently testable modules with
 - **Continuous Validation**: Test suite MUST run automatically on pre-commit and CI/CD pipeline to prevent regressions
 - **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
 
-**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
+**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Call stack analysis prevents regression bugs by ensuring developers understand the full impact of their changes before implementation** - a method might be called from multiple places with different assumptions about its behavior, and changing it without analyzing all call sites can break distant, seemingly unrelated functionality. **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
 ### VII. AI Development Constraints (NON-NEGOTIABLE)
 
@@ -635,4 +635,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.11.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.11.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

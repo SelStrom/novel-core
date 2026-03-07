@@ -64,6 +64,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
    - [x] Test organization in separate assemblies - NovelCore.Tests.Runtime, NovelCore.Tests.Editor
    - [x] EditMode-first test strategy - Data models, validation, builders in EditMode; async/I/O in PlayMode
    - [x] Test-first development for critical systems - Save system, dialogue branching, asset management
+   - [x] Call stack analysis for modifications - Analyze all callers before modifying existing logic to prevent regressions
    - [x] Continuous validation via CI/CD - Test suite runs on pre-commit and pipeline
 
 ✅ **VII. AI Development Constraints (NON-NEGOTIABLE)**
