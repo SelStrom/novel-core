@@ -1,33 +1,41 @@
 <!--
 Sync Impact Report:
-- Version: 1.8.0 → 1.9.0 (Testing requirements mandatory coverage)
+- Version: 1.8.0 → 1.9.2 (Added PlayMode test execution guidance)
 - Modified Principles:
   - VI. Modular Architecture: Renamed to "Modular Architecture & Testing", expanded with comprehensive testing requirements (unit + integration tests, test organization, test-first development, continuous validation)
+  - VII. AI Development Constraints: Added "Unity PlayMode Test Execution" section with required command templates and GUI alternative
   - Quality Assurance Standards: Added detailed post-MVP testing requirements (v0.4.0+), test organization standards, test naming conventions, and integration test coverage specifications
-- Added Principles: None (expanded existing principle)
+- Added Principles: None (expanded existing principles)
 - Removed Principles: None
 - Modified Sections:
-  - Principle VI: Added unit testing (>80% coverage), integration testing (cross-module contracts), test organization, test-first development, continuous validation requirements
+  - Principle VI: Added unit testing (>80% coverage), integration testing (cross-module contracts), test organization, test-first development, continuous validation requirements, immediate test coverage requirement
+  - Principle VII: Added "Unity PlayMode Test Execution" with batch mode and GUI workflows
   - Quality Assurance Standards: Added "Post-MVP Testing Requirements (v0.4.0+)" section with mandatory coverage targets
   - Quality Assurance Standards: Added "Test Organization Standards" with assembly structure, fixtures, mocking, PlayMode/EditMode guidance
 - Added Sections:
   - Post-MVP Testing Requirements (v0.4.0+) with specific integration test cases
   - Test Organization Standards with technical implementation guidance
+  - Unity PlayMode Test Execution (REQUIRED for running tests) with batch mode command templates
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with comprehensive testing requirements
+  ✅ Constitution updated with comprehensive testing requirements and PlayMode test execution guidance
   ⚠ plan.md needs update: Add testing technology stack (Unity Test Framework, NUnit)
   ⚠ tasks.md needs update: Add test task iterations for unit and integration tests (post-MVP phase)
   ⚠ spec.md may need review: Verify edge cases include test scenarios
+  ⚠ CI/CD pipeline configuration may need update to use new test command template
 - Follow-up TODOs:
   - Update plan.md Technical Context to include "Testing: Unity Test Framework (UTF), NUnit, PlayMode tests, EditMode tests, >80% coverage target"
   - Update tasks.md to add iteration for test infrastructure setup (post-MVP)
   - Update tasks.md to add unit test tasks for each core system (DialogueSystem, SaveSystem, AssetManager, SceneManager)
   - Update tasks.md to add integration test tasks for cross-module contracts
   - Verify .editorconfig includes test file naming conventions if applicable
+  - Consider adding CI/CD workflow examples using the PlayMode test command
+  - Document test result parsing from NUnit XML output format
 -->
 
 # Novel Core Constructor Constitution
+
+**Version**: 1.9.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
 
 ## Core Principles
 
@@ -108,6 +116,8 @@ The constructor MUST be built as composable, independently testable modules with
   - Platform-specific implementations against common interfaces
 - **Test Organization**: Tests MUST be organized in separate assemblies (`NovelCore.Tests.Runtime`, `NovelCore.Tests.Editor`) with clear naming conventions
 - **Test-First Development**: For critical systems (save system, dialogue branching, asset management), tests MUST be written before implementation to validate requirements
+- **Immediate Test Coverage**: After implementing new functionality, tests MUST be written immediately to cover the new code before moving to the next feature. Tests MUST be run and all errors fixed before proceeding.
+- **Test Execution Workflow**: After writing tests, run Unity Test Runner (batch mode: `-runTests -testPlatform PlayMode`) and fix all compilation and runtime errors before committing
 - **Continuous Validation**: Test suite MUST run automatically on pre-commit and CI/CD pipeline to prevent regressions
 - **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
 
@@ -192,6 +202,51 @@ cd /Users/selstrom/work/projects/novel-core/novel-core && \
 ```
 
 **Rationale**: Unity batch mode with `-nographics` avoids licensing issues that occur with GUI-based launches in automated contexts. Running from the parent directory with relative paths ensures consistent project resolution across different environments. File-based logging (`-logFile`) captures full compilation output including compiler errors, warnings, and Unity initialization messages, which are essential for debugging. Parsing log files for `error CS` patterns provides reliable compilation failure detection without depending on exit codes, which may not reflect C# compilation errors due to Unity's multi-stage initialization process. This workflow has been validated to work reliably for automated compilation checks in CI/CD pipelines and AI-assisted development.
+
+**Unity PlayMode Test Execution** (REQUIRED for running tests):
+
+When AI tools need to run PlayMode tests after implementing new functionality, they MUST use the following workflow:
+
+- **Batch Mode Execution**: Unity MUST be launched with `-batchmode`, `-nographics`, `-quit`, and `-runTests` flags
+- **Test Platform**: MUST specify `-testPlatform PlayMode` for runtime tests or `-testPlatform EditMode` for editor tests
+- **Test Results Output**: Test results MUST be written to XML file using `-testResults ./test-results.xml`
+- **Log File Output**: Test execution logs MUST be written using `-logFile ./unity-tests.log`
+- **Project Path**: Use absolute path to Unity project directory
+
+**Required Unity PlayMode Test Command Template**:
+```bash
+/Applications/Unity/Hub/Editor/2022.3.XXf1/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -nographics \
+  -projectPath /path/to/project \
+  -runTests \
+  -testPlatform PlayMode \
+  -testResults ./results.xml \
+  -logFile ./unity.log \
+  -quit
+```
+
+**For novel-core project**:
+```bash
+/Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+  -batchmode \
+  -nographics \
+  -projectPath /Users/selstrom/work/projects/novel-core/novel-core/novel-core \
+  -runTests \
+  -testPlatform PlayMode \
+  -testResults /Users/selstrom/work/projects/novel-core/novel-core/test-results.xml \
+  -logFile /Users/selstrom/work/projects/novel-core/novel-core/unity-tests.log \
+  -quit
+```
+
+**Alternative: Run tests from Unity Test Runner GUI**:
+- Open Unity Editor with the project
+- Go to Window → General → Test Runner
+- Select PlayMode or EditMode tab
+- Click "Run All" to execute tests
+- Review results in the Test Runner window
+
+**Rationale**: PlayMode tests require Unity's runtime environment and cannot be executed outside Unity. Batch mode test execution enables automated testing in CI/CD pipelines and allows AI tools to validate test coverage after implementing features. The `-runTests` flag triggers Unity Test Framework execution, `-testResults` outputs NUnit XML format for test result parsing, and `-testPlatform` specifies whether to run runtime (PlayMode) or editor (EditMode) tests. GUI-based Test Runner is recommended for interactive development and debugging, while batch mode is required for automation. This workflow ensures tests are executed immediately after writing them, following Principle VI's "Immediate Test Coverage" requirement.
 
 ### VIII. User Documentation Language (NON-NEGOTIABLE)
 
@@ -572,4 +627,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.9.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.9.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

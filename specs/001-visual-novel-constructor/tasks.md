@@ -629,13 +629,13 @@ Each iteration is a complete mini-milestone with:
 - Mock framework (NSubstitute or similar) available for interface mocking
 
 **Tasks**:
-- [ ] T113 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Runtime/NovelCore.Tests.Runtime.asmdef`
-- [ ] T114 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Editor/NovelCore.Tests.Editor.asmdef`
-- [ ] T115 [P] Configure test assembly references to NovelCore.Runtime and NovelCore.Editor assemblies
-- [ ] T116 Install NSubstitute (or NUnit mocking framework) via Package Manager for interface mocking
-- [ ] T117 [P] Create test fixtures base classes in `Assets/Scripts/NovelCore/Tests/Runtime/BaseTestFixture.cs`
-- [ ] T118 [P] Create test data builders in `Assets/Scripts/NovelCore/Tests/Runtime/Builders/` for SceneData, CharacterData, DialogueLineData
-- [ ] T119 Create sample test to verify infrastructure in `Assets/Scripts/NovelCore/Tests/Runtime/SampleTest.cs`
+- [X] T113 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Runtime/NovelCore.Tests.Runtime.asmdef`
+- [X] T114 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Editor/NovelCore.Tests.Editor.asmdef`
+- [X] T115 [P] Configure test assembly references to NovelCore.Runtime and NovelCore.Editor assemblies
+- [X] T116 Install NSubstitute (or NUnit mocking framework) via Package Manager for interface mocking
+- [X] T117 [P] Create test fixtures base classes in `Assets/Scripts/NovelCore/Tests/Runtime/BaseTestFixture.cs`
+- [X] T118 [P] Create test data builders in `Assets/Scripts/NovelCore/Tests/Runtime/Builders/` for SceneData, CharacterData, DialogueLineData
+- [X] T119 Create sample test to verify infrastructure in `Assets/Scripts/NovelCore/Tests/Runtime/SampleTest.cs`
 
 ---
 
@@ -653,11 +653,11 @@ Each iteration is a complete mini-milestone with:
 - Code coverage report shows >80% for data model classes
 
 **Tasks**:
-- [ ] T120 [P] Write unit tests for SceneData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/SceneDataTests.cs`
-- [ ] T121 [P] Write unit tests for CharacterData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterDataTests.cs`
-- [ ] T122 [P] Write unit tests for DialogueLineData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/DialogueLineDataTests.cs`
-- [ ] T123 [P] Write unit tests for ChoiceData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/ChoiceDataTests.cs`
-- [ ] T124 [P] Write unit tests for CharacterPlacement in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterPlacementTests.cs`
+- [X] T120 [P] Write unit tests for SceneData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/SceneDataTests.cs`
+- [X] T121 [P] Write unit tests for CharacterData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterDataTests.cs`
+- [X] T122 [P] Write unit tests for DialogueLineData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/DialogueLineDataTests.cs`
+- [X] T123 [P] Write unit tests for ChoiceData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/ChoiceDataTests.cs`
+- [X] T124 [P] Write unit tests for CharacterPlacement in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterPlacementTests.cs`
 
 ---
 
@@ -676,12 +676,12 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for DialogueSystem
 
 **Tasks**:
-- [ ] T125 [P] Write unit tests for DialogueSystem initialization in `Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystemTests.cs`
-- [ ] T126 Write unit tests for dialogue advance logic (AdvanceDialogue, previous line, completion)
-- [ ] T127 Write unit tests for choice point handling (ShowChoices, SelectChoice, track history)
-- [ ] T128 Write unit tests for emotion switching during dialogue
-- [ ] T129 Write unit tests for dialogue state serialization (for save system integration)
-- [ ] T130 [P] Create mock implementations: MockAssetManager, MockSceneManager for test isolation
+- [X] T125 [P] Write unit tests for DialogueSystem initialization in `Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystemTests.cs`
+- [X] T126 Write unit tests for dialogue advance logic (AdvanceDialogue, previous line, completion)
+- [X] T127 Write unit tests for choice point handling (ShowChoices, SelectChoice, track history)
+- [X] T128 Write unit tests for emotion switching during dialogue
+- [X] T129 Write unit tests for dialogue state serialization (for save system integration)
+- [X] T130 [P] Create mock implementations: MockAssetManager, MockSceneManager for test isolation
 
 ---
 
@@ -700,11 +700,11 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for SaveSystem
 
 **Tasks**:
-- [ ] T131 [P] Write unit tests for SaveSystem save operations in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SaveSystemTests.cs`
-- [ ] T132 Write unit tests for SaveSystem load operations (valid saves, missing saves, corrupted saves)
-- [ ] T133 Write unit tests for save format versioning (v1 → v2 migration scenarios)
-- [ ] T134 Write unit tests for auto-save triggers (scene transitions, choice points)
-- [ ] T135 Write unit tests for save slot management (create, delete, list slots)
+- [X] T131 [P] Write unit tests for SaveSystem save operations in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SaveSystemTests.cs`
+- [X] T132 Write unit tests for SaveSystem load operations (valid saves, missing saves, corrupted saves)
+- [X] T133 Write unit tests for save format versioning (v1 → v2 migration scenarios)
+- [X] T134 Write unit tests for auto-save triggers (scene transitions, choice points)
+- [X] T135 Write unit tests for save slot management (create, delete, list slots)
 
 ---
 
