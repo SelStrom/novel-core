@@ -653,14 +653,14 @@ Each iteration is a complete mini-milestone with:
 - No runtime initialization required for data model tests
 
 **Tasks**:
-- [ ] T112a [P] Create `BaseTestFixture` for EditMode tests in `Assets/Scripts/NovelCore/Tests/Editor/BaseTestFixture.cs`
-- [ ] T112b [P] Copy test data builders to Editor folder: `Assets/Scripts/NovelCore/Tests/Editor/Builders/TestDataBuilders.cs`
-- [ ] T112c [P] Move data model tests to EditMode: `SceneDataTests`, `CharacterDataTests`, `DialogueLineDataTests`, `ChoiceDataTests`, `CharacterPlacementTests`
-- [ ] T112d [P] Move DialogueSystem tests to EditMode: `DialogueSystemTests.cs` (pure C# logic, no Unity runtime needed)
-- [ ] T112e Move builder tests (`SampleTest.cs`) to EditMode
-- [ ] T112f Update `NovelCore.Tests.Editor.asmdef` to reference Addressables, NovelCore.Runtime, TestFramework
-- [ ] T112g [P] Run EditMode tests to verify migration successful
-- [ ] T112h Clean up old Runtime test files after confirming EditMode tests pass
+- [X] T112a [P] Create `BaseTestFixture` for EditMode tests in `Assets/Scripts/NovelCore/Tests/Editor/BaseTestFixture.cs`
+- [X] T112b [P] Copy test data builders to Editor folder: `Assets/Scripts/NovelCore/Tests/Editor/Builders/TestDataBuilders.cs`
+- [X] T112c [P] Move data model tests to EditMode: `SceneDataTests`, `CharacterDataTests`, `DialogueLineDataTests`, `ChoiceDataTests`, `CharacterPlacementTests`
+- [X] T112d [P] Move DialogueSystem tests to EditMode: `DialogueSystemTests.cs` (pure C# logic, no Unity runtime needed)
+- [X] T112e Move builder tests (`SampleTest.cs`) to EditMode
+- [X] T112f Update `NovelCore.Tests.Editor.asmdef` to reference Addressables, NovelCore.Runtime, TestFramework
+- [X] T112g [P] Run EditMode tests to verify migration successful
+- [X] T112h Clean up old Runtime test files after confirming EditMode tests pass
 
 **Rationale**: EditMode tests for ScriptableObject creation, data validation, and pure C# logic execute 60-80% faster than PlayMode tests and are more reliable (no Unity runtime variability). Only SaveSystemTests require PlayMode due to async/await operations and file I/O (`Application.persistentDataPath`, `Directory`/`File` APIs).
 
