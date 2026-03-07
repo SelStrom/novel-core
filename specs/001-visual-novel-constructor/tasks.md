@@ -47,14 +47,14 @@ Each iteration is a complete mini-milestone with:
 - URP 2D renderer visible in Graphics settings
 
 **Tasks**:
-- [ ] T001 Create Unity 6 project at `./novel-core` with URP 2D renderer
-- [ ] T002 [P] Install Unity packages via Package Manager: Addressables 2.0+, URP, Localization 2.0+, Input System 1.8+
-- [ ] T003 [P] Configure URP Asset (2D Renderer) in `Assets/Settings/UniversalRP-2DRenderer.asset`
-- [ ] T004 [P] Create assembly definition files: `Assets/Scripts/NovelCore/Runtime/NovelCore.Runtime.asmdef`
-- [ ] T005 [P] Create assembly definition: `Assets/Scripts/NovelCore/Editor/NovelCore.Editor.asmdef` with Editor platform
-- [ ] T006 Create `.editorconfig` file at project root (already exists with C# code style rules)
-- [ ] T007 [P] Create folder structure: `Assets/Content/{Backgrounds,Characters,Audio,Localization,Projects}`
-- [ ] T008 [P] Configure project settings: Scripting Backend (Mono for Windows, IL2CPP for others)
+- [X] T001 Create Unity 6 project at `./novel-core` with URP 2D renderer
+- [ ] T002 [P] Install Unity packages via Package Manager: Addressables 2.0+, URP, Localization 2.0+, Input System 1.8+ (MANUAL - requires Unity Editor)
+- [X] T003 [P] Configure URP Asset (2D Renderer) in `Assets/Settings/UniversalRP-2DRenderer.asset`
+- [X] T004 [P] Create assembly definition files: `Assets/Scripts/NovelCore/Runtime/NovelCore.Runtime.asmdef`
+- [X] T005 [P] Create assembly definition: `Assets/Scripts/NovelCore/Editor/NovelCore.Editor.asmdef` with Editor platform
+- [X] T006 Create `.editorconfig` file at project root (already exists with C# code style rules)
+- [X] T007 [P] Create folder structure: `Assets/Content/{Backgrounds,Characters,Audio,Localization,Projects}`
+- [ ] T008 [P] Configure project settings: Scripting Backend (Mono for Windows, IL2CPP for others) (MANUAL - requires Unity Editor)
 
 ---
 
@@ -70,12 +70,12 @@ Each iteration is a complete mini-milestone with:
 - Create test MonoBehaviour that resolves IAssetManager - works
 
 **Tasks**:
-- [ ] T009 Setup Addressables groups in `Assets/AddressableAssets/Settings/` for Content folders
-- [ ] T010 [P] Create `GlobalUsings.cs` in `Assets/Scripts/NovelCore/Runtime/` with C# 10 global usings
-- [ ] T011 [P] Create base ScriptableObject classes in `Assets/Scripts/NovelCore/Runtime/Data/BaseScriptableObject.cs`
-- [ ] T012 [P] Implement VContainer LifetimeScope in `Assets/Scripts/NovelCore/Runtime/Core/GameLifetimeScope.cs`
-- [ ] T013 [P] Create platform abstraction interfaces in `Assets/Scripts/NovelCore/Runtime/Platform/Interfaces/IPlatformService.cs`
-- [ ] T021 [P] Register all services in VContainer GameLifetimeScope (placeholder registrations for now)
+- [ ] T009 Setup Addressables groups in `Assets/AddressableAssets/Settings/` for Content folders (MANUAL - see ADDRESSABLES_SETUP.md)
+- [X] T010 [P] Create `GlobalUsings.cs` in `Assets/Scripts/NovelCore/Runtime/` with C# 10 global usings
+- [X] T011 [P] Create base ScriptableObject classes in `Assets/Scripts/NovelCore/Runtime/Data/BaseScriptableObject.cs`
+- [X] T012 [P] Implement VContainer LifetimeScope in `Assets/Scripts/NovelCore/Runtime/Core/GameLifetimeScope.cs`
+- [X] T013 [P] Create platform abstraction interfaces in `Assets/Scripts/NovelCore/Runtime/Platform/Interfaces/IPlatformService.cs`
+- [X] T021 [P] Register all services in VContainer GameLifetimeScope (placeholder registrations for now)
 
 ---
 
@@ -91,9 +91,9 @@ Each iteration is a complete mini-milestone with:
 - Addressables Profiler shows asset loaded correctly
 
 **Tasks**:
-- [ ] T014 [P] Create core data models: `SceneData.cs`, `CharacterData.cs`, `DialogueLineData.cs` in `Assets/Scripts/NovelCore/Runtime/Data/`
-- [ ] T015 [P] Implement IAssetManager interface in `Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/IAssetManager.cs`
-- [ ] T016 Implement AddressablesAssetManager in `Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs`
+- [X] T014 [P] Create core data models: `SceneData.cs`, `CharacterData.cs`, `DialogueLineData.cs` in `Assets/Scripts/NovelCore/Runtime/Data/`
+- [X] T015 [P] Implement IAssetManager interface in `Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/IAssetManager.cs`
+- [X] T016 Implement AddressablesAssetManager in `Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs`
 
 ---
 
