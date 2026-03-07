@@ -109,10 +109,10 @@ Each iteration is a complete mini-milestone with:
 - Audio volume adjustable via IAudioService
 
 **Tasks**:
-- [ ] T017 [P] Create IAudioService interface in `Assets/Scripts/NovelCore/Runtime/Core/AudioSystem/IAudioService.cs`
-- [ ] T018 Implement UnityAudioService wrapper in `Assets/Scripts/NovelCore/Runtime/Core/AudioSystem/UnityAudioService.cs`
-- [ ] T019 [P] Create IInputService interface in `Assets/Scripts/NovelCore/Runtime/Core/InputHandling/IInputService.cs`
-- [ ] T020 Implement UnityInputService in `Assets/Scripts/NovelCore/Runtime/Core/InputHandling/UnityInputService.cs`
+- [X] T017 [P] Create IAudioService interface in `Assets/Scripts/NovelCore/Runtime/Core/AudioSystem/IAudioService.cs`
+- [X] T018 Implement UnityAudioService wrapper in `Assets/Scripts/NovelCore/Runtime/Core/AudioSystem/UnityAudioService.cs`
+- [X] T019 [P] Create IInputService interface in `Assets/Scripts/NovelCore/Runtime/Core/InputHandling/IInputService.cs`
+- [X] T020 Implement UnityInputService in `Assets/Scripts/NovelCore/Runtime/Core/InputHandling/UnityInputService.cs`
 
 ---
 
