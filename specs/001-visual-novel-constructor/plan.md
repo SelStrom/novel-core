@@ -16,7 +16,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 **Primary Dependencies**: Unity Addressables 2.0+, VContainer 1.14+, Spine-Unity 4.2+, Steamworks.NET 20.2+, Unity Localization 2.0+  
 **Rendering Pipeline**: Universal Render Pipeline (URP) 2D  
 **Storage**: JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings  
-**Testing**: Unity Test Framework (UTF), NUnit, PlayMode tests for runtime validation, EditMode tests for editor tools, >80% code coverage target (post-MVP v0.4.0+), integration tests for cross-module contracts  
+**Testing**: Unity Test Framework (UTF), NUnit, **EditMode-first strategy** (unit tests for ScriptableObjects, data validation, pure C# logic), PlayMode tests only for async operations, file I/O, runtime-specific Unity APIs, and integration tests requiring game loop, >80% code coverage target (post-MVP v0.4.0+), integration tests for cross-module contracts  
 **Target Platforms**: Windows x64, macOS (Intel + Apple Silicon), iOS 15+, Android API 24+ (Nougat)  
 **Scripting Backend**: IL2CPP (all platforms)  
 **Project Type**: Hybrid editor tool + runtime system (creator uses Unity Editor, end-users run published games)  
@@ -61,6 +61,7 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
    - [x] Unit tests achieve >80% coverage - UTF test assemblies per module (post-MVP v0.4.0+)
    - [x] Integration tests for cross-module contracts - PlayMode tests for system interactions (post-MVP v0.4.0+)
    - [x] Test organization in separate assemblies - NovelCore.Tests.Runtime, NovelCore.Tests.Editor
+   - [x] EditMode-first test strategy - Data models, validation, builders in EditMode; async/I/O in PlayMode
    - [x] Test-first development for critical systems - Save system, dialogue branching, asset management
    - [x] Continuous validation via CI/CD - Test suite runs on pre-commit and pipeline
 

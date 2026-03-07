@@ -639,6 +639,33 @@ Each iteration is a complete mini-milestone with:
 
 ---
 
+## 🔄 ITERATION 28.5: Test Refactoring - EditMode Migration (2-3 hours)
+
+**Goal**: Migrate unit tests from PlayMode to EditMode for faster execution and better reliability
+
+**Visible Result**: Most unit tests run in EditMode (faster), only async/I/O tests remain in PlayMode
+
+**Validation**:
+- Open Unity Test Runner → EditMode tab shows 60+ tests
+- Open Unity Test Runner → PlayMode tab shows <15 tests (only SaveSystem and integration tests)
+- EditMode tests execute in <5 seconds (vs 30+ seconds for PlayMode)
+- All tests pass after migration
+- No runtime initialization required for data model tests
+
+**Tasks**:
+- [ ] T112a [P] Create `BaseTestFixture` for EditMode tests in `Assets/Scripts/NovelCore/Tests/Editor/BaseTestFixture.cs`
+- [ ] T112b [P] Copy test data builders to Editor folder: `Assets/Scripts/NovelCore/Tests/Editor/Builders/TestDataBuilders.cs`
+- [ ] T112c [P] Move data model tests to EditMode: `SceneDataTests`, `CharacterDataTests`, `DialogueLineDataTests`, `ChoiceDataTests`, `CharacterPlacementTests`
+- [ ] T112d [P] Move DialogueSystem tests to EditMode: `DialogueSystemTests.cs` (pure C# logic, no Unity runtime needed)
+- [ ] T112e Move builder tests (`SampleTest.cs`) to EditMode
+- [ ] T112f Update `NovelCore.Tests.Editor.asmdef` to reference Addressables, NovelCore.Runtime, TestFramework
+- [ ] T112g [P] Run EditMode tests to verify migration successful
+- [ ] T112h Clean up old Runtime test files after confirming EditMode tests pass
+
+**Rationale**: EditMode tests for ScriptableObject creation, data validation, and pure C# logic execute 60-80% faster than PlayMode tests and are more reliable (no Unity runtime variability). Only SaveSystemTests require PlayMode due to async/await operations and file I/O (`Application.persistentDataPath`, `Directory`/`File` APIs).
+
+---
+
 ## 🧩 ITERATION 29: Unit Tests - Core Data Models (2-3 hours)
 
 **Goal**: Unit tests for SceneData, CharacterData, DialogueLineData, ChoiceData validation
