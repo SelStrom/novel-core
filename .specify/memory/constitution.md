@@ -1,44 +1,36 @@
 <!--
 Sync Impact Report:
-- Version: 1.8.0 → 1.10.0 (Added EditMode-first testing strategy)
+- Version: 1.10.0 → 1.11.0 (Added Game Entry Point Architecture)
 - Modified Principles:
-  - VI. Modular Architecture & Testing: Added "EditMode-First Strategy" requiring unit tests for ScriptableObjects, data validation, and pure C# logic to be implemented as EditMode tests, reserving PlayMode only for async operations and runtime-specific APIs
-  - VI. Test Organization: Expanded with test platform selection criteria (EditMode vs PlayMode)
-  - VI. Test Execution Workflow: Updated to prioritize EditMode tests execution before PlayMode
-  - VII. AI Development Constraints: Previously added "Unity PlayMode Test Execution" section with required command templates and GUI alternative (v1.9.2)
-  - Quality Assurance Standards: Added detailed post-MVP testing requirements (v0.4.0+), test organization standards, test naming conventions, and integration test coverage specifications (v1.9.0)
+  - VI. Modular Architecture & Testing: Added requirement for explicit game entry point (GameStarter) to initialize runtime systems
+  - I. Creator-First Design: Expanded with requirement for dual-mode preview (Play Mode full game start vs Scene Editor preview)
 - Added Principles: None (expanded existing principles)
 - Removed Principles: None
 - Modified Sections:
-  - Principle VI: Added EditMode-first strategy with clear criteria for test platform selection
-  - Principle VI: Updated rationale with performance benefits (60-80% faster execution, reduced flakiness)
-  - Principle VI: Modified test execution workflow to run EditMode tests first
-  - Principle VII: Added "Unity PlayMode Test Execution" with batch mode and GUI workflows (v1.9.2)
-  - Quality Assurance Standards: Added "Post-MVP Testing Requirements (v0.4.0+)" section with mandatory coverage targets (v1.9.0)
-  - Quality Assurance Standards: Added "Test Organization Standards" with assembly structure, fixtures, mocking, PlayMode/EditMode guidance (v1.9.0)
+  - Principle I: Added requirement for preview mode flexibility (full game start from current scene OR selected scene preview)
+  - Principle VI: Added GameStarter component as mandatory entry point for dependency injection and system initialization
+  - Architecture: Added Game Entry Point section defining GameStarter responsibilities
 - Added Sections:
-  - EditMode-First Strategy (Principle VI) with test platform selection criteria
-  - Unity PlayMode Test Execution (REQUIRED for running tests) with batch mode command templates (v1.9.2)
-  - Post-MVP Testing Requirements (v0.4.0+) with specific integration test cases (v1.9.0)
-  - Test Organization Standards with technical implementation guidance (v1.9.0)
+  - Game Entry Point Architecture (Principle VI) defining GameStarter component, initialization sequence, and preview modes
+  - Dual-Mode Preview Strategy (Principle I) for Play Mode vs Scene Editor preview
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with EditMode-first testing strategy
-  ⚠ plan.md needs update: Add EditMode-first testing strategy to Technical Context
-  ⚠ tasks.md needs update: Add task for migrating existing tests from PlayMode to EditMode
-  ⚠ spec.md may need review: Verify test strategy aligns with feature requirements
-  ⚠ CI/CD pipeline configuration may need update to run EditMode tests separately from PlayMode
+  ✅ Constitution updated with game entry point architecture
+  ✅ plan.md needs update: Add GameStarter component to Project Structure
+  ✅ tasks.md needs update: Add task for implementing GameStarter component (T050, T051)
+  ✅ spec.md needs review: Verify preview mode requirements align with GameStarter architecture
+  ⚠ User documentation needs update: SAMPLE_PROJECT_QUICKSTART.md, SAMPLE_PROJECT_GUIDE.md (already updated)
 - Follow-up TODOs:
-  - Update plan.md Technical Context to include "Testing Strategy: EditMode-first for unit tests (ScriptableObjects, data validation, builders), PlayMode only for async/I/O/integration"
-  - Update tasks.md to add task for migrating existing Runtime tests to Editor tests where appropriate
-  - Consider updating CI/CD workflow to run EditMode tests first, then PlayMode tests
-  - Document EditMode test execution command: `-testPlatform EditMode`
-  - Verify all data model tests (SceneData, CharacterData, etc.) are migrated to EditMode
+  - Update plan.md Project Structure to include GameStarter in Runtime/Core/
+  - Update tasks.md to add T050 (Implement GameStarter) and T051 (Add Scene Editor preview integration)
+  - Add integration test for GameStarter initialization sequence
+  - Document GameStarter setup requirements in user manual
+  - Verify VContainer injection works correctly in GameStarter
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.10.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.11.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
 
 ## Core Principles
 
@@ -49,10 +41,13 @@ The visual novel constructor MUST prioritize the content creator experience abov
 - **Editor Interface**: All core features MUST be accessible through Unity Editor GUI without requiring code
 - **Visual Scripting**: Dialogue, branching narratives, and scene transitions MUST use node-based or visual scripting
 - **Immediate Feedback**: Changes in the editor MUST reflect immediately in preview mode without requiring project rebuilds
+- **Dual-Mode Preview**: System MUST support two preview modes:
+  - **Play Mode Full Start**: Pressing Play ▶️ starts the game from current scene (or configured starting scene) via GameStarter component
+  - **Scene Editor Preview**: Scene Editor window MUST provide "Preview Scene" button to test individual scenes in isolation without full game initialization
 - **Asset Import**: Common formats (PNG, JPG, MP3, OGG, TTF) MUST import with sensible defaults requiring zero configuration
 - **Error Messages**: All validation errors MUST be presented in plain language with actionable solutions, not technical stack traces
 
-**Rationale**: Content creators (writers, artists, game designers) are the primary users. Technical barriers reduce adoption and limit creative expression. A tool that requires programming knowledge contradicts the "constructor" value proposition.
+**Rationale**: Content creators (writers, artists, game designers) are the primary users. Technical barriers reduce adoption and limit creative expression. A tool that requires programming knowledge contradicts the "constructor" value proposition. Dual preview modes enable both rapid iteration (Scene Editor preview for individual scenes) and full validation (Play Mode for complete game flow testing with proper initialization).
 
 ### II. Cross-Platform Parity (NON-NEGOTIABLE)
 
@@ -108,6 +103,11 @@ Player progress MUST be preserved reliably across sessions and platform-specific
 The constructor MUST be built as composable, independently testable modules with comprehensive test coverage.
 
 - **Core Systems**: Dialogue engine, asset manager, save system, input handler MUST be separate assemblies
+- **Game Entry Point**: System MUST have explicit entry point (GameStarter component) that:
+  - Initializes VContainer dependency injection
+  - Loads starting scene from configuration
+  - Starts DialogueSystem and SceneManager
+  - Supports both Play Mode full start and Scene Editor preview mode
 - **Editor Extensions**: Custom editors MUST be optional and not required for runtime functionality
 - **Platform Abstraction**: Platform-specific code (Steam, iOS, Android APIs) MUST be isolated behind interfaces
 - **Dependency Injection**: Systems MUST use constructor injection or ScriptableObject configuration, avoiding singletons
@@ -117,18 +117,19 @@ The constructor MUST be built as composable, independently testable modules with
   - State transitions across system boundaries
   - Error handling and recovery scenarios
   - Platform-specific implementations against common interfaces
+  - **Game Initialization**: GameStarter → VContainer → DialogueSystem/SceneManager initialization sequence
 - **Test Organization**: Tests MUST be organized in separate assemblies (`NovelCore.Tests.Runtime`, `NovelCore.Tests.Editor`) with clear naming conventions
 - **EditMode-First Strategy**: Unit tests for ScriptableObjects, data validation, pure C# logic, and builders MUST be implemented as EditMode tests. PlayMode tests are ONLY for async operations, file I/O, runtime-specific Unity APIs (e.g., `Application.persistentDataPath`), and integration tests requiring game loop
 - **Test Platform Selection**: 
   - **EditMode** (preferred): ScriptableObject creation/validation, data model tests, builders, pure C# business logic, synchronous operations
-  - **PlayMode** (only when required): `async`/`await` operations, file system I/O, `Application.persistentDataPath`, `Directory`/`File` APIs, integration tests needing runtime environment
+  - **PlayMode** (only when required): `async`/`await` operations, file system I/O, `Application.persistentDataPath`, `Directory`/`File` APIs, integration tests needing runtime environment, GameStarter initialization tests
 - **Test-First Development**: For critical systems (save system, dialogue branching, asset management), tests MUST be written before implementation to validate requirements
 - **Immediate Test Coverage**: After implementing new functionality, tests MUST be written immediately to cover the new code before moving to the next feature. Tests MUST be run and all errors fixed before proceeding.
 - **Test Execution Workflow**: After writing tests, run Unity Test Runner in EditMode first (`-testPlatform EditMode`), then PlayMode if needed. Fix all compilation and runtime errors before committing
 - **Continuous Validation**: Test suite MUST run automatically on pre-commit and CI/CD pipeline to prevent regressions
 - **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
 
-**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
+**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
 ### VII. AI Development Constraints (NON-NEGOTIABLE)
 
@@ -634,4 +635,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.10.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.11.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

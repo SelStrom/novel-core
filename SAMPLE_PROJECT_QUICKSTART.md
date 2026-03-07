@@ -31,12 +31,27 @@ Assets/Content/Projects/Sample/
     └── char_protagonist.png
 ```
 
-### 3. Запустите тестирование
+### 3. Настройте Unity сцену
 
-**Вариант A: Через Play Mode (простой способ)**
+Перед запуском игры нужно настроить основную Unity сцену:
 
-1. Выберите `Scene01_Introduction.asset` в Project window
-2. Нажмите кнопку **Play** ▶️ в Unity
+1. Откройте Unity сцену `Assets/Scenes/SampleScene.unity`
+2. Убедитесь, что в сцене есть GameObject с компонентом `GameLifetimeScope` (VContainer)
+   - Если его нет, создайте: GameObject → Create Empty, назовите "GameLifetimeScope"
+   - Добавьте компонент: Add Component → Game Lifetime Scope
+3. Создайте GameObject для запуска игры:
+   - GameObject → Create Empty, назовите "GameStarter"
+   - Добавьте компонент: Add Component → Game Starter
+4. В компоненте `GameStarter`:
+   - Перетащите `Scene01_Introduction.asset` из Project window в поле "Starting Scene"
+   - Убедитесь, что "Auto Start" включен (галочка стоит)
+
+### 4. Запустите тестирование
+
+**Вариант A: Через Play Mode (рекомендуемый способ)**
+
+1. Нажмите кнопку **Play** ▶️ в Unity
+2. Игра автоматически загрузит первую сцену
 3. Кликайте на экран для продвижения диалога
 4. На сцене 2 появятся кнопки выбора - выберите путь
 
@@ -53,6 +68,14 @@ Assets/Content/Projects/Sample/
 - **Сцена 3a или 3b**: Концовка в зависимости от выбора
 
 ## ⚠️ Если не работает
+
+### Проблема: "Ничего не происходит при запуске Play Mode"
+
+**Решение**: 
+- Убедитесь, что в сцене есть GameObject с компонентом `GameStarter`
+- Проверьте, что в `GameStarter` назначена стартовая сцена (поле "Starting Scene")
+- Убедитесь, что "Auto Start" включен
+- Проверьте Console на ошибки (особенно "Starting scene is not assigned")
 
 ### Проблема: "Не могу найти меню NovelCore"
 

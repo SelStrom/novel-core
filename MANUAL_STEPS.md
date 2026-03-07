@@ -2,11 +2,58 @@
 
 **Project**: Visual Novel Constructor  
 **Date**: 2026-03-07  
-**Status**: Iteration 0 - Project Bootstrap
+**Status**: MVP Development - Game Entry Point Setup
 
 ## Required Manual Steps
 
 These tasks require Unity Editor operations. Some package management tasks MAY be automated via AI when explicitly requested by the user (per Constitution Principle VII updates), but manual verification in Unity Editor is still recommended.
+
+### Step 0: Setup Game Entry Point (GameStarter)
+
+**REQUIRED FOR GAME TO START**: Before testing any visual novel content, you must set up the game entry point.
+
+**Open**: Unity Editor → Assets/Scenes/SampleScene.unity
+
+**Create GameStarter GameObject**:
+
+1. **Create GameObject**:
+   - In Hierarchy window: Right Click → Create Empty
+   - Rename to "GameStarter"
+
+2. **Add GameStarter Component**:
+   - Select "GameStarter" GameObject
+   - Inspector → Add Component
+   - Search for "Game Starter"
+   - Click to add component
+
+3. **Configure Starting Scene**:
+   - In GameStarter component Inspector:
+   - **Starting Scene** field: Drag `Scene01_Introduction.asset` from Project window
+     - Location: `Assets/Content/Projects/Sample/Scenes/Scene01_Introduction.asset`
+   - **Auto Start**: ☑ Enabled (check the box)
+   - **Start Delay**: 0.5 seconds (default)
+
+4. **Verify GameLifetimeScope Exists**:
+   - Check Hierarchy for "GameLifetimeScope" GameObject
+   - If missing:
+     - Right Click → Create Empty
+     - Rename to "GameLifetimeScope"
+     - Add Component → "Game Lifetime Scope"
+
+**Verification**:
+- Press Play ▶️
+- Console shows: "GameStarter: Starting game with scene: ..."
+- Scene loads automatically after 0.5 seconds
+- Dialogue appears on screen
+
+**Troubleshooting**:
+- "Starting scene is not assigned": Drag Scene01_Introduction.asset to Starting Scene field
+- "DialogueSystem not injected": Verify GameLifetimeScope GameObject exists
+- Nothing happens on Play: Check Auto Start is enabled, check Console for errors
+
+**Detailed Guide**: See GAME_STARTER_SETUP.md for comprehensive setup instructions
+
+---
 
 ### Step 1: Install Required Packages
 

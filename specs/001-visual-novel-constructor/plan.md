@@ -16,7 +16,8 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 **Primary Dependencies**: Unity Addressables 2.0+, VContainer 1.14+, Spine-Unity 4.2+, Steamworks.NET 20.2+, Unity Localization 2.0+  
 **Rendering Pipeline**: Universal Render Pipeline (URP) 2D  
 **Storage**: JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings  
-**Testing**: Unity Test Framework (UTF), NUnit, **EditMode-first strategy** (unit tests for ScriptableObjects, data validation, pure C# logic), PlayMode tests only for async operations, file I/O, runtime-specific Unity APIs, and integration tests requiring game loop, >80% code coverage target (post-MVP v0.4.0+), integration tests for cross-module contracts  
+**Game Entry Point**: GameStarter component initializes VContainer, loads starting scene, starts DialogueSystem/SceneManager. Supports Play Mode full start and Scene Editor preview modes.  
+**Testing**: Unity Test Framework (UTF), NUnit, **EditMode-first strategy** (unit tests for ScriptableObjects, data validation, pure C# logic), PlayMode tests only for async operations, file I/O, runtime-specific Unity APIs, integration tests requiring game loop (including GameStarter initialization), >80% code coverage target (post-MVP v0.4.0+), integration tests for cross-module contracts  
 **Target Platforms**: Windows x64, macOS (Intel + Apple Silicon), iOS 15+, Android API 24+ (Nougat)  
 **Scripting Backend**: IL2CPP (all platforms)  
 **Project Type**: Hybrid editor tool + runtime system (creator uses Unity Editor, end-users run published games)  
@@ -96,11 +97,14 @@ Assets/
 │   └── NovelCore/
 │       ├── Runtime/            # Runtime systems (included in builds)
 │       │   ├── Core/
+│       │   │   ├── GameStarter.cs          # Entry point: initializes DI, loads starting scene
+│       │   │   ├── GameLifetimeScope.cs    # VContainer DI root scope
 │       │   │   ├── DialogueSystem/     # Dialogue engine, text rendering
 │       │   │   ├── SceneManagement/    # Scene loading, transitions
 │       │   │   ├── SaveSystem/         # Save/load, cloud sync
 │       │   │   ├── AssetManagement/    # Addressables wrappers
 │       │   │   ├── InputHandling/      # Input abstraction layer
+│       │   │   ├── Localization/       # Localization service
 │       │   │   └── AudioSystem/        # Audio wrapper (extensible)
 │       │   ├── Data/                   # ScriptableObjects, data models
 │       │   │   ├── Scenes/             # Scene data definitions
@@ -178,6 +182,8 @@ Packages/
 
 **Structure Decision**: Hybrid Runtime + Editor with strict separation:
 - **Assets/Scripts/NovelCore**: All code lives here (AI-modifiable per Principle VII)
+- **GameStarter.cs**: Entry point component attached to Unity scene, initializes VContainer, loads starting scene
+- **GameLifetimeScope.cs**: VContainer root scope registering all services
 - **Assets/Content**: User content folder (Addressables source, not AI-modifiable)
 - **Runtime/**: Modular systems with assembly definitions per subsystem (Principle VI)
 - **Editor/**: Custom editor tools for creator-first UX (Principle I)

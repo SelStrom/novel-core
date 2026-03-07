@@ -198,6 +198,43 @@ Each iteration is a complete mini-milestone with:
 
 ---
 
+## 🎯 ITERATION 7.5: Game Entry Point (GameStarter) (2-3 hours)
+
+**Goal**: GameStarter component initializes game and loads starting scene automatically in Play Mode
+
+**Visible Result**: Unity scene has GameStarter GameObject. Press Play → game auto-loads configured starting scene
+
+**Validation**:
+- Add GameStarter GameObject to main Unity scene (SampleScene.unity)
+- Assign starting scene (Scene01_Introduction.asset) in Inspector
+- Press Play → GameStarter logs initialization, scene loads automatically
+- Dialogue starts without manual intervention
+- **🎯 ARCHITECTURE CHECKPOINT**: Explicit entry point establishes proper initialization sequence
+
+**Tasks**:
+- [X] T039 [P] [US1] Create GameStarter component in `Assets/Scripts/NovelCore/Runtime/Core/GameStarter.cs`
+  - Inject IDialogueSystem and ISceneManager via VContainer
+  - Load starting scene from SceneData field
+  - Call SceneManager.LoadScene() and DialogueSystem.StartScene()
+  - Support auto-start with configurable delay
+  - Provide RestartGame() method for full reset
+- [ ] T040.1 [P] [US1] Add GameStarter integration test in `Assets/Scripts/NovelCore/Tests/Runtime/Core/GameStarterTests.cs`
+  - Test initialization sequence (VContainer → SceneManager → DialogueSystem)
+  - Test Play Mode full start vs Scene Editor preview
+  - Test error handling (missing starting scene, failed DI injection)
+- [ ] T040.2 [US1] Update Sample Project setup instructions in SAMPLE_PROJECT_QUICKSTART.md
+  - Add step for creating GameStarter GameObject
+  - Document Inspector configuration (starting scene, auto-start, delay)
+  - Add troubleshooting section for common setup errors
+- [ ] T040.3 [P] [US1] Create SampleProjectGenerator update in `Assets/Scripts/NovelCore/Editor/Tools/Generators/SampleProjectGenerator.cs`
+  - Auto-create GameStarter GameObject in SampleScene.unity if missing
+  - Auto-assign Scene01_Introduction.asset as starting scene
+  - Log setup completion with validation checks
+
+**Note**: This iteration implements Constitution Principle VI requirement for explicit game entry point. GameStarter ensures predictable initialization order: VContainer DI → Services registered → Starting scene loaded → DialogueSystem started.
+
+---
+
 ## 🔀 ITERATION 8: Choice System - Data Models (2 hours)
 
 **Goal**: Can create ChoiceData ScriptableObject with multiple options

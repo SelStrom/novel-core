@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c9fb7333504c2885a5dc89fda1bf8, type: 3}
+  m_Name: Scene02_ChoicePoint
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: f5cd7e19-7102-4aa6-9961-f130d33b5c56
+  _sceneId: scene_choice_001
+  _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
+  _backgroundImage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _backgroundMusic:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _characters: []
+  _dialogueLines:
+  - {fileID: 0}
+  - {fileID: 0}
+  _choices:
+  - {fileID: 11400000, guid: e4d7d313b80074c0fbcfbff9d621d2c9, type: 2}
+  _transitionType: 1
+  _transitionDuration: 0.5
+  _autoAdvance: 0
+  _autoAdvanceDelay: 2

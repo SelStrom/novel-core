@@ -60,7 +60,31 @@ Assets/Content/Projects/Sample/
 
 ## 🎮 Как протестировать
 
-### Вариант 1: Через Scene Editor (рекомендуется)
+### Предварительная настройка Unity сцены
+
+Перед первым запуском нужно настроить основную Unity сцену:
+
+1. Откройте Unity сцену `Assets/Scenes/SampleScene.unity`
+2. **Добавьте GameLifetimeScope** (если его нет):
+   - GameObject → Create Empty, назовите "GameLifetimeScope"
+   - Add Component → Game Lifetime Scope
+3. **Добавьте GameStarter**:
+   - GameObject → Create Empty, назовите "GameStarter"
+   - Add Component → Game Starter
+4. **Настройте GameStarter**:
+   - Перетащите `Scene01_Introduction.asset` в поле "Starting Scene"
+   - Включите "Auto Start" (должна стоять галочка)
+   - Установите "Start Delay" на 0.5 секунды
+
+### Вариант 1: Автоматический запуск (рекомендуется)
+
+1. Убедитесь, что GameStarter настроен (см. выше)
+2. Нажмите **Play** ▶️ в Unity
+3. Игра автоматически загрузит первую сцену через 0.5 секунды
+4. Кликайте на экран для продвижения диалога
+5. На сцене 2 появятся кнопки выбора - выберите путь
+
+### Вариант 2: Через Scene Editor (если реализован)
 
 1. Откройте `Window → NovelCore → Scene Editor` (если окно есть)
 2. В Project window выберите `Scene01_Introduction.asset`
@@ -68,13 +92,6 @@ Assets/Content/Projects/Sample/
 4. Unity войдёт в Play Mode
 5. Кликайте для продвижения диалога
 6. Сделайте выбор на сцене 2
-
-### Вариант 2: Прямой запуск Play Mode
-
-1. В Project window выберите `Scene01_Introduction.asset`
-2. Убедитесь, что в сцене есть GameObject с `GameLifetimeScope` (VContainer)
-3. Нажмите **Play** в Unity
-4. Кликайте для продвижения диалога
 
 ## 📝 Сюжет Sample Project
 
@@ -113,6 +130,15 @@ Assets/Content/Projects/Sample/
 ```
 
 ## ⚠️ Известные ограничения
+
+### 0. Нет автоматического запуска игры
+
+**Проблема**: При нажатии Play ничего не происходит, потому что не настроен компонент для автоматической загрузки первой сцены.
+
+**Решение**: 
+- Добавьте GameObject `GameStarter` в Unity сцену (см. раздел "Как протестировать")
+- Назначьте стартовую сцену в Inspector
+- Убедитесь, что "Auto Start" включен
 
 ### 1. Addressables не настроены
 

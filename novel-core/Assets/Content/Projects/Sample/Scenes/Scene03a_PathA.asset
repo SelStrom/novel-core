@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c9fb7333504c2885a5dc89fda1bf8, type: 3}
+  m_Name: Scene03a_PathA
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: a199c6ab-7868-478d-9674-883d9e75e89f
+  _sceneId: scene_path_a_001
+  _sceneName: "\u041F\u0443\u0442\u044C A: \u041F\u0440\u043E\u0433\u0443\u043B\u043A\u0430"
+  _backgroundImage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _backgroundMusic:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _characters: []
+  _dialogueLines:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _choices: []
+  _transitionType: 1
+  _transitionDuration: 0.5
+  _autoAdvance: 0
+  _autoAdvanceDelay: 2

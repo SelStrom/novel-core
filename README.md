@@ -34,14 +34,17 @@ novel-core/                     # Unity project root (this folder)
 
 ### 🎮 Test Sample Project (Fastest Way!)
 
-**Try it now in 2 minutes**:
+**Try it now in 3 minutes**:
 
 1. Open Unity with `novel-core` project
 2. Menu: **NovelCore → Generate Sample Project**
-3. Press **Play** ▶️ in Unity
-4. Click to advance dialogue, make choices!
+3. Set up the game starter (see [GAME_STARTER_SETUP.md](GAME_STARTER_SETUP.md))
+4. Press **Play** ▶️ in Unity
+5. Click to advance dialogue, make choices!
 
-📖 See: `SAMPLE_PROJECT_QUICKSTART.md` for detailed instructions
+📖 See: 
+- `SAMPLE_PROJECT_QUICKSTART.md` for quick start
+- `GAME_STARTER_SETUP.md` for setup instructions
 
 ### For Content Creators (Non-Programmers)
 
