@@ -8,10 +8,10 @@
 
 ### Required Software
 
-- **Unity 2022.3 LTS** (or later LTS version)
-- **Visual Studio 2022** or **JetBrains Rider 2023.3+** (C# IDE)
+- **Unity 6 (LTS)** (Long Term Support version)
+- **Visual Studio 2022** or **JetBrains Rider 2024.1+** (C# IDE)
 - **Git** for version control
-- **.NET SDK 6.0+** (for standalone tools/tests)
+- **.NET SDK 8.0+** (for standalone tools/tests)
 
 ### Platform SDKs (for build targets)
 
@@ -22,14 +22,15 @@
 ### Unity Packages (install via Package Manager)
 
 ```
-com.unity.addressables (1.21+)
-com.unity.localization (1.4+)
-com.unity.inputsystem (1.7+)
-com.unity.test-framework (1.3+)
+com.unity.render-pipelines.universal (2.0+) - URP
+com.unity.addressables (2.0+)
+com.unity.localization (2.0+)
+com.unity.inputsystem (1.8+)
+com.unity.test-framework (2.0+)
 jp.hadashikick.vcontainer (1.14+) - Install via OpenUPM or git URL
 ```
 
-**Spine-Unity**: Download from http://esotericsoftware.com/spine-unity-download (requires Spine license)
+**Spine-Unity**: Download from http://esotericsoftware.com/spine-unity-download (4.2+ for Unity 6)
 
 **Steamworks.NET**: Download from https://github.com/rlabrecque/Steamworks.NET
 
@@ -73,7 +74,7 @@ git checkout 001-visual-novel-constructor
 
 1. Launch Unity Hub
 2. Click "Add" → select `novel-core` folder (repository root, not a subfolder)
-3. Select Unity 2022.3 LTS version
+3. Select **Unity 6 (LTS)** version
 4. Click project to open
 
 **Note**: Unity will recognize the `Assets/`, `Packages/`, and `ProjectSettings/` folders and open as a Unity project.

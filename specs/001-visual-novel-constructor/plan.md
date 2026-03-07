@@ -12,15 +12,15 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
 ## Technical Context
 
 **Unity Project Location**: `./novel-core` (repository root)  
-**Language/Version**: C# 9.0+ / Unity 2022.3 LTS (Long Term Support)  
-**Primary Dependencies**: Unity Addressables 1.21+, VContainer 1.14+, Spine-Unity 4.1+, Steamworks.NET 20.2+, Unity Localization 1.4+  
+**Language/Version**: C# 10.0+ / Unity 6 (Long Term Support)  
+**Primary Dependencies**: Unity Addressables 2.0+, VContainer 1.14+, Spine-Unity 4.2+, Steamworks.NET 20.2+, Unity Localization 2.0+  
 **Rendering Pipeline**: Universal Render Pipeline (URP) 2D  
 **Storage**: JSON for save files (serialized via JsonUtility), Addressables for asset catalogs, PlayerPrefs for lightweight settings  
 **Testing**: Unity Test Framework (UTF), NUnit, PlayMode tests for runtime validation, EditMode tests for editor tools  
-**Target Platforms**: Windows x64, macOS (Intel + Apple Silicon), iOS 14+, Android API 21+ (Lollipop)  
+**Target Platforms**: Windows x64, macOS (Intel + Apple Silicon), iOS 15+, Android API 24+ (Nougat)  
 **Scripting Backend**: Mono (Windows), IL2CPP (macOS, iOS, Android)  
 **Project Type**: Hybrid editor tool + runtime system (creator uses Unity Editor, end-users run published games)  
-**Performance Goals**: 60 FPS on iPhone 12/Intel HD 620, scene transitions <1 second, <512MB RAM mobile / <1GB desktop  
+**Performance Goals**: 60 FPS on iPhone 13/Intel HD 620, scene transitions <1 second, <512MB RAM mobile / <1GB desktop  
 **Constraints**: Steam/App Store/Google Play compliance, GDPR opt-in analytics, UTF-8 localization support  
 **Scale/Scope**: Support 200+ scenes, 50+ branching choice points, 500+ assets per project, 10+ hour visual novels
 

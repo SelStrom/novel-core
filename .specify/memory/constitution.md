@@ -1,11 +1,11 @@
 <!--
 Sync Impact Report:
-- Version: 1.1.1 → 1.1.2 (Technical requirements clarification)
+- Version: 1.1.2 → 1.2.0 (Unity version upgrade)
 - Modified Principles: None
 - Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - Technical Requirements: Updated rendering (Built-in → URP 2D) and scripting backend (IL2CPP all → Mono for Windows, IL2CPP for others)
+  - Technical Requirements: Unity 2022.3 LTS → Unity 6 (LTS), updated minimum iOS/Android versions
 - Added Sections: None
 - Removed Sections: None
 - Templates Status:
@@ -123,7 +123,7 @@ AI-assisted development tools MUST operate within strict boundaries to prevent U
 
 ### Technical Requirements
 
-- **Unity Version**: Target Unity LTS version (currently 2022.3 LTS or later)
+- **Unity Version**: Unity 6 (LTS)
 - **Rendering**: Universal Render Pipeline (URP) 2D for cross-platform performance
 - **Scripting Backend**: Mono for Windows, IL2CPP for macOS/iOS/Android
 - **Asset Optimization**: Automatic texture compression, audio compression, mesh optimization per platform
@@ -332,4 +332,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.1.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
+**Version**: 1.2.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-06
