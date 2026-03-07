@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using NovelCore.Runtime.Core.AssetManagement;
 using NovelCore.Runtime.Core.AudioSystem;
 using NovelCore.Runtime.Core.InputHandling;
@@ -248,8 +249,7 @@ public class DialogueSystem : IDialogueSystem
         // Play sound effect if available
         if (currentLine.SoundEffect != null && currentLine.SoundEffect.RuntimeKeyIsValid())
         {
-            // TODO: Load and play sound effect via AssetManager
-            Debug.Log($"DialogueSystem: Playing sound effect for line {currentLine.LineId}");
+            LoadAndPlaySFX(currentLine.SoundEffect);
         }
 
         // Notify listeners
@@ -330,6 +330,26 @@ public class DialogueSystem : IDialogueSystem
     public void ClearChoiceHistory()
     {
         _choiceHistory.Clear();
+    }
+
+    /// <summary>
+    /// Loads and plays sound effect asynchronously.
+    /// </summary>
+    private async void LoadAndPlaySFX(AssetReference sfxReference)
+    {
+        try
+        {
+            AudioClip sfxClip = await _assetManager.LoadAssetAsync<AudioClip>(sfxReference);
+            if (sfxClip != null)
+            {
+                _audioService.PlaySFX(sfxClip);
+                Debug.Log($"DialogueSystem: Playing SFX {sfxClip.name}");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"DialogueSystem: Failed to load SFX: {ex.Message}");
+        }
     }
 }
 

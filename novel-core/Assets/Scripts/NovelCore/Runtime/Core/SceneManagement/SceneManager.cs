@@ -95,11 +95,10 @@ public class SceneManager : ISceneManager
             // Load and position characters
             await LoadCharactersAsync(sceneData);
 
-            // Play background music
+            // Play background music with fade in
             if (sceneData.BackgroundMusic != null && sceneData.BackgroundMusic.RuntimeKeyIsValid())
             {
-                // TODO: Load music via AssetManager
-                Debug.Log($"SceneManager: Playing background music for {sceneData.SceneName}");
+                await LoadAndPlayMusicAsync(sceneData.BackgroundMusic, fadeInDuration: 1.0f);
             }
 
             _currentScene = sceneData;
@@ -377,6 +376,34 @@ public class SceneManager : ISceneManager
         if (_backgroundContainer != null)
         {
             GameObject.Destroy(_backgroundContainer);
+        }
+    }
+
+    /// <summary>
+    /// Loads and plays background music asynchronously with fade in.
+    /// </summary>
+    private async Task LoadAndPlayMusicAsync(AssetReference musicReference, float fadeInDuration = 1.0f)
+    {
+        try
+        {
+            // Stop current music with fade out if playing
+            if (_audioService.IsMusicPlaying)
+            {
+                _audioService.StopMusic(fadeOutDuration: 0.5f);
+                await Task.Delay((int)(500)); // Wait for fade out
+            }
+
+            // Load new music clip
+            AudioClip musicClip = await _assetManager.LoadAssetAsync<AudioClip>(musicReference);
+            if (musicClip != null)
+            {
+                _audioService.PlayMusic(musicClip, loop: true, fadeInDuration: fadeInDuration);
+                Debug.Log($"SceneManager: Playing background music {musicClip.name}");
+            }
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogWarning($"SceneManager: Failed to load background music: {ex.Message}");
         }
     }
 }

@@ -337,10 +337,10 @@ Each iteration is a complete mini-milestone with:
 - Music fades in/out on scene transitions
 
 **Tasks**:
-- [ ] T068 [US4] Add backgroundMusic field to SceneData
-- [ ] T069 [US4] Add soundEffect field to DialogueLineData
-- [ ] T070 [US4] Implement music playback with fade in/out in UnityAudioService
-- [ ] T071 [US4] Implement SFX playback in DialogueSystem
+- [X] T068 [US4] Add backgroundMusic field to SceneData
+- [X] T069 [US4] Add soundEffect field to DialogueLineData
+- [X] T070 [US4] Implement music playback with fade in/out in UnityAudioService
+- [X] T071 [US4] Implement SFX playback in DialogueSystem
 
 ---
 
