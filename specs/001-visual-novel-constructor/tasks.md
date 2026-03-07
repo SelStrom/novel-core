@@ -3,7 +3,7 @@
 **Input**: Design documents from `/specs/001-visual-novel-constructor/`
 **Prerequisites**: plan.md ✅, spec.md ✅, research.md ✅, data-model.md ✅, contracts/ ✅
 
-**Tests**: Automated tests deferred to post-MVP per Constitution Principle VI (MVP Exception). MVP (v0.1.0-v0.3.0) will use manual testing and creator dogfooding. Automated test suite (>80% coverage) will be implemented incrementally starting v0.4.0 before production release (v1.0.0). Tasks below focus on implementation only.
+**Tests**: Per Constitution Principle VI (Modular Architecture & Testing), functionality MUST be covered by unit and integration tests. MVP (v0.1.0-v0.3.0) MAY use manual testing during initial implementation. Automated test suite with >80% code coverage MUST be implemented starting v0.4.0 before production release. Tasks below include dedicated test iterations for post-MVP phase.
 
 **Organization**: Tasks are grouped into **iterations** - small groups where each iteration delivers a visible, testable result. Each iteration can be completed and validated before moving to the next.
 
@@ -194,7 +194,7 @@ Each iteration is a complete mini-milestone with:
 
 **Tasks**:
 - [X] T038 [US1] Add "Preview Scene" button to SceneEditorWindow that enters Play mode
-- [ ] T040 [US1] Create sample SceneData asset for testing in `Assets/Content/Projects/Sample/`
+- [X] T040 [US1] Create sample SceneData asset for testing in `Assets/Content/Projects/Sample/`
 
 ---
 
@@ -609,7 +609,313 @@ Each iteration is a complete mini-milestone with:
 
 ---
 
+## 🧪 POST-MVP PHASE: Automated Testing (v0.4.0+)
+
+**CRITICAL**: Starting from v0.4.0, automated testing becomes MANDATORY per Constitution Principle VI. The iterations below MUST be completed to achieve >80% code coverage and comprehensive integration test coverage before v1.0.0 production release.
+
+---
+
+## 🔬 ITERATION 28: Test Infrastructure Setup (3-4 hours)
+
+**Goal**: Unity Test Framework configured, test assemblies created, mock framework integrated
+
+**Visible Result**: Unity Test Runner window shows test assemblies, can run empty tests successfully
+
+**Validation**:
+- Open Unity Test Runner window (Window → General → Test Runner)
+- See NovelCore.Tests.Runtime and NovelCore.Tests.Editor assemblies
+- Run tests → all pass (even if empty initially)
+- Test assemblies reference runtime assemblies correctly
+- Mock framework (NSubstitute or similar) available for interface mocking
+
+**Tasks**:
+- [ ] T113 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Runtime/NovelCore.Tests.Runtime.asmdef`
+- [ ] T114 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Editor/NovelCore.Tests.Editor.asmdef`
+- [ ] T115 [P] Configure test assembly references to NovelCore.Runtime and NovelCore.Editor assemblies
+- [ ] T116 Install NSubstitute (or NUnit mocking framework) via Package Manager for interface mocking
+- [ ] T117 [P] Create test fixtures base classes in `Assets/Scripts/NovelCore/Tests/Runtime/BaseTestFixture.cs`
+- [ ] T118 [P] Create test data builders in `Assets/Scripts/NovelCore/Tests/Runtime/Builders/` for SceneData, CharacterData, DialogueLineData
+- [ ] T119 Create sample test to verify infrastructure in `Assets/Scripts/NovelCore/Tests/Runtime/SampleTest.cs`
+
+---
+
+## 🧩 ITERATION 29: Unit Tests - Core Data Models (2-3 hours)
+
+**Goal**: Unit tests for SceneData, CharacterData, DialogueLineData, ChoiceData validation
+
+**Visible Result**: Test Runner shows 20+ passing unit tests for data models
+
+**Validation**:
+- Run Test Runner → see tests for all data models
+- Tests verify data validation (null checks, required fields)
+- Tests verify serialization/deserialization
+- Tests verify edge cases (empty dialogue, missing emotions)
+- Code coverage report shows >80% for data model classes
+
+**Tasks**:
+- [ ] T120 [P] Write unit tests for SceneData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/SceneDataTests.cs`
+- [ ] T121 [P] Write unit tests for CharacterData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterDataTests.cs`
+- [ ] T122 [P] Write unit tests for DialogueLineData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/DialogueLineDataTests.cs`
+- [ ] T123 [P] Write unit tests for ChoiceData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/ChoiceDataTests.cs`
+- [ ] T124 [P] Write unit tests for CharacterPlacement in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterPlacementTests.cs`
+
+---
+
+## 🗣️ ITERATION 30: Unit Tests - Dialogue System (3-4 hours)
+
+**Goal**: Unit tests for DialogueSystem covering dialogue flow, state management, choice handling
+
+**Visible Result**: Test Runner shows 30+ passing tests for DialogueSystem
+
+**Validation**:
+- Run Test Runner → see DialogueSystem tests
+- Tests verify dialogue advance, speaker changes, emotion switching
+- Tests verify choice point detection and navigation
+- Tests verify dialogue completion and scene transitions
+- Mocked dependencies (IAssetManager, ISceneManager) isolate DialogueSystem logic
+- Code coverage >80% for DialogueSystem
+
+**Tasks**:
+- [ ] T125 [P] Write unit tests for DialogueSystem initialization in `Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystemTests.cs`
+- [ ] T126 Write unit tests for dialogue advance logic (AdvanceDialogue, previous line, completion)
+- [ ] T127 Write unit tests for choice point handling (ShowChoices, SelectChoice, track history)
+- [ ] T128 Write unit tests for emotion switching during dialogue
+- [ ] T129 Write unit tests for dialogue state serialization (for save system integration)
+- [ ] T130 [P] Create mock implementations: MockAssetManager, MockSceneManager for test isolation
+
+---
+
+## 💾 ITERATION 31: Unit Tests - Save System (3-4 hours)
+
+**Goal**: Unit tests for SaveSystem covering save/load, versioning, corruption handling
+
+**Visible Result**: Test Runner shows 25+ passing tests for SaveSystem
+
+**Validation**:
+- Run Test Runner → see SaveSystem tests
+- Tests verify save/load with JSON serialization
+- Tests verify save format versioning and migration
+- Tests verify corrupted save detection and recovery
+- Tests verify multiple save slots management
+- Code coverage >80% for SaveSystem
+
+**Tasks**:
+- [ ] T131 [P] Write unit tests for SaveSystem save operations in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SaveSystemTests.cs`
+- [ ] T132 Write unit tests for SaveSystem load operations (valid saves, missing saves, corrupted saves)
+- [ ] T133 Write unit tests for save format versioning (v1 → v2 migration scenarios)
+- [ ] T134 Write unit tests for auto-save triggers (scene transitions, choice points)
+- [ ] T135 Write unit tests for save slot management (create, delete, list slots)
+
+---
+
+## 🎨 ITERATION 32: Unit Tests - Asset & Scene Management (3-4 hours)
+
+**Goal**: Unit tests for AddressablesAssetManager, SceneManager covering asset loading, scene transitions
+
+**Visible Result**: Test Runner shows 30+ passing tests for asset and scene systems
+
+**Validation**:
+- Run Test Runner → see AssetManager and SceneManager tests
+- Tests verify asset loading via Addressables (with mock Addressables operations)
+- Tests verify missing asset detection and error handling
+- Tests verify scene loading, background rendering, character placement
+- Tests verify scene transitions with effects
+- Code coverage >80% for AssetManager and SceneManager
+
+**Tasks**:
+- [ ] T136 [P] Write unit tests for AddressablesAssetManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/AssetManagementTests.cs`
+- [ ] T137 Write unit tests for asset loading (success, missing asset, invalid format)
+- [ ] T138 Write unit tests for asset reference tracking and cleanup
+- [ ] T139 [P] Write unit tests for SceneManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SceneManagementTests.cs`
+- [ ] T140 Write unit tests for scene loading, background rendering, character placement
+- [ ] T141 Write unit tests for scene transitions (Fade, Slide, Cut)
+
+---
+
+## 🎭 ITERATION 33: Unit Tests - Character Animation (2-3 hours)
+
+**Goal**: Unit tests for UnityCharacterAnimator and SpineCharacterAnimator
+
+**Visible Result**: Test Runner shows 20+ passing tests for character animation
+
+**Validation**:
+- Run Test Runner → see CharacterAnimator tests
+- Tests verify emotion switching (happy → sad → angry)
+- Tests verify entrance/exit animations
+- Tests verify Spine animation integration (if Spine used)
+- Code coverage >80% for character animators
+
+**Tasks**:
+- [ ] T142 [P] Write unit tests for UnityCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/UnityCharacterAnimatorTests.cs`
+- [ ] T143 Write unit tests for emotion switching logic
+- [ ] T144 Write unit tests for character entrance/exit animations
+- [ ] T145 [P] Write unit tests for SpineCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/SpineCharacterAnimatorTests.cs`
+
+---
+
+## 🔗 ITERATION 34: Integration Tests - Dialogue + Save (3-4 hours)
+
+**Goal**: Integration tests for dialogue system saving/loading mid-conversation
+
+**Visible Result**: PlayMode tests show dialogue state persists across save/load
+
+**Validation**:
+- Run PlayMode Test Runner → see integration tests
+- Tests verify saving dialogue state (current line, speaker, emotion)
+- Tests verify loading saved dialogue resumes correctly
+- Tests verify choice history persists across saves
+- Tests verify auto-save triggers at choice points
+
+**Tasks**:
+- [ ] T146 [P] Write integration test: Save dialogue state mid-conversation in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/DialogueSaveIntegrationTests.cs`
+- [ ] T147 Write integration test: Load saved dialogue and verify state restoration
+- [ ] T148 Write integration test: Choice history persists across save/load
+- [ ] T149 Write integration test: Auto-save triggers on choice selection
+- [ ] T150 Write integration test: Multiple save slots maintain separate dialogue states
+
+---
+
+## 🖼️ ITERATION 35: Integration Tests - Asset + Scene (3-4 hours)
+
+**Goal**: Integration tests for scene loading assets via Addressables
+
+**Visible Result**: PlayMode tests show scenes load with correct assets
+
+**Validation**:
+- Run PlayMode Test Runner → see asset + scene integration tests
+- Tests verify scene loads background via Addressables
+- Tests verify scene loads character sprites via Addressables
+- Tests verify missing asset warnings displayed correctly
+- Tests verify asset cleanup on scene unload
+
+**Tasks**:
+- [ ] T151 [P] Write integration test: Load scene with background asset in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AssetSceneIntegrationTests.cs`
+- [ ] T152 Write integration test: Load scene with character sprites
+- [ ] T153 Write integration test: Missing asset detection and error handling
+- [ ] T154 Write integration test: Asset cleanup on scene transition
+- [ ] T155 Write integration test: Multiple scenes reference same asset (reference counting)
+
+---
+
+## 🎵 ITERATION 36: Integration Tests - Audio + Dialogue (2-3 hours)
+
+**Goal**: Integration tests for audio playback during dialogue and scenes
+
+**Visible Result**: PlayMode tests show audio plays at correct moments
+
+**Validation**:
+- Run PlayMode Test Runner → see audio integration tests
+- Tests verify background music starts on scene load
+- Tests verify SFX plays on specific dialogue lines
+- Tests verify music fades on scene transitions
+- Tests verify audio stops on game quit/pause
+
+**Tasks**:
+- [ ] T156 [P] Write integration test: Background music plays on scene load in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AudioDialogueIntegrationTests.cs`
+- [ ] T157 Write integration test: SFX triggers on dialogue line
+- [ ] T158 Write integration test: Music fade-out on scene transition
+- [ ] T159 Write integration test: Audio volume controls affect playback
+- [ ] T160 Write integration test: Audio stops on game pause/quit
+
+---
+
+## 🖱️ ITERATION 37: Integration Tests - Input + UI (3-4 hours)
+
+**Goal**: Integration tests for input handling (clicks/taps) updating UI
+
+**Visible Result**: PlayMode tests show clicking advances dialogue, selects choices
+
+**Validation**:
+- Run PlayMode Test Runner → see input + UI integration tests
+- Tests verify clicking/tapping advances dialogue
+- Tests verify clicking choice button navigates to target scene
+- Tests verify keyboard shortcuts work (space advances, ESC opens menu)
+- Tests verify touch input works identically to mouse (cross-platform parity)
+
+**Tasks**:
+- [ ] T161 [P] Write integration test: Click advances dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/InputUIIntegrationTests.cs`
+- [ ] T162 Write integration test: Click choice button navigates to scene
+- [ ] T163 Write integration test: Keyboard shortcuts (Space, ESC) work
+- [ ] T164 Write integration test: Touch input advances dialogue (mobile)
+- [ ] T165 Write integration test: Input blocked during scene transitions
+
+---
+
+## 🌐 ITERATION 38: Integration Tests - Platform Services (3-4 hours)
+
+**Goal**: Integration tests for platform-specific features (Steam, iCloud, Google Play)
+
+**Visible Result**: PlayMode tests show cloud save integration works
+
+**Validation**:
+- Run PlayMode Test Runner → see platform service integration tests
+- Tests verify Steam cloud save upload/download (with mock Steamworks)
+- Tests verify iOS iCloud save sync (with mock iCloud APIs)
+- Tests verify Android Google Play save sync (with mock Google Play Services)
+- Tests verify platform service fallback if APIs unavailable
+
+**Tasks**:
+- [ ] T166 [P] Write integration test: Steam cloud save upload in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/PlatformServicesIntegrationTests.cs`
+- [ ] T167 Write integration test: Steam cloud save download and conflict resolution
+- [ ] T168 [P] Write integration test: iOS iCloud save sync
+- [ ] T169 [P] Write integration test: Android Google Play save sync
+- [ ] T170 Write integration test: Platform service fallback (offline mode)
+
+---
+
+## 🌍 ITERATION 39: Integration Tests - Localization (2-3 hours)
+
+**Goal**: Integration tests for language switching updating dialogue text
+
+**Visible Result**: PlayMode tests show dialogue updates when language changes
+
+**Validation**:
+- Run PlayMode Test Runner → see localization integration tests
+- Tests verify switching language updates dialogue text
+- Tests verify switching language updates UI labels
+- Tests verify localization keys resolve correctly
+- Tests verify missing translations show fallback text
+
+**Tasks**:
+- [ ] T171 [P] Write integration test: Switch language updates dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/LocalizationIntegrationTests.cs`
+- [ ] T172 Write integration test: Switch language updates UI labels
+- [ ] T173 Write integration test: Missing translation shows fallback
+- [ ] T174 Write integration test: Localization persists across saves
+
+---
+
+## 📊 ITERATION 40: Test Coverage & Regression Suite (3-4 hours)
+
+**Goal**: Achieve >80% code coverage, automate regression tests for P1/P2 user stories
+
+**Visible Result**: Coverage report shows >80% for all core systems, regression suite runs in CI/CD
+
+**Validation**:
+- Run Unity Test Framework with code coverage plugin
+- Coverage report shows:
+  - DialogueSystem: >80% coverage
+  - SaveSystem: >80% coverage
+  - AssetManager: >80% coverage
+  - SceneManager: >80% coverage
+  - CharacterAnimator: >80% coverage
+- Regression suite (P1/P2 user stories) runs automatically on every commit
+- CI/CD pipeline blocks merges if tests fail
+
+**Tasks**:
+- [ ] T175 Install Unity Code Coverage package via Package Manager
+- [ ] T176 Configure code coverage for test assemblies in Unity Test Framework settings
+- [ ] T177 Run coverage report and identify gaps (<80% coverage) in core systems
+- [ ] T178 Write additional unit tests to fill coverage gaps
+- [ ] T179 Create regression test suite for P1 user story (Create Basic Scene) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US1_BasicSceneRegressionTests.cs`
+- [ ] T180 Create regression test suite for P2 user story (Branching Narrative) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US2_BranchingRegressionTests.cs`
+- [ ] T181 Configure CI/CD pipeline to run test suite on every commit (GitHub Actions or similar)
+- [ ] T182 Document test execution and coverage reporting in README.md
+
+---
+
 # ITERATION SUMMARY
+
+## MVP Phase (v0.1.0 - v0.3.0)
 
 | Iteration | Goal | Duration | Deliverable |
 |-----------|------|----------|-------------|
@@ -640,12 +946,37 @@ Each iteration is a complete mini-milestone with:
 | 24 | Project Wizard | 2h | New project setup wizard |
 | 25 | Performance | 3-4h | 60 FPS optimization |
 | 26 | Cleanup & Docs | 2-3h | Code polish, README |
-| 27 | Final Validation | 2-3h | **✅ Full release validation** |
+| 27 | Final Validation | 2-3h | **✅ MVP feature-complete** |
 
-**Total Iterations**: 27  
-**Estimated Solo Duration**: 65-85 hours  
+**MVP Phase Total**: 27 iterations, 65-85 hours
+
+## Post-MVP Testing Phase (v0.4.0+) - MANDATORY
+
+| Iteration | Goal | Duration | Deliverable |
+|-----------|------|----------|-------------|
+| 28 | Test Infrastructure | 3-4h | UTF configured, test assemblies |
+| 29 | Unit Tests - Data Models | 2-3h | 20+ tests for SceneData, CharacterData |
+| 30 | Unit Tests - Dialogue System | 3-4h | 30+ tests for DialogueSystem |
+| 31 | Unit Tests - Save System | 3-4h | 25+ tests for SaveSystem |
+| 32 | Unit Tests - Asset & Scene | 3-4h | 30+ tests for AssetManager, SceneManager |
+| 33 | Unit Tests - Character Animation | 2-3h | 20+ tests for CharacterAnimator |
+| 34 | Integration - Dialogue + Save | 3-4h | Save/load dialogue state tests |
+| 35 | Integration - Asset + Scene | 3-4h | Scene asset loading tests |
+| 36 | Integration - Audio + Dialogue | 2-3h | Audio playback tests |
+| 37 | Integration - Input + UI | 3-4h | Click/tap interaction tests |
+| 38 | Integration - Platform Services | 3-4h | Cloud save integration tests |
+| 39 | Integration - Localization | 2-3h | Language switching tests |
+| 40 | Coverage & Regression Suite | 3-4h | **✅ >80% coverage, CI/CD** |
+
+**Testing Phase Total**: 13 iterations, 35-47 hours
+
+## Combined Total
+
+**Total Iterations**: 40 (MVP: 27, Testing: 13)  
+**Estimated Solo Duration**: 100-132 hours  
 **MVP Checkpoint**: Iteration 7 (first 19 hours)  
-**Production Ready**: Iteration 27
+**MVP Feature-Complete**: Iteration 27 (65-85 hours)  
+**Production Ready (v1.0.0)**: Iteration 40 (100-132 hours, >80% test coverage)
 
 ---
 
@@ -666,12 +997,26 @@ ITERATION 17-21: User Story 5 (Build/Publish)
     ↓
 ITERATION 22-26: Polish & Cross-Cutting
     ↓
-ITERATION 27: Final Validation ✅
+ITERATION 27: MVP Feature-Complete ✅
+    ↓
+========== POST-MVP TESTING PHASE (v0.4.0+) ==========
+    ↓
+ITERATION 28: Test Infrastructure Setup 🧪
+    ↓
+ITERATION 29-33: Unit Tests (All Core Systems)
+    ↓
+ITERATION 34-39: Integration Tests (Cross-Module Contracts)
+    ↓
+ITERATION 40: Coverage & Regression Suite ✅
+    ↓
+========== PRODUCTION READY (v1.0.0) ==========
 ```
 
 ---
 
 # KEY MILESTONES
+
+## MVP Phase (v0.1.0 - v0.3.0)
 
 - **After Iteration 3**: Foundation complete, can start user story work
 - **After Iteration 7**: 🎯 **MVP READY** - Can create basic visual novel scene with dialogue
@@ -679,19 +1024,47 @@ ITERATION 27: Final Validation ✅
 - **After Iteration 13**: Characters with emotions work
 - **After Iteration 16**: Audio and effects work
 - **After Iteration 21**: Can build and publish to all platforms
-- **After Iteration 27**: ✅ **PRODUCTION READY** - Full feature set validated
+- **After Iteration 27**: ✅ **MVP FEATURE-COMPLETE** - Full feature set validated (manual testing)
+
+## Post-MVP Testing Phase (v0.4.0+)
+
+- **After Iteration 28**: Test infrastructure ready (UTF, assemblies, mocks)
+- **After Iteration 33**: All core systems have >80% unit test coverage
+- **After Iteration 39**: All cross-module contracts have integration tests
+- **After Iteration 40**: ✅ **PRODUCTION READY (v1.0.0)** - >80% coverage, regression suite, CI/CD validation
 
 ---
 
 # NOTES
+
+## MVP Phase (Iterations 0-27)
 
 - Each iteration is **independently testable** - you get visible results at the end
 - **Iteration 7 is your MVP checkpoint** - stop here for first demo
 - Iterations can be **parallelized** within user stories if you have team members
 - **Stop and validate** after each iteration before proceeding
 - **Commit after each iteration** - you have a working state
-- Constitution Principle VI MVP Exception applies: manual testing for iterations 0-21
+- Constitution Principle VI MVP Exception applies: manual testing for MVP phase
+
+## Post-MVP Testing Phase (Iterations 28-40)
+
+- **MANDATORY for v1.0.0 production release** - cannot ship without >80% test coverage
+- **Start immediately after Iteration 27** (MVP feature-complete)
+- Test iterations 28-40 MUST be completed before v1.0.0 release
+- **Test-first development**: For critical systems (save, dialogue branching), write tests before implementation where possible
+- **Code coverage target**: >80% for all core systems (DialogueSystem, SaveSystem, AssetManager, SceneManager, CharacterAnimator)
+- **Integration test priority**: Focus on cross-module contracts that unit tests cannot catch:
+  - Dialogue + Save (state persistence)
+  - Asset + Scene (Addressables loading)
+  - Audio + Dialogue (timing and triggers)
+  - Input + UI (interaction flows)
+  - Platform Services (cloud saves)
+  - Localization (language switching)
+- **CI/CD integration**: Test suite MUST run automatically on every commit starting v0.4.0
+- **Regression prevention**: P1 and P2 user stories MUST have automated regression tests
 
 ---
 
-**Ready to Start**: Begin with Iteration 0 (Project Bootstrap) 🚀
+**Ready to Start**: 
+- **MVP Phase**: Begin with Iteration 0 (Project Bootstrap) 🚀
+- **Testing Phase**: Begin with Iteration 28 after completing Iteration 27 🧪

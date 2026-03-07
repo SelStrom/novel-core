@@ -32,6 +32,17 @@ novel-core/                     # Unity project root (this folder)
 
 ## Quick Start
 
+### 🎮 Test Sample Project (Fastest Way!)
+
+**Try it now in 2 minutes**:
+
+1. Open Unity with `novel-core` project
+2. Menu: **NovelCore → Generate Sample Project**
+3. Press **Play** ▶️ in Unity
+4. Click to advance dialogue, make choices!
+
+📖 See: `SAMPLE_PROJECT_QUICKSTART.md` for detailed instructions
+
 ### For Content Creators (Non-Programmers)
 
 Read the user manual: `specs/001-visual-novel-constructor/user-manual.md`
@@ -54,13 +65,26 @@ Read the developer guide: `specs/001-visual-novel-constructor/quickstart.md`
 
 ## Documentation
 
+### 🚀 Quick Start Guides
+
+- **SAMPLE_PROJECT_QUICKSTART.md**: 2-minute demo setup (start here!)
+- **SAMPLE_PROJECT_GUIDE.md**: Complete sample project documentation
+- **ADDRESSABLES_SETUP.md**: Asset management configuration
+- **MANUAL_STEPS.md**: Unity Editor manual configurations
+
+### 📚 Specification Documents
+
 - **User Manual** (`specs/.../user-manual.md`): For content creators (writers, artists)
 - **Quick Start** (`specs/.../quickstart.md`): For developers (technical setup)
 - **Specification** (`specs/.../spec.md`): Feature requirements
 - **Implementation Plan** (`specs/.../plan.md`): Technical architecture
 - **Data Model** (`specs/.../data-model.md`): Entity definitions
 - **Contracts** (`specs/.../contracts/`): System interfaces
-- **Constitution** (`.specify/memory/constitution.md`): Project principles
+- **Tasks** (`specs/.../tasks.md`): Implementation roadmap
+
+### ⚖️ Project Governance
+
+- **Constitution** (`.specify/memory/constitution.md`): Non-negotiable principles
 
 ## Technology Stack
 

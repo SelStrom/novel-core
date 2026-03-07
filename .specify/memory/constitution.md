@@ -1,26 +1,30 @@
 <!--
 Sync Impact Report:
-- Version: 1.7.0 → 1.8.0 (Unity compilation workflow + mandatory braces clarification)
+- Version: 1.8.0 → 1.9.0 (Testing requirements mandatory coverage)
 - Modified Principles:
-  - VII. AI Development Constraints: Added Unity compilation validation workflow requirements
-  - Code Style Standards: Clarified mandatory braces requirement with explicit examples
-- Added Principles: None
+  - VI. Modular Architecture: Renamed to "Modular Architecture & Testing", expanded with comprehensive testing requirements (unit + integration tests, test organization, test-first development, continuous validation)
+  - Quality Assurance Standards: Added detailed post-MVP testing requirements (v0.4.0+), test organization standards, test naming conventions, and integration test coverage specifications
+- Added Principles: None (expanded existing principle)
 - Removed Principles: None
 - Modified Sections:
-  - Added "Unity Compilation Validation" section under AI Development Constraints
-  - Strengthened "Braces (Allman Style)" enforcement with zero-tolerance policy
-  - Added explicit violation examples for missing braces
+  - Principle VI: Added unit testing (>80% coverage), integration testing (cross-module contracts), test organization, test-first development, continuous validation requirements
+  - Quality Assurance Standards: Added "Post-MVP Testing Requirements (v0.4.0+)" section with mandatory coverage targets
+  - Quality Assurance Standards: Added "Test Organization Standards" with assembly structure, fixtures, mocking, PlayMode/EditMode guidance
 - Added Sections:
-  - Unity batch mode compilation workflow specification
-  - Unity project path conventions for AI tools
+  - Post-MVP Testing Requirements (v0.4.0+) with specific integration test cases
+  - Test Organization Standards with technical implementation guidance
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with Unity compilation workflow
-  ✅ Code style mandatory braces enforcement strengthened
-  ⚠ .editorconfig should be updated to enforce brace rules (if not already configured)
-- Follow-up TODOs: 
-  - Verify .editorconfig includes `csharp_prefer_braces = true:error`
-  - Consider adding pre-commit hook to validate brace usage
+  ✅ Constitution updated with comprehensive testing requirements
+  ⚠ plan.md needs update: Add testing technology stack (Unity Test Framework, NUnit)
+  ⚠ tasks.md needs update: Add test task iterations for unit and integration tests (post-MVP phase)
+  ⚠ spec.md may need review: Verify edge cases include test scenarios
+- Follow-up TODOs:
+  - Update plan.md Technical Context to include "Testing: Unity Test Framework (UTF), NUnit, PlayMode tests, EditMode tests, >80% coverage target"
+  - Update tasks.md to add iteration for test infrastructure setup (post-MVP)
+  - Update tasks.md to add unit test tasks for each core system (DialogueSystem, SaveSystem, AssetManager, SceneManager)
+  - Update tasks.md to add integration test tasks for cross-module contracts
+  - Verify .editorconfig includes test file naming conventions if applicable
 -->
 
 # Novel Core Constructor Constitution
@@ -88,18 +92,26 @@ Player progress MUST be preserved reliably across sessions and platform-specific
 
 **Rationale**: Lost progress is the #1 cause of negative user reviews for story-driven games. Visual novels are multi-hour experiences where progress loss is unacceptable. Platform holders (Apple, Google) can terminate apps mid-session; auto-save is critical.
 
-### VI. Modular Architecture
+### VI. Modular Architecture & Testing (NON-NEGOTIABLE)
 
-The constructor MUST be built as composable, independently testable modules.
+The constructor MUST be built as composable, independently testable modules with comprehensive test coverage.
 
 - **Core Systems**: Dialogue engine, asset manager, save system, input handler MUST be separate assemblies
 - **Editor Extensions**: Custom editors MUST be optional and not required for runtime functionality
 - **Platform Abstraction**: Platform-specific code (Steam, iOS, Android APIs) MUST be isolated behind interfaces
 - **Dependency Injection**: Systems MUST use constructor injection or ScriptableObject configuration, avoiding singletons
-- **Testing**: Each module MUST have unit tests achieving >80% code coverage and integration tests for cross-module contracts
-- **MVP Exception**: Initial MVP release (first working version of User Story 1) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with full coverage achieved before production release (1.0.0)
+- **Unit Testing**: Each module MUST have unit tests achieving >80% code coverage of business logic
+- **Integration Testing**: Cross-module contracts (e.g., dialogue system + save system) MUST have integration tests covering:
+  - Data flow between modules
+  - State transitions across system boundaries
+  - Error handling and recovery scenarios
+  - Platform-specific implementations against common interfaces
+- **Test Organization**: Tests MUST be organized in separate assemblies (`NovelCore.Tests.Runtime`, `NovelCore.Tests.Editor`) with clear naming conventions
+- **Test-First Development**: For critical systems (save system, dialogue branching, asset management), tests MUST be written before implementation to validate requirements
+- **Continuous Validation**: Test suite MUST run automatically on pre-commit and CI/CD pipeline to prevent regressions
+- **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
 
-**Rationale**: Modular architecture prevents parallel development, makes debugging difficult, and increases regression risk. Modular design enables: faster iteration, easier onboarding, isolated bug fixes, and potential open-source component extraction. MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
+**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
 ### VII. AI Development Constraints (NON-NEGOTIABLE)
 
@@ -226,19 +238,46 @@ All end-user documentation MUST be written in Russian as the primary language.
 Every release candidate MUST pass:
 
 1. **Automated Tests**: 100% pass rate on unit, integration, and UI automation tests *(MVP Exception: 0.1.0-0.3.0 may use manual testing only; automated tests required starting 0.4.0)*
+   - **Unit Tests**: >80% code coverage of business logic (service classes, managers, data processors)
+   - **Integration Tests**: All cross-module contracts tested (dialogue + save, asset + scene, input + UI)
+   - **Regression Tests**: Critical user workflows automated (create scene, add dialogue, make choice, save/load)
 2. **Platform Builds**: Successful builds and smoke tests on all four target platforms
 3. **Performance Profiling**: No regressions vs. previous release (memory, FPS, load times)
 4. **Sample Project**: At least one complete demo visual novel builds and runs on all platforms
 5. **Documentation Review**: All new features documented with tutorials and API references
 
-### MVP Testing Strategy
+### MVP Testing Strategy (v0.1.0 - v0.3.0)
 
-For initial MVP releases (0.1.0 through 0.3.0):
+For initial MVP releases:
 
 - **Manual Testing**: Feature validation via manual testing of user stories in Unity Editor and builds
 - **Smoke Tests**: Basic "does it launch and run" validation on target platforms
 - **Creator Dogfooding**: Internal team creates sample visual novels to validate workflows
+- **Critical Path Coverage**: Even without full automation, critical user paths (create scene → add dialogue → preview) MUST be tested manually before each release
 - **Incremental Automation**: Test infrastructure MUST be implemented alongside feature development, targeting >80% coverage by 0.4.0
+
+### Post-MVP Testing Requirements (v0.4.0+)
+
+Starting from v0.4.0, automated testing becomes mandatory:
+
+- **Unit Test Coverage**: >80% code coverage for all Runtime systems (DialogueSystem, SaveSystem, AssetManager, SceneManager, etc.)
+- **Integration Test Suite**: Minimum 20 integration tests covering:
+  - Dialogue system → Save system: Save/load dialogue state mid-conversation
+  - Asset system → Scene system: Load scene assets via Addressables
+  - Input system → UI system: Click handling for dialogue advance and choices
+  - Save system → Platform services: Cloud save integration (Steam, iCloud, Google Play)
+  - Localization system → Dialogue system: Language switching updates dialogue text
+- **Regression Test Automation**: All P1 and P2 user stories MUST have automated PlayMode tests
+- **CI/CD Integration**: Test suite MUST run on every commit, blocking merges if tests fail
+- **Test Naming Convention**: Tests MUST follow pattern `[System]_[Method]_[Scenario]_[Expected]` (e.g., `DialogueSystem_AdvanceDialogue_AtLastLine_CompletesScene`)
+
+### Test Organization Standards
+
+- **Separate Assemblies**: Runtime tests in `NovelCore.Tests.Runtime.asmdef`, Editor tests in `NovelCore.Tests.Editor.asmdef`
+- **Test Fixtures**: Group related tests in test fixtures with `[TestFixture]` and shared setup/teardown
+- **Test Data Builders**: Use builder pattern for complex test data (SceneData, CharacterData) to improve readability
+- **Mock Abstractions**: Use interfaces (IAssetManager, ISaveSystem) with mock implementations for unit tests
+- **PlayMode vs EditMode**: Use PlayMode tests for runtime behavior, EditMode tests for editor tools and validators
 
 ### MVP Scope Guidance
 
@@ -533,4 +572,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.8.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.9.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
