@@ -74,8 +74,11 @@
 - [x] T018 [US1] Add graceful handling for missing/invalid nextScene references in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [x] T019 [US1] Update `SceneDataEditor` custom inspector to display nextScene field in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs` (if exists, otherwise create)
 - [x] T020 [US1] Add debug logging for nextScene transitions in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T020a [US1] Create `LinearSceneTestGenerator` editor tool in `novel-core/Assets/Scripts/NovelCore/Editor/Tools/LinearSceneTestGenerator.cs` for quick test scene creation
+- [x] T020b [US1] Fix Addressables integration in `LinearSceneTestGenerator` to auto-mark test scenes as Addressable
+- [x] T020c [US1] Subscribe `GameStarter` to `OnSceneNavigationRequested` event to enable automatic scene transitions
 - [ ] T021 [US1] Run all User Story 1 tests and verify they PASS
-- [ ] T022 [US1] Manual test: Create 3 linear scenes, verify full progression works
+- [x] T022 [US1] Manual test: Create 3 linear scenes, verify full progression works ✅ VERIFIED IN PLAYMODE
 
 **Checkpoint**: At this point, linear scene progression should be fully functional and testable independently
 
