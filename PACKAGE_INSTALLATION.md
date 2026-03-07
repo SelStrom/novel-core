@@ -98,19 +98,30 @@ openupm add jp.hadashikick.vcontainer
 
 ### 5. Spine-Unity 4.2+
 
-**Статус**: ❌ НЕ УСТАНОВЛЕН
+**Статус**: ✅ УСТАНОВЛЕН через git URL
 
-**Установка**:
-1. Скачайте Spine-Unity runtime с http://esotericsoftware.com/spine-unity-download
-2. Импортируйте .unitypackage через Assets → Import Package → Custom Package
+**Установлено**:
+- spine-csharp 4.2 (C# runtime)
+- spine-unity 4.2 (Unity runtime)
+- spine.urp-shaders 4.2 (URP шейдеры)
 
-**Или**:
-- Доступен через Unity Asset Store
+**Источник**: https://ru.esotericsoftware.com/spine-unity-download
+
+**Установлено через manifest.json**:
+```json
+"com.esotericsoftware.spine.spine-csharp": "git URL#4.2"
+"com.esotericsoftware.spine.spine-unity": "git URL#4.2"
+"com.esotericsoftware.spine.urp-shaders": "git URL#4.2"
+```
 
 **Используется в**:
 - `SpineCharacterAnimator.cs` - анимация персонажей через Spine
+- Поддержка скелетной 2D анимации для визуальных новелл
 
-**Важно**: Код уже написан для поддержки Spine, но будет работать только после установки пакета.
+**Важно**: 
+- Совместимо с Unity 2017.1-6000.3 (Unity 6)
+- Включает URP шейдеры для использования с Universal Render Pipeline
+- Последнее обновление: 2026-03-02
 
 ### 6. Steamworks.NET 20.2+
 
@@ -135,7 +146,7 @@ openupm add jp.hadashikick.vcontainer
 {
   "dependencies": {
     "com.unity.addressables": "2.0.8",
-    "com.unity.localization": "2.0.1",
+    "com.unity.localization": "1.5.9",
     "com.unity.textmeshpro": "3.0.9",
     "com.unity.collab-proxy": "2.11.3",
     "com.unity.feature.2d": "2.0.1",
@@ -149,6 +160,9 @@ openupm add jp.hadashikick.vcontainer
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.7",
     "jp.hadashikick.vcontainer": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.14.0",
+    "com.esotericsoftware.spine.spine-csharp": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-csharp/src#4.2",
+    "com.esotericsoftware.spine.spine-unity": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Assets/Spine#4.2",
+    "com.esotericsoftware.spine.urp-shaders": "https://github.com/EsotericSoftware/spine-runtimes.git?path=spine-unity/Modules/com.esotericsoftware.spine.urp-shaders#4.2",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
