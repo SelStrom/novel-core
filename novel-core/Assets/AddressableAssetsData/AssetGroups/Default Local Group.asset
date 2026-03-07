@@ -14,7 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: 3753524af11984518b2b5c8bca5263d7
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 5d8ffce10bb864e96ab1270422e174dc
+    m_Address: Assets/Content/Projects/Sample/Scenes/Scene02_ChoicePoint.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 5fbe358983f2d4824a5d7bd002d5b355, type: 2}
   m_SchemaSet:

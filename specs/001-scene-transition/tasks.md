@@ -59,8 +59,8 @@
 
 > **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
 
-- [ ] T009 [P] [US1] Create EditMode test for SceneData.Validate() nextScene validation in `novel-core/Assets/Scripts/NovelCore/Tests/Editor/Data/SceneDataValidationTests.cs`
-- [ ] T010 [P] [US1] Create EditMode test for SceneData with nextScene field in `novel-core/Assets/Scripts/NovelCore/Tests/Editor/Data/SceneDataNextSceneTests.cs`
+- [x] T009 [P] [US1] Create EditMode test for SceneData.Validate() nextScene validation in `novel-core/Assets/Scripts/NovelCore/Tests/Editor/Data/SceneDataValidationTests.cs`
+- [x] T010 [P] [US1] Create EditMode test for SceneData with nextScene field in `novel-core/Assets/Scripts/NovelCore/Tests/Editor/Data/SceneDataNextSceneTests.cs`
 - [ ] T011 [P] [US1] Create PlayMode test for DialogueSystem nextScene transition in `novel-core/Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystem/DialogueSystemNextSceneTests.cs`
 - [ ] T012 [P] [US1] Create PlayMode test for auto-advance with nextScene in `novel-core/Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystem/DialogueSystemAutoAdvanceNextSceneTests.cs`
 - [ ] T013 [P] [US1] Create PlayMode integration test for end-to-end linear progression in `novel-core/Assets/Scripts/NovelCore/Tests/Runtime/Integration/LinearSceneProgressionTests.cs`
@@ -72,7 +72,7 @@
 - [x] T016 [US1] Update `SceneData.Validate()` to check nextScene reference validity in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
 - [x] T017 [US1] Modify `DialogueSystem.CompleteDialogue()` to check for and load nextScene in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [x] T018 [US1] Add graceful handling for missing/invalid nextScene references in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
-- [ ] T019 [US1] Update `SceneDataEditor` custom inspector to display nextScene field in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs` (if exists, otherwise create)
+- [x] T019 [US1] Update `SceneDataEditor` custom inspector to display nextScene field in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs` (if exists, otherwise create)
 - [x] T020 [US1] Add debug logging for nextScene transitions in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [ ] T021 [US1] Run all User Story 1 tests and verify they PASS
 - [ ] T022 [US1] Manual test: Create 3 linear scenes, verify full progression works
