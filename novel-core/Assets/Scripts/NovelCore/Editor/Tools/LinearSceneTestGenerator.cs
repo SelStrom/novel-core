@@ -5,6 +5,8 @@ using NovelCore.Runtime.Data.Scenes;
 using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Core.SceneManagement;
 using UnityEngine.AddressableAssets;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
 
 namespace NovelCore.Editor.Tools
 {
@@ -48,6 +50,11 @@ public static class LinearSceneTestGenerator
                 "Linear scene progression is working!",
                 "[End of Test]"
             });
+
+        // Mark all scenes as Addressable BEFORE linking
+        MarkAssetAsAddressable(scene1);
+        MarkAssetAsAddressable(scene2);
+        MarkAssetAsAddressable(scene3);
 
         // Link scenes: Scene1 → Scene2 → Scene3 → null
         LinkScenes(scene1, scene2);
@@ -135,6 +142,50 @@ public static class LinearSceneTestGenerator
         SetPrivateField(line, "_characterAction", CharacterAction.None);
         
         return line;
+    }
+
+    private static void MarkAssetAsAddressable(SceneData scene)
+    {
+        if (scene == null)
+        {
+            Debug.LogError("Cannot mark null scene as Addressable");
+            return;
+        }
+
+        string assetPath = AssetDatabase.GetAssetPath(scene);
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+
+        // Get Addressables settings
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            Debug.LogError("Addressables settings not found. Please initialize Addressables.");
+            return;
+        }
+
+        // Check if already addressable
+        var entry = settings.FindAssetEntry(guid);
+        if (entry != null)
+        {
+            Debug.Log($"✓ Already Addressable: {scene.SceneName}");
+            return;
+        }
+
+        // Get default group (or create if needed)
+        var defaultGroup = settings.DefaultGroup;
+        if (defaultGroup == null)
+        {
+            Debug.LogError("No default Addressables group found");
+            return;
+        }
+
+        // Add to Addressables
+        entry = settings.CreateOrMoveEntry(guid, defaultGroup, false, false);
+        entry.address = scene.SceneName; // Use scene name as address
+        
+        settings.SetDirty(AddressableAssetSettings.ModificationEvent.EntryMoved, entry, true);
+        
+        Debug.Log($"✓ Marked as Addressable: {scene.SceneName} (Group: {defaultGroup.Name})");
     }
 
     private static void LinkScenes(SceneData sourceScene, SceneData targetScene)
