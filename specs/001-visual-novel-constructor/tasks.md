@@ -152,11 +152,11 @@ Each iteration is a complete mini-milestone with:
 - Correct layering (background behind, character on top, UI above)
 
 **Tasks**:
-- [ ] T023 [P] [US1] Create CharacterPlacement struct in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/CharacterPlacement.cs`
-- [ ] T030 [P] [US1] Create ISceneManager interface in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
-- [ ] T031 [US1] Implement SceneManager in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
-- [ ] T032 [US1] Implement background rendering in SceneManager using SpriteRenderer
-- [ ] T033 [US1] Implement character sprite positioning in SceneManager
+- [X] T023 [P] [US1] Create CharacterPlacement struct in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/CharacterPlacement.cs`
+- [X] T030 [P] [US1] Create ISceneManager interface in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
+- [X] T031 [US1] Implement SceneManager in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+- [X] T032 [US1] Implement background rendering in SceneManager using SpriteRenderer
+- [X] T033 [US1] Implement character sprite positioning in SceneManager
 
 ---
 

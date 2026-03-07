@@ -27,8 +27,8 @@ public class GameLifetimeScope : LifetimeScope
         // Dialogue System
         builder.Register<IDialogueSystem, DialogueSystem.DialogueSystem>(Lifetime.Singleton);
 
-        // Scene Management (to be implemented)
-        // builder.Register<ISceneManager, SceneManager>(Lifetime.Singleton);
+        // Scene Management
+        builder.Register<ISceneManager, SceneManagement.SceneManager>(Lifetime.Singleton);
 
         // Save System (to be implemented)
         // builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
