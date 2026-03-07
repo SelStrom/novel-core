@@ -1,30 +1,36 @@
 <!--
 Sync Impact Report:
-- Version: 1.11.0 → 1.11.1 (Added Call Stack Analysis Requirement)
+- Version: 1.11.1 → 1.12.0 (Added Editor-Runtime Bridge Principle)
 - Modified Principles:
-  - VI. Modular Architecture & Testing: Added mandatory call stack analysis requirement when modifying existing logic
-- Added Principles: None (expanded existing principle)
+  - I. Creator-First Design: Expanded dual-mode preview definition to clarify GameStarter vs Scene Editor preview modes
+  - VI. Modular Architecture & Testing: Added explicit GameStarter initialization requirement for entry point
+- Added Principles:
+  - New Principle IX: Editor-Runtime Bridge (mandatory integration between editor tools and runtime preview)
 - Removed Principles: None
 - Modified Sections:
-  - Principle VI: Added "Call Stack Analysis" bullet requiring analysis of all callers and side effects before modifying existing code
-  - Rationale updated to explain why call stack analysis prevents regression bugs and unintended side effects
-- Added Sections: None (inline addition to existing principle)
+  - Principle I: Clarified "Dual-Mode Preview" with technical implementation details (GameStarter for full start, Scene Editor preview for isolated testing)
+  - Principle VI: Added GameStarter entry point requirement to "Game Entry Point" bullet
+- Added Sections:
+  - New Principle IX with 6 requirements for Editor-Runtime bridge functionality
+  - Rationale explaining preview workflow importance for rapid iteration
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with call stack analysis requirement
-  ⚠ plan.md may need update: Consider adding call stack analysis to development workflow guidance
-  ⚠ tasks.md may need update: Add call stack analysis as checklist item for refactoring tasks
-  ⚠ Code review checklist should include call stack analysis verification
+  ✅ Constitution updated with Editor-Runtime Bridge principle
+  ⚠ plan.md needs update: Add preview bridge architecture section
+  ⚠ tasks.md needs update: Add T041 iteration for PreviewManager implementation
+  ⚠ GameStarter.cs needs update: Add GetSceneToLoad() with EditorPrefs check
+  ⚠ SceneEditorWindow.cs validated: Already implements PreviewScene() correctly
 - Follow-up TODOs:
-  - Update code review guidelines to include call stack analysis verification
-  - Consider adding automated tools (e.g., static analysis, call graph visualization) to aid in call stack analysis
-  - Document call stack analysis workflow in developer onboarding materials
-  - Add examples of call stack analysis in architecture documentation
+  - Implement PreviewManager.cs in Runtime/Core/ for centralized preview state management
+  - Add GetSceneToLoad() method to GameStarter.cs with #if UNITY_EDITOR directive
+  - Update plan.md with preview architecture diagram
+  - Add integration tests for preview-режим workflow (post-MVP)
+  - Document preview workflow in user-manual.md
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.11.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
 
 ## Core Principles
 
@@ -256,7 +262,20 @@ When AI tools need to run PlayMode tests after implementing new functionality, t
 
 **Rationale**: PlayMode tests require Unity's runtime environment and cannot be executed outside Unity. Batch mode test execution enables automated testing in CI/CD pipelines and allows AI tools to validate test coverage after implementing features. The `-runTests` flag triggers Unity Test Framework execution, `-testResults` outputs NUnit XML format for test result parsing, and `-testPlatform` specifies whether to run runtime (PlayMode) or editor (EditMode) tests. GUI-based Test Runner is recommended for interactive development and debugging, while batch mode is required for automation. This workflow ensures tests are executed immediately after writing them, following Principle VI's "Immediate Test Coverage" requirement.
 
-### VIII. User Documentation Language (NON-NEGOTIABLE)
+### VIII. Editor-Runtime Bridge (NON-NEGOTIABLE)
+
+Editor tools and runtime systems MUST be integrated to enable seamless preview and testing workflows.
+
+- **Preview State Transfer**: Editor tools (Scene Editor, Dialogue Editor) MUST be able to transfer preview state to runtime Play Mode
+- **EditorPrefs Bridge**: Preview data MUST be stored in EditorPrefs (or equivalent) for Editor→Runtime communication
+- **GameStarter Integration**: GameStarter (runtime entry point) MUST check for preview state on initialization and load preview scene if present
+- **Fallback Behavior**: If preview state is invalid or missing, GameStarter MUST load default starting scene without errors
+- **State Cleanup**: Preview state MUST be cleared after being consumed by runtime to prevent stale data
+- **Preview Manager (Recommended)**: Centralized PreviewManager class SHOULD encapsulate preview state management for reusability
+
+**Rationale**: The Scene Editor provides a "Preview Scene" button that should allow creators to test individual scenes in isolation without manually configuring GameStarter's starting scene. Without Editor-Runtime bridge, preview functionality is non-functional: clicking "Preview Scene" starts Play Mode but loads the wrong scene because GameStarter ignores the preview request. This creates a broken user experience where editors provide preview buttons that don't work. The bridge ensures: (1) rapid iteration - creators can test scenes immediately from the editor, (2) workflow consistency - "Preview" button does what creators expect, (3) no manual setup - no need to change Inspector settings for testing, (4) isolation - preview doesn't affect project configuration. EditorPrefs provides reliable Editor→Runtime communication (available in Unity Editor context, persists across Play Mode transitions, automatically scoped to project). Fallback ensures runtime never breaks due to invalid preview state. Cleanup prevents stale preview data from interfering with normal game launches. This pattern enables dual-mode testing: (a) full game flow via Play Mode with configured starting scene, (b) isolated scene testing via Scene Editor preview with temporary override.
+
+### IX. User Documentation Language (NON-NEGOTIABLE)
 
 All end-user documentation MUST be written in Russian as the primary language.
 
@@ -635,4 +654,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.11.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

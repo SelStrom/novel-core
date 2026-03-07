@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using System.IO;
 using System.Collections.Generic;
 using NovelCore.Runtime.Data.Scenes;
 using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Data.Choices;
 using NovelCore.Runtime.Core.SceneManagement;
+using NovelCore.Runtime.Core;
+using VContainer.Unity;
 
 namespace NovelCore.Editor.Tools.Generators
 {
@@ -21,6 +24,7 @@ public static class SampleProjectGenerator
     private const string SCENES_DIR = "Assets/Content/Projects/Sample/Scenes";
     private const string BACKGROUNDS_DIR = "Assets/Content/Projects/Sample/Backgrounds";
     private const string CHARACTERS_DIR = "Assets/Content/Projects/Sample/Characters";
+    private const string UNITY_SCENE_PATH = "Assets/Scenes/SampleScene.unity";
 
     [MenuItem("NovelCore/Generate Sample Project")]
     public static void GenerateSampleProject()
@@ -63,6 +67,10 @@ public static class SampleProjectGenerator
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
 
+        // Setup Unity scene with GameStarter
+        var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
+        SetupUnitySceneWithGameStarter(firstScene);
+
         // Display success message
         Debug.Log($"[SampleProjectGenerator] ✅ Successfully created sample project at {SAMPLE_PROJECT_DIR}");
         EditorUtility.DisplayDialog(
@@ -74,16 +82,18 @@ public static class SampleProjectGenerator
             $"• Scene 2: Choice Point (2 options)\n" +
             $"• Scene 3a: Path A (Happy Ending)\n" +
             $"• Scene 3b: Path B (Neutral Ending)\n\n" +
+            $"Unity Scene Setup:\n" +
+            $"• GameLifetimeScope configured\n" +
+            $"• GameStarter configured with starting scene\n\n" +
             $"To test:\n" +
-            $"1. Open Scene01_Introduction.asset\n" +
-            $"2. Enter Play Mode\n" +
+            $"1. Press Play ▶️ in Unity Editor\n" +
+            $"2. Game will auto-start after 0.5s\n" +
             $"3. Click to advance dialogue\n" +
             $"4. Make your choice!",
             "OK"
         );
 
         // Select first scene
-        var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
         Selection.activeObject = firstScene;
         EditorGUIUtility.PingObject(firstScene);
     }
@@ -387,6 +397,99 @@ public static class SampleProjectGenerator
         {
             Debug.LogWarning($"[SampleProjectGenerator] Field '{fieldName}' not found on {obj.GetType().Name}");
         }
+    }
+
+    /// <summary>
+    /// T040.3: Automatically configures Unity scene with GameLifetimeScope and GameStarter
+    /// </summary>
+    private static void SetupUnitySceneWithGameStarter(SceneData startingScene)
+    {
+        Debug.Log("[SampleProjectGenerator] Setting up Unity scene with GameStarter...");
+
+        // Check if Unity scene exists
+        if (!File.Exists(UNITY_SCENE_PATH))
+        {
+            Debug.LogError($"[SampleProjectGenerator] Unity scene not found at {UNITY_SCENE_PATH}. Please create it manually.");
+            return;
+        }
+
+        // Open the scene
+        var scene = EditorSceneManager.OpenScene(UNITY_SCENE_PATH, OpenSceneMode.Single);
+        if (!scene.IsValid())
+        {
+            Debug.LogError($"[SampleProjectGenerator] Failed to open Unity scene at {UNITY_SCENE_PATH}");
+            return;
+        }
+
+        // Find or create GameLifetimeScope
+        var lifetimeScope = GameObject.FindFirstObjectByType<GameLifetimeScope>();
+        if (lifetimeScope == null)
+        {
+            Debug.Log("[SampleProjectGenerator] Creating GameLifetimeScope GameObject...");
+            var lifetimeScopeObj = new GameObject("GameLifetimeScope");
+            lifetimeScope = lifetimeScopeObj.AddComponent<GameLifetimeScope>();
+            Undo.RegisterCreatedObjectUndo(lifetimeScopeObj, "Create GameLifetimeScope");
+        }
+        else
+        {
+            Debug.Log("[SampleProjectGenerator] GameLifetimeScope already exists, skipping creation.");
+        }
+
+        // Find or create GameStarter
+        var gameStarter = GameObject.FindFirstObjectByType<GameStarter>();
+        GameObject gameStarterObj;
+
+        if (gameStarter == null)
+        {
+            Debug.Log("[SampleProjectGenerator] Creating GameStarter GameObject...");
+            gameStarterObj = new GameObject("GameStarter");
+            gameStarter = gameStarterObj.AddComponent<GameStarter>();
+            Undo.RegisterCreatedObjectUndo(gameStarterObj, "Create GameStarter");
+        }
+        else
+        {
+            Debug.Log("[SampleProjectGenerator] GameStarter already exists, updating configuration...");
+            gameStarterObj = gameStarter.gameObject;
+        }
+
+        // Configure GameStarter using SerializedObject to set private fields
+        var serializedObject = new UnityEditor.SerializedObject(gameStarter);
+        
+        var startingSceneProperty = serializedObject.FindProperty("_startingScene");
+        if (startingSceneProperty != null)
+        {
+            startingSceneProperty.objectReferenceValue = startingScene;
+            Debug.Log($"[SampleProjectGenerator] Assigned starting scene: {startingScene.SceneName}");
+        }
+        else
+        {
+            Debug.LogWarning("[SampleProjectGenerator] Could not find _startingScene property on GameStarter");
+        }
+
+        var autoStartProperty = serializedObject.FindProperty("_autoStart");
+        if (autoStartProperty != null)
+        {
+            autoStartProperty.boolValue = true;
+        }
+
+        var startDelayProperty = serializedObject.FindProperty("_startDelay");
+        if (startDelayProperty != null)
+        {
+            startDelayProperty.floatValue = 0.5f;
+        }
+
+        serializedObject.ApplyModifiedProperties();
+
+        // Mark scene as dirty and save
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+
+        Debug.Log("[SampleProjectGenerator] ✅ Unity scene setup complete!");
+        Debug.Log($"[SampleProjectGenerator]    • GameLifetimeScope: {(lifetimeScope != null ? "✓" : "✗")}");
+        Debug.Log($"[SampleProjectGenerator]    • GameStarter: {(gameStarter != null ? "✓" : "✗")}");
+        Debug.Log($"[SampleProjectGenerator]    • Starting scene assigned: {(startingScene != null ? startingScene.SceneName : "None")}");
+        Debug.Log($"[SampleProjectGenerator]    • Auto-start enabled: True");
+        Debug.Log($"[SampleProjectGenerator]    • Start delay: 0.5s");
     }
 
     private struct DialogueContent

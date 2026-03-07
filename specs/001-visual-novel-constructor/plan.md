@@ -73,6 +73,13 @@ Build a Unity-based visual novel constructor enabling non-programmers to create 
    - [x] No direct asset file creation (prefabs, scenes, materials) - Created via Unity Editor only
    - [x] Package management permitted when user-specified - AI can install/update packages via manifest.json modifications
 
+✅ **VIII. Editor-Runtime Bridge (NON-NEGOTIABLE)**
+   - [x] Preview state transfer from Editor to Runtime - SceneEditorWindow → EditorPrefs → GameStarter
+   - [x] GameStarter checks preview state on initialization - GetSceneToLoad() method with EditorPrefs check
+   - [x] Fallback to default starting scene if preview invalid - Robust error handling
+   - [x] Preview state cleanup after consumption - Prevents stale data
+   - [x] PreviewManager recommended for centralized management - Encapsulates preview logic
+
 **GATE RESULT**: ✅ PASSED - All constitution principles satisfied
 
 ## Project Structure
@@ -183,13 +190,54 @@ Packages/
 
 **Structure Decision**: Hybrid Runtime + Editor with strict separation:
 - **Assets/Scripts/NovelCore**: All code lives here (AI-modifiable per Principle VII)
-- **GameStarter.cs**: Entry point component attached to Unity scene, initializes VContainer, loads starting scene
+- **GameStarter.cs**: Entry point component attached to Unity scene, initializes VContainer, loads starting scene (with preview override support per Principle VIII)
 - **GameLifetimeScope.cs**: VContainer root scope registering all services
+- **PreviewManager.cs** (optional, recommended): Centralized preview state management for Editor-Runtime bridge
 - **Assets/Content**: User content folder (Addressables source, not AI-modifiable)
 - **Runtime/**: Modular systems with assembly definitions per subsystem (Principle VI)
-- **Editor/**: Custom editor tools for creator-first UX (Principle I)
+- **Editor/**: Custom editor tools for creator-first UX (Principle I), including Scene Editor with preview functionality
 - **Tests/**: Separate assemblies for runtime vs editor tests (Principle VI)
 - **Platform/**: Abstraction layer for Steam/iOS/Android (Principle II)
+
+## Preview Architecture (Principle VIII: Editor-Runtime Bridge)
+
+### Preview Workflow
+
+```
+1. Creator clicks "Preview Scene" in SceneEditorWindow
+   ↓
+2. SceneEditorWindow.PreviewScene():
+   - Stores scene path in EditorPrefs["NovelCore_PreviewScene"]
+   - Enters Play Mode (EditorApplication.isPlaying = true)
+   ↓
+3. Unity starts Play Mode → GameStarter.Start() executes
+   ↓
+4. GameStarter.GetSceneToLoad():
+   - #if UNITY_EDITOR: Checks EditorPrefs["NovelCore_PreviewScene"]
+   - If preview scene found: Load preview scene, clear EditorPrefs
+   - Else: Load _startingScene (default from Inspector)
+   ↓
+5. SceneManager.LoadScene(scene) → DialogueSystem.StartScene(scene)
+   ↓
+6. Creator sees preview scene in Play Mode (isolated testing)
+```
+
+### Key Components
+
+**SceneEditorWindow** (Editor):
+- Provides "Preview Scene" button
+- Writes preview state to EditorPrefs
+- Validates scene path before entering Play Mode
+
+**GameStarter** (Runtime):
+- Checks for preview state on initialization
+- Falls back to default scene if preview missing/invalid
+- Clears preview state after consumption
+
+**PreviewManager** (Optional, Runtime):
+- Centralized API: `SetPreviewScene()`, `GetPreviewScene()`, `IsPreviewMode`
+- Encapsulates EditorPrefs key management
+- Reusable for future preview features (dialogue line preview, choice preview)
 
 ## Complexity Tracking
 

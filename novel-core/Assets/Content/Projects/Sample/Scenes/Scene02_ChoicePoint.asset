@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: f5cd7e19-7102-4aa6-9961-f130d33b5c56
+  _id: 4fdf5723-eec8-4fb6-ac7a-7da95d527c32
   _sceneId: scene_choice_001
   _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
   _backgroundImage:

@@ -12,6 +12,12 @@ NovelCore → Generate Sample Project
 
 Дождитесь сообщения об успешном создании.
 
+**✨ Новое в T040.3**: Генератор теперь автоматически настраивает Unity сцену:
+- Создаёт или находит GameObject с `GameLifetimeScope`
+- Создаёт или находит GameObject с `GameStarter`
+- Автоматически назначает `Scene01_Introduction.asset` как стартовую сцену
+- Настраивает Auto Start и задержку запуска
+
 ### 2. Проверьте созданные файлы
 
 В Project window должны появиться:
@@ -31,27 +37,29 @@ Assets/Content/Projects/Sample/
     └── char_protagonist.png
 ```
 
-### 3. Настройте Unity сцену
+### 3. ✅ Unity сцена настроена автоматически!
 
-Перед запуском игры нужно настроить основную Unity сцену:
+Генератор уже настроил `Assets/Scenes/SampleScene.unity`:
+- ✓ GameObject `GameLifetimeScope` создан и настроен
+- ✓ GameObject `GameStarter` создан
+- ✓ Стартовая сцена назначена (`Scene01_Introduction.asset`)
+- ✓ Auto Start включен
+- ✓ Start Delay = 0.5 секунды
 
+**Проверить настройку вручную** (опционально):
 1. Откройте Unity сцену `Assets/Scenes/SampleScene.unity`
-2. Убедитесь, что в сцене есть GameObject с компонентом `GameLifetimeScope` (VContainer)
-   - Если его нет, создайте: GameObject → Create Empty, назовите "GameLifetimeScope"
-   - Добавьте компонент: Add Component → Game Lifetime Scope
-3. Создайте GameObject для запуска игры:
-   - GameObject → Create Empty, назовите "GameStarter"
-   - Добавьте компонент: Add Component → Game Starter
-4. В компоненте `GameStarter`:
-   - Перетащите `Scene01_Introduction.asset` из Project window в поле "Starting Scene"
-   - Убедитесь, что "Auto Start" включен (галочка стоит)
+2. В Hierarchy должны быть GameObjects: `GameLifetimeScope` и `GameStarter`
+3. Выберите `GameStarter` в Inspector:
+   - Поле "Starting Scene" должно содержать `Scene01_Introduction`
+   - "Auto Start" должен быть включен (галочка)
+   - "Start Delay" должен быть 0.5
 
 ### 4. Запустите тестирование
 
-**Вариант A: Через Play Mode (рекомендуемый способ)**
+**Вариант A: Автоматический запуск (рекомендуется)**
 
 1. Нажмите кнопку **Play** ▶️ в Unity
-2. Игра автоматически загрузит первую сцену
+2. Игра автоматически загрузит первую сцену через 0.5 секунды
 3. Кликайте на экран для продвижения диалога
 4. На сцене 2 появятся кнопки выбора - выберите путь
 
@@ -61,7 +69,7 @@ Assets/Content/Projects/Sample/
 2. Выберите `Scene01_Introduction.asset`
 3. Нажмите **"Preview Scene"**
 
-### 4. Что вы увидите
+### 5. Что вы увидите
 
 - **Сцена 1**: 3 диалоговые реплики (вступление)
 - **Сцена 2**: 2 реплики + выбор из 2 вариантов
@@ -72,10 +80,10 @@ Assets/Content/Projects/Sample/
 ### Проблема: "Ничего не происходит при запуске Play Mode"
 
 **Решение**: 
-- Убедитесь, что в сцене есть GameObject с компонентом `GameStarter`
-- Проверьте, что в `GameStarter` назначена стартовая сцена (поле "Starting Scene")
-- Убедитесь, что "Auto Start" включен
-- Проверьте Console на ошибки (особенно "Starting scene is not assigned")
+- Убедитесь, что генератор успешно завершил работу (проверьте Console на сообщения `[SampleProjectGenerator] ✅`)
+- Откройте `SampleScene.unity` и проверьте наличие GameObjects
+- Если GameStarter отсутствует, запустите генератор заново: `NovelCore → Generate Sample Project`
+- Проверьте Console на ошибки инициализации VContainer
 
 ### Проблема: "Не могу найти меню NovelCore"
 
@@ -108,8 +116,16 @@ NovelCore → Generate UI Prefabs → Choice Button
 
 **Решение**:
 - Убедитесь, что в сцене есть GameObject с `GameLifetimeScope`
-- Проверьте, что VContainer зарегистрировал все сервисы
+- Проверьте, что VContainer зарегистрировал все сервисы (Console должен показать "NovelCore: GameLifetimeScope initialized successfully")
 - Посмотрите Console на ошибки инициализации
+- Убедитесь, что Main Camera присутствует в сцене
+
+### Проблема: "GameStarter не создаётся автоматически"
+
+**Решение**:
+- Проверьте, что файл `Assets/Scenes/SampleScene.unity` существует
+- Если сцена отсутствует, создайте её вручную: File → New Scene → Save As → `Assets/Scenes/SampleScene.unity`
+- Запустите генератор снова после создания сцены
 
 ## 📖 Полное руководство
 
@@ -117,4 +133,4 @@ NovelCore → Generate UI Prefabs → Choice Button
 
 ---
 
-**MVP Iteration 7** | Задача T040 ✅
+**MVP Iteration 7.5** | Задача T040.3 ✅ | Обновлено: 2026-03-07

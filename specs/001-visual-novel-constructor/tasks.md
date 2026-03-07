@@ -160,6 +160,47 @@ Each iteration is a complete mini-milestone with:
 
 ---
 
+## 🖼️ ITERATION 4.1: Complete Asset Loading Implementation (1-2 hours)
+
+**Goal**: SceneManager fully loads background sprites and character sprites via AssetManager (complete TODO implementations)
+
+**Visible Result**: Play mode shows actual background image and character sprites loaded from Addressables (not placeholders)
+
+**Validation**:
+- Create SceneData with background AssetReference pointing to actual sprite
+- Mark sprite as Addressable in Unity
+- Press Play → background sprite displays fullscreen
+- Add character with AssetReference → character sprite displays at correct position
+- Console shows successful asset loading logs (no "TODO" warnings)
+
+**Architectural Context**: This iteration completes the data-driven runtime generation approach defined in Constitution Principle III (Asset Pipeline Integrity). SceneData stores only AssetReferences, actual sprites are loaded asynchronously at runtime via IAssetManager. This ensures: (1) Creator-friendly workflow (drag-and-drop in Inspector), (2) Addressables for asset management, (3) No Unity Scene files needed per visual novel scene.
+
+**Tasks**:
+- [X] T031.1 [US1] Complete LoadBackgroundAsync() implementation in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+  - Remove TODO comment and implement actual sprite loading
+  - Call `await _assetManager.LoadAssetAsync<Sprite>(sceneData.BackgroundImage)`
+  - Assign loaded sprite to `_backgroundRenderer.sprite`
+  - Handle loading errors gracefully (log warning, continue without background)
+  - Add try-catch for Addressables loading failures
+  - Validate sprite loaded successfully before assigning
+- [X] T031.2 [US1] Verify LoadCharacterAsync() implementation in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+  - Confirm character sprites load via AssetManager (already implemented, just verify)
+  - Test with both Spine and Static sprite character types
+  - Validate character positioning (normalized 0-1 coordinates → world space)
+  - Add error handling for missing character references
+- [ ] T031.3 [P] [US1] Add Addressables setup validation in `Assets/Scripts/NovelCore/Editor/Tools/AssetValidator.cs` (optional, recommended)
+  - Validate SceneData background images are marked as Addressable
+  - Validate CharacterData sprites are marked as Addressable
+  - Show warnings in editor for non-Addressable asset references
+  - Add menu item "NovelCore → Validate Addressables Setup"
+
+**Constitution Compliance**:
+- ✅ Principle III (Asset Pipeline Integrity): Uses Addressables for all runtime assets
+- ✅ Principle IV (Performance): Async loading, doesn't block main thread
+- ✅ Principle I (Creator-First): Assets managed via drag-and-drop, no manual setup
+
+---
+
 ## 🛠️ ITERATION 6: Scene Editor Window (3-4 hours)
 
 **Goal**: Unity Editor menu "Window → NovelCore → Scene Editor" opens, can drag-and-drop assets
@@ -222,16 +263,63 @@ Each iteration is a complete mini-milestone with:
   - Test initialization sequence (VContainer → SceneManager → DialogueSystem)
   - Test Play Mode full start vs Scene Editor preview
   - Test error handling (missing starting scene, failed DI injection)
-- [ ] T040.2 [US1] Update Sample Project setup instructions in SAMPLE_PROJECT_QUICKSTART.md
+- [X] T040.2 [US1] Update Sample Project setup instructions in SAMPLE_PROJECT_QUICKSTART.md
   - Add step for creating GameStarter GameObject
   - Document Inspector configuration (starting scene, auto-start, delay)
   - Add troubleshooting section for common setup errors
-- [ ] T040.3 [P] [US1] Create SampleProjectGenerator update in `Assets/Scripts/NovelCore/Editor/Tools/Generators/SampleProjectGenerator.cs`
+- [X] T040.3 [P] [US1] Create SampleProjectGenerator update in `Assets/Scripts/NovelCore/Editor/Tools/Generators/SampleProjectGenerator.cs`
   - Auto-create GameStarter GameObject in SampleScene.unity if missing
   - Auto-assign Scene01_Introduction.asset as starting scene
   - Log setup completion with validation checks
 
 **Note**: This iteration implements Constitution Principle VI requirement for explicit game entry point. GameStarter ensures predictable initialization order: VContainer DI → Services registered → Starting scene loaded → DialogueSystem started.
+
+---
+
+## 🔗 ITERATION 7.6: Editor-Runtime Preview Bridge (2-3 hours)
+
+**Goal**: SceneEditorWindow "Preview Scene" button correctly loads selected scene in Play Mode (not default starting scene)
+
+**Visible Result**: Open Scene Editor → select Scene03b_PathB → click "Preview Scene" → Play Mode shows Scene03b (not Scene01)
+
+**Validation**:
+- Open SceneEditorWindow (Window → NovelCore → Scene Editor)
+- Select Scene03b_PathB.asset in Project window (auto-loads in editor)
+- Click "Preview Scene" button → Unity enters Play Mode
+- **EXPECTED**: Scene03b loads with its dialogue/characters (isolated testing)
+- **NOT**: Scene01_Introduction loads (default starting scene)
+- Exit Play Mode → EditorPrefs cleared automatically
+- Normal Play Mode (▶️ button) still loads Scene01 (default behavior preserved)
+
+**Architectural Context**: This iteration implements Constitution Principle VIII (Editor-Runtime Bridge). Before this fix, SceneEditorWindow.PreviewScene() set EditorPrefs but GameStarter.StartGame() ignored it, always loading _startingScene from Inspector. This broke the creator workflow: "Preview Scene" button didn't preview the selected scene. The bridge enables rapid iteration: edit scene → preview → iterate, without manually changing GameStarter configuration.
+
+**Tasks**:
+- [X] T040.4 [P] [US1] Create PreviewManager in `Assets/Scripts/NovelCore/Runtime/Core/PreviewManager.cs` (optional, recommended)
+  - Static class with `IsPreviewMode`, `GetPreviewScene()`, `SetPreviewScene()`, `ClearPreviewData()`
+  - Encapsulates EditorPrefs key management (`NovelCore_PreviewScene`)
+  - #if UNITY_EDITOR guards for Editor-only functionality
+  - Returns null in non-Editor builds (safety)
+- [X] T040.5 [US1] Update GameStarter.StartGame() in `Assets/Scripts/NovelCore/Runtime/Core/GameStarter.cs`
+  - Add GetSceneToLoad() method with preview check logic
+  - #if UNITY_EDITOR: Check EditorPrefs["NovelCore_PreviewScene"]
+  - Load preview scene if found, clear EditorPrefs after
+  - Fallback to _startingScene if preview missing/invalid
+  - Log preview mode vs normal mode for debugging
+- [X] T040.6 [P] [US1] Validate SceneEditorWindow.PreviewScene() in `Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs`
+  - Confirm EditorPrefs.SetString() call exists (already implemented)
+  - Add validation: scene path non-empty before entering Play Mode
+  - Add debug logs: "[Preview Mode] Set preview scene: {name}"
+  - Add error handling: warn if scene asset path invalid
+- [ ] T040.7 [US1] Add integration test for preview workflow (post-MVP)
+  - Test: Set preview scene → Enter Play Mode → Correct scene loads
+  - Test: Preview scene invalid → Falls back to default without crash
+  - Test: Normal Play Mode (no preview) → Default scene loads
+  - Test: EditorPrefs cleared after preview consumption
+
+**Constitution Compliance**:
+- ✅ Principle I (Creator-First Design): "Preview Scene" button now works as expected
+- ✅ Principle VIII (Editor-Runtime Bridge): Editor tools transfer state to runtime correctly
+- ✅ Principle VI (Modular Architecture): Preview logic isolated in PreviewManager, GameStarter remains clean
 
 ---
 

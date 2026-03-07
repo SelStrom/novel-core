@@ -60,9 +60,11 @@ public class GameStarter : MonoBehaviour
             return;
         }
 
-        if (_startingScene == null)
+        SceneData sceneToLoad = GetSceneToLoad();
+        
+        if (sceneToLoad == null)
         {
-            Debug.LogError("GameStarter: Starting scene is not assigned! Please assign a SceneData asset in the Inspector.");
+            Debug.LogError("GameStarter: No scene to load! Please assign a SceneData asset in the Inspector.");
             return;
         }
 
@@ -80,13 +82,37 @@ public class GameStarter : MonoBehaviour
 
         _hasStarted = true;
 
-        Debug.Log($"GameStarter: Starting game with scene: {_startingScene.SceneName}");
+        Debug.Log($"GameStarter: Starting game with scene: {sceneToLoad.SceneName}");
 
         // Load the scene visually (background, characters, music)
-        _sceneManager.LoadScene(_startingScene);
+        _sceneManager.LoadScene(sceneToLoad);
 
         // Start the dialogue system
-        _dialogueSystem.StartScene(_startingScene);
+        _dialogueSystem.StartScene(sceneToLoad);
+    }
+    
+    /// <summary>
+    /// Determines which scene to load on game start.
+    /// Checks for preview mode (Editor-Runtime bridge) and falls back to default starting scene.
+    /// </summary>
+    /// <returns>SceneData to load (preview scene or default starting scene)</returns>
+    private SceneData GetSceneToLoad()
+    {
+        // Check for preview mode (Constitution Principle VIII: Editor-Runtime Bridge)
+        SceneData previewScene = PreviewManager.GetPreviewScene();
+        if (previewScene != null)
+        {
+            Debug.Log($"[Preview Mode] Loading preview scene: {previewScene.SceneName}");
+            return previewScene;
+        }
+        
+        // Fallback to default starting scene
+        if (_startingScene != null)
+        {
+            Debug.Log($"GameStarter: Loading default starting scene: {_startingScene.SceneName}");
+        }
+        
+        return _startingScene;
     }
 
     /// <summary>

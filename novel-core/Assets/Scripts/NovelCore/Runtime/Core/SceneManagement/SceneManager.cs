@@ -261,14 +261,30 @@ public class SceneManager : ISceneManager
 
         Debug.Log($"SceneManager: Loading background for {sceneData.SceneName}");
 
-        // TODO: Load sprite via AssetManager
-        // For now, just log
-        await Task.CompletedTask;
+        try
+        {
+            // Load sprite via AssetManager (Constitution Principle III: Addressables)
+            Sprite backgroundSprite = await _assetManager.LoadAssetAsync<Sprite>(sceneData.BackgroundImage);
+            
+            if (backgroundSprite == null)
+            {
+                Debug.LogWarning($"SceneManager: Failed to load background sprite for {sceneData.SceneName}");
+                return;
+            }
 
-        // _backgroundRenderer.sprite = loadedSprite;
-        
-        // Scale background to fit screen
-        ScaleBackgroundToFitScreen();
+            // Assign to renderer
+            _backgroundRenderer.sprite = backgroundSprite;
+            
+            Debug.Log($"SceneManager: Background sprite loaded successfully: {backgroundSprite.name}");
+            
+            // Scale background to fit screen (maintain aspect ratio)
+            ScaleBackgroundToFitScreen();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"SceneManager: Error loading background for {sceneData.SceneName}: {ex.Message}");
+            Debug.LogException(ex);
+        }
     }
 
     private async Task LoadCharactersAsync(SceneData sceneData)

@@ -622,15 +622,28 @@ namespace NovelCore.Editor.Windows
         private void PreviewScene()
         {
             if (_currentScene == null)
+            {
+                Debug.LogError("SceneEditorWindow: Cannot preview null scene!");
                 return;
+            }
 
-            // Store current scene for preview
-            EditorPrefs.SetString("NovelCore_PreviewScene", AssetDatabase.GetAssetPath(_currentScene));
+            string scenePath = AssetDatabase.GetAssetPath(_currentScene);
+            
+            if (string.IsNullOrEmpty(scenePath))
+            {
+                Debug.LogError($"SceneEditorWindow: Scene {_currentScene.SceneName} has invalid asset path!");
+                return;
+            }
+
+            // Store current scene for preview (Constitution Principle VIII: Editor-Runtime Bridge)
+            EditorPrefs.SetString("NovelCore_PreviewScene", scenePath);
+            
+            Debug.Log($"[Preview Mode] Set preview scene: {_currentScene.SceneName}");
+            Debug.Log($"[Preview Mode] Path: {scenePath}");
+            Debug.Log($"[Preview Mode] Entering Play Mode...");
 
             // Enter Play mode
             EditorApplication.isPlaying = true;
-
-            Debug.Log($"Previewing scene: {_currentScene.SceneName}");
         }
     }
 }
