@@ -1,21 +1,23 @@
 <!--
 Sync Impact Report:
-- Version: 1.2.3 → 1.3.0 (Namespace style enforcement)
+- Version: 1.3.0 → 1.4.0 (User documentation language requirement)
 - Modified Principles: None
-- Added Principles: None
+- Added Principles: 
+  - VIII. User Documentation Language (NON-NEGOTIABLE): Russian as primary language for all end-user documentation
 - Removed Principles: None
 - Modified Sections:
-  - Code Style Standards: Added explicit namespace formatting rules (traditional block-scoped, not file-scoped)
-  - Technical Requirements: Clarified C# 9.0 feature usage (records, init-only, pattern matching - NO file-scoped namespaces)
+  - Quality Assurance Standards: Updated documentation review requirements to include Russian language check
 - Added Sections:
-  - Namespace Formatting (under Code Style Standards)
+  - User Documentation Language principle with rationale
 - Removed Sections: None
 - Templates Status:
-  ✅ All code files converted from file-scoped to traditional namespaces
-  ✅ GlobalUsings.cs comment already references C# 9.0
+  ✅ User manual translated to Russian (user-manual-ru.md)
+  ✅ English version retained for reference (user-manual.md)
 - Follow-up TODOs:
-  - Update research.md if it references file-scoped namespaces as a feature
-  - Update plan.md to clarify namespace style requirement
+  - Translate error messages in code to Russian
+  - Add Russian tooltips to Unity Editor extensions when they are created
+  - Create Russian version of README.md for end users
+  - Update quickstart.md with Russian version
 -->
 
 # Novel Core Constructor Constitution
@@ -107,6 +109,19 @@ AI-assisted development tools MUST operate within strict boundaries to prevent U
 - **Scene Editing**: AI tools MUST NOT edit `.unity` scene files or `.prefab` files in binary or YAML format
 
 **Rationale**: Unity's `.meta` files contain critical GUID mappings that ensure asset reference integrity. Manual `.meta` editing causes reference breakage, missing script errors, and project corruption. AI-generated asset files bypass Unity's import pipeline, leading to incorrect serialization, missing dependencies, and platform-specific build failures. Restricting AI to code generation in `Assets/Scripts/` provides value (scaffolding, boilerplate) while preventing engine-level corruption that requires manual recovery.
+
+### VIII. User Documentation Language (NON-NEGOTIABLE)
+
+All end-user documentation MUST be written in Russian as the primary language.
+
+- **User Manuals**: All user-facing documentation (user manuals, tutorials, quickstart guides) MUST be written in Russian
+- **Error Messages**: All user-facing error messages and warnings MUST be in Russian with clear, actionable explanations
+- **UI Labels**: Unity Editor extension menus and windows MUST have Russian labels and tooltips
+- **Help System**: In-editor help and documentation links MUST direct to Russian-language resources
+- **Technical Documentation Exception**: Developer/contributor documentation (API docs, architecture docs, code comments) MAY remain in English for international collaboration
+- **Translation Quality**: Russian documentation MUST be written by native speakers or professional translators, not machine translation
+
+**Rationale**: Content creators (primary users) are Russian-speaking. Technical English documentation creates barriers to entry, reduces adoption, and increases support burden. Native-language documentation is standard for professional creative tools (Adobe Creative Suite, Unreal Engine localization, Unity Hub Russian interface). Clear Russian error messages prevent creator frustration and reduce developer support load. English technical documentation is retained for potential open-source contributors and international development team collaboration.
 
 ## Platform & Distribution Requirements
 
