@@ -112,8 +112,8 @@ csharp_style_conditional_delegate_call = true:suggestion
 csharp_prefer_static_local_function = true:suggestion
 csharp_preferred_modifier_order = public,private,protected,internal,static,extern,new,virtual,abstract,sealed,override,readonly,unsafe,volatile,async:silent
 
-# Code-block preferences (CONSTITUTION RULE: Always use braces, Allman style)
-csharp_prefer_braces = true:warning
+# Code-block preferences (CONSTITUTION RULE: Always use braces, Allman style - ZERO TOLERANCE)
+csharp_prefer_braces = true:error
 csharp_prefer_simple_using_statement = true:suggestion
 
 # Expression-level preferences

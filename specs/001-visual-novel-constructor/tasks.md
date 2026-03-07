@@ -173,10 +173,10 @@ Each iteration is a complete mini-milestone with:
 - Changes persist after closing/reopening Unity
 
 **Tasks**:
-- [ ] T034 [P] [US1] Create SceneEditorWindow in `Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs`
-- [ ] T035 [US1] Implement background image drag-and-drop in SceneEditorWindow
-- [ ] T036 [US1] Implement dialogue line editor UI in SceneEditorWindow
-- [ ] T037 [US1] Implement character placement UI in SceneEditorWindow
+- [X] T034 [P] [US1] Create SceneEditorWindow in `Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs`
+- [X] T035 [US1] Implement background image drag-and-drop in SceneEditorWindow
+- [X] T036 [US1] Implement dialogue line editor UI in SceneEditorWindow
+- [X] T037 [US1] Implement character placement UI in SceneEditorWindow
 
 ---
 
@@ -193,7 +193,7 @@ Each iteration is a complete mini-milestone with:
 - **🎯 MVP CHECKPOINT**: First complete visual novel scene works end-to-end!
 
 **Tasks**:
-- [ ] T038 [US1] Add "Preview Scene" button to SceneEditorWindow that enters Play mode
+- [X] T038 [US1] Add "Preview Scene" button to SceneEditorWindow that enters Play mode
 - [ ] T040 [US1] Create sample SceneData asset for testing in `Assets/Content/Projects/Sample/`
 
 ---
@@ -252,12 +252,12 @@ Each iteration is a complete mini-milestone with:
 - Visual warnings for broken links
 
 **Tasks**:
-- [ ] T049 [P] [US2] Create StoryFlowWindow in `Assets/Scripts/NovelCore/Editor/Windows/StoryFlowWindow.cs`
-- [ ] T050 [US2] Implement graph visualization using Unity GraphView in StoryFlowWindow
-- [ ] T051 [US2] Display scene nodes and choice connections in StoryFlowWindow
-- [ ] T052 [US2] Add choice editor UI to SceneEditorWindow
-- [ ] T053 [US2] Implement choice validation (detect broken links) in SceneEditorWindow
-- [ ] T054 [US2] Add warning indicators for scenes with no paths to endings
+- [X] T049 [P] [US2] Create StoryFlowWindow in `Assets/Scripts/NovelCore/Editor/Windows/StoryFlowWindow.cs`
+- [X] T050 [US2] Implement graph visualization using Unity GraphView in StoryFlowWindow
+- [X] T051 [US2] Display scene nodes and choice connections in StoryFlowWindow
+- [X] T052 [US2] Add choice editor UI to SceneEditorWindow
+- [X] T053 [US2] Implement choice validation (detect broken links) in SceneEditorWindow
+- [X] T054 [US2] Add warning indicators for scenes with no paths to endings
 
 ---
 
@@ -316,10 +316,10 @@ Each iteration is a complete mini-milestone with:
 - Character available in Scene Editor dropdown
 
 **Tasks**:
-- [ ] T063 [P] [US3] Create CharacterEditorWindow in `Assets/Scripts/NovelCore/Editor/Windows/CharacterEditorWindow.cs`
-- [ ] T064 [US3] Implement emotion sprite upload UI in CharacterEditorWindow
-- [ ] T065 [US3] Add emotion dropdown to dialogue line editor in SceneEditorWindow
-- [ ] T066 [US3] Implement active speaker highlighting in DialogueBoxController
+- [X] T063 [P] [US3] Create CharacterEditorWindow in `Assets/Scripts/NovelCore/Editor/Windows/CharacterEditorWindow.cs`
+- [X] T064 [US3] Implement emotion sprite upload UI in CharacterEditorWindow
+- [X] T065 [US3] Add emotion dropdown to dialogue line editor in SceneEditorWindow
+- [X] T066 [US3] Implement active speaker highlighting in DialogueBoxController
 
 ---
 
@@ -358,8 +358,8 @@ Each iteration is a complete mini-milestone with:
 
 **Tasks**:
 - [X] T072 [P] [US4] Create TransitionType enum in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/TransitionType.cs`
-- [ ] T073 [P] [US4] Create transition shaders (Fade, Slide) in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/Transitions/`
-- [ ] T074 [US4] Implement scene transition effects in SceneManager
+- [X] T073 [P] [US4] Create transition shaders (Fade, Slide) in `Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/Transitions/`
+- [X] T074 [US4] Implement scene transition effects in SceneManager
 - [X] T075 [P] [US4] Create character entrance/exit animations (Slide, Fade) in UnityCharacterAnimator
 
 ---
@@ -378,10 +378,10 @@ Each iteration is a complete mini-milestone with:
 - Changes persist and work in Play mode
 
 **Tasks**:
-- [ ] T076 [US4] Add music drag-and-drop to SceneEditorWindow
-- [ ] T077 [US4] Add SFX drag-and-drop to dialogue line editor in SceneEditorWindow
-- [ ] T078 [US4] Add transition type dropdown to SceneEditorWindow
-- [ ] T079 [US4] Add entrance animation controls to character placement UI
+- [X] T076 [US4] Add music drag-and-drop to SceneEditorWindow
+- [X] T077 [US4] Add SFX drag-and-drop to dialogue line editor in SceneEditorWindow
+- [X] T078 [US4] Add transition type dropdown to SceneEditorWindow
+- [X] T079 [US4] Add entrance animation controls to character placement UI
 
 ---
 
@@ -500,8 +500,8 @@ Each iteration is a complete mini-milestone with:
 - Multiple manual save slots work
 
 **Tasks**:
-- [ ] T097 [P] Implement ISaveSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/ISaveSystem.cs`
-- [ ] T098 Implement SaveSystem with JSON serialization in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
+- [X] T097 [P] Implement ISaveSystem interface in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/ISaveSystem.cs`
+- [X] T098 Implement SaveSystem with JSON serialization in `Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
 - [ ] T099 Add auto-save on scene transitions and choices in SceneManager
 - [X] T100 Implement save/load UI in `Assets/Resources/NovelCore/UI/SaveLoadUI.prefab` (Generated via Editor script)
 

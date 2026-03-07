@@ -1,19 +1,26 @@
 <!--
 Sync Impact Report:
-- Version: 1.6.0 → 1.7.0 (Editor script generators for asset creation)
+- Version: 1.7.0 → 1.8.0 (Unity compilation workflow + mandatory braces clarification)
 - Modified Principles:
-  - VII. AI Development Constraints: Added explicit permissions for Editor script generators
+  - VII. AI Development Constraints: Added Unity compilation validation workflow requirements
+  - Code Style Standards: Clarified mandatory braces requirement with explicit examples
 - Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - AI Development Constraints: Added "Explicit Permissions for Editor Script Generators" section
+  - Added "Unity Compilation Validation" section under AI Development Constraints
+  - Strengthened "Braces (Allman Style)" enforcement with zero-tolerance policy
+  - Added explicit violation examples for missing braces
 - Added Sections:
-  - Editor Script Generators permissions and requirements
+  - Unity batch mode compilation workflow specification
+  - Unity project path conventions for AI tools
 - Removed Sections: None
 - Templates Status:
-  ✅ Constitution updated with Editor script generator permissions
-  ✅ Principle VII expanded with programmatic asset generation via Editor scripts
-- Follow-up TODOs: None
+  ✅ Constitution updated with Unity compilation workflow
+  ✅ Code style mandatory braces enforcement strengthened
+  ⚠ .editorconfig should be updated to enforce brace rules (if not already configured)
+- Follow-up TODOs: 
+  - Verify .editorconfig includes `csharp_prefer_braces = true:error`
+  - Consider adding pre-commit hook to validate brace usage
 -->
 
 # Novel Core Constructor Constitution
@@ -150,6 +157,30 @@ Package management is explicitly permitted because: (1) Unity Package Manager pr
 
 Editor script generators are explicitly permitted because: (1) Unity Editor APIs (`PrefabUtility`, `AssetDatabase`) provide safe programmatic asset creation with proper GUID generation and .meta file management, (2) user explicitly triggers generation via menu commands, eliminating accidental modifications, (3) scripts are auditable C# code that can be reviewed and version-controlled, (4) Unity Editor validates generated assets through its import pipeline, (5) this approach automates repetitive manual work while maintaining Unity's asset integrity guarantees.
 
+**Unity Compilation Validation** (REQUIRED for error checking):
+
+When AI tools need to validate Unity project compilation after code changes, they MUST use the following workflow:
+
+- **Batch Mode Execution**: Unity MUST be launched with `-batchmode`, `-nographics`, and `-quit` flags
+- **Project Path**: Unity MUST be invoked from the **parent directory** of the Unity project folder
+- **Relative Path**: Project path MUST be specified as `"$(pwd)/novel-core"` (relative to parent directory)
+- **Log File Output**: Compilation logs MUST be written to a file in the parent directory using `-logFile "$(pwd)/unity_<task_name>.log"`
+- **Error Detection**: After Unity exits, AI MUST parse the log file for `error CS` patterns to detect compilation failures
+- **No GUI Launch**: AI MUST NOT launch Unity with GUI (`open -a Unity.app`) for compilation validation
+
+**Required Unity Command Template**:
+```bash
+cd /Users/selstrom/work/projects/novel-core/novel-core && \
+/Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+  -quit \
+  -batchmode \
+  -nographics \
+  -projectPath "$(pwd)/novel-core" \
+  -logFile "$(pwd)/unity_<iteration_name>.log" 2>&1
+```
+
+**Rationale**: Unity batch mode with `-nographics` avoids licensing issues that occur with GUI-based launches in automated contexts. Running from the parent directory with relative paths ensures consistent project resolution across different environments. File-based logging (`-logFile`) captures full compilation output including compiler errors, warnings, and Unity initialization messages, which are essential for debugging. Parsing log files for `error CS` patterns provides reliable compilation failure detection without depending on exit codes, which may not reflect C# compilation errors due to Unity's multi-stage initialization process. This workflow has been validated to work reliably for automated compilation checks in CI/CD pipelines and AI-assisted development.
+
 ### VIII. User Documentation Language (NON-NEGOTIABLE)
 
 All end-user documentation MUST be written in Russian as the primary language.
@@ -274,9 +305,11 @@ public class DialogueSystem : IDialogueSystem
 
 **Rationale**: Traditional namespaces provide clear scope boundaries, consistent with C# 9.0 language features available in Unity 6. File-scoped namespaces (C# 10) are not used to maintain compatibility and readability standards.
 
-**Braces (Allman Style)**:
+**Braces (Allman Style)** (MANDATORY - ZERO TOLERANCE):
 - Opening brace MUST always be on a new line
-- Braces MUST be used for all control structures (if, else, for, while, foreach), even single-line statements
+- Braces MUST be used for ALL control structures (if, else, for, while, foreach, do-while), even single-line statements
+- **NO EXCEPTIONS**: Single-line statements without braces are PROHIBITED
+- Code reviews MUST reject any PR with missing braces
 
 ```csharp
 // ✅ CORRECT
@@ -285,15 +318,70 @@ if (condition)
     DoSomething();
 }
 
+// ✅ CORRECT (single statement still requires braces)
+if (condition)
+{
+    return true;
+}
+
+// ✅ CORRECT (empty else block - braces still required)
+if (condition)
+{
+    DoSomething();
+}
+else
+{
+    // No action needed
+}
+
 // ❌ INCORRECT (brace on same line)
 if (condition) {
     DoSomething();
 }
 
-// ❌ INCORRECT (missing braces)
+// ❌ INCORRECT (missing braces - PROHIBITED)
 if (condition)
     DoSomething();
+
+// ❌ INCORRECT (inline single statement - PROHIBITED)
+if (condition) DoSomething();
+
+// ❌ INCORRECT (ternary operator abuse - use if/else with braces for complex logic)
+var result = condition ? CallMethod() : CallOtherMethod(); // Only acceptable for simple assignments
+
+// ✅ CORRECT (loop with single statement)
+foreach (var item in collection)
+{
+    ProcessItem(item);
+}
+
+// ❌ INCORRECT (loop missing braces - PROHIBITED)
+foreach (var item in collection)
+    ProcessItem(item);
+
+// ✅ CORRECT (nested conditions with braces)
+if (outerCondition)
+{
+    if (innerCondition)
+    {
+        DoNestedAction();
+    }
+}
+
+// ❌ INCORRECT (nested conditions without braces - PROHIBITED)
+if (outerCondition)
+    if (innerCondition)
+        DoNestedAction();
 ```
+
+**Rationale**: Mandatory braces prevent entire categories of bugs:
+1. **Accidental Scope Errors**: Adding statements later without realizing they're outside the conditional
+2. **Merge Conflicts**: Git merges can create invalid code when statements are added/removed without braces
+3. **Readability**: Braces make code structure immediately obvious, especially in deeply nested logic
+4. **"Apple goto fail" Bug Prevention**: The infamous SSL bug (CVE-2014-1266) was caused by missing braces allowing unintended code execution
+5. **Team Consistency**: Eliminates style debates and ensures all code follows the same structure
+
+This is a **zero-tolerance rule** because the cost of a single missing-brace bug (hours of debugging, production incidents) far exceeds the minor inconvenience of typing two extra characters.
 
 **Loops and Type Inference**:
 - Use `var` for type declaration in loops (foreach, for)
@@ -408,16 +496,16 @@ public class SceneManager : ISceneManager
 ### Rationale
 
 - **Allman Braces**: Improves readability by clearly separating control structure from body, consistent with Unity C# conventions
-- **Mandatory Braces**: Prevents bugs from accidental scope misunderstanding, especially when adding statements later
+- **Mandatory Braces (Zero Tolerance)**: Prevents entire bug categories including scope errors, merge conflicts, and the infamous "Apple goto fail" SSL vulnerability (CVE-2014-1266). The minor typing inconvenience is vastly outweighed by preventing hours of debugging production incidents.
 - **Underscore Prefix**: Immediately distinguishes fields from local variables and parameters, reducing naming conflicts
 - **Var in Loops**: Reduces verbosity without sacrificing clarity (loop variable type is obvious from context)
 - **Consistent Ordering**: Makes code predictable and easier to navigate in large files
 
 ### Enforcement
 
-- Code reviews MUST verify adherence to these standards
-- `.editorconfig` file SHOULD be configured with these rules for automatic formatting
-- CI/CD pipeline MAY include linting step to flag violations (warning, not error)
+- Code reviews MUST reject PRs with missing braces (zero tolerance)
+- `.editorconfig` file MUST be configured with `csharp_prefer_braces = true:error` for automatic enforcement
+- CI/CD pipeline SHOULD include linting step to flag violations as build errors (not warnings)
 
 ## Governance
 
@@ -445,4 +533,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.7.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.8.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

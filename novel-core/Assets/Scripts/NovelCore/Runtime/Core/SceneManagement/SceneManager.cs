@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using NovelCore.Runtime.Core.AssetManagement;
 using NovelCore.Runtime.Core.AudioSystem;
+using NovelCore.Runtime.Core.SceneManagement.Transitions;
 using NovelCore.Runtime.Data.Scenes;
 using NovelCore.Runtime.Data.Characters;
 using NovelCore.Runtime.Animation;
@@ -21,9 +22,11 @@ public class SceneManager : ISceneManager
     private readonly IAssetManager _assetManager;
     private readonly IAudioService _audioService;
     private readonly ICharacterAnimatorFactory _animatorFactory;
+    private readonly SceneTransitionFactory _transitionFactory;
 
     private SceneData _currentScene;
     private bool _isLoading;
+    private ISceneTransition _currentTransition;
 
     // Rendering components
     private GameObject _backgroundContainer;
@@ -53,6 +56,7 @@ public class SceneManager : ISceneManager
         _assetManager = assetManager ?? throw new System.ArgumentNullException(nameof(assetManager));
         _audioService = audioService ?? throw new System.ArgumentNullException(nameof(audioService));
         _animatorFactory = animatorFactory ?? throw new System.ArgumentNullException(nameof(animatorFactory));
+        _transitionFactory = new SceneTransitionFactory();
 
         InitializeSceneHierarchy();
     }
@@ -86,6 +90,10 @@ public class SceneManager : ISceneManager
 
         // Start transition
         OnSceneTransitionStart?.Invoke(sceneData);
+        
+        // Create and play transition effect
+        _currentTransition = _transitionFactory.CreateTransition(sceneData.TransitionType);
+        var transitionTask = _currentTransition.PlayAsync(sceneData.TransitionDuration);
 
         try
         {
@@ -103,6 +111,13 @@ public class SceneManager : ISceneManager
 
             _currentScene = sceneData;
 
+            // Wait for transition to complete
+            await transitionTask;
+            
+            // Clean up transition
+            _currentTransition?.Cleanup();
+            _currentTransition = null;
+
             OnSceneTransitionComplete?.Invoke(sceneData);
             OnSceneLoadComplete?.Invoke(sceneData);
 
@@ -111,6 +126,10 @@ public class SceneManager : ISceneManager
         catch (System.Exception ex)
         {
             Debug.LogError($"SceneManager: Failed to load scene {sceneData.SceneName}: {ex.Message}");
+            
+            // Clean up transition on error
+            _currentTransition?.Cleanup();
+            _currentTransition = null;
         }
         finally
         {
@@ -372,6 +391,10 @@ public class SceneManager : ISceneManager
     public void Dispose()
     {
         UnloadCurrentScene();
+        
+        // Clean up active transition
+        _currentTransition?.Cleanup();
+        _currentTransition = null;
 
         if (_backgroundContainer != null)
         {
