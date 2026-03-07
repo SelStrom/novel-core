@@ -64,7 +64,14 @@ public class CharacterData : BaseScriptableObject
     /// </summary>
     public CharacterEmotion? GetEmotion(string emotionKey)
     {
-        return _emotions.FirstOrDefault(e => e.emotionName == emotionKey);
+        var emotion = _emotions.FirstOrDefault(e => e.emotionName == emotionKey);
+        
+        if (string.IsNullOrEmpty(emotion.emotionName))
+        {
+            return null;
+        }
+        
+        return emotion;
     }
 
     public override bool Validate()
