@@ -7,6 +7,8 @@ public class DialogueSystem : IDialogueSystem
 {
     private readonly IAudioService _audioService;
     private readonly IInputService _inputService;
+    private readonly ISceneManager _sceneManager;
+    private readonly IAssetManager _assetManager;
 
     private SceneData _currentScene;
     private int _currentLineIndex;
@@ -24,11 +26,18 @@ public class DialogueSystem : IDialogueSystem
     public event System.Action<DialogueLineData> OnDialogueLineChanged;
     public event System.Action<ChoiceData> OnChoicePointReached;
     public event System.Action OnDialogueComplete;
+    public event System.Action<SceneData> OnSceneNavigationRequested;
 
-    public DialogueSystem(IAudioService audioService, IInputService inputService)
+    public DialogueSystem(
+        IAudioService audioService, 
+        IInputService inputService,
+        ISceneManager sceneManager,
+        IAssetManager assetManager)
     {
         _audioService = audioService ?? throw new System.ArgumentNullException(nameof(audioService));
         _inputService = inputService ?? throw new System.ArgumentNullException(nameof(inputService));
+        _sceneManager = sceneManager ?? throw new System.ArgumentNullException(nameof(sceneManager));
+        _assetManager = assetManager ?? throw new System.ArgumentNullException(nameof(assetManager));
     }
 
     public void StartScene(SceneData sceneData)
@@ -95,7 +104,7 @@ public class DialogueSystem : IDialogueSystem
         }
     }
 
-    public void SelectChoice(int choiceIndex)
+    public async void SelectChoice(int choiceIndex)
     {
         if (!_isWaitingForChoice || _currentChoice == null)
         {
@@ -119,9 +128,36 @@ public class DialogueSystem : IDialogueSystem
 
         _isWaitingForChoice = false;
 
-        // TODO: Load target scene when SceneManager is implemented
-        // For now, just complete dialogue
-        CompleteDialogue();
+        // Load target scene if specified
+        if (selectedOption.targetScene != null && selectedOption.targetScene.RuntimeKeyIsValid())
+        {
+            try
+            {
+                // Load the scene data
+                var targetScene = await _assetManager.LoadAssetAsync<SceneData>(selectedOption.targetScene);
+                
+                if (targetScene != null)
+                {
+                    Debug.Log($"DialogueSystem: Navigating to scene {targetScene.SceneName}");
+                    OnSceneNavigationRequested?.Invoke(targetScene);
+                }
+                else
+                {
+                    Debug.LogError($"DialogueSystem: Failed to load target scene");
+                    CompleteDialogue();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"DialogueSystem: Error loading target scene: {ex.Message}");
+                CompleteDialogue();
+            }
+        }
+        else
+        {
+            // No target scene, complete dialogue
+            CompleteDialogue();
+        }
     }
 
     public void SkipCurrentLine()
@@ -180,6 +216,13 @@ public class DialogueSystem : IDialogueSystem
         }
 
         Debug.Log($"DialogueSystem: Displaying line {currentLine.LineId}");
+
+        // Update character emotion if speaker is specified
+        if (currentLine.Speaker != null && currentLine.Speaker.RuntimeKeyIsValid() && !string.IsNullOrEmpty(currentLine.Emotion))
+        {
+            string characterId = currentLine.Speaker.AssetGUID;
+            _sceneManager.UpdateCharacterEmotion(characterId, currentLine.Emotion);
+        }
 
         // Play voice clip if available
         if (currentLine.VoiceClip != null && currentLine.VoiceClip.RuntimeKeyIsValid())

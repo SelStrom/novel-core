@@ -41,6 +41,11 @@ public interface IDialogueSystem
     event System.Action OnDialogueComplete;
 
     /// <summary>
+    /// Event triggered when a choice leads to a new scene.
+    /// </summary>
+    event System.Action<SceneData> OnSceneNavigationRequested;
+
+    /// <summary>
     /// Start playing dialogue from a scene.
     /// </summary>
     /// <param name="sceneData">Scene to play.</param>

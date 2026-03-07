@@ -211,9 +211,9 @@ Each iteration is a complete mini-milestone with:
 - Data persists correctly
 
 **Tasks**:
-- [ ] T041 [P] [US2] Create ChoiceData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Choices/ChoiceData.cs`
-- [ ] T042 [P] [US2] Create ChoiceOption struct in `Assets/Scripts/NovelCore/Runtime/Data/Choices/ChoiceOption.cs`
-- [ ] T043 [US2] Add choices list to SceneData in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
+- [X] T041 [P] [US2] Create ChoiceData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Choices/ChoiceData.cs`
+- [X] T042 [P] [US2] Create ChoiceOption struct in `Assets/Scripts/NovelCore/Runtime/Data/Choices/ChoiceOption.cs`
+- [X] T043 [US2] Add choices list to SceneData in `Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
 
 ---
 
@@ -231,10 +231,10 @@ Each iteration is a complete mini-milestone with:
 
 **Tasks**:
 - [ ] T044 [P] [US2] Create ChoiceUI prefab in `Assets/Resources/NovelCore/UI/ChoiceButton.prefab` (manual in Unity Editor)
-- [ ] T045 [P] [US2] Create ChoiceUIController script in `Assets/Scripts/NovelCore/Runtime/UI/ChoiceButtons/ChoiceUIController.cs`
-- [ ] T046 [US2] Implement choice display logic in DialogueSystem
-- [ ] T047 [US2] Implement choice selection and scene navigation in SceneManager
-- [ ] T048 [US2] Track choice history for conditional branching in DialogueSystem
+- [X] T045 [P] [US2] Create ChoiceUIController script in `Assets/Scripts/NovelCore/Runtime/UI/ChoiceButtons/ChoiceUIController.cs`
+- [X] T046 [US2] Implement choice display logic in DialogueSystem
+- [X] T047 [US2] Implement choice selection and scene navigation in SceneManager
+- [X] T048 [US2] Track choice history for conditional branching in DialogueSystem
 
 ---
 
@@ -274,9 +274,9 @@ Each iteration is a complete mini-milestone with:
 - Data persists correctly
 
 **Tasks**:
-- [ ] T055 [P] [US3] Create CharacterData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Characters/CharacterData.cs`
-- [ ] T056 [P] [US3] Create CharacterEmotion struct in `Assets/Scripts/NovelCore/Runtime/Data/Characters/CharacterEmotion.cs`
-- [ ] T057 [US3] Add emotions dictionary to CharacterData
+- [X] T055 [P] [US3] Create CharacterData ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/Characters/CharacterData.cs`
+- [X] T056 [P] [US3] Create CharacterEmotion struct in `Assets/Scripts/NovelCore/Runtime/Data/Characters/CharacterEmotion.cs`
+- [X] T057 [US3] Add emotions dictionary to CharacterData
 
 ---
 
@@ -296,7 +296,7 @@ Each iteration is a complete mini-milestone with:
 - [ ] T058 [P] [US3] Create ICharacterAnimator interface in `Assets/Scripts/NovelCore/Runtime/Animation/ICharacterAnimator.cs`
 - [ ] T059 [P] [US3] Implement UnityCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/UnityCharacterAnimator.cs`
 - [ ] T060 [P] [US3] Implement SpineCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/SpineCharacterAnimator.cs`
-- [ ] T061 [US3] Add emotion switching logic to DialogueSystem
+- [X] T061 [US3] Add emotion switching logic to DialogueSystem
 - [ ] T062 [US3] Implement character sprite swapping in SceneManager
 - [ ] T067 [US3] Register character animators in VContainer with factory pattern
 
