@@ -58,6 +58,10 @@ public class SceneData : BaseScriptableObject
     private float _transitionDuration = 0.5f;
 
     [SerializeField]
+    [Tooltip("Next scene to load after dialogue completes (for linear progression). Ignored if choices are present.")]
+    private AssetReference _nextScene;
+
+    [SerializeField]
     [Tooltip("Enable auto-advance for dialogue in this scene")]
     private bool _autoAdvance = false;
 
@@ -75,6 +79,7 @@ public class SceneData : BaseScriptableObject
     public IReadOnlyList<ChoiceData> Choices => _choices;
     public TransitionType TransitionType => _transitionType;
     public float TransitionDuration => _transitionDuration;
+    public AssetReference NextScene => _nextScene;
     public bool AutoAdvance => _autoAdvance;
     public float AutoAdvanceDelay => _autoAdvanceDelay;
 
@@ -89,6 +94,20 @@ public class SceneData : BaseScriptableObject
         if (_dialogueLines.Count == 0 && _choices.Count == 0)
         {
             Debug.LogWarning($"SceneData {name}: No dialogue or choices defined");
+        }
+
+        // Validate nextScene reference if set
+        if (_nextScene != null && _nextScene.RuntimeKeyIsValid())
+        {
+            // Note: Circular reference detection should be done in editor validation
+            // as it requires loading all scenes in the graph
+            Debug.Log($"SceneData {name}: nextScene reference is valid");
+        }
+
+        // Warn if both choices and nextScene are defined (choices take priority)
+        if (_choices.Count > 0 && _nextScene != null && _nextScene.RuntimeKeyIsValid())
+        {
+            Debug.LogWarning($"SceneData {name}: Both choices and nextScene are defined. Choices will take priority, nextScene will be ignored.");
         }
 
         return true;

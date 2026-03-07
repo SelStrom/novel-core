@@ -282,11 +282,44 @@ public class DialogueSystem : IDialogueSystem
         OnChoicePointReached?.Invoke(choiceData);
     }
 
-    private void CompleteDialogue()
+    private async void CompleteDialogue()
     {
         Debug.Log("DialogueSystem: Dialogue complete");
         _isPlaying = false;
-        OnDialogueComplete?.Invoke();
+        
+        // Check if there's a next scene to load (linear progression)
+        if (_currentScene != null && _currentScene.NextScene != null && _currentScene.NextScene.RuntimeKeyIsValid())
+        {
+            try
+            {
+                Debug.Log($"DialogueSystem: Loading next scene via nextScene reference");
+                
+                // Load the next scene
+                var nextScene = await _assetManager.LoadAssetAsync<SceneData>(_currentScene.NextScene);
+                
+                if (nextScene != null)
+                {
+                    Debug.Log($"DialogueSystem: Navigating to next scene: {nextScene.SceneName}");
+                    OnSceneNavigationRequested?.Invoke(nextScene);
+                }
+                else
+                {
+                    Debug.LogError($"DialogueSystem: Failed to load next scene");
+                    OnDialogueComplete?.Invoke();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"DialogueSystem: Error loading next scene: {ex.Message}");
+                OnDialogueComplete?.Invoke();
+            }
+        }
+        else
+        {
+            // No next scene defined, complete normally
+            Debug.Log("DialogueSystem: No next scene defined, dialogue ending");
+            OnDialogueComplete?.Invoke();
+        }
     }
 
     /// <summary>

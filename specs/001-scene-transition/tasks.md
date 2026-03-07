@@ -27,7 +27,7 @@
 
 **Purpose**: Project initialization and documentation structure
 
-- [ ] T001 Create `specs/001-scene-transition/research.md` documenting current implementation gaps
+- [x] T001 Create `specs/001-scene-transition/research.md` documenting current implementation gaps
 - [ ] T002 Create `specs/001-scene-transition/data-model.md` defining data structures
 - [ ] T003 [P] Create `specs/001-scene-transition/quickstart.md` with usage guide for creators
 - [ ] T004 [P] Create `specs/001-scene-transition/contracts/` directory with interface definitions
@@ -67,13 +67,13 @@
 
 ### Implementation for User Story 1
 
-- [ ] T014 [US1] Add `[SerializeField] private AssetReference _nextScene;` field to `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
-- [ ] T015 [US1] Add public `AssetReference NextScene => _nextScene;` property to `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
-- [ ] T016 [US1] Update `SceneData.Validate()` to check nextScene reference validity in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
-- [ ] T017 [US1] Modify `DialogueSystem.CompleteDialogue()` to check for and load nextScene in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
-- [ ] T018 [US1] Add graceful handling for missing/invalid nextScene references in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T014 [US1] Add `[SerializeField] private AssetReference _nextScene;` field to `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
+- [x] T015 [US1] Add public `AssetReference NextScene => _nextScene;` property to `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
+- [x] T016 [US1] Update `SceneData.Validate()` to check nextScene reference validity in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs`
+- [x] T017 [US1] Modify `DialogueSystem.CompleteDialogue()` to check for and load nextScene in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T018 [US1] Add graceful handling for missing/invalid nextScene references in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [ ] T019 [US1] Update `SceneDataEditor` custom inspector to display nextScene field in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs` (if exists, otherwise create)
-- [ ] T020 [US1] Add debug logging for nextScene transitions in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T020 [US1] Add debug logging for nextScene transitions in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
 - [ ] T021 [US1] Run all User Story 1 tests and verify they PASS
 - [ ] T022 [US1] Manual test: Create 3 linear scenes, verify full progression works
 
