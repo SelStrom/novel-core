@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Data.Characters;
+namespace NovelCore.Runtime.Data.Characters
+{
 
 /// <summary>
 /// ScriptableObject representing a character with multiple emotional states.
@@ -133,4 +134,6 @@ public enum AnimationType
     Unity,   // Unity Animator
     Spine,   // Spine 2D skeletal animation
     Static   // No animation (sprite swap only)
+}
+
 }

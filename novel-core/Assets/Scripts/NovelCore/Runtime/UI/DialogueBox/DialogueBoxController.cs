@@ -1,6 +1,7 @@
 using TMPro;
 
-namespace NovelCore.Runtime.UI.DialogueBox;
+namespace NovelCore.Runtime.UI.DialogueBox
+{
 
 /// <summary>
 /// Controller for dialogue box UI, handling text display and rendering.
@@ -326,4 +327,6 @@ public class DialogueBoxController : MonoBehaviour
         // TODO: Implement speaker highlighting when character system is ready
         Debug.Log($"DialogueBoxController: Highlighting speaker {characterId}");
     }
+}
+
 }

@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 using NovelCore.Runtime.Animation;
 
-namespace NovelCore.Runtime.Core.SceneManagement;
+namespace NovelCore.Runtime.Core.SceneManagement
+{
 
 /// <summary>
 /// Manages scene loading, rendering backgrounds, and character positioning.
@@ -375,4 +376,6 @@ public class SceneManager : ISceneManager
             GameObject.Destroy(_backgroundContainer);
         }
     }
+}
+
 }

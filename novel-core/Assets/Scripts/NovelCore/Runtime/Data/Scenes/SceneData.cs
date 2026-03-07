@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Data.Scenes;
+namespace NovelCore.Runtime.Data.Scenes
+{
 
 /// <summary>
 /// ScriptableObject representing a single scene in a visual novel.
@@ -125,4 +126,6 @@ public enum TransitionType
     Fade,     // Fade to black then fade in
     Slide,    // Slide transition
     Custom    // Custom transition shader
+}
+
 }

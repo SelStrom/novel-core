@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Data;
+namespace NovelCore.Runtime.Data
+{
 
 /// <summary>
 /// Base class for all NovelCore ScriptableObjects with versioning support.
@@ -65,4 +66,6 @@ public abstract class BaseScriptableObject : ScriptableObject
     {
         Debug.Log($"Migrating {name} from version {fromVersion} to {_version}");
     }
+}
+
 }

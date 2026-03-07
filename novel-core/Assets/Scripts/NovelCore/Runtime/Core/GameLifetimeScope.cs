@@ -1,7 +1,8 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace NovelCore.Runtime.Core;
+namespace NovelCore.Runtime.Core
+{
 
 /// <summary>
 /// Root lifetime scope for NovelCore.
@@ -60,4 +61,6 @@ public class GameLifetimeScope : LifetimeScope
         Debug.LogWarning("NovelCore: No platform service registered for current platform");
 #endif
     }
+}
+
 }

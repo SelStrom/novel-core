@@ -1,7 +1,8 @@
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace NovelCore.Runtime.Core.AssetManagement;
+namespace NovelCore.Runtime.Core.AssetManagement
+{
 
 /// <summary>
 /// Implementation of IAssetManager using Unity Addressables.
@@ -176,4 +177,6 @@ public class AddressablesAssetManager : IAssetManager
         // This is a simplified implementation
         return true;
     }
+}
+
 }

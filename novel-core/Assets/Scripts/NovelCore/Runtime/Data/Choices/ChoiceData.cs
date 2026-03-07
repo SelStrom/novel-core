@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Data.Choices;
+namespace NovelCore.Runtime.Data.Choices
+{
 
 /// <summary>
 /// ScriptableObject representing a player choice point.
@@ -110,4 +111,6 @@ public struct ChoiceOption
 
     [Tooltip("Optional icon for this option")]
     public Sprite icon;
+}
+
 }

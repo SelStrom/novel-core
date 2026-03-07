@@ -1,6 +1,7 @@
 using UnityEngine.InputSystem;
 
-namespace NovelCore.Runtime.Core.InputHandling;
+namespace NovelCore.Runtime.Core.InputHandling
+{
 
 /// <summary>
 /// Unity Input System implementation of IInputService.
@@ -133,4 +134,6 @@ public class UnityInputService : MonoBehaviour, IInputService
         _pointerPosition?.Dispose();
         _pointerPress?.Dispose();
     }
+}
+
 }

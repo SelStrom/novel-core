@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Core.AssetManagement;
+namespace NovelCore.Runtime.Core.AssetManagement
+{
 
 /// <summary>
 /// Interface for asset loading and management via Addressables.
@@ -47,4 +48,6 @@ public interface IAssetManager
     /// <param name="key">Addressable key to check.</param>
     /// <returns>True if asset exists.</returns>
     bool AssetExists(object key);
+}
+
 }

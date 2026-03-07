@@ -1,6 +1,7 @@
 using System.Collections;
 
-namespace NovelCore.Runtime.Core.AudioSystem;
+namespace NovelCore.Runtime.Core.AudioSystem
+{
 
 /// <summary>
 /// Unity implementation of IAudioService.
@@ -219,4 +220,6 @@ public class UnityAudioService : MonoBehaviour, IAudioService
         _musicSource.volume = _musicVolume * _masterVolume;
         _musicFadeCoroutine = null;
     }
+}
+
 }

@@ -1,22 +1,21 @@
 <!--
 Sync Impact Report:
-- Version: 1.2.2 → 1.2.3 (C# version correction)
+- Version: 1.2.3 → 1.3.0 (Namespace style enforcement)
 - Modified Principles: None
 - Added Principles: None
 - Removed Principles: None
 - Modified Sections:
-  - Technical Requirements: Corrected C# version from 10.0+ to 9.0 (Unity 6 supports C# 9)
-  - Code Style Standards: Updated C# feature references to reflect C# 9 capabilities
-- Added Sections: None
+  - Code Style Standards: Added explicit namespace formatting rules (traditional block-scoped, not file-scoped)
+  - Technical Requirements: Clarified C# 9.0 feature usage (records, init-only, pattern matching - NO file-scoped namespaces)
+- Added Sections:
+  - Namespace Formatting (under Code Style Standards)
 - Removed Sections: None
 - Templates Status:
-  ✅ plan-template.md - needs update (C# version reference)
-  ⚠️ Code files - needs update (GlobalUsings.cs and comments referencing C# 10)
+  ✅ All code files converted from file-scoped to traditional namespaces
+  ✅ GlobalUsings.cs comment already references C# 9.0
 - Follow-up TODOs:
-  - Update plan.md to specify C# 9.0 instead of C# 10.0+
-  - Update GlobalUsings.cs comment from "C# 10.0+" to "C# 9.0"
-  - Review code for C# 10-specific features (file-scoped namespaces, global usings are C# 10)
-  - Note: Some C# 9 features available: records, init-only setters, pattern matching enhancements
+  - Update research.md if it references file-scoped namespaces as a feature
+  - Update plan.md to clarify namespace style requirement
 -->
 
 # Novel Core Constructor Constitution
@@ -190,6 +189,36 @@ All C# code MUST follow these formatting and naming conventions to ensure consis
 
 ### Formatting Rules
 
+**Namespaces (Traditional Block-Scoped)**:
+- MUST use traditional namespace blocks with braces (NOT file-scoped namespaces)
+- Opening brace MUST be on a new line (Allman style)
+- All type declarations MUST be nested inside the namespace block
+- One blank line after namespace declaration before first type
+
+```csharp
+// ✅ CORRECT (traditional namespace)
+namespace NovelCore.Runtime.Core.DialogueSystem
+{
+    /// <summary>
+    /// Dialogue system implementation.
+    /// </summary>
+    public class DialogueSystem : IDialogueSystem
+    {
+        // Implementation
+    }
+}
+
+// ❌ INCORRECT (file-scoped namespace - C# 10 feature not used)
+namespace NovelCore.Runtime.Core.DialogueSystem;
+
+public class DialogueSystem : IDialogueSystem
+{
+    // Implementation
+}
+```
+
+**Rationale**: Traditional namespaces provide clear scope boundaries, consistent with C# 9.0 language features available in Unity 6. File-scoped namespaces (C# 10) are not used to maintain compatibility and readability standards.
+
 **Braces (Allman Style)**:
 - Opening brace MUST always be on a new line
 - Braces MUST be used for all control structures (if, else, for, while, foreach), even single-line statements
@@ -361,4 +390,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.2.3 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.3.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07

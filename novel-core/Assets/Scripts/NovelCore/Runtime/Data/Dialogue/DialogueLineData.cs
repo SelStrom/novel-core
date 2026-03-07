@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Data.Dialogue;
+namespace NovelCore.Runtime.Data.Dialogue
+{
 
 /// <summary>
 /// ScriptableObject representing a single line of dialogue.
@@ -107,4 +108,6 @@ public enum CharacterAction
     Enter,  // Character enters the scene
     Exit,   // Character exits the scene
     Move    // Character moves to new position
+}
+
 }

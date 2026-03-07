@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
 using Spine.Unity;
 
-namespace NovelCore.Runtime.Animation;
+namespace NovelCore.Runtime.Animation
+{
 
 /// <summary>
 /// Spine-based character animator using skeletal animation.
@@ -217,4 +218,6 @@ public class SpineCharacterAnimator : ICharacterAnimator
         _targetObject = null;
         _characterData = null;
     }
+}
+
 }

@@ -1,6 +1,7 @@
 using UnityEngine.InputSystem;
 
-namespace NovelCore.Runtime.Core.InputHandling;
+namespace NovelCore.Runtime.Core.InputHandling
+{
 
 /// <summary>
 /// Interface for input handling across different platforms.
@@ -42,4 +43,6 @@ public interface IInputService
     /// Enables or disables input processing.
     /// </summary>
     bool InputEnabled { get; set; }
+}
+
 }

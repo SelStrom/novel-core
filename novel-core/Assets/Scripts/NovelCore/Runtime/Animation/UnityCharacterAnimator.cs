@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 
-namespace NovelCore.Runtime.Animation;
+namespace NovelCore.Runtime.Animation
+{
 
 /// <summary>
 /// Unity-based character animator using sprite swapping.
@@ -193,4 +194,6 @@ public class UnityCharacterAnimator : ICharacterAnimator
         _targetObject = null;
         _characterData = null;
     }
+}
+
 }

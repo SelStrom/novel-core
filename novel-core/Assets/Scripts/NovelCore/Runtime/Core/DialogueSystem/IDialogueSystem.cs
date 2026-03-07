@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Core.DialogueSystem;
+namespace NovelCore.Runtime.Core.DialogueSystem
+{
 
 /// <summary>
 /// Interface for the dialogue system managing dialogue playback and state.
@@ -81,4 +82,6 @@ public interface IDialogueSystem
     /// Check if there are more dialogue lines.
     /// </summary>
     bool HasNextLine();
+}
+
 }

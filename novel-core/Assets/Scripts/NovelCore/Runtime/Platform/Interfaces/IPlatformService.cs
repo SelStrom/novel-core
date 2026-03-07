@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Platform.Interfaces;
+namespace NovelCore.Runtime.Platform.Interfaces
+{
 
 /// <summary>
 /// Platform abstraction interface for platform-specific functionality.
@@ -41,4 +42,6 @@ public interface IPlatformService
     /// <param name="key">Storage key.</param>
     /// <returns>Loaded data, or null if not found.</returns>
     Task<byte[]> LoadFromCloudAsync(string key);
+}
+
 }

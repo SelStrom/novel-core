@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Core.SceneManagement;
+namespace NovelCore.Runtime.Core.SceneManagement
+{
 
 /// <summary>
 /// Interface for scene management system handling scene loading, rendering, and transitions.
@@ -79,4 +80,6 @@ public interface ISceneManager
     /// <param name="targetPosition">Target position (normalized 0-1).</param>
     /// <param name="duration">Animation duration in seconds.</param>
     void MoveCharacter(string characterId, Vector2 targetPosition, float duration = 0.5f);
+}
+
 }

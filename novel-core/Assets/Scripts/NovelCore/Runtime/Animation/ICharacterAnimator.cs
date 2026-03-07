@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Animation;
+namespace NovelCore.Runtime.Animation
+{
 
 /// <summary>
 /// Interface for character animation systems.
@@ -72,4 +73,6 @@ public enum CharacterSide
     Left,
     Right,
     Center
+}
+
 }

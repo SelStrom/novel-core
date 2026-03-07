@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.UI.ChoiceButtons;
+namespace NovelCore.Runtime.UI.ChoiceButtons
+{
 
 /// <summary>
 /// Controller for choice button UI, managing display and selection of choices.
@@ -357,4 +358,6 @@ public class ChoiceUIController : MonoBehaviour
     {
         HideChoices();
     }
+}
+
 }

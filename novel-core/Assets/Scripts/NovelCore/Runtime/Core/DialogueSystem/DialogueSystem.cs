@@ -1,4 +1,5 @@
-namespace NovelCore.Runtime.Core.DialogueSystem;
+namespace NovelCore.Runtime.Core.DialogueSystem
+{
 
 /// <summary>
 /// Implementation of dialogue system managing dialogue playback, choices, and flow.
@@ -317,4 +318,6 @@ public class DialogueSystem : IDialogueSystem
     {
         _choiceHistory.Clear();
     }
+}
+
 }
