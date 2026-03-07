@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using NovelCore.Runtime.Animation;
 
 namespace NovelCore.Runtime.Core.SceneManagement;
 
@@ -17,7 +18,7 @@ public class SceneManager : ISceneManager
     private GameObject _backgroundContainer;
     private SpriteRenderer _backgroundRenderer;
     private Dictionary<string, GameObject> _characterObjects = new();
-    private Dictionary<string, SpriteRenderer> _characterRenderers = new();
+    private Dictionary<string, ICharacterAnimator> _characterAnimators = new();
 
     // Scene hierarchy
     private const string BackgroundLayerName = "Background";
@@ -127,7 +128,7 @@ public class SceneManager : ISceneManager
             }
         }
         _characterObjects.Clear();
-        _characterRenderers.Clear();
+        _characterAnimators.Clear();
 
         // Stop music
         _audioService.StopMusic();
@@ -153,7 +154,7 @@ public class SceneManager : ISceneManager
 
     public void UpdateCharacterEmotion(string characterId, string emotion)
     {
-        if (!_characterRenderers.ContainsKey(characterId))
+        if (!_characterAnimators.ContainsKey(characterId))
         {
             Debug.LogWarning($"SceneManager: Character {characterId} not found in scene");
             return;
@@ -161,8 +162,8 @@ public class SceneManager : ISceneManager
 
         Debug.Log($"SceneManager: Updating character {characterId} emotion to {emotion}");
 
-        // TODO: Load and swap character sprite based on emotion
-        // This will be implemented when character system is complete
+        var animator = _characterAnimators[characterId];
+        animator?.SetEmotion(emotion);
     }
 
     public void SetCharacterVisible(string characterId, bool visible)
@@ -261,28 +262,55 @@ public class SceneManager : ISceneManager
             return;
         }
 
-        // TODO: Get character ID from loaded CharacterData
-        string characterId = placement.character.AssetGUID;
+        try
+        {
+            // Load character data
+            var characterData = await _assetManager.LoadAssetAsync<CharacterData>(placement.character);
+            if (characterData == null)
+            {
+                Debug.LogError("SceneManager: Failed to load character data");
+                return;
+            }
 
-        // Create character GameObject
-        var characterObj = new GameObject($"Character_{characterId}");
-        var spriteRenderer = characterObj.AddComponent<SpriteRenderer>();
+            string characterId = characterData.CharacterId;
 
-        // Set sorting order
-        spriteRenderer.sortingOrder = CharacterBaseSortingOrder + placement.sortingOrder;
+            // Create character GameObject
+            var characterObj = new GameObject($"Character_{characterData.CharacterName}");
+            
+            // Position character
+            Vector3 worldPosition = NormalizedToWorldPosition(placement.position);
+            characterObj.transform.position = worldPosition;
+            characterObj.transform.localScale = new Vector3(
+                characterData.DefaultScale.x, 
+                characterData.DefaultScale.y, 
+                1f);
 
-        // Position character
-        Vector3 worldPosition = NormalizedToWorldPosition(placement.position);
-        characterObj.transform.position = worldPosition;
+            // Create appropriate animator based on animation type
+            ICharacterAnimator animator = CreateCharacterAnimator(characterData.AnimationType);
+            animator.Initialize(characterData, characterObj);
+            animator.SetEmotion(placement.initialEmotion);
 
-        // Store references
-        _characterObjects[characterId] = characterObj;
-        _characterRenderers[characterId] = spriteRenderer;
+            // Store references
+            _characterObjects[characterId] = characterObj;
+            _characterAnimators[characterId] = animator;
 
-        // TODO: Load character sprite via AssetManager based on initialEmotion
-        Debug.Log($"SceneManager: Character {characterId} positioned at {worldPosition}");
+            Debug.Log($"SceneManager: Character {characterData.CharacterName} loaded at {worldPosition} with {characterData.AnimationType} animator");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"SceneManager: Error loading character: {ex.Message}");
+        }
+    }
 
-        await Task.CompletedTask;
+    private ICharacterAnimator CreateCharacterAnimator(AnimationType animationType)
+    {
+        return animationType switch
+        {
+            AnimationType.Spine => new SpineCharacterAnimator(_assetManager),
+            AnimationType.Unity => new UnityCharacterAnimator(_assetManager),
+            AnimationType.Static => new UnityCharacterAnimator(_assetManager), // Use Unity animator for static sprites
+            _ => new UnityCharacterAnimator(_assetManager)
+        };
     }
 
     private void ScaleBackgroundToFitScreen()

@@ -293,11 +293,11 @@ Each iteration is a complete mini-milestone with:
 - Smooth transitions between emotions
 
 **Tasks**:
-- [ ] T058 [P] [US3] Create ICharacterAnimator interface in `Assets/Scripts/NovelCore/Runtime/Animation/ICharacterAnimator.cs`
-- [ ] T059 [P] [US3] Implement UnityCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/UnityCharacterAnimator.cs`
-- [ ] T060 [P] [US3] Implement SpineCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/SpineCharacterAnimator.cs`
+- [X] T058 [P] [US3] Create ICharacterAnimator interface in `Assets/Scripts/NovelCore/Runtime/Animation/ICharacterAnimator.cs`
+- [X] T059 [P] [US3] Implement UnityCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/UnityCharacterAnimator.cs`
+- [X] T060 [P] [US3] Implement SpineCharacterAnimator in `Assets/Scripts/NovelCore/Runtime/Animation/SpineCharacterAnimator.cs`
 - [X] T061 [US3] Add emotion switching logic to DialogueSystem
-- [ ] T062 [US3] Implement character sprite swapping in SceneManager
+- [X] T062 [US3] Implement character sprite swapping in SceneManager
 - [ ] T067 [US3] Register character animators in VContainer with factory pattern
 
 ---
