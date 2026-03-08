@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7574505295734178457
+--- !u!114 &-7948161713435969598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 5cb14f33-8440-4d7c-aa75-4449734b9eb5
+  _id: 8d4f9b46-f793-42b9-9a8a-9148f7fe329c
   _lineId: line_choice_001
   _speaker:
     m_AssetGUID: 
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 9b2bbe2b-ed07-401e-8a90-c00a48f2e3a3
+  _id: 90681006-bdf3-4fc8-89ea-638fe4c28ec9
   _sceneId: scene_choice_001
   _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
   _backgroundImage:
@@ -70,8 +70,8 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: -7574505295734178457}
-  - {fileID: 5293625171301453526}
+  - {fileID: -7948161713435969598}
+  - {fileID: 5061486023715333552}
   _choices:
   - {fileID: 11400000, guid: ff10cc9c3f14c4051a79717469464c7d, type: 2}
   _transitionType: 1
@@ -84,7 +84,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &5293625171301453526
+--- !u!114 &5061486023715333552
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: c9a1285c-ac85-40f6-8819-5b08910cf60b
+  _id: 21055150-4e90-42b6-b71d-36429c81e1a5
   _lineId: line_choice_002
   _speaker:
     m_AssetGUID: 

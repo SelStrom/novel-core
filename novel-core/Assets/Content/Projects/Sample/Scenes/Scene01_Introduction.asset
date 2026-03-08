@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4946550403921737883
+--- !u!114 &-6651287434342648645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene01_Introduction_Line02
+  m_Name: Scene01_Introduction_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: c1323ce6-29eb-474e-a8e4-ee9176078aeb
-  _lineId: line_intro_003
+  _id: cf7aa818-032e-49c3-a5f2-012a2a2e0061
+  _lineId: line_intro_001
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -22,9 +22,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_intro_003
-  _fallbackText: "\u041D\u0430\u0436\u0438\u043C\u0430\u0439 \u043D\u0430 \u044D\u043A\u0440\u0430\u043D,
-    \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C..."
+  _textKey: line_intro_001
+  _fallbackText: "\u041F\u0440\u0438\u0432\u0435\u0442! \u042D\u0442\u043E \u0434\u0435\u043C\u043E\u043D\u0441\u0442\u0440\u0430\u0446\u0438\u043E\u043D\u043D\u0430\u044F
+    \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u0430\u044F \u043D\u043E\u0432\u0435\u043B\u043B\u0430."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -40,7 +40,7 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
---- !u!114 &-4089088159538979053
+--- !u!114 &-3277068978557096673
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene01_Introduction_Line00
+  m_Name: Scene01_Introduction_Line02
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 09aafab1-e23e-49f5-9336-b3d09adcedac
-  _lineId: line_intro_001
+  _id: f6d4444f-a4e7-4066-8e28-b3b704f23a93
+  _lineId: line_intro_003
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -62,9 +62,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_intro_001
-  _fallbackText: "\u041F\u0440\u0438\u0432\u0435\u0442! \u042D\u0442\u043E \u0434\u0435\u043C\u043E\u043D\u0441\u0442\u0440\u0430\u0446\u0438\u043E\u043D\u043D\u0430\u044F
-    \u0432\u0438\u0437\u0443\u0430\u043B\u044C\u043D\u0430\u044F \u043D\u043E\u0432\u0435\u043B\u043B\u0430."
+  _textKey: line_intro_003
+  _fallbackText: "\u041D\u0430\u0436\u0438\u043C\u0430\u0439 \u043D\u0430 \u044D\u043A\u0440\u0430\u043D,
+    \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0438\u0442\u044C..."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: bf4ed81b-95d5-459b-b231-ba1de4776d8a
+  _id: 9add3bfe-4c37-4e74-b61f-b2971c443ca5
   _sceneId: scene_intro_001
   _sceneName: "\u0412\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
   _backgroundImage:
@@ -110,9 +110,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: -4089088159538979053}
-  - {fileID: 6134176606277058347}
-  - {fileID: -4946550403921737883}
+  - {fileID: -6651287434342648645}
+  - {fileID: 4392823821381853994}
+  - {fileID: -3277068978557096673}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &6134176606277058347
+--- !u!114 &4392823821381853994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: b8235b86-115b-4d24-a90f-5d295a2c2c2d
+  _id: 34a716ce-2f19-4b54-b194-fe004ee831af
   _lineId: line_intro_002
   _speaker:
     m_AssetGUID: 

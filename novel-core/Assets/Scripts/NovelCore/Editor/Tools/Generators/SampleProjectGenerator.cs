@@ -160,7 +160,7 @@ public static class SampleProjectGenerator
         byte[] bytes = texture.EncodeToPNG();
         string path = $"{directory}/{name}.png";
         File.WriteAllBytes(path, bytes);
-        
+
         AssetDatabase.Refresh();
 
         // Configure texture import settings
@@ -302,10 +302,10 @@ public static class SampleProjectGenerator
     {
         // Create SceneData asset
         SceneData scene = ScriptableObject.CreateInstance<SceneData>();
-        
+
         // Use reflection to set private fields (since they're serialized but have no public setters)
         var sceneType = typeof(SceneData);
-        
+
         SetPrivateField(scene, "_sceneId", sceneId);
         SetPrivateField(scene, "_sceneName", sceneName);
         SetPrivateField(scene, "_transitionType", TransitionType.Fade);
@@ -324,7 +324,7 @@ public static class SampleProjectGenerator
         {
             var line = CreateDialogueLine(content, fileName, lineIndex);
             dialogueLines.Add(line);
-            
+
             // Add as sub-asset to the SceneData asset
             AssetDatabase.AddObjectToAsset(line, scene);
             lineIndex++;
@@ -337,9 +337,9 @@ public static class SampleProjectGenerator
         // Mark scene as dirty and save
         EditorUtility.SetDirty(scene);
         AssetDatabase.SaveAssets();
-        
+
         Debug.Log($"[SampleProjectGenerator] Created scene: {path} with {dialogueLines.Count} dialogue lines");
-        
+
         return scene;
     }
 
@@ -347,14 +347,14 @@ public static class SampleProjectGenerator
     {
         DialogueLineData line = ScriptableObject.CreateInstance<DialogueLineData>();
         line.name = $"{sceneFileName}_Line{lineIndex:D2}";
-        
+
         SetPrivateField(line, "_lineId", content.lineId);
         SetPrivateField(line, "_emotion", content.emotion);
         SetPrivateField(line, "_textKey", content.lineId);
         SetPrivateField(line, "_fallbackText", content.fallbackText);
         SetPrivateField(line, "_displayDuration", -1f);
         SetPrivateField(line, "_characterAction", CharacterAction.None);
-        
+
         return line;
     }
 
@@ -363,14 +363,21 @@ public static class SampleProjectGenerator
         // Link Scene01 -> Scene02 (linear progression)
         LinkScenesLinear(scenes["scene1"], scenes["scene2"]);
 
+        // Get GUIDs for target scenes
+        var scene3aPath = AssetDatabase.GetAssetPath(scenes["scene3a"]);
+        var scene3aGuid = AssetDatabase.AssetPathToGUID(scene3aPath);
+        
+        var scene3bPath = AssetDatabase.GetAssetPath(scenes["scene3b"]);
+        var scene3bGuid = AssetDatabase.AssetPathToGUID(scene3bPath);
+
         // Create choice for Scene 2
         ChoiceData choice = ScriptableObject.CreateInstance<ChoiceData>();
         choice.name = "Choice_MainDecision";
-        
+
         SetPrivateField(choice, "_choiceId", "choice_main_001");
         SetPrivateField(choice, "_promptTextKey", "choice_prompt_001");
         SetPrivateField(choice, "_fallbackPromptText", "Выбери свой путь:");
-        
+
         var options = new List<ChoiceOption>
         {
             new ChoiceOption
@@ -378,7 +385,7 @@ public static class SampleProjectGenerator
                 optionId = "option_a",
                 textKey = "option_a_text",
                 fallbackText = "Выйти на улицу",
-                targetScene = null, // Will be set manually after Addressables setup
+                targetScene = new AssetReference(scene3aGuid), // ✅ Set target scene
                 requiredChoices = new List<string>(),
                 isAvailable = true,
                 icon = null
@@ -388,13 +395,13 @@ public static class SampleProjectGenerator
                 optionId = "option_b",
                 textKey = "option_b_text",
                 fallbackText = "Остаться дома",
-                targetScene = null, // Will be set manually after Addressables setup
+                targetScene = new AssetReference(scene3bGuid), // ✅ Set target scene
                 requiredChoices = new List<string>(),
                 isAvailable = true,
                 icon = null
             }
         };
-        
+
         SetPrivateField(choice, "_options", options);
         SetPrivateField(choice, "_timerSeconds", 0f);
         SetPrivateField(choice, "_defaultOptionIndex", 0);
@@ -403,13 +410,15 @@ public static class SampleProjectGenerator
         string choicePath = $"{SCENES_DIR}/Choice_MainDecision.asset";
         AssetDatabase.CreateAsset(choice, choicePath);
         AssetDatabase.SaveAssets();
-        
+
         Debug.Log($"[SampleProjectGenerator] Created choice: {choicePath}");
+        Debug.Log($"[SampleProjectGenerator]    • Option A -> {scenes["scene3a"].SceneName} (GUID: {scene3aGuid})");
+        Debug.Log($"[SampleProjectGenerator]    • Option B -> {scenes["scene3b"].SceneName} (GUID: {scene3bGuid})");
 
         // Add choice to Scene 2
         var scene2Choices = new List<ChoiceData> { choice };
         SetPrivateField(scenes["scene2"], "_choices", scene2Choices);
-        
+
         EditorUtility.SetDirty(scenes["scene2"]);
         AssetDatabase.SaveAssets();
     }
@@ -428,22 +437,22 @@ public static class SampleProjectGenerator
         // Create AssetReference to the target scene
         var assetPath = AssetDatabase.GetAssetPath(toScene);
         var guid = AssetDatabase.AssetPathToGUID(assetPath);
-        
+
         var nextSceneRef = new UnityEngine.AddressableAssets.AssetReference(guid);
         SetPrivateField(fromScene, "_nextScene", nextSceneRef);
-        
+
         EditorUtility.SetDirty(fromScene);
         AssetDatabase.SaveAssets();
-        
+
         Debug.Log($"[SampleProjectGenerator] Linked {fromScene.SceneName} -> {toScene.SceneName}");
     }
 
     private static void SetPrivateField(object obj, string fieldName, object value)
     {
-        var field = obj.GetType().GetField(fieldName, 
-            System.Reflection.BindingFlags.NonPublic | 
+        var field = obj.GetType().GetField(fieldName,
+            System.Reflection.BindingFlags.NonPublic |
             System.Reflection.BindingFlags.Instance);
-        
+
         if (field != null)
         {
             field.SetValue(obj, value);
@@ -509,7 +518,7 @@ public static class SampleProjectGenerator
 
         // Configure GameStarter using SerializedObject to set private fields
         var serializedObject = new UnityEditor.SerializedObject(gameStarter);
-        
+
         var startingSceneProperty = serializedObject.FindProperty("_startingScene");
         if (startingSceneProperty != null)
         {
@@ -610,7 +619,7 @@ public static class SampleProjectGenerator
         }
 
         // Check if ChoiceUI already exists
-        var existingChoiceUI = GameObject.FindFirstObjectByType<ChoiceButtons.ChoiceUIController>();
+        var existingChoiceUI = GameObject.FindFirstObjectByType<NovelCore.Runtime.UI.ChoiceButtons.ChoiceUIController>();
         if (existingChoiceUI != null)
         {
             Debug.Log("[SampleProjectGenerator] ChoiceUIController already exists, skipping creation.");
@@ -620,7 +629,7 @@ public static class SampleProjectGenerator
         // Create ChoiceUI container
         GameObject choiceUIObj = new GameObject("ChoiceUI");
         choiceUIObj.transform.SetParent(canvas.transform, false);
-        
+
         var choiceUIRect = choiceUIObj.AddComponent<RectTransform>();
         choiceUIRect.anchorMin = Vector2.zero;
         choiceUIRect.anchorMax = Vector2.one;
@@ -629,7 +638,7 @@ public static class SampleProjectGenerator
         // Create choice panel background
         GameObject choicePanel = new GameObject("ChoicePanel");
         choicePanel.transform.SetParent(choiceUIObj.transform, false);
-        
+
         var panelRect = choicePanel.AddComponent<RectTransform>();
         panelRect.anchorMin = new Vector2(0.5f, 0.5f);
         panelRect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -643,7 +652,7 @@ public static class SampleProjectGenerator
         // Create choice container for buttons
         GameObject choiceContainer = new GameObject("ChoiceContainer");
         choiceContainer.transform.SetParent(choicePanel.transform, false);
-        
+
         var containerRect = choiceContainer.AddComponent<RectTransform>();
         containerRect.anchorMin = new Vector2(0, 0);
         containerRect.anchorMax = new Vector2(1, 1);
@@ -660,11 +669,11 @@ public static class SampleProjectGenerator
         layoutGroup.childForceExpandHeight = false;
 
         // Add ChoiceUIController component
-        var choiceUIController = choiceUIObj.AddComponent<ChoiceButtons.ChoiceUIController>();
-        
+        var choiceUIController = choiceUIObj.AddComponent<NovelCore.Runtime.UI.ChoiceButtons.ChoiceUIController>();
+
         // Use SerializedObject to set private fields
         var serializedObject = new SerializedObject(choiceUIController);
-        
+
         var containerProperty = serializedObject.FindProperty("_choiceContainer");
         if (containerProperty != null)
         {
@@ -754,7 +763,7 @@ public static class SampleProjectGenerator
         // Create NavigationUI container
         GameObject navUIContainer = new GameObject("NavigationUI");
         navUIContainer.transform.SetParent(canvas.transform, false);
-        
+
         var navUIRect = navUIContainer.AddComponent<RectTransform>();
         navUIRect.anchorMin = new Vector2(0, 0);
         navUIRect.anchorMax = new Vector2(1, 0);
@@ -781,10 +790,10 @@ public static class SampleProjectGenerator
 
         // Add SceneNavigationUI component
         var navUI = navUIContainer.AddComponent<SceneNavigationUI>();
-        
+
         // Use SerializedObject to set private fields
         var serializedObject = new SerializedObject(navUI);
-        
+
         var backButtonProperty = serializedObject.FindProperty("_backButton");
         if (backButtonProperty != null)
         {
@@ -802,7 +811,7 @@ public static class SampleProjectGenerator
         // Create NavigationUIManager to handle initialization
         GameObject navManagerObj = new GameObject("NavigationUIManager");
         var navManager = navManagerObj.AddComponent<NavigationUIManager>();
-        
+
         var navManagerSerialized = new SerializedObject(navManager);
         var navUIProperty = navManagerSerialized.FindProperty("_navigationUI");
         if (navUIProperty != null)
@@ -915,7 +924,7 @@ public static class SampleProjectGenerator
 
         // Mark settings as dirty
         EditorUtility.SetDirty(settings);
-        
+
         Debug.Log($"[SampleProjectGenerator] ✅ Marked as Addressable: {scene.SceneName} (GUID: {guid})");
     }
 
