@@ -22,11 +22,13 @@ public class SceneManager : ISceneManager
     private readonly IAssetManager _assetManager;
     private readonly IAudioService _audioService;
     private readonly ICharacterAnimatorFactory _animatorFactory;
+    private readonly ISceneNavigationHistory _navigationHistory;
     private readonly SceneTransitionFactory _transitionFactory;
 
     private SceneData _currentScene;
     private bool _isLoading;
     private ISceneTransition _currentTransition;
+    private bool _isNavigating; // Flag to prevent history recording during navigation
 
     // Rendering components
     private GameObject _backgroundContainer;
@@ -51,11 +53,13 @@ public class SceneManager : ISceneManager
     public SceneManager(
         IAssetManager assetManager, 
         IAudioService audioService,
-        ICharacterAnimatorFactory animatorFactory)
+        ICharacterAnimatorFactory animatorFactory,
+        ISceneNavigationHistory navigationHistory = null)
     {
         _assetManager = assetManager ?? throw new System.ArgumentNullException(nameof(assetManager));
         _audioService = audioService ?? throw new System.ArgumentNullException(nameof(audioService));
         _animatorFactory = animatorFactory ?? throw new System.ArgumentNullException(nameof(animatorFactory));
+        _navigationHistory = navigationHistory; // Optional - can be null if navigation not needed
         _transitionFactory = new SceneTransitionFactory();
 
         InitializeSceneHierarchy();
@@ -120,6 +124,18 @@ public class SceneManager : ISceneManager
 
             OnSceneTransitionComplete?.Invoke(sceneData);
             OnSceneLoadComplete?.Invoke(sceneData);
+
+            // Add to navigation history (if not navigating and history is available)
+            if (!_isNavigating && _navigationHistory != null)
+            {
+                var historyEntry = new SceneHistoryEntry(
+                    sceneId: sceneData.SceneId,
+                    dialogueLineIndex: 0, // Start at beginning of scene
+                    gameStateSnapshot: new Dictionary<string, object>() // TODO: Get from GameStateManager
+                );
+                _navigationHistory.Push(historyEntry);
+                Debug.Log($"SceneManager: Added scene '{sceneData.SceneId}' to navigation history");
+            }
 
             Debug.Log($"SceneManager: Scene {sceneData.SceneName} loaded successfully");
         }
@@ -399,6 +415,91 @@ public class SceneManager : ISceneManager
         float worldY = (normalizedPos.y - 0.5f) * cameraHeight;
 
         return new Vector3(worldX, worldY, 0f);
+    }
+
+    /// <summary>
+    /// Navigate back to the previous scene in history.
+    /// </summary>
+    public bool NavigateBack()
+    {
+        if (_navigationHistory == null)
+        {
+            Debug.LogWarning("SceneManager: Navigation history not available");
+            return false;
+        }
+
+        if (!_navigationHistory.CanNavigateBack())
+        {
+            Debug.LogWarning("SceneManager: Cannot navigate back (no previous scene in history)");
+            return false;
+        }
+
+        var previousEntry = _navigationHistory.NavigateBack();
+        if (previousEntry == null)
+        {
+            Debug.LogError("SceneManager: Failed to get previous scene from history");
+            return false;
+        }
+
+        Debug.Log($"SceneManager: Navigating back to scene '{previousEntry.sceneId}' at line {previousEntry.dialogueLineIndex}");
+
+        // TODO: Load scene by ID and restore dialogue position
+        // For now, just log the navigation attempt
+        _isNavigating = true;
+        // LoadSceneByIdAsync(previousEntry.sceneId, previousEntry.dialogueLineIndex);
+        _isNavigating = false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Navigate forward to the next scene in history.
+    /// </summary>
+    public bool NavigateForward()
+    {
+        if (_navigationHistory == null)
+        {
+            Debug.LogWarning("SceneManager: Navigation history not available");
+            return false;
+        }
+
+        if (!_navigationHistory.CanNavigateForward())
+        {
+            Debug.LogWarning("SceneManager: Cannot navigate forward (no next scene in history)");
+            return false;
+        }
+
+        var nextEntry = _navigationHistory.NavigateForward();
+        if (nextEntry == null)
+        {
+            Debug.LogError("SceneManager: Failed to get next scene from history");
+            return false;
+        }
+
+        Debug.Log($"SceneManager: Navigating forward to scene '{nextEntry.sceneId}' at line {nextEntry.dialogueLineIndex}");
+
+        // TODO: Load scene by ID and restore dialogue position
+        _isNavigating = true;
+        // LoadSceneByIdAsync(nextEntry.sceneId, nextEntry.dialogueLineIndex);
+        _isNavigating = false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// Check if back navigation is possible.
+    /// </summary>
+    public bool CanNavigateBack()
+    {
+        return _navigationHistory != null && _navigationHistory.CanNavigateBack();
+    }
+
+    /// <summary>
+    /// Check if forward navigation is possible.
+    /// </summary>
+    public bool CanNavigateForward()
+    {
+        return _navigationHistory != null && _navigationHistory.CanNavigateForward();
     }
 
     /// <summary>

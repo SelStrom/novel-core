@@ -9,7 +9,10 @@ using NovelCore.Runtime.Data.Choices;
 using NovelCore.Runtime.Core.SceneManagement;
 using NovelCore.Runtime.Core;
 using NovelCore.Runtime.UI;
+using NovelCore.Runtime.UI.NavigationControls;
 using VContainer.Unity;
+using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 namespace NovelCore.Editor.Tools.Generators
 {
@@ -72,6 +75,7 @@ public static class SampleProjectGenerator
         var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
         SetupUnitySceneWithGameStarter(firstScene);
         SetupUIManager();
+        SetupNavigationUI();
 
         // Display success message
         Debug.Log($"[SampleProjectGenerator] ✅ Successfully created sample project at {SAMPLE_PROJECT_DIR}");
@@ -347,6 +351,9 @@ public static class SampleProjectGenerator
 
     private static void LinkScenesWithChoices(Dictionary<string, SceneData> scenes)
     {
+        // Link Scene01 -> Scene02 (linear progression)
+        LinkScenesLinear(scenes["scene1"], scenes["scene2"]);
+
         // Create choice for Scene 2
         ChoiceData choice = ScriptableObject.CreateInstance<ChoiceData>();
         choice.name = "Choice_MainDecision";
@@ -396,6 +403,30 @@ public static class SampleProjectGenerator
         
         EditorUtility.SetDirty(scenes["scene2"]);
         AssetDatabase.SaveAssets();
+    }
+
+    /// <summary>
+    /// Links two scenes together using nextScene field for linear progression
+    /// </summary>
+    private static void LinkScenesLinear(SceneData fromScene, SceneData toScene)
+    {
+        if (fromScene == null || toScene == null)
+        {
+            Debug.LogWarning("[SampleProjectGenerator] Cannot link null scenes");
+            return;
+        }
+
+        // Create AssetReference to the target scene
+        var assetPath = AssetDatabase.GetAssetPath(toScene);
+        var guid = AssetDatabase.AssetPathToGUID(assetPath);
+        
+        var nextSceneRef = new UnityEngine.AddressableAssets.AssetReference(guid);
+        SetPrivateField(fromScene, "_nextScene", nextSceneRef);
+        
+        EditorUtility.SetDirty(fromScene);
+        AssetDatabase.SaveAssets();
+        
+        Debug.Log($"[SampleProjectGenerator] Linked {fromScene.SceneName} -> {toScene.SceneName}");
     }
 
     private static void SetPrivateField(object obj, string fieldName, object value)
@@ -545,6 +576,167 @@ public static class SampleProjectGenerator
 
         Debug.Log("[SampleProjectGenerator] ✅ UIManager setup complete!");
         Debug.Log($"[SampleProjectGenerator]    • UIManager: {(uiManager != null ? "✓" : "✗")}");
+    }
+
+    /// <summary>
+    /// Creates navigation UI with back/forward buttons for scene history navigation
+    /// </summary>
+    private static void SetupNavigationUI()
+    {
+        Debug.Log("[SampleProjectGenerator] Setting up Navigation UI...");
+
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (!scene.IsValid())
+        {
+            Debug.LogError("[SampleProjectGenerator] No active scene found");
+            return;
+        }
+
+        // Find or create Canvas
+        Canvas canvas = GameObject.FindFirstObjectByType<Canvas>();
+        if (canvas == null)
+        {
+            Debug.Log("[SampleProjectGenerator] Creating Canvas for Navigation UI...");
+            GameObject canvasObj = new GameObject("Canvas");
+            canvas = canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvas.sortingOrder = 100;
+
+            var scaler = canvasObj.AddComponent<CanvasScaler>();
+            scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            scaler.referenceResolution = new Vector2(1920, 1080);
+            scaler.matchWidthOrHeight = 0.5f;
+
+            canvasObj.AddComponent<GraphicRaycaster>();
+            Undo.RegisterCreatedObjectUndo(canvasObj, "Create Canvas");
+        }
+
+        // Check if NavigationUI already exists
+        var existingNavUI = GameObject.FindFirstObjectByType<SceneNavigationUI>();
+        if (existingNavUI != null)
+        {
+            Debug.Log("[SampleProjectGenerator] SceneNavigationUI already exists, skipping creation.");
+            return;
+        }
+
+        // Create NavigationUI container
+        GameObject navUIContainer = new GameObject("NavigationUI");
+        navUIContainer.transform.SetParent(canvas.transform, false);
+        
+        var navUIRect = navUIContainer.AddComponent<RectTransform>();
+        navUIRect.anchorMin = new Vector2(0, 0);
+        navUIRect.anchorMax = new Vector2(1, 0);
+        navUIRect.pivot = new Vector2(0.5f, 0);
+        navUIRect.anchoredPosition = new Vector2(0, 20);
+        navUIRect.sizeDelta = new Vector2(-40, 80);
+
+        // Add HorizontalLayoutGroup for button arrangement
+        var layoutGroup = navUIContainer.AddComponent<HorizontalLayoutGroup>();
+        layoutGroup.childAlignment = TextAnchor.MiddleCenter;
+        layoutGroup.spacing = 20;
+        layoutGroup.childControlWidth = false;
+        layoutGroup.childControlHeight = false;
+        layoutGroup.childForceExpandWidth = false;
+        layoutGroup.childForceExpandHeight = false;
+
+        // Create Back Button
+        GameObject backButtonObj = CreateNavigationButton("BackButton", "← Назад", navUIContainer.transform);
+        Button backButton = backButtonObj.GetComponent<Button>();
+
+        // Create Forward Button
+        GameObject forwardButtonObj = CreateNavigationButton("ForwardButton", "Вперёд →", navUIContainer.transform);
+        Button forwardButton = forwardButtonObj.GetComponent<Button>();
+
+        // Add SceneNavigationUI component
+        var navUI = navUIContainer.AddComponent<SceneNavigationUI>();
+        
+        // Use SerializedObject to set private fields
+        var serializedObject = new SerializedObject(navUI);
+        
+        var backButtonProperty = serializedObject.FindProperty("_backButton");
+        if (backButtonProperty != null)
+        {
+            backButtonProperty.objectReferenceValue = backButton;
+        }
+
+        var forwardButtonProperty = serializedObject.FindProperty("_forwardButton");
+        if (forwardButtonProperty != null)
+        {
+            forwardButtonProperty.objectReferenceValue = forwardButton;
+        }
+
+        serializedObject.ApplyModifiedProperties();
+
+        // Create NavigationUIManager to handle initialization
+        GameObject navManagerObj = new GameObject("NavigationUIManager");
+        var navManager = navManagerObj.AddComponent<NavigationUIManager>();
+        
+        var navManagerSerialized = new SerializedObject(navManager);
+        var navUIProperty = navManagerSerialized.FindProperty("_navigationUI");
+        if (navUIProperty != null)
+        {
+            navUIProperty.objectReferenceValue = navUI;
+        }
+        navManagerSerialized.ApplyModifiedProperties();
+
+        Undo.RegisterCreatedObjectUndo(navUIContainer, "Create Navigation UI");
+        Undo.RegisterCreatedObjectUndo(navManagerObj, "Create Navigation UI Manager");
+
+        // Mark scene as dirty and save
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+
+        Debug.Log("[SampleProjectGenerator] ✅ Navigation UI setup complete!");
+        Debug.Log("[SampleProjectGenerator]    • Back Button: ✓");
+        Debug.Log("[SampleProjectGenerator]    • Forward Button: ✓");
+        Debug.Log("[SampleProjectGenerator]    • SceneNavigationUI: ✓");
+        Debug.Log("[SampleProjectGenerator]    • NavigationUIManager: ✓");
+    }
+
+    /// <summary>
+    /// Helper method to create a navigation button with consistent styling
+    /// </summary>
+    private static GameObject CreateNavigationButton(string name, string text, Transform parent)
+    {
+        // Create button GameObject
+        GameObject buttonObj = new GameObject(name);
+        buttonObj.transform.SetParent(parent, false);
+
+        // Add RectTransform
+        var rectTransform = buttonObj.AddComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(160, 60);
+
+        // Add Image component (button background)
+        var image = buttonObj.AddComponent<Image>();
+        image.color = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+        image.type = Image.Type.Sliced;
+
+        // Add Button component
+        var button = buttonObj.AddComponent<Button>();
+        var colors = button.colors;
+        colors.normalColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
+        colors.highlightedColor = new Color(0.3f, 0.3f, 0.3f, 0.8f);
+        colors.pressedColor = new Color(0.15f, 0.15f, 0.15f, 0.8f);
+        colors.disabledColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+        button.colors = colors;
+
+        // Create text child
+        GameObject textObj = new GameObject("Text");
+        textObj.transform.SetParent(buttonObj.transform, false);
+
+        var textRect = textObj.AddComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.sizeDelta = Vector2.zero;
+
+        var textComponent = textObj.AddComponent<Text>();
+        textComponent.text = text;
+        textComponent.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        textComponent.fontSize = 20;
+        textComponent.color = Color.white;
+        textComponent.alignment = TextAnchor.MiddleCenter;
+
+        return buttonObj;
     }
 
     private struct DialogueContent

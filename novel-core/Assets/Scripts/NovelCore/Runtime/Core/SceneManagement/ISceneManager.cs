@@ -85,6 +85,28 @@ public interface ISceneManager
     /// <param name="targetPosition">Target position (normalized 0-1).</param>
     /// <param name="duration">Animation duration in seconds.</param>
     void MoveCharacter(string characterId, Vector2 targetPosition, float duration = 0.5f);
+
+    /// <summary>
+    /// Navigate back to the previous scene in history.
+    /// </summary>
+    /// <returns>True if navigation was successful, false if no history available.</returns>
+    bool NavigateBack();
+
+    /// <summary>
+    /// Navigate forward to the next scene in history.
+    /// </summary>
+    /// <returns>True if navigation was successful, false if no forward history available.</returns>
+    bool NavigateForward();
+
+    /// <summary>
+    /// Check if back navigation is possible.
+    /// </summary>
+    bool CanNavigateBack();
+
+    /// <summary>
+    /// Check if forward navigation is possible.
+    /// </summary>
+    bool CanNavigateForward();
 }
 
 }

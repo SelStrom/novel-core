@@ -24,6 +24,7 @@ public class SceneDataBuilder
     private List<ChoiceData> _choices = new();
     private TransitionType _transitionType = TransitionType.Fade;
     private float _transitionDuration = 0.5f;
+    private AssetReference _nextScene;
     private bool _autoAdvance = false;
     private float _autoAdvanceDelay = 2.0f;
 
@@ -82,6 +83,12 @@ public class SceneDataBuilder
         return this;
     }
 
+    public SceneDataBuilder WithNextScene(AssetReference nextScene)
+    {
+        _nextScene = nextScene;
+        return this;
+    }
+
     public SceneData Build()
     {
         var sceneData = ScriptableObject.CreateInstance<SceneData>();
@@ -104,6 +111,8 @@ public class SceneDataBuilder
             ?.SetValue(sceneData, _transitionType);
         typeof(SceneData).GetField("_transitionDuration", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             ?.SetValue(sceneData, _transitionDuration);
+        typeof(SceneData).GetField("_nextScene", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(sceneData, _nextScene);
         typeof(SceneData).GetField("_autoAdvance", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             ?.SetValue(sceneData, _autoAdvance);
         typeof(SceneData).GetField("_autoAdvanceDelay", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)

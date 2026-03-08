@@ -237,6 +237,30 @@ public class MockSceneManager : ISceneManager
         CurrentScene = targetScene;
         OnSceneTransitionComplete?.Invoke(targetScene);
     }
+
+    public bool NavigateBack()
+    {
+        // Mock implementation - always returns false for tests
+        return false;
+    }
+
+    public bool NavigateForward()
+    {
+        // Mock implementation - always returns false for tests
+        return false;
+    }
+
+    public bool CanNavigateBack()
+    {
+        // Mock implementation - always returns false for tests
+        return false;
+    }
+
+    public bool CanNavigateForward()
+    {
+        // Mock implementation - always returns false for tests
+        return false;
+    }
 }
 
 }

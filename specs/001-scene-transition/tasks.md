@@ -40,10 +40,10 @@
 
 **⚠️ CRITICAL**: No user story work can begin until this phase is complete
 
-- [ ] T005 Review and document complete call stack for `DialogueSystem.AdvanceDialogue()` and `CompleteDialogue()` methods
-- [ ] T006 Review and document all current callers of `SceneManager.LoadScene()` 
-- [ ] T007 Verify `AddressablesAssetManager.LoadAssetAsync<T>()` async behavior and memory management
-- [ ] T008 Document current `SaveSystem` serialization format and extension points
+- [x] T005 Review and document complete call stack for `DialogueSystem.AdvanceDialogue()` and `CompleteDialogue()` methods
+- [x] T006 Review and document all current callers of `SceneManager.LoadScene()` 
+- [x] T007 Verify `AddressablesAssetManager.LoadAssetAsync<T>()` async behavior and memory management
+- [x] T008 Document current `SaveSystem` serialization format and extension points
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -99,10 +99,10 @@
 
 ### Implementation for User Story 2
 
-- [ ] T027 [US2] Review existing `DialogueSystem.SelectChoice()` implementation in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
-- [ ] T028 [US2] Verify choice priority logic in `DialogueSystem.AdvanceDialogue()` (choices checked before nextScene) in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
-- [ ] T029 [US2] Add test case validation: scene with both choices and nextScene (choices should win) in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs` Validate()
-- [ ] T030 [US2] Add editor warning if both choices and nextScene are defined in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs`
+- [x] T027 [US2] Review existing `DialogueSystem.SelectChoice()` implementation in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T028 [US2] Verify choice priority logic in `DialogueSystem.AdvanceDialogue()` (choices checked before nextScene) in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs`
+- [x] T029 [US2] Add test case validation: scene with both choices and nextScene (choices should win) in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneData.cs` Validate()
+- [x] T030 [US2] Add editor warning if both choices and nextScene are defined in `novel-core/Assets/Scripts/NovelCore/Editor/Data/SceneDataEditor.cs`
 - [ ] T031 [US2] Run all User Story 2 tests and verify they PASS
 - [ ] T032 [US2] Manual test: Create branching story with 2 choices leading to different paths, verify both work
 
@@ -127,21 +127,21 @@
 
 ### Implementation for User Story 3
 
-- [ ] T039 [P] [US3] Create `SceneHistoryEntry` data model in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneHistoryEntry.cs`
-- [ ] T040 [P] [US3] Create `SceneNavigationState` serializable class in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneNavigationState.cs`
-- [ ] T041 [P] [US3] Create `ISceneNavigationHistory` interface in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneNavigationHistory.cs`
-- [ ] T042 [US3] Implement `SceneNavigationHistory` class with stack operations in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneNavigationHistory.cs`
-- [ ] T043 [US3] Add history Push() call to `SceneManager.LoadScene()` in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
-- [ ] T044 [US3] Add `NavigateBack()` method to ISceneManager in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
-- [ ] T045 [US3] Add `NavigateForward()` method to ISceneManager in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
-- [ ] T046 [US3] Implement `NavigateBack()` in SceneManager using history stack in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
-- [ ] T047 [US3] Implement `NavigateForward()` in SceneManager using history stack in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
-- [ ] T048 [US3] Add SceneNavigationState to SaveSystem data structure in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
-- [ ] T049 [US3] Implement Save() integration for navigation state in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
-- [ ] T050 [US3] Implement Load() integration for navigation state in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs`
-- [ ] T051 [US3] Add history memory limit enforcement (max 50 entries) in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneNavigationHistory.cs`
-- [ ] T052 [P] [US3] Create optional `SceneNavigationUI` component in `novel-core/Assets/Scripts/NovelCore/Runtime/UI/NavigationControls/SceneNavigationUI.cs`
-- [ ] T053 [US3] Register SceneNavigationHistory with VContainer in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/GameLifetimeScope.cs`
+- [x] T039 [P] [US3] Create `SceneHistoryEntry` data model in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneHistoryEntry.cs`
+- [x] T040 [P] [US3] Create `SceneNavigationState` serializable class in `novel-core/Assets/Scripts/NovelCore/Runtime/Data/Scenes/SceneNavigationState.cs`
+- [x] T041 [P] [US3] Create `ISceneNavigationHistory` interface in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneNavigationHistory.cs`
+- [x] T042 [US3] Implement `SceneNavigationHistory` class with stack operations in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneNavigationHistory.cs`
+- [x] T043 [US3] Add history Push() call to `SceneManager.LoadScene()` in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+- [x] T044 [US3] Add `NavigateBack()` method to ISceneManager in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
+- [x] T045 [US3] Add `NavigateForward()` method to ISceneManager in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/ISceneManager.cs`
+- [x] T046 [US3] Implement `NavigateBack()` in SceneManager using history stack in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+- [x] T047 [US3] Implement `NavigateForward()` in SceneManager using history stack in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneManager.cs`
+- [ ] T048 [US3] Add SceneNavigationState to SaveSystem data structure in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs` (TODO: Requires custom serialization)
+- [ ] T049 [US3] Implement Save() integration for navigation state in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs` (TODO: Requires custom serialization)
+- [ ] T050 [US3] Implement Load() integration for navigation state in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SaveSystem/SaveSystem.cs` (TODO: Requires custom serialization)
+- [ ] T051 [US3] Add history memory limit enforcement (max 50 entries) in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/SceneManagement/SceneNavigationHistory.cs` (DONE: Already implemented in Push())
+- [x] T052 [P] [US3] Create optional `SceneNavigationUI` component in `novel-core/Assets/Scripts/NovelCore/Runtime/UI/NavigationControls/SceneNavigationUI.cs`
+- [ ] T053 [US3] Register SceneNavigationHistory with VContainer in `novel-core/Assets/Scripts/NovelCore/Runtime/Core/GameLifetimeScope.cs` (TODO: Needs VContainer setup)
 - [ ] T054 [US3] Run all User Story 3 tests and verify they PASS
 - [ ] T055 [US3] Manual test: Progress through 5 scenes, navigate back 3 times, verify state restoration
 
