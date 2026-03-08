@@ -83,6 +83,7 @@ public static class SampleProjectGenerator
         var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
         SetupUnitySceneWithGameStarter(firstScene);
         SetupUIManager();
+        SetupEventSystem();
         SetupChoiceUI();
         SetupNavigationUI();
 
@@ -594,6 +595,44 @@ public static class SampleProjectGenerator
 
         Debug.Log("[SampleProjectGenerator] ✅ UIManager setup complete!");
         Debug.Log($"[SampleProjectGenerator]    • UIManager: {(uiManager != null ? "✓" : "✗")}");
+    }
+
+    /// <summary>
+    /// Creates EventSystem for UI input handling
+    /// </summary>
+    private static void SetupEventSystem()
+    {
+        Debug.Log("[SampleProjectGenerator] Setting up EventSystem...");
+
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (!scene.IsValid())
+        {
+            Debug.LogError("[SampleProjectGenerator] No active scene found");
+            return;
+        }
+
+        // Check if EventSystem already exists
+        var existingEventSystem = GameObject.FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>();
+        if (existingEventSystem != null)
+        {
+            Debug.Log("[SampleProjectGenerator] EventSystem already exists, skipping creation.");
+            return;
+        }
+
+        // Create EventSystem
+        GameObject eventSystemObj = new GameObject("EventSystem");
+        var eventSystem = eventSystemObj.AddComponent<UnityEngine.EventSystems.EventSystem>();
+        var inputModule = eventSystemObj.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
+        
+        Undo.RegisterCreatedObjectUndo(eventSystemObj, "Create EventSystem");
+
+        // Mark scene as dirty and save
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+
+        Debug.Log("[SampleProjectGenerator] ✅ EventSystem setup complete!");
+        Debug.Log("[SampleProjectGenerator]    • EventSystem: ✓");
+        Debug.Log("[SampleProjectGenerator]    • StandaloneInputModule: ✓");
     }
 
     /// <summary>

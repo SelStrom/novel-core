@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Choice_MainDecision
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: c5f7f63b-9ad7-4b54-9074-2a400eb8c567
+  _id: f8f542a8-2317-44a3-885c-3deede745551
   _choiceId: choice_main_001
   _promptTextKey: choice_prompt_001
   _fallbackPromptText: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0441\u0432\u043E\u0439
@@ -23,7 +23,7 @@ MonoBehaviour:
     textKey: option_a_text
     fallbackText: "\u0412\u044B\u0439\u0442\u0438 \u043D\u0430 \u0443\u043B\u0438\u0446\u0443"
     targetScene:
-      m_AssetGUID: 
+      m_AssetGUID: 5f239d9d5ede7412397aef83ede152dd
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -35,7 +35,7 @@ MonoBehaviour:
     textKey: option_b_text
     fallbackText: "\u041E\u0441\u0442\u0430\u0442\u044C\u0441\u044F \u0434\u043E\u043C\u0430"
     targetScene:
-      m_AssetGUID: 
+      m_AssetGUID: f22afcad3d2d0431ba6522de8ae54eeb
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

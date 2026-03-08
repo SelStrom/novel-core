@@ -208,6 +208,8 @@ public class ChoiceUIController : MonoBehaviour
         // Setup button click handler
         int choiceIndex = index;
         button.onClick.AddListener(() => OnChoiceSelected(choiceIndex));
+        
+        Debug.Log($"ChoiceUIController: Created button for option {index}: '{option.fallbackText}' (interactable: {button.interactable})");
 
         // Disable button if not available
         button.interactable = option.isAvailable;
