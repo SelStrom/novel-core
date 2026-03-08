@@ -13,6 +13,8 @@ using NovelCore.Runtime.UI.NavigationControls;
 using VContainer.Unity;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
+using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
 
 namespace NovelCore.Editor.Tools.Generators
 {
@@ -63,6 +65,12 @@ public static class SampleProjectGenerator
 
         // Generate story data
         var scenes = GenerateStoryScenes();
+
+        // Mark all scenes as Addressable
+        foreach (var scene in scenes.Values)
+        {
+            MarkAssetAsAddressable(scene);
+        }
 
         // Link scenes together
         LinkScenesWithChoices(scenes);
@@ -737,6 +745,54 @@ public static class SampleProjectGenerator
         textComponent.alignment = TextAnchor.MiddleCenter;
 
         return buttonObj;
+    }
+
+    /// <summary>
+    /// Marks a SceneData asset as Addressable in the default group.
+    /// </summary>
+    private static void MarkAssetAsAddressable(SceneData scene)
+    {
+        if (scene == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] Cannot mark null scene as Addressable");
+            return;
+        }
+
+        string assetPath = AssetDatabase.GetAssetPath(scene);
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+
+        // Get Addressables settings
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] Addressables settings not found. Please initialize Addressables.");
+            return;
+        }
+
+        // Check if already addressable
+        var entry = settings.FindAssetEntry(guid);
+        if (entry != null)
+        {
+            Debug.Log($"[SampleProjectGenerator] ✓ Already Addressable: {scene.SceneName}");
+            return;
+        }
+
+        // Get default group (or create if needed)
+        var defaultGroup = settings.DefaultGroup;
+        if (defaultGroup == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] No default Addressables group found");
+            return;
+        }
+
+        // Add asset to Addressables
+        entry = settings.CreateOrMoveEntry(guid, defaultGroup, false, false);
+        entry.address = scene.SceneName; // Use scene name as address
+
+        // Mark settings as dirty
+        EditorUtility.SetDirty(settings);
+        
+        Debug.Log($"[SampleProjectGenerator] ✅ Marked as Addressable: {scene.SceneName} (GUID: {guid})");
     }
 
     private struct DialogueContent

@@ -38,7 +38,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<IDialogueSystem, DialogueSystem.DialogueSystem>(Lifetime.Singleton);
 
         // Scene Management
-        builder.Register<ISceneNavigationHistory, SceneNavigationHistory>(Lifetime.Singleton);
+        builder.Register<ISceneNavigationHistory, SceneNavigationHistory>(Lifetime.Singleton).WithParameter(SceneNavigationHistory.DEFAULT_MAX_HISTORY_SIZE);
         builder.Register<ISceneManager, SceneManagement.SceneManager>(Lifetime.Singleton);
 
         // Localization

@@ -12,17 +12,9 @@ namespace NovelCore.Runtime.Core.SceneManagement
 public class SceneNavigationHistory : ISceneNavigationHistory
 {
     private SceneNavigationState _state;
-    private const int DEFAULT_MAX_HISTORY_SIZE = 50;
+    public const int DEFAULT_MAX_HISTORY_SIZE = 50;
 
     public int Count => _state?.history?.Count ?? 0;
-
-    /// <summary>
-    /// Creates a new navigation history with default max size.
-    /// This parameterless constructor is required for VContainer DI.
-    /// </summary>
-    public SceneNavigationHistory() : this(DEFAULT_MAX_HISTORY_SIZE)
-    {
-    }
 
     /// <summary>
     /// Creates a new navigation history with custom max size.
@@ -77,7 +69,7 @@ public class SceneNavigationHistory : ISceneNavigationHistory
 
         var entry = _state.history[_state.history.Count - 1];
         _state.history.RemoveAt(_state.history.Count - 1);
-        
+
         if (_state.currentIndex >= _state.history.Count)
         {
             _state.currentIndex = _state.history.Count - 1;
