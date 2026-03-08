@@ -446,8 +446,10 @@ public class SceneManager : ISceneManager
 
         // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        LoadScene(previousEntry.sceneData);
-        _isNavigating = false;
+        LoadSceneAsync(previousEntry.sceneData).ContinueWith(task =>
+        {
+            _isNavigating = false;
+        });
 
         // TODO: Restore dialogue position to previousEntry.dialogueLineIndex
         // This requires DialogueSystem integration
@@ -483,8 +485,10 @@ public class SceneManager : ISceneManager
 
         // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        LoadScene(nextEntry.sceneData);
-        _isNavigating = false;
+        LoadSceneAsync(nextEntry.sceneData).ContinueWith(task =>
+        {
+            _isNavigating = false;
+        });
 
         // TODO: Restore dialogue position to nextEntry.dialogueLineIndex
         // This requires DialogueSystem integration

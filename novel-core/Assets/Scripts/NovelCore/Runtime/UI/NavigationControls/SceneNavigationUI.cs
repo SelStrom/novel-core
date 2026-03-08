@@ -43,14 +43,24 @@ public class SceneNavigationUI : MonoBehaviour
         if (_backButton != null)
         {
             _backButton.onClick.AddListener(OnBackButtonClicked);
+            Debug.Log("SceneNavigationUI: Back button listener added");
+        }
+        else
+        {
+            Debug.LogError("SceneNavigationUI: Back button is null!");
         }
 
         if (_forwardButton != null)
         {
             _forwardButton.onClick.AddListener(OnForwardButtonClicked);
+            Debug.Log("SceneNavigationUI: Forward button listener added");
+        }
+        else
+        {
+            Debug.LogError("SceneNavigationUI: Forward button is null!");
         }
 
-        Debug.Log("SceneNavigationUI: Initialized");
+        Debug.Log("SceneNavigationUI: Initialized successfully");
     }
 
     private void Update()
@@ -95,6 +105,8 @@ public class SceneNavigationUI : MonoBehaviour
 
     private void OnBackButtonClicked()
     {
+        Debug.Log("SceneNavigationUI: Back button clicked!");
+        
         if (_sceneManager == null)
         {
             Debug.LogWarning("SceneNavigationUI: Scene manager not initialized");
@@ -104,7 +116,7 @@ public class SceneNavigationUI : MonoBehaviour
         bool success = _sceneManager.NavigateBack();
         if (success)
         {
-            Debug.Log("SceneNavigationUI: Navigated back");
+            Debug.Log("SceneNavigationUI: Navigated back successfully");
         }
         else
         {
@@ -114,6 +126,8 @@ public class SceneNavigationUI : MonoBehaviour
 
     private void OnForwardButtonClicked()
     {
+        Debug.Log("SceneNavigationUI: Forward button clicked!");
+        
         if (_sceneManager == null)
         {
             Debug.LogWarning("SceneNavigationUI: Scene manager not initialized");
@@ -123,7 +137,7 @@ public class SceneNavigationUI : MonoBehaviour
         bool success = _sceneManager.NavigateForward();
         if (success)
         {
-            Debug.Log("SceneNavigationUI: Navigated forward");
+            Debug.Log("SceneNavigationUI: Navigated forward successfully");
         }
         else
         {
