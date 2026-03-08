@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7154794895639686017
+--- !u!114 &-4946550403921737883
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction_Line02
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 5c0e677c-b454-4eb4-89e4-322c1b0898dd
+  _id: c1323ce6-29eb-474e-a8e4-ee9176078aeb
   _lineId: line_intro_003
   _speaker:
     m_AssetGUID: 
@@ -40,7 +40,7 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
---- !u!114 &-6731200900681134823
+--- !u!114 &-4089088159538979053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 1d9159fa-dcb4-4af6-b03e-dc1c314d4ae5
+  _id: 09aafab1-e23e-49f5-9336-b3d09adcedac
   _lineId: line_intro_001
   _speaker:
     m_AssetGUID: 
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: c5af0d87-8bdd-4f3e-92f9-506cae472346
+  _id: bf4ed81b-95d5-459b-b231-ba1de4776d8a
   _sceneId: scene_intro_001
   _sceneName: "\u0412\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
   _backgroundImage:
@@ -110,9 +110,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: -6731200900681134823}
-  - {fileID: 1653623158500523073}
-  - {fileID: -7154794895639686017}
+  - {fileID: -4089088159538979053}
+  - {fileID: 6134176606277058347}
+  - {fileID: -4946550403921737883}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -124,7 +124,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &1653623158500523073
+--- !u!114 &6134176606277058347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: Scene01_Introduction_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: e7d3763e-a726-435a-9aeb-48db5b5b37d8
+  _id: b8235b86-115b-4d24-a90f-5d295a2c2c2d
   _lineId: line_intro_002
   _speaker:
     m_AssetGUID: 

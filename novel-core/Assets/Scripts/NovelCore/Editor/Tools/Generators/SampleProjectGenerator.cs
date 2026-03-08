@@ -83,6 +83,7 @@ public static class SampleProjectGenerator
         var firstScene = AssetDatabase.LoadAssetAtPath<SceneData>($"{SCENES_DIR}/Scene01_Introduction.asset");
         SetupUnitySceneWithGameStarter(firstScene);
         SetupUIManager();
+        SetupChoiceUI();
         SetupNavigationUI();
 
         // Display success message
@@ -584,6 +585,129 @@ public static class SampleProjectGenerator
 
         Debug.Log("[SampleProjectGenerator] ✅ UIManager setup complete!");
         Debug.Log($"[SampleProjectGenerator]    • UIManager: {(uiManager != null ? "✓" : "✗")}");
+    }
+
+    /// <summary>
+    /// Creates ChoiceUI panel for displaying choice buttons
+    /// </summary>
+    private static void SetupChoiceUI()
+    {
+        Debug.Log("[SampleProjectGenerator] Setting up Choice UI...");
+
+        var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+        if (!scene.IsValid())
+        {
+            Debug.LogError("[SampleProjectGenerator] No active scene found");
+            return;
+        }
+
+        // Find or create Canvas
+        Canvas canvas = GameObject.FindFirstObjectByType<Canvas>();
+        if (canvas == null)
+        {
+            Debug.LogWarning("[SampleProjectGenerator] Canvas not found, ChoiceUI needs a Canvas");
+            return;
+        }
+
+        // Check if ChoiceUI already exists
+        var existingChoiceUI = GameObject.FindFirstObjectByType<ChoiceButtons.ChoiceUIController>();
+        if (existingChoiceUI != null)
+        {
+            Debug.Log("[SampleProjectGenerator] ChoiceUIController already exists, skipping creation.");
+            return;
+        }
+
+        // Create ChoiceUI container
+        GameObject choiceUIObj = new GameObject("ChoiceUI");
+        choiceUIObj.transform.SetParent(canvas.transform, false);
+        
+        var choiceUIRect = choiceUIObj.AddComponent<RectTransform>();
+        choiceUIRect.anchorMin = Vector2.zero;
+        choiceUIRect.anchorMax = Vector2.one;
+        choiceUIRect.sizeDelta = Vector2.zero;
+
+        // Create choice panel background
+        GameObject choicePanel = new GameObject("ChoicePanel");
+        choicePanel.transform.SetParent(choiceUIObj.transform, false);
+        
+        var panelRect = choicePanel.AddComponent<RectTransform>();
+        panelRect.anchorMin = new Vector2(0.5f, 0.5f);
+        panelRect.anchorMax = new Vector2(0.5f, 0.5f);
+        panelRect.pivot = new Vector2(0.5f, 0.5f);
+        panelRect.anchoredPosition = Vector2.zero;
+        panelRect.sizeDelta = new Vector2(800, 400);
+
+        var panelImage = choicePanel.AddComponent<Image>();
+        panelImage.color = new Color(0.1f, 0.1f, 0.1f, 0.9f);
+
+        // Create choice container for buttons
+        GameObject choiceContainer = new GameObject("ChoiceContainer");
+        choiceContainer.transform.SetParent(choicePanel.transform, false);
+        
+        var containerRect = choiceContainer.AddComponent<RectTransform>();
+        containerRect.anchorMin = new Vector2(0, 0);
+        containerRect.anchorMax = new Vector2(1, 1);
+        containerRect.offsetMin = new Vector2(20, 20);
+        containerRect.offsetMax = new Vector2(-20, -20);
+
+        // Add VerticalLayoutGroup for button arrangement
+        var layoutGroup = choiceContainer.AddComponent<VerticalLayoutGroup>();
+        layoutGroup.childAlignment = TextAnchor.MiddleCenter;
+        layoutGroup.spacing = 15;
+        layoutGroup.childControlWidth = true;
+        layoutGroup.childControlHeight = false;
+        layoutGroup.childForceExpandWidth = true;
+        layoutGroup.childForceExpandHeight = false;
+
+        // Add ChoiceUIController component
+        var choiceUIController = choiceUIObj.AddComponent<ChoiceButtons.ChoiceUIController>();
+        
+        // Use SerializedObject to set private fields
+        var serializedObject = new SerializedObject(choiceUIController);
+        
+        var containerProperty = serializedObject.FindProperty("_choiceContainer");
+        if (containerProperty != null)
+        {
+            containerProperty.objectReferenceValue = choiceContainer.transform;
+        }
+
+        var panelProperty = serializedObject.FindProperty("_choicePanel");
+        if (panelProperty != null)
+        {
+            panelProperty.objectReferenceValue = choicePanel;
+        }
+
+        // Try to load choice button prefab from Resources
+        var choiceButtonPrefab = Resources.Load<GameObject>("NovelCore/UI/ChoiceButton");
+        if (choiceButtonPrefab != null)
+        {
+            var prefabProperty = serializedObject.FindProperty("_choiceButtonPrefab");
+            if (prefabProperty != null)
+            {
+                prefabProperty.objectReferenceValue = choiceButtonPrefab;
+            }
+            Debug.Log("[SampleProjectGenerator] Found and assigned ChoiceButton prefab from Resources");
+        }
+        else
+        {
+            Debug.LogWarning("[SampleProjectGenerator] ChoiceButton prefab not found in Resources. Generate it via NovelCore → Generate UI Prefabs → Choice Button");
+        }
+
+        serializedObject.ApplyModifiedProperties();
+
+        // Initially hide the choice panel
+        choicePanel.SetActive(false);
+
+        Undo.RegisterCreatedObjectUndo(choiceUIObj, "Create Choice UI");
+
+        // Mark scene as dirty and save
+        EditorSceneManager.MarkSceneDirty(scene);
+        EditorSceneManager.SaveScene(scene);
+
+        Debug.Log("[SampleProjectGenerator] ✅ Choice UI setup complete!");
+        Debug.Log("[SampleProjectGenerator]    • ChoicePanel: ✓");
+        Debug.Log("[SampleProjectGenerator]    • ChoiceContainer: ✓");
+        Debug.Log("[SampleProjectGenerator]    • ChoiceUIController: ✓");
     }
 
     /// <summary>

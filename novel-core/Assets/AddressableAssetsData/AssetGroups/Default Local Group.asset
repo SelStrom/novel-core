@@ -20,8 +20,28 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56b064106da8548f5ace73256e6d34e3
+    m_Address: "\u0412\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d8ffce10bb864e96ab1270422e174dc
+    m_Address: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f239d9d5ede7412397aef83ede152dd
+    m_Address: "\u041F\u0443\u0442\u044C A: \u041F\u0440\u043E\u0433\u0443\u043B\u043A\u0430"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a0add1c1b12a4900b9cceedb31c54ab
     m_Address: 'Test Scene 3: End'
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f22afcad3d2d0431ba6522de8ae54eeb
+    m_Address: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

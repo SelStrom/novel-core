@@ -5,13 +5,14 @@ using NovelCore.Runtime.Core.DialogueSystem;
 using NovelCore.Runtime.Core.InputHandling;
 using NovelCore.Runtime.Core.Localization;
 using NovelCore.Runtime.UI.DialogueBox;
+using NovelCore.Runtime.UI.ChoiceButtons;
 
 namespace NovelCore.Runtime.UI
 {
 
 /// <summary>
 /// Manages UI components and bridges them with core systems via dependency injection.
-/// Handles initialization of DialogueBox and other UI elements.
+/// Handles initialization of DialogueBox, ChoiceUI and other UI elements.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
@@ -21,13 +22,21 @@ public class UIManager : MonoBehaviour
     private DialogueBoxController _dialogueBoxController;
 
     [SerializeField]
+    [Tooltip("Reference to ChoiceUIController (will be auto-found if null)")]
+    private ChoiceUIController _choiceUIController;
+
+    [SerializeField]
     [Tooltip("Canvas for UI elements (will be auto-found if null)")]
     private Canvas _canvas;
 
-    [Header("DialogueBox Prefab")]
+    [Header("Prefabs")]
     [SerializeField]
     [Tooltip("Prefab to instantiate if DialogueBox not found in scene")]
     private GameObject _dialogueBoxPrefab;
+
+    [SerializeField]
+    [Tooltip("Prefab to instantiate if ChoiceUI not found in scene")]
+    private GameObject _choiceUIPrefab;
 
     [Inject]
     private IDialogueSystem _dialogueSystem;
@@ -95,6 +104,29 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogError("UIManager: Failed to find or create DialogueBoxController!");
             return;
+        }
+
+        // Find or create ChoiceUI
+        if (_choiceUIController == null)
+        {
+            _choiceUIController = FindFirstObjectByType<ChoiceUIController>();
+            
+            if (_choiceUIController == null)
+            {
+                Debug.Log("UIManager: ChoiceUIController not found, attempting to create from prefab or Resources");
+                _choiceUIController = CreateChoiceUI();
+            }
+        }
+
+        // Initialize ChoiceUI with dependencies
+        if (_choiceUIController != null)
+        {
+            _choiceUIController.Initialize(_dialogueSystem, _localizationService);
+            Debug.Log("UIManager: ChoiceUIController initialized successfully");
+        }
+        else
+        {
+            Debug.LogWarning("UIManager: ChoiceUIController not found - choices will not be displayed!");
         }
 
         // Subscribe to input events
@@ -172,6 +204,46 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
+    private ChoiceUIController CreateChoiceUI()
+    {
+        GameObject choiceUIObj = null;
+
+        // Try to instantiate from assigned prefab
+        if (_choiceUIPrefab != null)
+        {
+            choiceUIObj = Instantiate(_choiceUIPrefab, _canvas.transform);
+            Debug.Log("UIManager: Instantiated ChoiceUI from assigned prefab");
+        }
+        else
+        {
+            // Try to load from Resources
+            GameObject prefab = Resources.Load<GameObject>("NovelCore/UI/ChoicePanel");
+            if (prefab != null)
+            {
+                choiceUIObj = Instantiate(prefab, _canvas.transform);
+                Debug.Log("UIManager: Instantiated ChoiceUI from Resources");
+            }
+            else
+            {
+                Debug.LogWarning("UIManager: ChoiceUI prefab not found! Generate it via NovelCore → Generate UI Prefabs → Choice Panel");
+                return null;
+            }
+        }
+
+        if (choiceUIObj != null)
+        {
+            var controller = choiceUIObj.GetComponent<ChoiceUIController>();
+            if (controller == null)
+            {
+                Debug.LogError("UIManager: ChoiceUI prefab missing ChoiceUIController component!");
+                return null;
+            }
+            return controller;
+        }
+
+        return null;
+    }
+
     private void OnPrimaryInput()
     {
         if (!_isInitialized || _dialogueSystem == null || _dialogueBoxController == null)
@@ -216,6 +288,12 @@ public class UIManager : MonoBehaviour
         if (_dialogueBoxController == null)
         {
             _dialogueBoxController = FindFirstObjectByType<DialogueBoxController>();
+        }
+
+        // Find ChoiceUIController in scene if not assigned
+        if (_choiceUIController == null)
+        {
+            _choiceUIController = FindFirstObjectByType<ChoiceUIController>();
         }
     }
 }
