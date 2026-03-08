@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8092182135087391209
+--- !u!114 &-6455651499859219177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene03b_PathB_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 056cde32-ad6d-4713-a8b5-225172008ded
+  _id: 334071cd-e64d-416b-aee3-be2c8cf97b16
   _lineId: line_path_b_002
   _speaker:
     m_AssetGUID: 
@@ -26,6 +26,46 @@ MonoBehaviour:
   _fallbackText: "\u0423\u044E\u0442\u043D\u044B\u0439 \u0432\u0435\u0447\u0435\u0440
     \u0441 \u043A\u043D\u0438\u0433\u043E\u0439 - \u0442\u043E\u0436\u0435 \u043D\u0435\u043F\u043B\u043E\u0445\u043E\u0439
     \u0432\u0430\u0440\u0438\u0430\u043D\u0442."
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-4551094625238662907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene03b_PathB_Line02
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: e18540bc-3f43-47be-9590-61eed66e869d
+  _lineId: line_path_b_003
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_path_b_003
+  _fallbackText: "[\u041D\u0435\u0439\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F
+    \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430 - Path B]"
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -54,7 +94,7 @@ MonoBehaviour:
   m_Name: Scene03b_PathB
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 5c7c039a-e66d-44d0-a341-38b81a0457b1
+  _id: c4f0927f-776f-43c2-bcd8-2556b1cf3294
   _sceneId: scene_path_b_001
   _sceneName: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
   _backgroundImage:
@@ -71,9 +111,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: 6045756954917740710}
-  - {fileID: -8092182135087391209}
-  - {fileID: 2840398629441759524}
+  - {fileID: 5896428744913619839}
+  - {fileID: -6455651499859219177}
+  - {fileID: -4551094625238662907}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -85,47 +125,7 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &2840398629441759524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line02
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 95b9e330-4ee6-476d-b5c8-be4020c48c91
-  _lineId: line_path_b_003
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_path_b_003
-  _fallbackText: "[\u041D\u0435\u0439\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F
-    \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430 - Path B]"
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
---- !u!114 &6045756954917740710
+--- !u!114 &5896428744913619839
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Name: Scene03b_PathB_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: b88aaf80-3bfb-498a-9a08-66374716aeee
+  _id: 63860eec-3d08-44ef-8b0e-2a83583aa3f0
   _lineId: line_path_b_001
   _speaker:
     m_AssetGUID: 

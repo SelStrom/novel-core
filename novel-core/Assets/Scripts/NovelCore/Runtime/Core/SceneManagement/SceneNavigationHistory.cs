@@ -16,7 +16,18 @@ public class SceneNavigationHistory : ISceneNavigationHistory
 
     public int Count => _state?.history?.Count ?? 0;
 
-    public SceneNavigationHistory(int maxHistorySize = DEFAULT_MAX_HISTORY_SIZE)
+    /// <summary>
+    /// Creates a new navigation history with default max size.
+    /// This parameterless constructor is required for VContainer DI.
+    /// </summary>
+    public SceneNavigationHistory() : this(DEFAULT_MAX_HISTORY_SIZE)
+    {
+    }
+
+    /// <summary>
+    /// Creates a new navigation history with custom max size.
+    /// </summary>
+    public SceneNavigationHistory(int maxHistorySize)
     {
         _state = new SceneNavigationState
         {

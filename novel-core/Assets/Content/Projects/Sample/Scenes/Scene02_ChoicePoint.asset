@@ -1,6 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5290814772834944880
+--- !u!114 &-2644012439825906089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene02_ChoicePoint_Line01
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: afffe67b-89e5-4586-9a7d-b983f9b05305
+  _lineId: line_choice_002
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_choice_002
+  _fallbackText: "\u041A\u0443\u0434\u0430 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
+    \u043F\u043E\u0439\u0442\u0438?"
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-1398003120447579389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: bb4cf5f3-9899-4f81-ae54-25a6e54c8df1
+  _id: ab3cc234-d013-45ee-9763-61d54aa7c491
   _lineId: line_choice_001
   _speaker:
     m_AssetGUID: 
@@ -53,7 +93,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: a9e850cb-4ad5-4656-8bd2-a161b5ef0008
+  _id: d92dd479-c94c-493d-a886-25e856da3809
   _sceneId: scene_choice_001
   _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
   _backgroundImage:
@@ -70,8 +110,8 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: -5290814772834944880}
-  - {fileID: 7598602871374355932}
+  - {fileID: -1398003120447579389}
+  - {fileID: -2644012439825906089}
   _choices:
   - {fileID: 11400000, guid: ff10cc9c3f14c4051a79717469464c7d, type: 2}
   _transitionType: 1
@@ -84,43 +124,3 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &7598602871374355932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene02_ChoicePoint_Line01
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: af248002-a61f-4467-b8c4-5e87814973c4
-  _lineId: line_choice_002
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_choice_002
-  _fallbackText: "\u041A\u0443\u0434\u0430 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
-    \u043F\u043E\u0439\u0442\u0438?"
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 

@@ -54,12 +54,12 @@ public class SceneManager : ISceneManager
         IAssetManager assetManager, 
         IAudioService audioService,
         ICharacterAnimatorFactory animatorFactory,
-        ISceneNavigationHistory navigationHistory = null)
+        ISceneNavigationHistory navigationHistory)
     {
         _assetManager = assetManager ?? throw new System.ArgumentNullException(nameof(assetManager));
         _audioService = audioService ?? throw new System.ArgumentNullException(nameof(audioService));
         _animatorFactory = animatorFactory ?? throw new System.ArgumentNullException(nameof(animatorFactory));
-        _navigationHistory = navigationHistory; // Optional - can be null if navigation not needed
+        _navigationHistory = navigationHistory; // Can be injected as singleton from VContainer
         _transitionFactory = new SceneTransitionFactory();
 
         InitializeSceneHierarchy();
