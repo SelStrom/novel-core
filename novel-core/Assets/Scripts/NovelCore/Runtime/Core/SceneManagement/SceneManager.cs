@@ -131,7 +131,8 @@ public class SceneManager : ISceneManager
                 var historyEntry = new SceneHistoryEntry(
                     sceneId: sceneData.SceneId,
                     dialogueLineIndex: 0, // Start at beginning of scene
-                    gameStateSnapshot: new Dictionary<string, object>() // TODO: Get from GameStateManager
+                    gameStateSnapshot: new Dictionary<string, object>(), // TODO: Get from GameStateManager
+                    sceneData: sceneData // Store reference for easy loading
                 );
                 _navigationHistory.Push(historyEntry);
                 Debug.Log($"SceneManager: Added scene '{sceneData.SceneId}' to navigation history");
@@ -435,7 +436,7 @@ public class SceneManager : ISceneManager
         }
 
         var previousEntry = _navigationHistory.NavigateBack();
-        if (previousEntry == null)
+        if (previousEntry == null || previousEntry.sceneData == null)
         {
             Debug.LogError("SceneManager: Failed to get previous scene from history");
             return false;
@@ -443,11 +444,13 @@ public class SceneManager : ISceneManager
 
         Debug.Log($"SceneManager: Navigating back to scene '{previousEntry.sceneId}' at line {previousEntry.dialogueLineIndex}");
 
-        // TODO: Load scene by ID and restore dialogue position
-        // For now, just log the navigation attempt
+        // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        // LoadSceneByIdAsync(previousEntry.sceneId, previousEntry.dialogueLineIndex);
+        LoadScene(previousEntry.sceneData);
         _isNavigating = false;
+
+        // TODO: Restore dialogue position to previousEntry.dialogueLineIndex
+        // This requires DialogueSystem integration
 
         return true;
     }
@@ -470,7 +473,7 @@ public class SceneManager : ISceneManager
         }
 
         var nextEntry = _navigationHistory.NavigateForward();
-        if (nextEntry == null)
+        if (nextEntry == null || nextEntry.sceneData == null)
         {
             Debug.LogError("SceneManager: Failed to get next scene from history");
             return false;
@@ -478,10 +481,13 @@ public class SceneManager : ISceneManager
 
         Debug.Log($"SceneManager: Navigating forward to scene '{nextEntry.sceneId}' at line {nextEntry.dialogueLineIndex}");
 
-        // TODO: Load scene by ID and restore dialogue position
+        // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        // LoadSceneByIdAsync(nextEntry.sceneId, nextEntry.dialogueLineIndex);
+        LoadScene(nextEntry.sceneData);
         _isNavigating = false;
+
+        // TODO: Restore dialogue position to nextEntry.dialogueLineIndex
+        // This requires DialogueSystem integration
 
         return true;
     }

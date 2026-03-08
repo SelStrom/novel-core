@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace NovelCore.Runtime.Data.Scenes
 {
@@ -15,6 +16,13 @@ public class SceneHistoryEntry
     /// Unique identifier of the scene.
     /// </summary>
     public string sceneId;
+
+    /// <summary>
+    /// Reference to the actual SceneData object for loading.
+    /// Note: This is not serialized to save files (use sceneId for that).
+    /// </summary>
+    [NonSerialized]
+    public SceneData sceneData;
 
     /// <summary>
     /// Current dialogue line index when the scene was visited.
@@ -35,9 +43,10 @@ public class SceneHistoryEntry
     /// <summary>
     /// Creates a new scene history entry.
     /// </summary>
-    public SceneHistoryEntry(string sceneId, int dialogueLineIndex, Dictionary<string, object> gameStateSnapshot = null)
+    public SceneHistoryEntry(string sceneId, int dialogueLineIndex, Dictionary<string, object> gameStateSnapshot = null, SceneData sceneData = null)
     {
         this.sceneId = sceneId;
+        this.sceneData = sceneData;
         this.dialogueLineIndex = dialogueLineIndex;
         this.gameStateSnapshot = gameStateSnapshot ?? new Dictionary<string, object>();
         this.timestamp = DateTime.UtcNow.Ticks;
