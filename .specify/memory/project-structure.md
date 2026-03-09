@@ -198,6 +198,43 @@ Runtime systems use separate assemblies per Constitution Principle VI (Modular A
 - `obj/`, `bin/` (C# build artifacts)
 - `Builds/` (platform builds)
 
+## Temporary Output Directory
+
+**Location**: `./temp/`
+
+**Purpose**: Centralized location for all temporary output files (per Constitution Principle X)
+
+**Contents**:
+- Unity compilation logs (`unity_clean.log`, `unity_tests.log`)
+- Test result XML files (`test-results-editmode.xml`, `test-results-playmode.xml`)
+- Build logs and intermediate build artifacts
+- Profiling reports and performance metrics
+- CI/CD pipeline artifacts
+
+**Retention**: Files in `temp/` may be deleted at any time without data loss
+
+**Version Control**: Excluded via `.gitignore`
+
+## Intermediate Documentation
+
+**Location**: `.specify/memory/`
+
+**Purpose**: Knowledge base for historical decisions, bugfixes, and architectural analysis (per Constitution Principle X)
+
+**Contents**:
+- Bug analysis documents (e.g., `navigation-fix-2026-03-09.md`)
+- Implementation decision records
+- Architecture analysis notes
+- Refactoring reports with historical value
+- NOT temporary status updates (delete after merge)
+
+**Retention**: Files should be retained for historical context
+
+**Examples**:
+- `REFACTORING_REPORT.md` - Recent refactoring analysis
+- `navigation-fix-analysis.md` - Bug investigation notes
+- `addressables-migration-decisions.md` - Migration strategy
+
 ## Version Control Exclusions (.gitignore)
 
 ```
@@ -211,6 +248,7 @@ Runtime systems use separate assemblies per Constitution Principle VI (Modular A
 *.suo
 *.user
 *.tmp
+/temp/
 *.log
 /test-results*.xml
 /unity*.log

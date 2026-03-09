@@ -307,6 +307,28 @@ All end-user documentation MUST be written in Russian as the primary language.
 
 **Rationale**: Content creators (primary users) are Russian-speaking. Technical English documentation creates barriers to entry, reduces adoption, and increases support burden. Native-language documentation is standard for professional creative tools (Adobe Creative Suite, Unreal Engine localization, Unity Hub Russian interface). Clear Russian error messages prevent creator frustration and reduce developer support load. English technical documentation is retained for potential open-source contributors and international development team collaboration.
 
+### X. File Organization & Temporary Artifacts
+
+Temporary output files and intermediate documentation MUST be organized in designated locations to maintain project cleanliness.
+
+- **Temporary Output Directory**: All temporary output files (logs, test reports, build artifacts) MUST be placed in `./temp/` directory
+  - Unity compilation logs (e.g., `unity_clean.log`, `unity_tests.log`)
+  - Test result XML files (e.g., `test-results-editmode.xml`, `test-results-playmode.xml`)
+  - Build logs and intermediate build artifacts
+  - Profiling reports and performance metrics
+  - CI/CD pipeline artifacts
+- **Intermediate Documentation**: All intermediate MD files documenting bugfixes, behavior analysis, or implementation notes MUST be placed in `.specify/memory/`
+  - Bug analysis documents (e.g., `navigation-fix-2026-03-09.md`)
+  - Implementation decision records
+  - Architecture analysis notes
+  - Refactoring reports with historical value
+  - NOT temporary status updates (those should be deleted after merge)
+- **Version Control Exclusion**: `./temp/` directory MUST be excluded from version control via `.gitignore`
+- **Cleanup Policy**: Files in `./temp/` MAY be deleted at any time without data loss concerns
+- **Documentation Retention**: Files in `.specify/memory/` SHOULD be retained for historical context and decision tracking
+
+**Rationale**: Separating temporary artifacts from permanent documentation prevents repository clutter and makes it clear which files are ephemeral vs. valuable knowledge. The `./temp/` directory provides a predictable location for automated tools (CI/CD, test runners) to write output without polluting the repository root. The `.specify/memory/` directory serves as a knowledge base for understanding past decisions, debugging patterns, and architectural evolution. This organization follows industry best practices (e.g., `target/` in Maven, `build/` in Gradle) and enables easy cleanup without risk of deleting important documentation.
+
 ## Platform & Distribution Requirements
 
 ### Steam Integration
@@ -673,4 +695,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.14.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.15.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09

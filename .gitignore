@@ -97,3 +97,9 @@
 
 # Auto-generated scenes by play mode tests
 */[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Project-specific: Temporary output files (logs, test reports, etc.)
+temp/
+*.log
+test-results*.xml
+unity*.log
