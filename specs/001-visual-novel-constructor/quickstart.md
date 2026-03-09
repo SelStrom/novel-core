@@ -130,6 +130,78 @@ git checkout 001-visual-novel-constructor
 - Click "Create Addressables Settings" if first time
 - Default settings are sufficient for now
 
+### 5. Configure Addressables Groups (Optional - Can be done later)
+
+For production projects, organize assets into Addressables groups:
+
+**Create the following groups** (Window → Asset Management → Addressables → Groups):
+
+1. **Content_Backgrounds**
+   - Path: `Assets/Content/Backgrounds/`
+   - Build/Load Path: LocalBuildPath/LocalLoadPath
+   - Purpose: Background images
+
+2. **Content_Characters**
+   - Path: `Assets/Content/Characters/`
+   - Purpose: Character sprites
+
+3. **Content_Audio_Music** / **Content_Audio_SFX**
+   - Paths: `Assets/Content/Audio/Music/`, `Assets/Content/Audio/SFX/`
+   - Compression: Vorbis for music, LZ4 for SFX
+
+4. **Runtime_Prefabs**
+   - Path: `Assets/Resources/NovelCore/UI/`
+   - Purpose: UI prefabs (dialogue box, choice buttons)
+
+**For each group**:
+- Right-click → Inspect Group Settings
+- Bundle Mode: Pack Together
+- Compression: LZ4 (or Vorbis for music)
+
+**Mark assets as Addressable**:
+1. Select asset in Project window
+2. Check "Addressable" checkbox in Inspector
+3. Set Address (e.g., "bg_forest")
+4. Assign to appropriate group
+
+**Build Addressables**:
+- Addressables Groups window → Build → New Build → Default Build Script
+
+### 6. Setup Game Entry Point (GameStarter)
+
+**REQUIRED FOR GAME TO START**: Configure the main Unity scene to load your visual novel.
+
+**Open**: `Assets/Scenes/SampleScene.unity`
+
+**Add GameStarter**:
+
+1. **Create GameObject**:
+   - Hierarchy → Right Click → Create Empty
+   - Rename to "GameStarter"
+
+2. **Add Component**:
+   - Select "GameStarter" GameObject
+   - Inspector → Add Component → "Game Starter"
+
+3. **Configure Starting Scene**:
+   - Starting Scene field: Drag a `SceneData` asset (e.g., `Scene01_Introduction.asset`)
+   - Auto Start: ☑ Enabled
+   - Start Delay: 0.5 seconds
+
+4. **Verify GameLifetimeScope**:
+   - Check Hierarchy for "GameLifetimeScope" GameObject
+   - If missing: Create Empty → Add Component → "Game Lifetime Scope"
+
+**Verification**:
+- Press Play ▶️
+- Console shows: "GameStarter: Starting game with scene: ..."
+- Scene loads after 0.5 seconds
+
+**Troubleshooting**:
+- "Starting scene is not assigned": Drag SceneData asset to Starting Scene field
+- "DialogueSystem not injected": Verify GameLifetimeScope exists
+- Nothing happens: Check Auto Start is enabled, check Console for errors
+
 ---
 
 ## Project Structure Tour
@@ -166,6 +238,67 @@ Assets/Content/           # User-created content (Addressables source)
 └── Projects/             # Visual novel projects
     └── SampleProject/    # Example project
 ```
+
+---
+
+## Quick Testing: Sample Project Generator
+
+To quickly test the visual novel constructor, use the built-in Sample Project Generator.
+
+### Generate Sample Project
+
+**Unity Menu**: `NovelCore → Generate Sample Project`
+
+This creates a complete demo visual novel with:
+- 4 scenes with dialogue
+- Choice point with branching paths
+- 2 different endings
+- Placeholder backgrounds and characters
+
+**Generated Structure**:
+```
+Assets/Content/Projects/Sample/
+├── Scenes/
+│   ├── Scene01_Introduction.asset      # Intro (3 lines)
+│   ├── Scene02_ChoicePoint.asset       # Choice (2 lines + choice)
+│   ├── Scene03a_PathA.asset            # Ending A (3 lines)
+│   └── Scene03b_PathB.asset            # Ending B (3 lines)
+├── Backgrounds/
+│   ├── bg_room.png                     # Beige background
+│   ├── bg_street.png                   # Blue background
+│   └── bg_home.png                     # Green background
+└── Characters/
+    └── char_protagonist.png            # Placeholder character
+```
+
+**Auto-Configuration** (T040.3):
+- Automatically finds/creates GameLifetimeScope GameObject
+- Automatically finds/creates GameStarter GameObject
+- Sets Scene01_Introduction as starting scene
+- Enables Auto Start with 0.5s delay
+- Saves Unity scene automatically
+
+### Test Sample Project
+
+1. After generation completes, press **Play** ▶️
+2. Game automatically loads first scene after 0.5 seconds
+3. Click screen to advance dialogue
+4. Make a choice when prompted
+5. See different endings based on choice
+
+**Expected Console Logs**:
+```
+[SampleProjectGenerator] ✅ Successfully created sample project
+GameStarter: Starting game with scene: Введение
+SceneManager: Loading scene Введение
+DialogueSystem: Starting scene Введение
+```
+
+### Regenerate Sample Project
+
+To reset the sample project:
+1. Delete `Assets/Content/Projects/Sample/` folder
+2. Run `NovelCore → Generate Sample Project` again
 
 ---
 
@@ -487,6 +620,87 @@ Assets/Content/           # User-created content (Addressables source)
    - Verify scene loads and dialogue plays
 
 **Success Criteria**: Working executable for each platform
+
+---
+
+## Dependency Injection Setup
+
+### VContainer Registration
+
+All runtime systems use VContainer for dependency injection (constitution requirement for modular architecture).
+
+**GameLifetimeScope** (`Assets/Scripts/NovelCore/Runtime/Core/GameLifetimeScope.cs`):
+
+```csharp
+using VContainer;
+using VContainer.Unity;
+
+namespace NovelCore.Runtime.Core
+{
+    public class GameLifetimeScope : LifetimeScope
+    {
+        protected override void Configure(IContainerBuilder builder)
+        {
+            // Core Systems (singleton - one instance for entire game)
+            builder.Register<IDialogueSystem, DialogueSystem>(Lifetime.Singleton);
+            builder.Register<ISceneManager, SceneManager>(Lifetime.Singleton);
+            builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
+            builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
+            builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
+            builder.Register<IInputService, UnityInputService>(Lifetime.Singleton);
+            builder.Register<ILocalizationService, UnityLocalizationService>(Lifetime.Singleton);
+            
+            // Platform Service (runtime selection via preprocessor directives)
+            #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
+            builder.Register<IPlatformService, SteamPlatformService>(Lifetime.Singleton);
+            #elif UNITY_IOS
+            builder.Register<IPlatformService, iOSPlatformService>(Lifetime.Singleton);
+            #elif UNITY_ANDROID
+            builder.Register<IPlatformService, AndroidPlatformService>(Lifetime.Singleton);
+            #else
+            builder.Register<IPlatformService, DefaultPlatformService>(Lifetime.Singleton);
+            #endif
+            
+            // Animation (transient - new instance per character)
+            builder.Register<UnityCharacterAnimator>(Lifetime.Transient);
+            builder.Register<SpineCharacterAnimator>(Lifetime.Transient);
+        }
+    }
+}
+```
+
+**Usage in Components** (constructor injection):
+
+```csharp
+using VContainer;
+
+namespace NovelCore.Runtime.UI
+{
+    public class DialogueBoxController : MonoBehaviour
+    {
+        private readonly IDialogueSystem _dialogueSystem;
+        private readonly ILocalizationService _localization;
+        
+        // VContainer injects dependencies via constructor
+        [Inject]
+        public DialogueBoxController(
+            IDialogueSystem dialogueSystem, 
+            ILocalizationService localization)
+        {
+            _dialogueSystem = dialogueSystem;
+            _localization = localization;
+        }
+        
+        private void Start()
+        {
+            // Subscribe to dialogue events
+            _dialogueSystem.OnLineStarted += DisplayLine;
+        }
+    }
+}
+```
+
+**Interface Definitions**: See [`contracts/runtime-contracts.md`](./contracts/runtime-contracts.md) for complete interface specifications.
 
 ---
 

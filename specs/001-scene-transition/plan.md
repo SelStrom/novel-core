@@ -9,66 +9,31 @@ This plan implements comprehensive scene transition mechanics for the visual nov
 
 ## Technical Context
 
-**Language/Version**: C# 9.0+ / Unity 2022.3 LTS (Long Term Support)  
-**Primary Dependencies**: Unity Addressables 1.21+, VContainer 1.14+, TextMeshPro, DOTween (if needed for transitions)  
-**Rendering Pipeline**: Universal Render Pipeline (URP)  
-**Storage**: JSON for scene navigation state (serialized via JsonUtility), integrated with existing SaveSystem  
-**Testing**: Unity Test Framework (EditMode for data validation/logic, PlayMode for DialogueSystem/SceneManager integration)  
-**Target Platforms**: Windows/Mac (Steam), iOS, Android  
-**Scripting Backend**: IL2CPP (all platforms for cross-platform parity)  
-**Project Type**: Hybrid Runtime + Editor (runtime scene transition system + editor validation tools)  
-**Performance Goals**: 60 FPS on iPhone 12/Intel HD 620, scene transitions <1 second  
-**Constraints**: Mobile: ≤512MB RAM, Desktop: ≤1GB RAM, scene history limited to 50 entries  
-**Scale/Scope**: Support for stories with 100+ scenes, complex branching narratives with 50+ decision points
+> **📘 Centralized Documentation**: 
+> - Technical stack: [`.specify/memory/tech-stack.md`](../../.specify/memory/tech-stack.md)
+> - Testing strategy: [`.specify/memory/testing-strategy.md`](../../.specify/memory/testing-strategy.md)
+> - Project structure: [`.specify/memory/project-structure.md`](../../.specify/memory/project-structure.md)
+
+**Feature-Specific Details**:
+- **Storage**: JSON for scene navigation state (serialized via JsonUtility), integrated with existing SaveSystem
+- **Constraints**: Scene history limited to 50 entries (memory management)
+- **Scale/Scope**: Support for stories with 100+ scenes, complex branching narratives with 50+ decision points
 
 ## Constitution Check
 
+> **📘 Project Constitution**: For complete principle definitions, see [`.specify/memory/constitution.md`](../../.specify/memory/constitution.md)
+
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-### ✅ I. Creator-First Design
-- [x] Feature accessible via Unity Editor GUI (SceneData Inspector shows nextScene field)
-- [x] Visual/node-based interface where applicable (Scene Editor preview supports testing transitions)
-- [x] Preview mode provides immediate feedback (Scene Editor can test individual scenes, Play Mode tests full flow)
-- [x] Error messages in plain language with solutions (validation messages explain missing/circular references)
+### Feature Compliance Summary
 
-### ✅ II. Cross-Platform Parity (NON-NEGOTIABLE)
-- [x] Feature works identically on Windows, macOS, iOS, Android (pure C# logic, no platform-specific code)
-- [x] Automated tests on at least 3 platforms (Unity Test Framework runs on all platforms)
-- [x] No platform-specific logic unless technically impossible (N/A - all logic is cross-platform)
-
-### ✅ III. Asset Pipeline Integrity
-- [x] All asset references use Addressables/persistent IDs (nextScene uses AssetReference)
-- [x] Missing assets detected at import/edit time (SceneData.Validate() checks nextScene validity)
-- [x] Migration script included for format changes (SceneData already has version field for future migrations)
-
-### ✅ IV. Runtime Performance Guarantees
-- [x] 60 FPS on target hardware (no performance-intensive operations in transition logic)
-- [x] Mobile: ≤512MB RAM, Desktop: ≤1GB RAM (scene history capped at 50 entries with memory monitoring)
-- [x] Scene transitions <1 second (existing TransitionType system meets this, preloading improves further)
-- [x] Performance profiling included (Unity Profiler integration for transition timing)
-
-### ✅ V. Save System Reliability (NON-NEGOTIABLE)
-- [x] Auto-save after state changes (scene navigation history persisted via existing SaveSystem)
-- [x] Save format backward compatible or includes migration (SceneNavigationState serializable, version tracked)
-- [x] Cloud sync supported (leverages existing SaveSystem which supports Steam/iCloud/Google Play)
-
-### ✅ VI. Modular Architecture & Testing
-- [x] Feature implemented as separate assembly/module (extends existing NovelCore.Runtime assembly)
-- [x] Interfaces used for platform-specific code (N/A - no platform-specific code needed)
-- [x] Unit tests achieve >80% coverage (EditMode tests for SceneData validation, PlayMode for DialogueSystem integration)
-- [x] Integration tests for cross-module contracts (DialogueSystem ↔ SceneManager ↔ SaveSystem transitions)
-- [x] **Test Execution Requirement** (Constitution Principle VI - MANDATORY):
-  - After completing each user story (US1-US5), MUST run full test suite (EditMode + PlayMode)
-  - Tests MUST be executed in batch mode using Unity Test Runner with explicit commands
-  - Zero test failures required before proceeding to next phase
-  - Test execution commands included in tasks.md (T025, T036, T061, T085, T102, T115)
-
-### ✅ VII. AI Development Constraints (NON-NEGOTIABLE)
-- [x] AI modifications limited to Assets/Scripts/ directory only (all changes in NovelCore/Runtime and NovelCore/Tests)
-- [x] No .meta file generation or modification by AI (Unity manages all .meta files)
-- [x] No direct asset file creation (sample scenes created manually or via Editor scripts if needed)
-- [x] Package management permitted ONLY when user explicitly specifies (no new packages required)
-- [x] Package operations require compatibility verification and backup (N/A - no package changes)
+✅ **I. Creator-First Design** - SceneData Inspector nextScene field, Scene Editor preview, plain language validation  
+✅ **II. Cross-Platform Parity** - Pure C# logic, no platform-specific code, automated cross-platform tests  
+✅ **III. Asset Pipeline Integrity** - AssetReference for nextScene, editor-time validation, migration support  
+✅ **IV. Runtime Performance Guarantees** - No performance overhead, scene history capped at 50 entries  
+✅ **V. Save System Reliability** - Navigation history persisted, backward compatible format, cloud sync  
+✅ **VI. Modular Architecture & Testing** - Extends existing assemblies, >80% coverage, mandatory test execution after each user story  
+✅ **VII. AI Development Constraints** - All changes in Assets/Scripts/, no .meta modification, no new packages  
 
 **Constitution Compliance**: ✅ All principles satisfied. No violations requiring justification.
 

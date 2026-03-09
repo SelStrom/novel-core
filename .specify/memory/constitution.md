@@ -1,22 +1,19 @@
 <!--
 Sync Impact Report:
-- Version: 1.13.0 → 1.14.0 (MINOR: Enhanced Principle VII with explicit prefab creation/modification permissions)
-- Modified Principles: 
-  - Principle VII (AI Development Constraints): Expanded "Editor Script Generators" section to explicitly include prefab modification capabilities
+- Version: 1.14.0 → 1.15.0 (MINOR: Added Principle X - File Organization & Temporary Artifacts)
+- Modified Principles: None
 - Added Sections:
-  - Explicit permission for AI to create Editor scripts that modify existing prefabs
-  - Requirements for prefab modification workflow (backup, validation, logging)
-  - Safety constraints for prefab modification (namespace scope, asset path validation)
+  - Principle X (File Organization & Temporary Artifacts): Defines storage locations for logs, test reports, and intermediate documentation
+  - Updated .gitignore: Added temp/ folder exclusion
 - Templates Requiring Updates:
-  ✅ plan-template.md: Already includes Editor Script Generator checks in Constitution Check
-  ✅ spec-template.md: No updates needed (template is generic)
-  ✅ tasks-template.md: No updates needed (template is generic)
-- Follow-up TODOs: None
+  ✅ .gitignore: Updated with temp/ folder
+  ⚠ project-structure.md: Should document temp/ and .specify/memory/ usage
+- Follow-up TODOs: Update project-structure.md with new file organization rules
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.14.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.15.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
 
 ## Core Principles
 

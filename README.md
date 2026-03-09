@@ -2,139 +2,138 @@
 
 Unity-based visual novel constructor for creating professional visual novels without programming.
 
+## 🎯 Project Overview
+
+**Novel Core** is a Unity 6-based framework for building cross-platform visual novels. It provides:
+- Visual scene editor for non-programmers
+- Dialogue system with branching narratives
+- Save/load system with cloud sync
+- Cross-platform builds (Windows, macOS, iOS, Android)
+- Modular, testable architecture
+
+**Current Status**: MVP Development (v0.3.0)
+
+## 📂 Documentation Structure
+
+This project uses **spec-kit** methodology for organized documentation:
+
+### Core Documentation (`.specify/memory/`)
+- **[Constitution](./specify/memory/constitution.md)** - Project principles & non-negotiable rules
+- **[Tech Stack](./specify/memory/tech-stack.md)** - Unity version, dependencies, platforms
+- **[Testing Strategy](./specify/memory/testing-strategy.md)** - Test organization & workflow
+- **[Project Structure](./specify/memory/project-structure.md)** - Directory layout & boundaries
+
+### Feature Specifications (`specs/`)
+- **[001-visual-novel-constructor](./specs/001-visual-novel-constructor/)** - Core feature
+  - `plan.md` - Implementation plan
+  - `spec.md` - Requirements specification
+  - `tasks.md` - Task breakdown
+  - `quickstart.md` - Developer setup guide
+  - `user-manual.md` - User guide (non-programmers)
+  - `data-model.md` - Entity definitions
+  - `contracts/` - System interfaces
+
 ## Project Structure
 
 ```
-novel-core/                     # Unity project root (this folder)
-├── Assets/                     # Unity assets
-│   ├── Scripts/NovelCore/      # All C# code
-│   │   ├── Runtime/            # Runtime systems
-│   │   ├── Editor/             # Editor tools
-│   │   └── Tests/              # Unit tests
-│   ├── Content/                # User content (your visual novels)
-│   │   ├── Backgrounds/        # Background images
-│   │   ├── Characters/         # Character sprites
-│   │   ├── Audio/              # Music and SFX
-│   │   └── Projects/           # Visual novel projects
-│   ├── Resources/              # Runtime-loaded resources
-│   └── AddressableAssets/      # Addressables configuration
-├── Packages/                   # Unity packages (dependencies)
-├── ProjectSettings/            # Unity project settings
-├── .specify/                   # Specification system
-├── specs/                      # Feature specifications & docs
+novel-core/                     # Unity project root
+├── .specify/                   # Spec-kit: Core documentation
+│   ├── memory/                 # Centralized project knowledge
+│   │   ├── constitution.md     # Project principles (SINGLE SOURCE OF TRUTH)
+│   │   ├── tech-stack.md       # Technical stack
+│   │   ├── testing-strategy.md # Testing guidelines
+│   │   └── project-structure.md # Directory structure
+│   └── templates/              # Document templates
+├── specs/                      # Feature specifications
 │   └── 001-visual-novel-constructor/
-│       ├── spec.md             # Feature specification
-│       ├── plan.md             # Implementation plan
-│       ├── quickstart.md       # Developer guide
-│       └── user-manual.md      # User guide (non-programmers)
+├── Assets/                     # Unity assets
+│   ├── Scripts/NovelCore/      # All C# code (AI-modifiable)
+│   ├── Content/                # User content (Addressables source)
+│   └── Resources/              # Runtime-loaded assets
+├── Packages/                   # Unity packages
+├── ProjectSettings/            # Unity settings (AI-restricted)
 └── README.md                   # This file
 ```
 
+**See**: [Project Structure](./specify/memory/project-structure.md) for detailed directory breakdown
+
 ## Quick Start
 
-### 🎮 Test Sample Project (Fastest Way!)
+### 🎮 For Content Creators (Non-Programmers)
 
-**Try it now in 3 minutes**:
+**Try the demo in 3 minutes**:
 
 1. Open Unity with `novel-core` project
 2. Menu: **NovelCore → Generate Sample Project**
-3. Set up the game starter (see [GAME_STARTER_SETUP.md](GAME_STARTER_SETUP.md))
-4. Press **Play** ▶️ in Unity
-5. Click to advance dialogue, make choices!
+3. Press **Play** ▶️ in Unity
+4. Click to advance dialogue, make choices!
 
-📖 See: 
-- `SAMPLE_PROJECT_QUICKSTART.md` for quick start
-- `GAME_STARTER_SETUP.md` for setup instructions
+**📖 Full Guide**: [User Manual (Russian)](./specs/001-visual-novel-constructor/user-manual-ru.md)
 
-### For Content Creators (Non-Programmers)
-
-Read the user manual: `specs/001-visual-novel-constructor/user-manual.md`
-
-**Quick Access**:
-1. Open Unity
-2. Open `novel-core` folder as Unity project
-3. Go to menu: **NovelCore → Scene Editor**
-4. Start creating your visual novel!
-
-### For Developers
-
-Read the developer guide: `specs/001-visual-novel-constructor/quickstart.md`
+### 👨‍💻 For Developers
 
 **Setup**:
-1. Install Unity 2022.3 LTS
-2. Open `novel-core` folder in Unity
-3. Install dependencies via Package Manager
-4. Follow quickstart guide for implementation workflow
+1. Install Unity 6 (LTS)
+2. Clone repo: `git clone <url> && cd novel-core`
+3. Open `novel-core` folder in Unity Hub
+4. Install dependencies (Addressables, VContainer, Localization)
+5. Generate sample project to verify setup
+
+**📖 Developer Guide**: [Quick Start](./specs/001-visual-novel-constructor/quickstart.md)
 
 ## Documentation
 
-### 🚀 Quick Start Guides
+### Essential Docs (Start Here)
 
-- **SAMPLE_PROJECT_QUICKSTART.md**: 2-minute demo setup (start here!)
-- **SAMPLE_PROJECT_GUIDE.md**: Complete sample project documentation
-- **ADDRESSABLES_SETUP.md**: Asset management configuration
-- **MANUAL_STEPS.md**: Unity Editor manual configurations
+- **[Constitution](./specify/memory/constitution.md)** - Project principles & rules
+- **[Quick Start Guide](./specs/001-visual-novel-constructor/quickstart.md)** - Developer setup
+- **[User Manual (RU)](./specs/001-visual-novel-constructor/user-manual-ru.md)** - For creators
+- **[Testing Strategy](./specify/memory/testing-strategy.md)** - How to run tests
 
-### 📚 Specification Documents
+### Detailed Specifications
 
-- **User Manual** (`specs/.../user-manual.md`): For content creators (writers, artists)
-- **Quick Start** (`specs/.../quickstart.md`): For developers (technical setup)
-- **Specification** (`specs/.../spec.md`): Feature requirements
-- **Implementation Plan** (`specs/.../plan.md`): Technical architecture
-- **Data Model** (`specs/.../data-model.md`): Entity definitions
-- **Contracts** (`specs/.../contracts/`): System interfaces
-- **Tasks** (`specs/.../tasks.md`): Implementation roadmap
-
-### ⚖️ Project Governance
-
-- **Constitution** (`.specify/memory/constitution.md`): Non-negotiable principles
+- **[Tech Stack](./specify/memory/tech-stack.md)** - Unity version, dependencies, platforms
+- **[Specification](./specs/001-visual-novel-constructor/spec.md)** - Feature requirements
+- **[Implementation Plan](./specs/001-visual-novel-constructor/plan.md)** - Architecture
+- **[Tasks](./specs/001-visual-novel-constructor/tasks.md)** - Implementation roadmap
+- **[Data Model](./specs/001-visual-novel-constructor/data-model.md)** - Entity definitions
+- **[Contracts](./specs/001-visual-novel-constructor/contracts/)** - System interfaces
 
 ## Technology Stack
 
+**See**: [Tech Stack](./specify/memory/tech-stack.md) for detailed version requirements
+
 - **Engine**: Unity 6 (LTS)
-- **Language**: C# 10.0+
+- **Language**: C# 9.0+
 - **Rendering**: Universal Render Pipeline (URP) 2D
 - **Asset Management**: Unity Addressables 2.0+
 - **Dependency Injection**: VContainer 1.14+
-- **Animation**: Unity Animator + Spine-Unity 4.2+
 - **Localization**: Unity Localization 2.0+
-- **Platform SDKs**: Steamworks.NET 20.2+ (Steam), iOS/Android native
-- **Scripting Backend**: IL2CPP (all platforms)
+- **Platforms**: Windows, macOS, iOS, Android (IL2CPP)
 
 ## Code Style
 
-This project enforces strict C# coding standards (see `.specify/memory/constitution.md` - Code Style Standards):
+**Strict C# standards enforced** (see [Constitution - Code Style](./specify/memory/constitution.md#code-style-standards)):
 
-**Key Rules**:
-- ✅ **Allman Style Braces**: Opening brace always on new line
-- ✅ **Mandatory Braces**: Always use braces for if/else/for/while, even single-line
-- ✅ **Var in Loops**: Use `var` for type declaration in foreach/for loops
-- ✅ **Underscore Prefix**: Private and protected fields must use `_fieldName` format
-
-**Automatic Formatting**:
-- `.editorconfig` file configures IDE formatting rules
-- Visual Studio / Rider will auto-format on save
-- Code reviews enforce these standards
-
-## Target Platforms
-
-- Windows x64 (Steam)
-- macOS Intel + Apple Silicon (Steam)
-- iOS 15+ (App Store)
-- Android API 24+ / Android 7.0+ (Google Play)
+- ✅ Allman braces (opening brace on new line)
+- ✅ Mandatory braces (even for single-line statements)
+- ✅ `var` in loops
+- ✅ Underscore prefix for private/protected fields (`_fieldName`)
 
 ## Constitution Principles
 
-This project follows strict design principles (see `.specify/memory/constitution.md`):
+**See**: [Constitution](./specify/memory/constitution.md) for full details
 
-1. **Creator-First Design**: No programming required for content creation
-2. **Cross-Platform Parity**: Identical behavior on all platforms
-3. **Asset Pipeline Integrity**: No broken references, Addressables mandatory
-4. **Runtime Performance**: 60 FPS on target hardware
-5. **Save System Reliability**: Auto-save, cloud sync, no data loss
-6. **Modular Architecture**: Independent, testable modules
-7. **AI Development Constraints**: AI only modifies `Assets/Scripts/` (exception: package management when user-specified)
-8. **User Documentation Language**: Russian as primary language for end-user documentation
+**Core Principles**:
+1. Creator-First Design - No programming required
+2. Cross-Platform Parity - Identical behavior everywhere
+3. Asset Pipeline Integrity - No broken references
+4. Runtime Performance - 60 FPS target
+5. Save System Reliability - Auto-save, cloud sync
+6. Modular Architecture - Testable, independent modules
+7. AI Development Constraints - Script-only modifications
+8. Editor-Runtime Bridge - Preview integration
+9. User Documentation Language - Russian for end-users
 
 ## Branch Structure
 

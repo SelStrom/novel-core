@@ -556,45 +556,11 @@ namespace NovelCore.Runtime.Core.Localization
 
 ---
 
-## VContainer Registration Example
+## Dependency Injection Setup
 
-```csharp
-using VContainer;
-using VContainer.Unity;
+> **📘 Implementation Guide**: For complete VContainer setup and registration examples, see [quickstart.md](../quickstart.md#dependency-injection-setup)
 
-namespace NovelCore.Runtime.Core
-{
-    public class GameLifetimeScope : LifetimeScope
-    {
-        protected override void Configure(IContainerBuilder builder)
-        {
-            // Core Systems
-            builder.Register<IDialogueSystem, DialogueSystem>(Lifetime.Singleton);
-            builder.Register<ISceneManager, SceneManager>(Lifetime.Singleton);
-            builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
-            builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
-            builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
-            builder.Register<IInputService, UnityInputService>(Lifetime.Singleton);
-            builder.Register<ILocalizationService, UnityLocalizationService>(Lifetime.Singleton);
-            
-            // Platform Service (runtime selection)
-            #if UNITY_STANDALONE_WIN || UNITY_STANDALONE_OSX
-            builder.Register<IPlatformService, SteamPlatformService>(Lifetime.Singleton);
-            #elif UNITY_IOS
-            builder.Register<IPlatformService, iOSPlatformService>(Lifetime.Singleton);
-            #elif UNITY_ANDROID
-            builder.Register<IPlatformService, AndroidPlatformService>(Lifetime.Singleton);
-            #else
-            builder.Register<IPlatformService, DefaultPlatformService>(Lifetime.Singleton);
-            #endif
-            
-            // Animation (both implementations registered, selected at runtime per character)
-            builder.Register<UnityCharacterAnimator>(Lifetime.Transient);
-            builder.Register<SpineCharacterAnimator>(Lifetime.Transient);
-        }
-    }
-}
-```
+All interfaces defined above are registered in `GameLifetimeScope` (VContainer root scope). Platform-specific implementations are selected at runtime via preprocessor directives.
 
 ---
 
