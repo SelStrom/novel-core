@@ -63,11 +63,15 @@
      - [ ] Save format backward compatible or includes migration
      - [ ] Cloud sync supported (Steam/iCloud/Google Play)
   
-  ✅ VI. Modular Architecture
+  ✅ VI. Modular Architecture & Testing
      - [ ] Feature implemented as separate assembly/module
      - [ ] Interfaces used for platform-specific code
      - [ ] Unit tests achieve >80% coverage
      - [ ] Integration tests for cross-module contracts
+     - [ ] Test execution workflow defined (EditMode → PlayMode)
+     - [ ] Test execution after task groups/bug fixes is mandatory
+     - [ ] Batch mode test execution supported for CI/CD
+     - [ ] Zero-tolerance for test failures before task completion
   
   ✅ VII. AI Development Constraints (NON-NEGOTIABLE)
      - [ ] AI modifications limited to Assets/Scripts/ directory only

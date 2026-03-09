@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.TestTools;
 using NovelCore.Runtime.Data.Scenes;
 using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Core.SceneManagement;
@@ -39,6 +40,9 @@ public class SceneDataValidationTests
         SceneData scene = ScriptableObject.CreateInstance<SceneData>();
         SetPrivateField(scene, "_sceneId", ""); // Empty scene ID
         SetPrivateField(scene, "_sceneName", "Test Scene");
+        
+        // Expect the error log
+        LogAssert.Expect(LogType.Error, "SceneData : sceneId is required");
         
         // Act
         bool result = scene.Validate();

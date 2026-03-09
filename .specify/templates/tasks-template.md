@@ -100,6 +100,34 @@ Examples of foundational tasks (adjust based on your project):
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
+### Test Execution for User Story 1 (MANDATORY) ✅
+
+> **REQUIRED by Constitution Principle VI: Test Execution Requirement**
+>
+> After completing User Story 1 implementation, ALL tests MUST pass before proceeding.
+
+- [ ] T018 [US1] **Run EditMode tests** in batch mode:
+  ```bash
+  /Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+    -runTests -batchmode -projectPath "$(pwd)" \
+    -testPlatform EditMode -testResults "./test-results-editmode.xml" \
+    -logFile - 2>&1
+  ```
+  - Verify exit code 0 (all tests passed)
+  - Fix any test failures before proceeding
+
+- [ ] T019 [US1] **Run PlayMode tests** in batch mode (only if EditMode passes):
+  ```bash
+  /Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+    -runTests -batchmode -projectPath "$(pwd)" \
+    -testPlatform PlayMode -testResults "./test-results-playmode.xml" \
+    -logFile - 2>&1
+  ```
+  - Verify exit code 0 (all tests passed)
+  - Fix any test failures before proceeding
+
+**Test Gate**: User Story 1 is NOT complete until all tests pass ✅
+
 ---
 
 ## Phase 4: User Story 2 - [Title] (Priority: P2)
@@ -122,6 +150,13 @@ Examples of foundational tasks (adjust based on your project):
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
+### Test Execution for User Story 2 (MANDATORY) ✅
+
+- [ ] T024 [US2] **Run EditMode tests** - verify all tests pass (exit code 0)
+- [ ] T025 [US2] **Run PlayMode tests** - verify all tests pass (exit code 0)
+
+**Test Gate**: User Story 2 is NOT complete until all tests pass ✅
+
 ---
 
 ## Phase 5: User Story 3 - [Title] (Priority: P3)
@@ -143,6 +178,13 @@ Examples of foundational tasks (adjust based on your project):
 
 **Checkpoint**: All user stories should now be independently functional
 
+### Test Execution for User Story 3 (MANDATORY) ✅
+
+- [ ] T029 [US3] **Run EditMode tests** - verify all tests pass (exit code 0)
+- [ ] T030 [US3] **Run PlayMode tests** - verify all tests pass (exit code 0)
+
+**Test Gate**: User Story 3 is NOT complete until all tests pass ✅
+
 ---
 
 [Add more user story phases as needed, following the same pattern]
@@ -160,6 +202,15 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX Platform build validation (Windows, Mac, iOS, Android)
 - [ ] TXXX Run quickstart.md validation
 - [ ] TXXX Asset reference integrity check
+
+### Final Test Execution (MANDATORY before release) ✅
+
+- [ ] TXXX **Run full EditMode test suite** - verify 100% pass rate
+- [ ] TXXX **Run full PlayMode test suite** - verify 100% pass rate
+- [ ] TXXX **Verify test results XML files** - confirm zero failures
+- [ ] TXXX **Document test coverage** - confirm >80% coverage (post-MVP requirement)
+
+**Release Gate**: Feature is NOT ready for release until all tests pass ✅
 
 ---
 

@@ -1,20 +1,24 @@
 <!--
 Sync Impact Report:
-- Version: 1.12.1 → 1.12.2 (PATCH: Code Style - Mandatory Braces clarification and enforcement)
-- Modified Principles: None (clarifying existing Code Style Standards principle)
-- Changes:
-  - Reinforced mandatory braces rule with ZERO TOLERANCE policy
-  - Added extensive code examples showing correct/incorrect patterns
-  - Added rationale explaining bug prevention (including "Apple goto fail" CVE)
-  - Added enforcement requirements (.editorconfig, CI/CD linting)
-  - Made explicit that single-line if/for/while statements MUST use braces
-- Templates Status: ✅ No template updates required (code style clarification only)
-- Follow-up TODOs: None
+- Version: 1.12.2 → 1.13.0 (MINOR: Added mandatory test execution requirement after task completion/bug fixes)
+- Modified Principles: 
+  - Principle VI (Modular Architecture & Testing): Added "Test Execution Requirement" subsection
+- Added Sections:
+  - Mandatory test execution after task groups and bug fixes
+  - Required test workflow (EditMode → PlayMode)
+  - Test failure handling requirements
+  - Test execution in batch mode for automation
+- Templates Requiring Updates:
+  ⚠️ tasks-template.md: Add test execution checkpoints after user story phases
+  ⚠️ plan-template.md: Add test execution requirements in Constitution Check
+- Follow-up TODOs: 
+  - Update tasks-template.md to include test execution tasks after each user story phase
+  - Update plan-template.md Constitution Check to include test execution verification
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.12.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.13.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
 
 ## Core Principles
 
@@ -117,9 +121,31 @@ The constructor MUST be built as composable, independently testable modules with
 - **Immediate Test Coverage**: After implementing new functionality, tests MUST be written immediately to cover the new code before moving to the next feature. Tests MUST be run and all errors fixed before proceeding.
 - **Test Execution Workflow**: After writing tests, run Unity Test Runner in EditMode first (`-testPlatform EditMode`), then PlayMode if needed. Fix all compilation and runtime errors before committing
 - **Continuous Validation**: Test suite MUST run automatically on pre-commit and CI/CD pipeline to prevent regressions
+- **Test Execution Requirement** (MANDATORY after task completion):
+  - After completing ANY group of related tasks (user story, feature phase, bug fix), developers MUST run full test suite
+  - **EditMode Tests**: Run first with `-testPlatform EditMode -testResults ./test-results-editmode.xml`
+  - **PlayMode Tests**: Run second with `-testPlatform PlayMode -testResults ./test-results-playmode.xml`
+  - **Batch Mode Execution**: Tests MUST be runnable in batch mode for CI/CD integration
+  - **Zero Failures Required**: ALL tests MUST pass (exit code 0) before considering task complete
+  - **Failure Handling**: If tests fail, developer MUST fix failures before moving to next task or committing
+  - **Bug Fix Validation**: After fixing any bug, developer MUST run full test suite to verify fix and prevent regressions
+  - **Test Execution Command Template**:
+    ```bash
+    # EditMode tests
+    /Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+      -runTests -batchmode -projectPath "$(pwd)" \
+      -testPlatform EditMode -testResults "./test-results-editmode.xml" \
+      -logFile - 2>&1
+    
+    # PlayMode tests (only if EditMode passes)
+    /Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
+      -runTests -batchmode -projectPath "$(pwd)" \
+      -testPlatform PlayMode -testResults "./test-results-playmode.xml" \
+      -logFile - 2>&1
+    ```
 - **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
 
-**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Call stack analysis prevents regression bugs by ensuring developers understand the full impact of their changes before implementation** - a method might be called from multiple places with different assumptions about its behavior, and changing it without analyzing all call sites can break distant, seemingly unrelated functionality. **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
+**Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Call stack analysis prevents regression bugs by ensuring developers understand the full impact of their changes before implementation** - a method might be called from multiple places with different assumptions about its behavior, and changing it without analyzing all call sites can break distant, seemingly unrelated functionality. **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). **Mandatory test execution after task completion prevents regression bugs by validating that new code doesn't break existing functionality** - running the full test suite after each user story, feature phase, or bug fix catches integration issues early when they're cheap to fix. Batch mode test execution enables CI/CD automation and ensures tests can run in headless environments. Zero-tolerance for test failures ensures code quality gates are enforced consistently. This workflow transforms tests from optional validation into a required checkpoint, making regression prevention automatic rather than relying on developer discipline. MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
 ### VII. AI Development Constraints (NON-NEGOTIABLE)
 
@@ -636,4 +662,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.12.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.13.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
