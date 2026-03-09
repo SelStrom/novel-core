@@ -1,14 +1,20 @@
 <!--
 Sync Impact Report:
-- Version: 1.12.0 → 1.12.1 (PATCH: LocalizationService API refinement documentation)
-- Modified Principles: None (code-level refinement, no principle changes)
-- Changes: Documented TryGetLocalizedString API pattern in existing Call Stack Analysis requirement
-- Templates Status: ✅ No template updates required (code change only)
+- Version: 1.12.1 → 1.12.2 (PATCH: Code Style - Mandatory Braces clarification and enforcement)
+- Modified Principles: None (clarifying existing Code Style Standards principle)
+- Changes:
+  - Reinforced mandatory braces rule with ZERO TOLERANCE policy
+  - Added extensive code examples showing correct/incorrect patterns
+  - Added rationale explaining bug prevention (including "Apple goto fail" CVE)
+  - Added enforcement requirements (.editorconfig, CI/CD linting)
+  - Made explicit that single-line if/for/while statements MUST use braces
+- Templates Status: ✅ No template updates required (code style clarification only)
+- Follow-up TODOs: None
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.12.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
 
 ## Core Principles
 
@@ -104,7 +110,7 @@ The constructor MUST be built as composable, independently testable modules with
   - **Game Initialization**: GameStarter → VContainer → DialogueSystem/SceneManager initialization sequence
 - **Test Organization**: Tests MUST be organized in separate assemblies (`NovelCore.Tests.Runtime`, `NovelCore.Tests.Editor`) with clear naming conventions
 - **EditMode-First Strategy**: Unit tests for ScriptableObjects, data validation, pure C# logic, and builders MUST be implemented as EditMode tests. PlayMode tests are ONLY for async operations, file I/O, runtime-specific Unity APIs (e.g., `Application.persistentDataPath`), and integration tests requiring game loop
-- **Test Platform Selection**: 
+- **Test Platform Selection**:
   - **EditMode** (preferred): ScriptableObject creation/validation, data model tests, builders, pure C# business logic, synchronous operations
   - **PlayMode** (only when required): `async`/`await` operations, file system I/O, `Application.persistentDataPath`, `Directory`/`File` APIs, integration tests needing runtime environment, GameStarter initialization tests
 - **Test-First Development**: For critical systems (save system, dialogue branching, asset management), tests MUST be written before implementation to validate requirements
@@ -209,27 +215,25 @@ When AI tools need to run PlayMode tests after implementing new functionality, t
 ```bash
 /Applications/Unity/Hub/Editor/2022.3.XXf1/Unity.app/Contents/MacOS/Unity \
   -batchmode \
-  -nographics \
   -projectPath /path/to/project \
   -runTests \
   -testPlatform PlayMode \
   -testResults ./results.xml \
   -logFile ./unity.log \
-  -quit
 ```
 
-**For novel-core project**:
+**Required Unity EditMode Test Command Template**:
 ```bash
 /Applications/Unity/Hub/Editor/6000.0.69f1/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
   -projectPath /Users/selstrom/work/projects/novel-core/novel-core/novel-core \
   -runTests \
-  -testPlatform PlayMode \
+  -testPlatform EditMode \
   -testResults /Users/selstrom/work/projects/novel-core/novel-core/test-results.xml \
   -logFile /Users/selstrom/work/projects/novel-core/novel-core/unity-tests.log \
-  -quit
 ```
+** If unable to run tests from command line don't use no graphics. It will able to start unit tests in Edit mode.
 
 **Alternative: Run tests from Unity Test Runner GUI**:
 - Open Unity Editor with the project
@@ -516,7 +520,7 @@ public class Example
     private int _count;
     private string _userName;
     protected IDialogueSystem _dialogueSystem;
-    
+
     public Example(IDialogueSystem dialogueSystem)
     {
         _dialogueSystem = dialogueSystem;
@@ -555,14 +559,14 @@ public class SceneManager : ISceneManager
     private readonly IAssetManager _assetManager;
     private readonly IAudioService _audioService;
     private SceneData _currentScene;
-    
+
     // Protected fields
     protected List<SceneData> _sceneHistory;
-    
+
     // Public properties
     public SceneData CurrentScene => _currentScene;
     public bool IsLoading { get; private set; }
-    
+
     // Constructor
     public SceneManager(IAssetManager assetManager, IAudioService audioService)
     {
@@ -570,7 +574,7 @@ public class SceneManager : ISceneManager
         _audioService = audioService;
         _sceneHistory = new List<SceneData>();
     }
-    
+
     // Public methods
     public void LoadScene(SceneData sceneData, TransitionType transition, Action onComplete)
     {
@@ -578,10 +582,10 @@ public class SceneManager : ISceneManager
         {
             throw new ArgumentNullException(nameof(sceneData));
         }
-        
+
         StartLoadingScene(sceneData, transition, onComplete);
     }
-    
+
     // Private methods
     private void StartLoadingScene(SceneData sceneData, TransitionType transition, Action onComplete)
     {
@@ -632,4 +636,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.12.1 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-07
+**Version**: 1.12.2 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
