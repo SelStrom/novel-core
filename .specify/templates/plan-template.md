@@ -23,7 +23,7 @@
 **Storage**: [if applicable, e.g., JSON save files, PlayerPrefs, SQLite or N/A]  
 **Testing**: [e.g., Unity Test Framework, NUnit, PlayMode tests or NEEDS CLARIFICATION]  
 **Target Platforms**: [Windows/Mac (Steam), iOS, Android or NEEDS CLARIFICATION]  
-**Scripting Backend**: [e.g., IL2CPP (iOS required), Mono or NEEDS CLARIFICATION]
+**Scripting Backend**: [e.g., IL2CPP (all platforms recommended for cross-platform parity) or NEEDS CLARIFICATION]
 **Project Type**: [e.g., editor-tool/runtime-system/visual-scripting-node/UI-component or NEEDS CLARIFICATION]  
 **Performance Goals**: [60 FPS on iPhone 12/Intel HD 620, <1s load times or NEEDS CLARIFICATION]  
 **Constraints**: [Mobile: ≤512MB RAM, Desktop: ≤1GB RAM, Steam/App Store compliance or NEEDS CLARIFICATION]  
@@ -63,17 +63,22 @@
      - [ ] Save format backward compatible or includes migration
      - [ ] Cloud sync supported (Steam/iCloud/Google Play)
   
-  ✅ VI. Modular Architecture
+  ✅ VI. Modular Architecture & Testing
      - [ ] Feature implemented as separate assembly/module
      - [ ] Interfaces used for platform-specific code
      - [ ] Unit tests achieve >80% coverage
      - [ ] Integration tests for cross-module contracts
+     - [ ] Test execution workflow defined (EditMode → PlayMode)
+     - [ ] Test execution after task groups/bug fixes is mandatory
+     - [ ] Batch mode test execution supported for CI/CD
+     - [ ] Zero-tolerance for test failures before task completion
   
   ✅ VII. AI Development Constraints (NON-NEGOTIABLE)
      - [ ] AI modifications limited to Assets/Scripts/ directory only
      - [ ] No .meta file generation or modification by AI
      - [ ] No direct asset file creation (prefabs, scenes, materials)
-     - [ ] No ProjectSettings/ or package manifest changes by AI
+     - [ ] Package management permitted ONLY when user explicitly specifies
+     - [ ] Package operations require compatibility verification and backup
   
   Document any principle violations with justification in Complexity Tracking section.
 -->

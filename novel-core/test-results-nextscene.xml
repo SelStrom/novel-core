@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="4" result="Passed" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.7325839">
+  <test-suite type="TestSuite" id="1111" name="novel-core" fullname="novel-core" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.732584" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1099" name="NovelCore.Tests.Runtime.dll" fullname="/Users/selstrom/work/projects/novel-core/novel-core/novel-core/Library/ScriptAssemblies/NovelCore.Tests.Runtime.dll" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.728187" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="24450" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1100" name="NovelCore" fullname="NovelCore" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.727573" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1101" name="Tests" fullname="NovelCore.Tests" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.727253" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1102" name="Runtime" fullname="NovelCore.Tests.Runtime" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.726947" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestSuite" id="1105" name="Core" fullname="NovelCore.Tests.Runtime.Core" runstate="Runnable" testcasecount="41" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.725866" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestSuite" id="1107" name="DialogueSystem" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem" runstate="Runnable" testcasecount="22" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.725150" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-suite type="TestFixture" id="1079" name="DialogueSystemNextSceneTests" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.724077" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1080" name="NextScene_WhenDialogueCompletes_FiresNavigationEvent" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenDialogueCompletes_FiresNavigationEvent" methodname="NextScene_WhenDialogueCompletes_FiresNavigationEvent" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="777438686" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:37Z" duration="0.212776" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for nextScene
+DialogueSystem: Current scene = Current Scene
+DialogueSystem: NextScene field = SET
+DialogueSystem: NextScene.RuntimeKeyIsValid() = False
+DialogueSystem: ✓ nextScene is set, attempting to load...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+DialogueSystem: Firing OnSceneNavigationRequested event...
+]]></output>
+                  </test-case>
+                  <test-case id="1082" name="NextScene_WhenLoadFails_CompletesDialogueGracefully" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenLoadFails_CompletesDialogueGracefully" methodname="NextScene_WhenLoadFails_CompletesDialogueGracefully" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="2030738094" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:37Z" duration="0.201714" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for nextScene
+DialogueSystem: Current scene = Current Scene
+DialogueSystem: NextScene field = SET
+DialogueSystem: NextScene.RuntimeKeyIsValid() = False
+DialogueSystem: ✓ nextScene is set, attempting to load...
+DialogueSystem: ✗ Failed to load next scene (returned null)
+]]></output>
+                  </test-case>
+                  <test-case id="1081" name="NextScene_WhenNoNextScene_CompletesWithoutNavigation" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenNoNextScene_CompletesWithoutNavigation" methodname="NextScene_WhenNoNextScene_CompletesWithoutNavigation" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="296508585" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:37Z" duration="0.101378" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Final Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for nextScene
+DialogueSystem: Current scene = Final Scene
+DialogueSystem: NextScene field = NULL
+DialogueSystem: No next scene defined (or invalid), dialogue ending normally
+]]></output>
+                  </test-case>
+                  <test-case id="1083" name="NextScene_WithMultipleDialogueLines_TransitionsAfterAll" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WithMultipleDialogueLines_TransitionsAfterAll" methodname="NextScene_WithMultipleDialogueLines_TransitionsAfterAll" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="808309715" result="Passed" start-time="2026-03-09 17:57:37Z" end-time="2026-03-09 17:57:38Z" duration="0.202096" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+DialogueSystem: Displaying line line_003
+DialogueSystem: Dialogue complete - checking for nextScene
+DialogueSystem: Current scene = Current Scene
+DialogueSystem: NextScene field = SET
+DialogueSystem: NextScene.RuntimeKeyIsValid() = False
+DialogueSystem: ✓ nextScene is set, attempting to load...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+DialogueSystem: Firing OnSceneNavigationRequested event...
+Saving results to: /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestResults.xml
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

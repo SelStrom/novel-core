@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9064874139465516339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: TestScene03_End_Line02
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: decfdda8-3950-41a2-a05a-57d0727b5ea9
+  _lineId: test_line_TestScene03_End_002
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: test_line_TestScene03_End_002
+  _fallbackText: '[End of Test]'
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-7797597567737473940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: TestScene03_End_Line01
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: fb8739d5-59b6-4895-afbd-a27376d34a81
+  _lineId: test_line_TestScene03_End_001
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: test_line_TestScene03_End_001
+  _fallbackText: Linear scene progression is working!
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-3048567711162602250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: TestScene03_End_Line00
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: f0b8e559-4192-4da1-9a52-4f2f49c91866
+  _lineId: test_line_TestScene03_End_000
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: test_line_TestScene03_End_000
+  _fallbackText: Excellent! You've reached the final scene.
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 998c9fb7333504c2885a5dc89fda1bf8, type: 3}
+  m_Name: TestScene03_End
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 623c7a05-d340-44a9-9731-c8988dd59d5f
+  _sceneId: test_scene_03
+  _sceneName: 'Test Scene 3: End'
+  _backgroundImage:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _backgroundMusic:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _characters: []
+  _dialogueLines:
+  - {fileID: -3048567711162602250}
+  - {fileID: -7797597567737473940}
+  - {fileID: -9064874139465516339}
+  _choices: []
+  _transitionType: 1
+  _transitionDuration: 0.5
+  _nextScene:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _autoAdvance: 0
+  _autoAdvanceDelay: 2

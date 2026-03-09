@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="99" result="Failed(Child)" total="99" passed="98" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.2118398">
+  <test-suite type="TestSuite" id="1000" name="novel-core" fullname="novel-core" runstate="Runnable" testcasecount="99" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.211840" total="99" passed="98" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1110" name="NovelCore.Tests.Editor.dll" fullname="/Users/selstrom/work/projects/novel-core/novel-core/novel-core/Library/ScriptAssemblies/NovelCore.Tests.Editor.dll" runstate="Runnable" testcasecount="98" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.206901" total="98" passed="97" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="34370" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1111" name="NovelCore" fullname="NovelCore" runstate="Runnable" testcasecount="98" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.206640" total="98" passed="97" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1112" name="Tests" fullname="NovelCore.Tests" runstate="Runnable" testcasecount="98" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.206537" total="98" passed="97" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1113" name="Editor" fullname="NovelCore.Tests.Editor" runstate="Runnable" testcasecount="98" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.206451" total="98" passed="97" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestSuite" id="1115" name="Core" fullname="NovelCore.Tests.Editor.Core" runstate="Runnable" testcasecount="35" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.158397" total="35" passed="34" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestSuite" id="1117" name="DialogueSystem" fullname="NovelCore.Tests.Editor.Core.DialogueSystem" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.095932" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-suite type="TestFixture" id="1095" name="DialogueSystemTests" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.094984" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1104" name="DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" methodname="DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="444093431" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.011925" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                  </test-case>
+                  <test-case id="1103" name="DialogueSystem_AdvanceDialogue_IncrementsLineIndex" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_AdvanceDialogue_IncrementsLineIndex" methodname="DialogueSystem_AdvanceDialogue_IncrementsLineIndex" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1844003258" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.058080" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+]]></output>
+                  </test-case>
+                  <test-case id="1099" name="DialogueSystem_Constructor_ThrowsOnNullAssetManager" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullAssetManager" methodname="DialogueSystem_Constructor_ThrowsOnNullAssetManager" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="83215365" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001367" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1096" name="DialogueSystem_Constructor_ThrowsOnNullAudioService" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullAudioService" methodname="DialogueSystem_Constructor_ThrowsOnNullAudioService" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="98336015" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000216" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1097" name="DialogueSystem_Constructor_ThrowsOnNullInputService" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullInputService" methodname="DialogueSystem_Constructor_ThrowsOnNullInputService" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="749127671" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000196" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1098" name="DialogueSystem_Constructor_ThrowsOnNullSceneManager" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullSceneManager" methodname="DialogueSystem_Constructor_ThrowsOnNullSceneManager" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1769445287" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000253" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1105" name="DialogueSystem_GetCurrentLine_ReturnsCorrectLine" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_GetCurrentLine_ReturnsCorrectLine" methodname="DialogueSystem_GetCurrentLine_ReturnsCorrectLine" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="661584924" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001919" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1107" name="DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" methodname="DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="64968832" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001206" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1106" name="DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" methodname="DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1105511816" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001341" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1109" name="DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" methodname="DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="151368221" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001257" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+]]></output>
+                  </test-case>
+                  <test-case id="1102" name="DialogueSystem_StartScene_WithInvalidScene_LogsError" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithInvalidScene_LogsError" methodname="DialogueSystem_StartScene_WithInvalidScene_LogsError" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1780683499" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.002321" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneData : sceneId is required
+DialogueSystem: Scene validation failed for Invalid Scene
+]]></output>
+                  </test-case>
+                  <test-case id="1101" name="DialogueSystem_StartScene_WithNullScene_LogsError" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithNullScene_LogsError" methodname="DialogueSystem_StartScene_WithNullScene_LogsError" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="520373444" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000582" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Cannot start null scene
+]]></output>
+                  </test-case>
+                  <test-case id="1100" name="DialogueSystem_StartScene_WithValidScene_SetsPlayingState" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithValidScene_SetsPlayingState" methodname="DialogueSystem_StartScene_WithValidScene_SetsPlayingState" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1273848938" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000965" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1108" name="DialogueSystem_StopDialogue_ResetsState" fullname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StopDialogue_ResetsState" methodname="DialogueSystem_StopDialogue_ResetsState" classname="NovelCore.Tests.Editor.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="682486272" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001399" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue stopped
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+              <test-suite type="TestSuite" id="1116" name="SceneManagement" fullname="NovelCore.Tests.Editor.Core.SceneManagement" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.062006" total="21" passed="20" failed="1" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-suite type="TestFixture" id="1073" name="SceneNavigationHistoryTests" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" testcasecount="21" result="Failed" site="Child" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.031302" total="21" passed="20" failed="1" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[One or more child tests had errors]]></message>
+                  </failure>
+                  <test-case id="1081" name="CanNavigateBack_AtBeginning_ReturnsFalse" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.CanNavigateBack_AtBeginning_ReturnsFalse" methodname="CanNavigateBack_AtBeginning_ReturnsFalse" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1575237304" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001070" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+]]></output>
+                  </test-case>
+                  <test-case id="1082" name="CanNavigateBack_NotAtBeginning_ReturnsTrue" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.CanNavigateBack_NotAtBeginning_ReturnsTrue" methodname="CanNavigateBack_NotAtBeginning_ReturnsTrue" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1327428273" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000876" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+]]></output>
+                  </test-case>
+                  <test-case id="1084" name="CanNavigateForward_AfterNavigateBack_ReturnsTrue" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.CanNavigateForward_AfterNavigateBack_ReturnsTrue" methodname="CanNavigateForward_AfterNavigateBack_ReturnsTrue" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="754698845" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001180" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+]]></output>
+                  </test-case>
+                  <test-case id="1083" name="CanNavigateForward_AtEnd_ReturnsFalse" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.CanNavigateForward_AtEnd_ReturnsFalse" methodname="CanNavigateForward_AtEnd_ReturnsFalse" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="987639795" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000889" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+]]></output>
+                  </test-case>
+                  <test-case id="1091" name="Clear_WithEntries_RemovesAllEntries" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Clear_WithEntries_RemovesAllEntries" methodname="Clear_WithEntries_RemovesAllEntries" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1754045278" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001510" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: History cleared
+]]></output>
+                  </test-case>
+                  <test-case id="1092" name="GetState_ReturnsCurrentState" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.GetState_ReturnsCurrentState" methodname="GetState_ReturnsCurrentState" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="2049248409" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000925" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 5 (total: 2)
+]]></output>
+                  </test-case>
+                  <test-case id="1086" name="NavigateBack_AtBeginning_ReturnsNull" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.NavigateBack_AtBeginning_ReturnsNull" methodname="NavigateBack_AtBeginning_ReturnsNull" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1482081021" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000818" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Cannot navigate back (at beginning of history)
+]]></output>
+                  </test-case>
+                  <test-case id="1085" name="NavigateBack_WithHistory_ReturnsPreviousEntry" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.NavigateBack_WithHistory_ReturnsPreviousEntry" methodname="NavigateBack_WithHistory_ReturnsPreviousEntry" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="698077364" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001238" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 5 (total: 2)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+]]></output>
+                  </test-case>
+                  <test-case id="1087" name="NavigateForward_AfterNavigateBack_ReturnsNextEntry" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.NavigateForward_AfterNavigateBack_ReturnsNextEntry" methodname="NavigateForward_AfterNavigateBack_ReturnsNextEntry" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="146942581" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001592" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 5 (total: 2)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+SceneNavigationHistory: Navigated forward to scene 'scene_002' (index: 1)
+]]></output>
+                  </test-case>
+                  <test-case id="1088" name="NavigateForward_AtEnd_ReturnsNull" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.NavigateForward_AtEnd_ReturnsNull" methodname="NavigateForward_AtEnd_ReturnsNull" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1144223312" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000844" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Cannot navigate forward (at end of history)
+]]></output>
+                  </test-case>
+                  <test-case id="1080" name="Peek_EmptyHistory_ReturnsNull" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Peek_EmptyHistory_ReturnsNull" methodname="Peek_EmptyHistory_ReturnsNull" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="400907" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000237" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1079" name="Peek_WithEntries_ReturnsLastEntryWithoutRemoving" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Peek_WithEntries_ReturnsLastEntryWithoutRemoving" methodname="Peek_WithEntries_ReturnsLastEntryWithoutRemoving" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1848510949" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000523" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+]]></output>
+                  </test-case>
+                  <test-case id="1078" name="Pop_EmptyHistory_ReturnsNull" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Pop_EmptyHistory_ReturnsNull" methodname="Pop_EmptyHistory_ReturnsNull" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="29263963" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000558" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Cannot pop from empty history
+]]></output>
+                  </test-case>
+                  <test-case id="1077" name="Pop_WithEntries_ReturnsAndRemovesLastEntry" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Pop_WithEntries_ReturnsAndRemovesLastEntry" methodname="Pop_WithEntries_ReturnsAndRemovesLastEntry" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="786715781" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001420" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 5 (total: 2)
+SceneNavigationHistory: Popped entry for scene 'scene_002'
+]]></output>
+                  </test-case>
+                  <test-case id="1089" name="Push_AfterNavigateBack_ClearsForwardHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_AfterNavigateBack_ClearsForwardHistory" methodname="Push_AfterNavigateBack_ClearsForwardHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="882084716" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.002340" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: Navigated back to scene 'scene_002' (index: 1)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+SceneNavigationHistory: Removed 2 forward entries
+SceneNavigationHistory: Pushed entry for scene 'scene_new' at line 0 (total: 2)
+]]></output>
+                  </test-case>
+                  <test-case id="1090" name="Push_ExceedsMaxSize_RemovesOldestEntries" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_ExceedsMaxSize_RemovesOldestEntries" methodname="Push_ExceedsMaxSize_RemovesOldestEntries" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1596636995" result="Failed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.006067" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <failure>
+                      <message><![CDATA[  Second entry should be scene_004
+  String lengths are both 9. Strings differ at index 8.
+  Expected: "scene_004"
+  But was:  "scene_005"
+  -------------------^
+]]></message>
+                      <stack-trace><![CDATA[at NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_ExceedsMaxSize_RemovesOldestEntries () [0x000b4] in /Users/selstrom/work/projects/novel-core/novel-core/novel-core/Assets/Scripts/NovelCore/Tests/Editor/Core/SceneManagement/SceneNavigationHistoryTests.cs:314
+]]></stack-trace>
+                    </failure>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: Removed 1 oldest entries (max size: 3)
+SceneNavigationHistory: Pushed entry for scene 'scene_004' at line 0 (total: 3)
+SceneNavigationHistory: Removed 1 oldest entries (max size: 3)
+SceneNavigationHistory: Pushed entry for scene 'scene_005' at line 0 (total: 3)
+SceneNavigationHistory: Navigated back to scene 'scene_004' (index: 1)
+]]></output>
+                  </test-case>
+                  <test-case id="1076" name="Push_InvalidEntry_DoesNotModifyHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_InvalidEntry_DoesNotModifyHistory" methodname="Push_InvalidEntry_DoesNotModifyHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1957474776" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000581" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Cannot push invalid entry
+]]></output>
+                  </test-case>
+                  <test-case id="1075" name="Push_NullEntry_DoesNotModifyHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_NullEntry_DoesNotModifyHistory" methodname="Push_NullEntry_DoesNotModifyHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="507546427" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000408" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Cannot push invalid entry
+]]></output>
+                  </test-case>
+                  <test-case id="1074" name="Push_ValidEntry_AddsToHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.Push_ValidEntry_AddsToHistory" methodname="Push_ValidEntry_AddsToHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="997034231" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000482" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+]]></output>
+                  </test-case>
+                  <test-case id="1094" name="RestoreState_NullState_DoesNotModifyHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.RestoreState_NullState_DoesNotModifyHistory" methodname="RestoreState_NullState_DoesNotModifyHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="1996005132" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000862" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Cannot restore invalid state
+]]></output>
+                  </test-case>
+                  <test-case id="1093" name="RestoreState_ValidState_RestoresHistory" fullname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests.RestoreState_ValidState_RestoresHistory" methodname="RestoreState_ValidState_RestoresHistory" classname="NovelCore.Tests.Editor.Core.SceneManagement.SceneNavigationHistoryTests" runstate="Runnable" seed="659280786" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000766" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneNavigationHistory: State restored (2 entries, currentIndex: 0)
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestSuite" id="1114" name="Data" fullname="NovelCore.Tests.Editor.Data" runstate="Runnable" testcasecount="59" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.046580" total="59" passed="59" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1006" name="CharacterDataTests" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.010220" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1007" name="CharacterData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_CreatedWithValidData_IsValid" methodname="CharacterData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="529746280" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001701" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1015" name="CharacterData_DefaultScale_IsOne" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_DefaultScale_IsOne" methodname="CharacterData_DefaultScale_IsOne" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="1219748469" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000840" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1012" name="CharacterData_GetEmotion_ReturnsCorrectEmotion" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_GetEmotion_ReturnsCorrectEmotion" methodname="CharacterData_GetEmotion_ReturnsCorrectEmotion" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="541854330" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000506" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1013" name="CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" methodname="CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="155016180" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000187" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1008" name="CharacterData_WithEmptyCharacterId_ValidateFails" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_WithEmptyCharacterId_ValidateFails" methodname="CharacterData_WithEmptyCharacterId_ValidateFails" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="456756075" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001152" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : characterId is required
+]]></output>
+                </test-case>
+                <test-case id="1009" name="CharacterData_WithEmptyCharacterName_ValidateFails" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_WithEmptyCharacterName_ValidateFails" methodname="CharacterData_WithEmptyCharacterName_ValidateFails" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="1268513891" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000610" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : characterName is required
+]]></output>
+                </test-case>
+                <test-case id="1011" name="CharacterData_WithInvalidDefaultEmotion_ValidateFails" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_WithInvalidDefaultEmotion_ValidateFails" methodname="CharacterData_WithInvalidDefaultEmotion_ValidateFails" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="1607087686" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000659" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : Default emotion 'neutral' not found in emotions list
+]]></output>
+                </test-case>
+                <test-case id="1010" name="CharacterData_WithNoEmotions_ValidateFails" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_WithNoEmotions_ValidateFails" methodname="CharacterData_WithNoEmotions_ValidateFails" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="1667456265" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000587" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : At least one emotion is required
+]]></output>
+                </test-case>
+                <test-case id="1014" name="CharacterData_WithSpineAnimation_ValidatesSpineData" fullname="NovelCore.Tests.Editor.Data.CharacterDataTests.CharacterData_WithSpineAnimation_ValidatesSpineData" methodname="CharacterData_WithSpineAnimation_ValidatesSpineData" classname="NovelCore.Tests.Editor.Data.CharacterDataTests" runstate="Runnable" seed="887945601" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000869" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : Spine animation type requires spineDataAsset
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1016" name="CharacterPlacementTests" fullname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" classname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.002155" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1020" name="CharacterPlacement_CanHaveNegativeSortingOrder" fullname="NovelCore.Tests.Editor.Data.CharacterPlacementTests.CharacterPlacement_CanHaveNegativeSortingOrder" methodname="CharacterPlacement_CanHaveNegativeSortingOrder" classname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" runstate="Runnable" seed="1377408305" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000245" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1017" name="CharacterPlacement_CreatedWithValues_StoresCorrectly" fullname="NovelCore.Tests.Editor.Data.CharacterPlacementTests.CharacterPlacement_CreatedWithValues_StoresCorrectly" methodname="CharacterPlacement_CreatedWithValues_StoresCorrectly" classname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" runstate="Runnable" seed="1988786054" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000190" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1018" name="CharacterPlacement_DefaultValues_AreZero" fullname="NovelCore.Tests.Editor.Data.CharacterPlacementTests.CharacterPlacement_DefaultValues_AreZero" methodname="CharacterPlacement_DefaultValues_AreZero" classname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" runstate="Runnable" seed="658001957" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000136" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1019" name="CharacterPlacement_WithNormalizedPosition_IsValid" fullname="NovelCore.Tests.Editor.Data.CharacterPlacementTests.CharacterPlacement_WithNormalizedPosition_IsValid" methodname="CharacterPlacement_WithNormalizedPosition_IsValid" classname="NovelCore.Tests.Editor.Data.CharacterPlacementTests" runstate="Runnable" seed="233670591" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000209" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1021" name="ChoiceDataTests" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.009439" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1022" name="ChoiceData_CreatedWithTwoOptions_IsValid" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_CreatedWithTwoOptions_IsValid" methodname="ChoiceData_CreatedWithTwoOptions_IsValid" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="845037142" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001759" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1029" name="ChoiceData_DefaultTimerSeconds_IsZero" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_DefaultTimerSeconds_IsZero" methodname="ChoiceData_DefaultTimerSeconds_IsZero" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="617025203" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000507" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1026" name="ChoiceData_WithDuplicateOptionIds_ValidateFails" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithDuplicateOptionIds_ValidateFails" methodname="ChoiceData_WithDuplicateOptionIds_ValidateFails" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="1147377090" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000904" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Duplicate option IDs found
+]]></output>
+                </test-case>
+                <test-case id="1023" name="ChoiceData_WithEmptyChoiceId_ValidateFails" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithEmptyChoiceId_ValidateFails" methodname="ChoiceData_WithEmptyChoiceId_ValidateFails" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="808404177" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000844" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : choiceId is required
+]]></output>
+                </test-case>
+                <test-case id="1024" name="ChoiceData_WithOneOption_ValidateFails" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithOneOption_ValidateFails" methodname="ChoiceData_WithOneOption_ValidateFails" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="685792124" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000804" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Must have between 2 and 6 options
+]]></output>
+                </test-case>
+                <test-case id="1025" name="ChoiceData_WithSevenOptions_ValidateFails" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithSevenOptions_ValidateFails" methodname="ChoiceData_WithSevenOptions_ValidateFails" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="684161379" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000937" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Must have between 2 and 6 options
+]]></output>
+                </test-case>
+                <test-case id="1027" name="ChoiceData_WithTimer_StoresTimerValues" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithTimer_StoresTimerValues" methodname="ChoiceData_WithTimer_StoresTimerValues" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="461589156" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000297" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1028" name="ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" fullname="NovelCore.Tests.Editor.Data.ChoiceDataTests.ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" methodname="ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" classname="NovelCore.Tests.Editor.Data.ChoiceDataTests" runstate="Runnable" seed="1494464813" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000797" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Invalid defaultOptionIndex for timed choice
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1030" name="DialogueLineDataTests" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.007530" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1031" name="DialogueLineData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_CreatedWithValidData_IsValid" methodname="DialogueLineData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1426348105" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000388" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1037" name="DialogueLineData_DefaultDisplayDuration_IsNegativeOne" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_DefaultDisplayDuration_IsNegativeOne" methodname="DialogueLineData_DefaultDisplayDuration_IsNegativeOne" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1801678565" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000189" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1038" name="DialogueLineData_DefaultEmotion_IsNeutral" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_DefaultEmotion_IsNeutral" methodname="DialogueLineData_DefaultEmotion_IsNeutral" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1347017445" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000235" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1035" name="DialogueLineData_WithActionButNoParameters_ShowsWarning" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithActionButNoParameters_ShowsWarning" methodname="DialogueLineData_WithActionButNoParameters_ShowsWarning" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1128717287" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000767" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : Character action specified but no parameters provided
+]]></output>
+                </test-case>
+                <test-case id="1034" name="DialogueLineData_WithCharacterAction_ReturnsCorrectAction" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithCharacterAction_ReturnsCorrectAction" methodname="DialogueLineData_WithCharacterAction_ReturnsCorrectAction" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1187591807" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000493" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1036" name="DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" methodname="DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1385911254" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000255" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1032" name="DialogueLineData_WithEmptyLineId_ValidateFails" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithEmptyLineId_ValidateFails" methodname="DialogueLineData_WithEmptyLineId_ValidateFails" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1232194086" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000875" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : lineId is required
+]]></output>
+                </test-case>
+                <test-case id="1033" name="DialogueLineData_WithEmptyTextKey_ShowsWarning" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithEmptyTextKey_ShowsWarning" methodname="DialogueLineData_WithEmptyTextKey_ShowsWarning" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1858444987" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000632" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : textKey is empty, using fallback text
+]]></output>
+                </test-case>
+                <test-case id="1039" name="DialogueLineData_WithSoundEffect_ReturnsAssetReference" fullname="NovelCore.Tests.Editor.Data.DialogueLineDataTests.DialogueLineData_WithSoundEffect_ReturnsAssetReference" methodname="DialogueLineData_WithSoundEffect_ReturnsAssetReference" classname="NovelCore.Tests.Editor.Data.DialogueLineDataTests" runstate="Runnable" seed="1730768914" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000240" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1040" name="SceneDataNextSceneTests" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.002743" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1042" name="NextScene_WhenNotSet_ReturnsNull" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests.NextScene_WhenNotSet_ReturnsNull" methodname="NextScene_WhenNotSet_ReturnsNull" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" seed="1868015790" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000274" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1041" name="NextScene_WhenSet_ReturnsCorrectReference" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests.NextScene_WhenSet_ReturnsCorrectReference" methodname="NextScene_WhenSet_ReturnsCorrectReference" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" seed="1004294723" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000198" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1044" name="SceneData_CanHaveNullNextScene_WithoutErrors" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests.SceneData_CanHaveNullNextScene_WithoutErrors" methodname="SceneData_CanHaveNullNextScene_WithoutErrors" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" seed="1985316129" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000626" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1045" name="SceneData_NextSceneProperty_IsReadOnly" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests.SceneData_NextSceneProperty_IsReadOnly" methodname="SceneData_NextSceneProperty_IsReadOnly" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" seed="1279270969" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000188" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1043" name="SceneData_WithNextScene_HasCorrectProperty" fullname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests.SceneData_WithNextScene_HasCorrectProperty" methodname="SceneData_WithNextScene_HasCorrectProperty" classname="NovelCore.Tests.Editor.Data.SceneDataNextSceneTests" runstate="Runnable" seed="1467682359" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000136" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1046" name="SceneDataTests" fullname="NovelCore.Tests.Editor.Data.SceneDataTests" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.005513" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1047" name="SceneData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_CreatedWithValidData_IsValid" methodname="SceneData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="618013401" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000441" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1054" name="SceneData_DefaultAutoAdvance_IsFalse" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_DefaultAutoAdvance_IsFalse" methodname="SceneData_DefaultAutoAdvance_IsFalse" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1906103404" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000217" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1053" name="SceneData_DefaultTransitionDuration_IsHalfSecond" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_DefaultTransitionDuration_IsHalfSecond" methodname="SceneData_DefaultTransitionDuration_IsHalfSecond" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1987859563" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000224" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1051" name="SceneData_WithAutoAdvance_ReturnsCorrectValues" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_WithAutoAdvance_ReturnsCorrectValues" methodname="SceneData_WithAutoAdvance_ReturnsCorrectValues" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1468773099" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000313" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="SceneData_WithCharacters_ReturnsCharactersList" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_WithCharacters_ReturnsCharactersList" methodname="SceneData_WithCharacters_ReturnsCharactersList" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1193194207" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000544" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1048" name="SceneData_WithEmptySceneId_ValidateFails" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_WithEmptySceneId_ValidateFails" methodname="SceneData_WithEmptySceneId_ValidateFails" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="13206416" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000788" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : sceneId is required
+]]></output>
+                </test-case>
+                <test-case id="1049" name="SceneData_WithoutDialogueOrChoices_ShowsWarning" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_WithoutDialogueOrChoices_ShowsWarning" methodname="SceneData_WithoutDialogueOrChoices_ShowsWarning" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1551739941" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000610" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : No dialogue or choices defined
+]]></output>
+                </test-case>
+                <test-case id="1050" name="SceneData_WithTransitionType_ReturnsCorrectValue" fullname="NovelCore.Tests.Editor.Data.SceneDataTests.SceneData_WithTransitionType_ReturnsCorrectValue" methodname="SceneData_WithTransitionType_ReturnsCorrectValue" classname="NovelCore.Tests.Editor.Data.SceneDataTests" runstate="Runnable" seed="1017877098" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000198" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1055" name="SceneDataValidationTests" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.003047" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1060" name="SceneData_NextSceneProperty_ReturnsCorrectValue" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests.SceneData_NextSceneProperty_ReturnsCorrectValue" methodname="SceneData_NextSceneProperty_ReturnsCorrectValue" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" seed="111716760" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000194" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1058" name="SceneData_WithBothChoicesAndNextScene_ShowsWarning" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests.SceneData_WithBothChoicesAndNextScene_ShowsWarning" methodname="SceneData_WithBothChoicesAndNextScene_ShowsWarning" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" seed="1779665113" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000472" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1059" name="SceneData_WithNoDialogueOrChoices_ShowsWarning" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests.SceneData_WithNoDialogueOrChoices_ShowsWarning" methodname="SceneData_WithNoDialogueOrChoices_ShowsWarning" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" seed="1904935713" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000421" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : No dialogue or choices defined
+]]></output>
+                </test-case>
+                <test-case id="1057" name="SceneData_WithoutSceneId_FailsValidation" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests.SceneData_WithoutSceneId_FailsValidation" methodname="SceneData_WithoutSceneId_FailsValidation" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" seed="1606141351" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000357" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : sceneId is required
+]]></output>
+                </test-case>
+                <test-case id="1056" name="SceneData_WithValidNextScene_PassesValidation" fullname="NovelCore.Tests.Editor.Data.SceneDataValidationTests.SceneData_WithValidNextScene_PassesValidation" methodname="SceneData_WithValidNextScene_PassesValidation" classname="NovelCore.Tests.Editor.Data.SceneDataValidationTests" runstate="Runnable" seed="730402359" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000325" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : No dialogue or choices defined
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1061" name="SceneHistoryEntryTests" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" testcasecount="11" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.003927" total="11" passed="11" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1062" name="Constructor_ValidData_CreatesEntry" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.Constructor_ValidData_CreatesEntry" methodname="Constructor_ValidData_CreatesEntry" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="916116083" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001017" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1063" name="Constructor_WithGameState_StoresSnapshot" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.Constructor_WithGameState_StoresSnapshot" methodname="Constructor_WithGameState_StoresSnapshot" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="324844416" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000133" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1065" name="IsValid_EmptySceneId_ReturnsFalse" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.IsValid_EmptySceneId_ReturnsFalse" methodname="IsValid_EmptySceneId_ReturnsFalse" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="902292487" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000052" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1067" name="IsValid_NegativeDialogueIndex_ReturnsFalse" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.IsValid_NegativeDialogueIndex_ReturnsFalse" methodname="IsValid_NegativeDialogueIndex_ReturnsFalse" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="14907598" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000040" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1066" name="IsValid_NullSceneId_ReturnsFalse" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.IsValid_NullSceneId_ReturnsFalse" methodname="IsValid_NullSceneId_ReturnsFalse" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="1603876695" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000040" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1064" name="IsValid_ValidEntry_ReturnsTrue" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.IsValid_ValidEntry_ReturnsTrue" methodname="IsValid_ValidEntry_ReturnsTrue" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="2105788268" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000040" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1069" name="JsonDeserialization_RestoresBasicFields" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.JsonDeserialization_RestoresBasicFields" methodname="JsonDeserialization_RestoresBasicFields" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="697966446" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000174" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1072" name="JsonSerialization_MaxValues_SerializesCorrectly" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.JsonSerialization_MaxValues_SerializesCorrectly" methodname="JsonSerialization_MaxValues_SerializesCorrectly" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="757805250" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000127" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1071" name="JsonSerialization_MultipleEntries_SerializesAsArray" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.JsonSerialization_MultipleEntries_SerializesAsArray" methodname="JsonSerialization_MultipleEntries_SerializesAsArray" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="1917549676" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000573" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[Serialized history: {"history":[{"sceneId":"scene_001","dialogueLineIndex":0,"timestamp":639086799158364170},{"sceneId":"scene_002","dialogueLineIndex":5,"timestamp":639086799158364200},{"sceneId":"scene_003","dialogueLineIndex":10,"timestamp":639086799158364210}],"currentIndex":-1,"maxHistorySize":50}
+]]></output>
+                </test-case>
+                <test-case id="1068" name="JsonSerialization_PreservesFields" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.JsonSerialization_PreservesFields" methodname="JsonSerialization_PreservesFields" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="1267500777" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000442" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[Serialized entry: {"sceneId":"scene_002","dialogueLineIndex":10,"timestamp":639086799158370850}
+]]></output>
+                </test-case>
+                <test-case id="1070" name="JsonSerialization_SceneDataNotSerialized" fullname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests.JsonSerialization_SceneDataNotSerialized" methodname="JsonSerialization_SceneDataNotSerialized" classname="NovelCore.Tests.Editor.Data.SceneHistoryEntryTests" runstate="Runnable" seed="682341712" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000131" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1001" name="SampleTest" fullname="NovelCore.Tests.Editor.SampleTest" classname="NovelCore.Tests.Editor.SampleTest" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.001032" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1004" name="CharacterDataBuilder_CreatesValidCharacterData" fullname="NovelCore.Tests.Editor.SampleTest.CharacterDataBuilder_CreatesValidCharacterData" methodname="CharacterDataBuilder_CreatesValidCharacterData" classname="NovelCore.Tests.Editor.SampleTest" runstate="Runnable" seed="1403860709" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="DialogueLineDataBuilder_CreatesValidDialogueLineData" fullname="NovelCore.Tests.Editor.SampleTest.DialogueLineDataBuilder_CreatesValidDialogueLineData" methodname="DialogueLineDataBuilder_CreatesValidDialogueLineData" classname="NovelCore.Tests.Editor.SampleTest" runstate="Runnable" seed="725461909" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000135" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="SampleTest_Infrastructure_Works" fullname="NovelCore.Tests.Editor.SampleTest.SampleTest_Infrastructure_Works" methodname="SampleTest_Infrastructure_Works" classname="NovelCore.Tests.Editor.SampleTest" runstate="Runnable" seed="1602561839" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000063" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="SceneDataBuilder_CreatesValidSceneData" fullname="NovelCore.Tests.Editor.SampleTest.SceneDataBuilder_CreatesValidSceneData" methodname="SceneDataBuilder_CreatesValidSceneData" classname="NovelCore.Tests.Editor.SampleTest" runstate="Runnable" seed="768214389" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000129" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+    <test-suite type="Assembly" id="1120" name="Unity.Addressables.DocExampleCode.Editor.Tests.dll" fullname="/Users/selstrom/work/projects/novel-core/novel-core/novel-core/Library/ScriptAssemblies/Unity.Addressables.DocExampleCode.Editor.Tests.dll" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000711" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="34370" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1121" name="AddressableAssets" fullname="AddressableAssets" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000544" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1122" name="DocExampleCode" fullname="AddressableAssets.DocExampleCode" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000473" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1118" name="TestStub" fullname="AddressableAssets.DocExampleCode.TestStub" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000402" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1119" name="RequiredTest" fullname="AddressableAssets.DocExampleCode.TestStub.RequiredTest" methodname="RequiredTest" classname="AddressableAssets.DocExampleCode.TestStub" runstate="Runnable" seed="2032150008" result="Passed" start-time="2026-03-09 19:05:15Z" end-time="2026-03-09 19:05:15Z" duration="0.000064" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>
