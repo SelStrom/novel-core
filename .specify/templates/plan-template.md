@@ -76,9 +76,11 @@
   ✅ VII. AI Development Constraints (NON-NEGOTIABLE)
      - [ ] AI modifications limited to Assets/Scripts/ directory only
      - [ ] No .meta file generation or modification by AI
-     - [ ] No direct asset file creation (prefabs, scenes, materials)
+     - [ ] No direct asset file creation (prefabs, scenes, materials) - ONLY via Editor scripts with Unity APIs
      - [ ] Package management permitted ONLY when user explicitly specifies
      - [ ] Package operations require compatibility verification and backup
+     - [ ] Editor script generators permitted for creating new assets (user-triggered via menu items)
+     - [ ] Editor script modifiers permitted for modifying existing prefabs (with backups, validation, logging)
   
   Document any principle violations with justification in Complexity Tracking section.
 -->

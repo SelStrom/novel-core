@@ -1,24 +1,22 @@
 <!--
 Sync Impact Report:
-- Version: 1.12.2 → 1.13.0 (MINOR: Added mandatory test execution requirement after task completion/bug fixes)
+- Version: 1.13.0 → 1.14.0 (MINOR: Enhanced Principle VII with explicit prefab creation/modification permissions)
 - Modified Principles: 
-  - Principle VI (Modular Architecture & Testing): Added "Test Execution Requirement" subsection
+  - Principle VII (AI Development Constraints): Expanded "Editor Script Generators" section to explicitly include prefab modification capabilities
 - Added Sections:
-  - Mandatory test execution after task groups and bug fixes
-  - Required test workflow (EditMode → PlayMode)
-  - Test failure handling requirements
-  - Test execution in batch mode for automation
+  - Explicit permission for AI to create Editor scripts that modify existing prefabs
+  - Requirements for prefab modification workflow (backup, validation, logging)
+  - Safety constraints for prefab modification (namespace scope, asset path validation)
 - Templates Requiring Updates:
-  ⚠️ tasks-template.md: Add test execution checkpoints after user story phases
-  ⚠️ plan-template.md: Add test execution requirements in Constitution Check
-- Follow-up TODOs: 
-  - Update tasks-template.md to include test execution tasks after each user story phase
-  - Update plan-template.md Constitution Check to include test execution verification
+  ✅ plan-template.md: Already includes Editor Script Generator checks in Constitution Check
+  ✅ spec-template.md: No updates needed (template is generic)
+  ✅ tasks-template.md: No updates needed (template is generic)
+- Follow-up TODOs: None
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.13.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.14.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
 
 ## Core Principles
 
@@ -178,15 +176,16 @@ When the user explicitly requests package operations by name, version, or config
 
 **Explicit Permissions for Editor Script Generators** (when user-specified):
 
-When the user explicitly requests creation of Unity assets (prefabs, ScriptableObjects, materials, etc.), AI tools MAY create Editor scripts that programmatically generate these assets:
+When the user explicitly requests creation or modification of Unity assets (prefabs, ScriptableObjects, materials, etc.), AI tools MAY create Editor scripts that programmatically generate or modify these assets:
 
-- **Editor Script Creation**: AI MAY create C# Editor scripts in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` that use Unity Editor APIs to generate assets
+- **Editor Script Creation**: AI MAY create C# Editor scripts in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` that use Unity Editor APIs to generate or modify assets
 - **Programmatic Asset Generation**: Editor scripts MAY use Unity APIs (`PrefabUtility`, `AssetDatabase`, `EditorUtility`) to create prefabs, materials, ScriptableObjects
-- **Menu Integration**: Editor scripts MAY add menu items (e.g., `NovelCore → Generate Dialogue Prefab`) for user-triggered generation
+- **Programmatic Asset Modification**: Editor scripts MAY use Unity APIs (`PrefabUtility.LoadPrefabContents`, `PrefabUtility.SaveAsPrefabAsset`) to modify existing prefabs
+- **Menu Integration**: Editor scripts MAY add menu items (e.g., `NovelCore → Generate Dialogue Prefab`, `NovelCore → Update Scene Prefabs`) for user-triggered generation or modification
 - **One-Time Execution**: Scripts SHOULD be designed for one-time or on-demand execution, not automatic generation on every compile
 - **Asset Output Location**: Generated assets MUST be placed in appropriate directories (`Assets/Resources/`, `Assets/Content/`) as specified by project structure
 
-**Editor Script Generator Requirements**:
+**Editor Script Generator Requirements (for new asset creation)**:
 
 - User MUST explicitly request asset generation (e.g., "create DialogueBox prefab", "generate default materials")
 - AI MUST create Editor script in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` directory only
@@ -195,13 +194,28 @@ When the user explicitly requests creation of Unity assets (prefabs, ScriptableO
 - Script MUST log success/failure messages to Unity Console
 - Script MUST check if asset already exists and prompt user before overwriting
 - Generated assets MUST follow project naming conventions and structure from plan.md
-- AI MUST NOT create Editor scripts that modify existing prefabs/assets - only generate new ones
+
+**Editor Script Modification Requirements (for existing asset modification)**:
+
+- User MUST explicitly request asset modification (e.g., "update all scene prefabs to include AudioSource", "add BoxCollider to all character prefabs")
+- AI MUST create Editor script in `Assets/Scripts/NovelCore/Editor/Tools/Generators/` directory only
+- Script MUST use Unity Editor APIs (`PrefabUtility.LoadPrefabContents`, `PrefabUtility.SaveAsPrefabAsset`, `AssetDatabase.SaveAssets`) exclusively
+- Script MUST create backup of modified assets before making changes (via `AssetDatabase.CopyAsset` or version control commit)
+- Script MUST validate asset paths and types before modification (e.g., verify prefab exists and is a valid prefab asset)
+- Script MUST log all modifications to Unity Console (file path, changes made, success/failure status)
+- Script MUST include safety constraints:
+  - **Namespace Scope**: Only modify assets under specific namespace/folder (e.g., `Assets/NovelCore/Runtime/Prefabs/`)
+  - **Type Validation**: Verify asset type matches expected type before modification
+  - **Dry-Run Mode**: Optionally support preview mode that logs planned changes without applying them
+- Script MUST handle errors gracefully (e.g., missing prefab, invalid GameObject hierarchy) and report failures clearly
+- Script MUST NOT modify Unity built-in assets (e.g., `Assets/Standard Assets/`, packages from Package Manager)
+- Script SHOULD batch modifications using `AssetDatabase.StartAssetEditing()` / `AssetDatabase.StopAssetEditing()` for performance
 
 **Rationale**: Unity's `.meta` files contain critical GUID mappings that ensure asset reference integrity. Manual `.meta` editing causes reference breakage, missing script errors, and project corruption. AI-generated asset files bypass Unity's import pipeline, leading to incorrect serialization, missing dependencies, and platform-specific build failures. Restricting AI to code generation in `Assets/Scripts/` provides value (scaffolding, boilerplate) while preventing engine-level corruption that requires manual recovery.
 
 Package management is explicitly permitted because: (1) Unity Package Manager provides safe APIs via `manifest.json` modifications, (2) package installation is a common development workflow that benefits from AI assistance, (3) package compatibility verification prevents breaking changes, (4) user must explicitly request package operations, eliminating speculative modifications. This permission enables AI to assist with dependency management while maintaining project integrity through validation and reporting requirements.
 
-Editor script generators are explicitly permitted because: (1) Unity Editor APIs (`PrefabUtility`, `AssetDatabase`) provide safe programmatic asset creation with proper GUID generation and .meta file management, (2) user explicitly triggers generation via menu commands, eliminating accidental modifications, (3) scripts are auditable C# code that can be reviewed and version-controlled, (4) Unity Editor validates generated assets through its import pipeline, (5) this approach automates repetitive manual work while maintaining Unity's asset integrity guarantees.
+Editor script generators and modifiers are explicitly permitted because: (1) Unity Editor APIs (`PrefabUtility`, `AssetDatabase`) provide safe programmatic asset creation and modification with proper GUID generation and .meta file management, (2) user explicitly triggers generation/modification via menu commands, eliminating accidental modifications, (3) scripts are auditable C# code that can be reviewed and version-controlled, (4) Unity Editor validates generated/modified assets through its import pipeline, (5) this approach automates repetitive manual work (e.g., batch prefab updates across hundreds of assets) while maintaining Unity's asset integrity guarantees, (6) backup requirements and dry-run mode enable safe experimentation, (7) namespace/type validation prevents accidental modification of critical assets. Prefab modification is especially valuable for visual novel constructor development where batch updates to scene prefabs (adding components, updating references, refactoring hierarchies) are common maintenance tasks that would be prohibitively time-consuming to perform manually.
 
 **Unity Compilation Validation** (REQUIRED for error checking):
 
@@ -662,4 +676,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.13.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.14.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
