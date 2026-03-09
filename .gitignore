@@ -103,3 +103,16 @@ temp/
 *.log
 test-results*.xml
 unity*.log
+
+# Bug fixing pipeline temporary artifacts
+.fix/agents/
+.fix/patch/unity_*.log
+.fix/patch/test_results_iter*.xml
+
+# Preserve final fix artifacts for manual review before archive
+!.fix/bug_context/
+!.fix/theories/
+!.fix/tests/
+!.fix/patch/fix_summary.md
+!.fix/patch/patch.diff
+!.fix/patch/iterations.log
