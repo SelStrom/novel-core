@@ -1,46 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4722290655119345806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03a_PathA_Line02
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 92c6f69e-f16b-4a49-ba8a-92394db6bf7c
-  _lineId: line_path_a_003
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_path_a_003
-  _fallbackText: "[\u0421\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u0430\u044F \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430
-    - Path A]"
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
---- !u!114 &-1977937671909896383
+--- !u!114 &-6375445246444853213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene03a_PathA_Line00
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 1008b16d-0154-4991-b660-936c68315479
+  _id: 775e77d6-0a9e-496b-b08b-1512b64286b4
   _lineId: line_path_a_001
   _speaker:
     m_AssetGUID: 
@@ -93,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene03a_PathA
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 94415179-5154-4019-aba4-7e9d6b7c909b
+  _id: 7d94cc72-2b57-49b0-972e-b31c1c478519
   _sceneId: scene_path_a_001
   _sceneName: "\u041F\u0443\u0442\u044C A: \u041F\u0440\u043E\u0433\u0443\u043B\u043A\u0430"
   _backgroundImage:
@@ -110,9 +70,9 @@ MonoBehaviour:
     m_EditorAssetChanged: 0
   _characters: []
   _dialogueLines:
-  - {fileID: -1977937671909896383}
-  - {fileID: 1303032673279896967}
-  - {fileID: -4722290655119345806}
+  - {fileID: -6375445246444853213}
+  - {fileID: 9031210531551002298}
+  - {fileID: 3993114409650237704}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -122,9 +82,50 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _transitionRules: []
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &1303032673279896967
+--- !u!114 &3993114409650237704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene03a_PathA_Line02
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: d12c3663-db67-4c6d-9a49-dd90d1cda899
+  _lineId: line_path_a_003
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_path_a_003
+  _fallbackText: "[\u0421\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u0430\u044F \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430
+    - Path A]"
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &9031210531551002298
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +138,7 @@ MonoBehaviour:
   m_Name: Scene03a_PathA_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 77fe53b4-a237-4737-9601-ed3742b0f1fd
+  _id: ea03b3f1-38be-438e-a322-05b93d47c3c7
   _lineId: line_path_a_002
   _speaker:
     m_AssetGUID: 

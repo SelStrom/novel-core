@@ -40,6 +40,26 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6d655b5140112408d950269ff5d7c595
+    m_Address: Backgrounds/bg_room
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72dd5be02196e4d46b126fd0ed7fe9fd
+    m_Address: Backgrounds/bg_home
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c49fd6e2ca934d27aff224e1e2a35e9
+    m_Address: Backgrounds/bg_street
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9a88888c901f4274a518f62fe84a959
+    m_Address: Characters/char_protagonist
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f22afcad3d2d0431ba6522de8ae54eeb
     m_Address: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
     m_ReadOnly: 0

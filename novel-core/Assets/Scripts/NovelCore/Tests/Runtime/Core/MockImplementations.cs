@@ -30,10 +30,37 @@ public class MockAssetManager : IAssetManager
             return Task.FromResult<T>(null);
         }
 
-        var keyString = key.ToString();
-        if (_loadedAssets.TryGetValue(keyString, out var asset))
+        // Handle AssetReference specially
+        if (key is AssetReference assetRef)
         {
-            return Task.FromResult(asset as T);
+            // Try to get the asset key from AssetReference
+            // AssetReference.RuntimeKey might be a GUID, but we can use AssetGUID as fallback
+            var runtimeKey = assetRef.RuntimeKey;
+            if (runtimeKey != null)
+            {
+                var runtimeKeyString = runtimeKey.ToString();
+                if (_loadedAssets.TryGetValue(runtimeKeyString, out var asset))
+                {
+                    return Task.FromResult(asset as T);
+                }
+            }
+            
+            // Fallback: try AssetGUID
+            if (!string.IsNullOrEmpty(assetRef.AssetGUID))
+            {
+                if (_loadedAssets.TryGetValue(assetRef.AssetGUID, out var asset))
+                {
+                    return Task.FromResult(asset as T);
+                }
+            }
+            
+            return Task.FromResult<T>(null);
+        }
+
+        var keyString = key.ToString();
+        if (_loadedAssets.TryGetValue(keyString, out var foundAsset))
+        {
+            return Task.FromResult(foundAsset as T);
         }
 
         return Task.FromResult<T>(null);
@@ -185,9 +212,24 @@ public class MockSceneManager : ISceneManager
     public Dictionary<string, string> CharacterEmotions = new();
     public Dictionary<string, bool> CharacterVisibility = new();
     public Dictionary<string, Vector2> CharacterPositions = new();
+    
+    public int LoadSceneCallCount { get; private set; }
+    public string LastLoadedSceneGuid { get; private set; }
+    
+    public void Reset()
+    {
+        LoadSceneCallCount = 0;
+        LastLoadedSceneGuid = null;
+        CurrentScene = null;
+        CharacterEmotions.Clear();
+        CharacterVisibility.Clear();
+        CharacterPositions.Clear();
+    }
 
     public void LoadScene(SceneData sceneData)
     {
+        LoadSceneCallCount++;
+        LastLoadedSceneGuid = sceneData?.name ?? "null";
         CurrentScene = sceneData;
         OnSceneLoadStart?.Invoke(sceneData);
         OnSceneLoadComplete?.Invoke(sceneData);
@@ -195,6 +237,9 @@ public class MockSceneManager : ISceneManager
 
     public async Task LoadSceneAsync(SceneData sceneData)
     {
+        LoadSceneCallCount++;
+        LastLoadedSceneGuid = sceneData?.name ?? "null";
+        
         IsLoading = true;
         OnSceneLoadStart?.Invoke(sceneData);
         

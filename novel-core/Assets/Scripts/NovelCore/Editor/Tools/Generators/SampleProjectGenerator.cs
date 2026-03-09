@@ -129,12 +129,20 @@ public static class SampleProjectGenerator
         CreateColoredTexture("bg_room", new Color(0.8f, 0.7f, 0.6f), BACKGROUNDS_DIR); // Beige (room)
         CreateColoredTexture("bg_street", new Color(0.6f, 0.7f, 0.8f), BACKGROUNDS_DIR); // Light blue (street)
         CreateColoredTexture("bg_home", new Color(0.7f, 0.8f, 0.7f), BACKGROUNDS_DIR); // Light green (home)
+        
+        // Настроить эти текстуры как Addressables
+        SetupBackgroundAsAddressable("bg_room");
+        SetupBackgroundAsAddressable("bg_street");
+        SetupBackgroundAsAddressable("bg_home");
     }
 
     private static void GeneratePlaceholderCharacters()
     {
         // Generate simple colored textures as placeholder characters
         CreateColoredTexture("char_protagonist", new Color(1f, 0.8f, 0.6f), CHARACTERS_DIR); // Skin tone
+        
+        // Настроить персонажей как Addressables
+        SetupCharacterAsAddressable("char_protagonist");
     }
 
     private static void CreateColoredTexture(string name, Color color, string directory)
@@ -965,6 +973,67 @@ public static class SampleProjectGenerator
         EditorUtility.SetDirty(settings);
 
         Debug.Log($"[SampleProjectGenerator] ✅ Marked as Addressable: {scene.SceneName} (GUID: {guid})");
+    }
+
+    /// <summary>
+    /// Настраивает фоновое изображение как Addressable с правильным адресом.
+    /// </summary>
+    private static void SetupBackgroundAsAddressable(string backgroundName)
+    {
+        string assetPath = $"{BACKGROUNDS_DIR}/{backgroundName}.png";
+        string address = $"Backgrounds/{backgroundName}";
+        SetupAssetAsAddressable(assetPath, address);
+    }
+
+    /// <summary>
+    /// Настраивает персонажа как Addressable с правильным адресом.
+    /// </summary>
+    private static void SetupCharacterAsAddressable(string characterName)
+    {
+        string assetPath = $"{CHARACTERS_DIR}/{characterName}.png";
+        string address = $"Characters/{characterName}";
+        SetupAssetAsAddressable(assetPath, address);
+    }
+
+    /// <summary>
+    /// Универсальный метод для настройки любого ассета как Addressable.
+    /// </summary>
+    private static void SetupAssetAsAddressable(string assetPath, string address)
+    {
+        if (!File.Exists(assetPath))
+        {
+            Debug.LogWarning($"[SampleProjectGenerator] Asset not found: {assetPath}");
+            return;
+        }
+
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] Addressables settings not found!");
+            return;
+        }
+
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+        var entry = settings.FindAssetEntry(guid);
+        
+        if (entry == null)
+        {
+            var defaultGroup = settings.DefaultGroup;
+            if (defaultGroup == null)
+            {
+                Debug.LogError("[SampleProjectGenerator] No default Addressables group found");
+                return;
+            }
+            
+            entry = settings.CreateOrMoveEntry(guid, defaultGroup, false, false);
+        }
+
+        if (entry != null)
+        {
+            entry.address = address;
+            EditorUtility.SetDirty(settings);
+            Debug.Log($"[SampleProjectGenerator] ✓ Addressable setup: {address} → {assetPath}");
+        }
     }
 
     private struct DialogueContent

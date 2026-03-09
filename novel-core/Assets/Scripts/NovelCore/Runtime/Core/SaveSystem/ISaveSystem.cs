@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using NovelCore.Runtime.Data.Scenes;
 
 namespace NovelCore.Runtime.Core.SaveSystem
 {
@@ -56,7 +57,7 @@ namespace NovelCore.Runtime.Core.SaveSystem
     [Serializable]
     public class SaveData
     {
-        public string saveVersion = "1.0";
+        public string saveVersion = "1.1";
         public string currentSceneId;
         public int currentDialogueIndex;
         public string[] choiceHistory;
@@ -69,11 +70,15 @@ namespace NovelCore.Runtime.Core.SaveSystem
         public SerializableDictionary<string, bool> flags;
         public SerializableDictionary<string, int> variables;
         
+        // Scene navigation history (v1.1+)
+        public SceneNavigationState navigationState;
+        
         public SaveData()
         {
             saveTimestamp = DateTime.Now;
             flags = new SerializableDictionary<string, bool>();
             variables = new SerializableDictionary<string, int>();
+            navigationState = new SceneNavigationState();
         }
     }
     

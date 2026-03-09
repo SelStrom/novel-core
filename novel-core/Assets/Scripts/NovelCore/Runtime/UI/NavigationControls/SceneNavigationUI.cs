@@ -109,7 +109,13 @@ public class SceneNavigationUI : MonoBehaviour
         
         if (_sceneManager == null)
         {
-            Debug.LogWarning("SceneNavigationUI: Scene manager not initialized");
+            Debug.LogError("SceneNavigationUI: Scene manager not initialized - cannot navigate back");
+            return;
+        }
+
+        if (!_sceneManager.CanNavigateBack())
+        {
+            Debug.LogWarning("SceneNavigationUI: Cannot navigate back - no previous scenes in history");
             return;
         }
 
@@ -120,7 +126,7 @@ public class SceneNavigationUI : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("SceneNavigationUI: Failed to navigate back");
+            Debug.LogError("SceneNavigationUI: Failed to navigate back despite CanNavigateBack returning true");
         }
     }
 
@@ -130,7 +136,13 @@ public class SceneNavigationUI : MonoBehaviour
         
         if (_sceneManager == null)
         {
-            Debug.LogWarning("SceneNavigationUI: Scene manager not initialized");
+            Debug.LogError("SceneNavigationUI: Scene manager not initialized - cannot navigate forward");
+            return;
+        }
+
+        if (!_sceneManager.CanNavigateForward())
+        {
+            Debug.LogWarning("SceneNavigationUI: Cannot navigate forward - no forward scenes in history");
             return;
         }
 
@@ -141,7 +153,7 @@ public class SceneNavigationUI : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("SceneNavigationUI: Failed to navigate forward");
+            Debug.LogError("SceneNavigationUI: Failed to navigate forward despite CanNavigateForward returning true");
         }
     }
 

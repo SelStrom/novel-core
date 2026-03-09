@@ -62,6 +62,10 @@ public class SceneData : BaseScriptableObject
     private AssetReference _nextScene;
 
     [SerializeField]
+    [Tooltip("Conditional transition rules evaluated before nextScene. First matching rule determines target scene.")]
+    private List<SceneTransitionRule> _transitionRules = new();
+
+    [SerializeField]
     [Tooltip("Enable auto-advance for dialogue in this scene")]
     private bool _autoAdvance = false;
 
@@ -80,6 +84,7 @@ public class SceneData : BaseScriptableObject
     public TransitionType TransitionType => _transitionType;
     public float TransitionDuration => _transitionDuration;
     public AssetReference NextScene => _nextScene;
+    public IReadOnlyList<SceneTransitionRule> TransitionRules => _transitionRules;
     public bool AutoAdvance => _autoAdvance;
     public float AutoAdvanceDelay => _autoAdvanceDelay;
 
@@ -108,6 +113,43 @@ public class SceneData : BaseScriptableObject
         if (_choices.Count > 0 && _nextScene != null && _nextScene.RuntimeKeyIsValid())
         {
             Debug.LogWarning($"SceneData {name}: Both choices and nextScene are defined. Choices will take priority, nextScene will be ignored.");
+        }
+
+        // Validate transition rules
+        if (_transitionRules != null && _transitionRules.Count > 0)
+        {
+            for (int i = 0; i < _transitionRules.Count; i++)
+            {
+                var rule = _transitionRules[i];
+                if (rule == null)
+                {
+                    Debug.LogError($"SceneData {name}: Transition rule at index {i} is null");
+                    return false;
+                }
+
+                if (!rule.IsValid())
+                {
+                    Debug.LogError($"SceneData {name}: Transition rule at index {i} is invalid");
+                    return false;
+                }
+
+                // Check for duplicate priorities
+                for (int j = i + 1; j < _transitionRules.Count; j++)
+                {
+                    if (_transitionRules[j] != null && _transitionRules[j].Priority == rule.Priority)
+                    {
+                        Debug.LogWarning($"SceneData {name}: Duplicate priority {rule.Priority} found at indices {i} and {j}. Evaluation order may be ambiguous.");
+                    }
+                }
+            }
+
+            Debug.Log($"SceneData {name}: {_transitionRules.Count} transition rules validated");
+        }
+
+        // Warn if transition rules, choices, and nextScene are all defined
+        if (_transitionRules != null && _transitionRules.Count > 0 && _choices.Count > 0)
+        {
+            Debug.LogWarning($"SceneData {name}: Both transition rules and choices are defined. Choices take priority over transition rules.");
         }
 
         return true;

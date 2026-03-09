@@ -219,6 +219,129 @@ The Inspector shows helpful messages:
 
 ---
 
+---
+
+## Scene Navigation History (Back/Forward)
+
+### Enable Player Navigation
+
+The system automatically tracks scene history. Players can navigate back to previous scenes!
+
+**Implementation**: Add navigation buttons to your UI
+
+```csharp
+// Example: In your custom UI script
+public void OnBackButtonClick()
+{
+    if (_sceneManager.CanNavigateBack())
+    {
+        _sceneManager.NavigateBack();
+    }
+}
+
+public void OnForwardButtonClick()
+{
+    if (_sceneManager.CanNavigateForward())
+    {
+        _sceneManager.NavigateForward();
+    }
+}
+```
+
+### How It Works
+
+- **Automatic**: History tracked automatically on scene transitions
+- **Memory**: Stores last 50 scenes visited
+- **Save/Load**: History persists in save files
+- **State Restoration**: Returns to exact dialogue line when navigating back
+
+---
+
+## Conditional Scene Transitions (Advanced)
+
+### What Are Conditional Transitions?
+
+Load different scenes based on game state (flags, choices made earlier).
+
+**Example Use Cases**:
+- "If player has key, show secret room; otherwise show locked door"
+- "If romance level >= 5, show date scene; otherwise show friend scene"
+- "If player chose [Path A] earlier, show consequence scene"
+
+### Step 1: Set Game State Flags
+
+In your dialogue scripts or custom code:
+
+```csharp
+// Set a flag (true/false)
+_gameStateManager.SetFlag("hasKey", true);
+_gameStateManager.SetFlag("metCharacter", true);
+
+// Set a variable (integer)
+_gameStateManager.SetVariable("romanceLevel", 5);
+_gameStateManager.SetVariable("chapter", 2);
+```
+
+### Step 2: Add Transition Rules to Scene
+
+1. Select your SceneData in Inspector
+2. Find **Scene Transition** → **Transition Rules**
+3. Add new rule (click + button)
+4. Configure:
+   - **Priority**: `0` (lower number = checked first)
+   - **Condition Expression**: `"hasKey == true"`
+   - **Target Scene**: Drag target scene (e.g., `SecretRoom`)
+
+### Step 3: Add Fallback with Next Scene
+
+1. In same scene, set **Next Scene** to default path (e.g., `LockedDoor`)
+2. This loads if NO rules match
+
+### Condition Expression Syntax
+
+**Boolean flags:**
+```
+hasKey == true
+metCharacter == false
+completedTutorial != false
+```
+
+**Integer variables:**
+```
+chapter >= 2
+health > 50
+romanceLevel <= 3
+score == 100
+```
+
+### Priority Order Example
+
+```
+Scene with multiple rules:
+  Rule 1 [Priority: 0]: "hasKey == true" → SecretRoom
+  Rule 2 [Priority: 1]: "chapter >= 2" → Chapter2Path
+  Rule 3 [Priority: 2]: "score > 100" → BonusScene
+  Next Scene: DefaultPath
+
+Evaluation:
+1. Check hasKey → If true, load SecretRoom (STOP)
+2. Check chapter → If ≥2, load Chapter2Path (STOP)
+3. Check score → If >100, load BonusScene (STOP)
+4. No matches → Load DefaultPath
+```
+
+### Complete Priority Chain
+
+```
+When scene completes:
+1. Has Choices? → Show choices, wait for selection
+2. No choices? → Evaluate Transition Rules (by priority)
+3. No matching rules? → Load Next Scene (if set)
+4. No next scene? → End dialogue (show menu/credits)
+```
+
+---
+
 ## Testing Checklist
 
 Before publishing your story:
@@ -226,10 +349,14 @@ Before publishing your story:
 - [ ] Test each scene individually in Scene Editor
 - [ ] Play through entire story from start to finish in Play Mode
 - [ ] Test all choice branches
+- [ ] Test navigation back/forward through scenes
+- [ ] Verify conditional transitions with different game states
 - [ ] Verify all scenes have dialogue or choices
 - [ ] Check Console for validation warnings
 - [ ] Test scene transitions are smooth (<1 second)
 - [ ] Verify no circular references exist
+- [ ] Test save/load with navigation history
+- [ ] Test conditional rules with various flag combinations
 
 ---
 
@@ -269,6 +396,60 @@ Scene01_Introduction
 
 ---
 
-**Quickstart Status**: ✅ Complete (Linear + Choice-Based Progressions)  
-**Documentation**: research.md, data-model.md, this file  
-**Next**: contracts/ (API documentation for developers)
+## Pattern Library: Common Scene Structures
+
+### Hub-and-Spoke Model
+
+```
+MainHub (with choices)
+  ├─[Explore Town] → TownScene → [Return] → MainHub
+  ├─[Visit Shop] → ShopScene → [Return] → MainHub
+  └─[Continue Story] → NextChapter
+```
+
+### State-Based Branching
+
+```
+Scene_MeetCharacter
+  └─ Sets flag: metCharacter = true
+
+Scene_Later (conditional)
+  ├─ Rule[P0]: "metCharacter == true" → FriendlyDialogue
+  └─ Next Scene (fallback): StrangerDialogue
+```
+
+### Chapter System
+
+```
+Chapter1_Start (sets: chapter = 1)
+  → Chapter1_Middle
+  → Chapter1_End
+
+Chapter2_Start (sets: chapter = 2)
+  └─ Rule[P0]: "chapter >= 2" → UnlockSpecialPath
+  └─ Next Scene (fallback): NormalPath
+```
+
+---
+
+## Performance Tips
+
+### Best Practices
+
+1. **Keep scene files small**: <2MB per scene asset
+2. **Limit history**: System automatically caps at 50 scenes
+3. **Test on target hardware**: Verify transitions <1 second
+4. **Use validation**: Click Validate Scene before building
+
+### Memory Management
+
+- **Navigation History**: Max 50 scenes (oldest removed automatically)
+- **Game State**: Unlimited flags/variables (stored in save file)
+- **Asset References**: Use Addressables (automatic memory management)
+
+---
+
+**Quickstart Status**: ✅ Complete (All Features Covered)  
+**Features**: Linear Progression, Choice Branching, Navigation History, Conditional Transitions  
+**Documentation**: research.md, data-model.md, this file, contracts/  
+**Next**: Build your first interactive story! 🎮

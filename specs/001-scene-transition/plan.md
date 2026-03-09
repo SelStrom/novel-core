@@ -52,11 +52,16 @@ This plan implements comprehensive scene transition mechanics for the visual nov
 - [x] Save format backward compatible or includes migration (SceneNavigationState serializable, version tracked)
 - [x] Cloud sync supported (leverages existing SaveSystem which supports Steam/iCloud/Google Play)
 
-### ✅ VI. Modular Architecture
+### ✅ VI. Modular Architecture & Testing
 - [x] Feature implemented as separate assembly/module (extends existing NovelCore.Runtime assembly)
 - [x] Interfaces used for platform-specific code (N/A - no platform-specific code needed)
 - [x] Unit tests achieve >80% coverage (EditMode tests for SceneData validation, PlayMode for DialogueSystem integration)
 - [x] Integration tests for cross-module contracts (DialogueSystem ↔ SceneManager ↔ SaveSystem transitions)
+- [x] **Test Execution Requirement** (Constitution Principle VI - MANDATORY):
+  - After completing each user story (US1-US5), MUST run full test suite (EditMode + PlayMode)
+  - Tests MUST be executed in batch mode using Unity Test Runner with explicit commands
+  - Zero test failures required before proceeding to next phase
+  - Test execution commands included in tasks.md (T025, T036, T061, T085, T102, T115)
 
 ### ✅ VII. AI Development Constraints (NON-NEGOTIABLE)
 - [x] AI modifications limited to Assets/Scripts/ directory only (all changes in NovelCore/Runtime and NovelCore/Tests)

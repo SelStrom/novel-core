@@ -124,6 +124,8 @@ public class SceneManager : ISceneManager
 
             OnSceneTransitionComplete?.Invoke(sceneData);
             OnSceneLoadComplete?.Invoke(sceneData);
+            
+            Debug.Log("SceneManager: Scene load complete event fired");
 
             // Add to navigation history (if not navigating and history is available)
             if (!_isNavigating && _navigationHistory != null)
@@ -446,10 +448,7 @@ public class SceneManager : ISceneManager
 
         // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        LoadSceneAsync(previousEntry.sceneData).ContinueWith(task =>
-        {
-            _isNavigating = false;
-        });
+        NavigateToSceneAsync(previousEntry.sceneData);
 
         // TODO: Restore dialogue position to previousEntry.dialogueLineIndex
         // This requires DialogueSystem integration
@@ -485,15 +484,27 @@ public class SceneManager : ISceneManager
 
         // Load the scene with navigation flag set to prevent adding to history
         _isNavigating = true;
-        LoadSceneAsync(nextEntry.sceneData).ContinueWith(task =>
-        {
-            _isNavigating = false;
-        });
+        NavigateToSceneAsync(nextEntry.sceneData);
 
         // TODO: Restore dialogue position to nextEntry.dialogueLineIndex
         // This requires DialogueSystem integration
 
         return true;
+    }
+
+    /// <summary>
+    /// Helper method for navigation that properly handles async loading.
+    /// </summary>
+    private async void NavigateToSceneAsync(SceneData sceneData)
+    {
+        try
+        {
+            await LoadSceneAsync(sceneData);
+        }
+        finally
+        {
+            _isNavigating = false;
+        }
     }
 
     /// <summary>

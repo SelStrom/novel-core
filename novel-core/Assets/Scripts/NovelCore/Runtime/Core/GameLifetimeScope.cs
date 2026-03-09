@@ -7,6 +7,8 @@ using NovelCore.Runtime.Core.InputHandling;
 using NovelCore.Runtime.Core.DialogueSystem;
 using NovelCore.Runtime.Core.SceneManagement;
 using NovelCore.Runtime.Core.Localization;
+using NovelCore.Runtime.Core.SaveSystem;
+using NovelCore.Runtime.Data.GameState;
 using NovelCore.Runtime.Animation;
 
 namespace NovelCore.Runtime.Core
@@ -41,14 +43,17 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ISceneNavigationHistory, SceneNavigationHistory>(Lifetime.Singleton).WithParameter(SceneNavigationHistory.DEFAULT_MAX_HISTORY_SIZE);
         builder.Register<ISceneManager, SceneManagement.SceneManager>(Lifetime.Singleton);
 
+        // Game State Management
+        builder.Register<IGameStateManager, GameStateManager>(Lifetime.Singleton);
+
         // Localization
         builder.Register<ILocalizationService, BasicLocalizationService>(Lifetime.Singleton);
 
         // Character Animation Factory
         builder.Register<ICharacterAnimatorFactory, CharacterAnimatorFactory>(Lifetime.Singleton);
 
-        // Save System (to be implemented)
-        // builder.Register<ISaveSystem, SaveSystem>(Lifetime.Singleton);
+        // Save System
+        builder.Register<ISaveSystem, SaveSystem.SaveSystem>(Lifetime.Singleton);
 
         // Platform Services (conditional registration based on build target)
         // RegisterPlatformService(builder);

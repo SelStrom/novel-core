@@ -106,6 +106,7 @@ As a player, I want next scenes to load in the background while I'm reading the 
   
 - What happens when a scene has both choices defined AND a next scene defined?
   - Choices take priority - the next scene field is ignored if choices are present
+  - **System MUST warn creator**: Unity Editor MUST display a warning message in SceneDataEditor Inspector when both choices and nextScene are defined, informing the creator that nextScene will be ignored
 
 ## Requirements *(mandatory)*
 

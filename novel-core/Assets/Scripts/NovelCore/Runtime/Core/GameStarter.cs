@@ -132,12 +132,15 @@ public class GameStarter : MonoBehaviour
     
     /// <summary>
     /// Determines which scene to load on game start.
-    /// Checks for preview mode (Editor-Runtime bridge) and falls back to default starting scene.
+    /// Priority order:
+    /// 1. Preview scene (from Scene Editor "Preview" button)
+    /// 2. Selected scene (from Project Window selection)
+    /// 3. Default starting scene (from Inspector field)
     /// </summary>
-    /// <returns>SceneData to load (preview scene or default starting scene)</returns>
+    /// <returns>SceneData to load</returns>
     private SceneData GetSceneToLoad()
     {
-        // Check for preview mode (Constitution Principle VIII: Editor-Runtime Bridge)
+        // 1. Check for preview mode (Constitution Principle VIII: Editor-Runtime Bridge)
         SceneData previewScene = PreviewManager.GetPreviewScene();
         if (previewScene != null)
         {
@@ -145,7 +148,16 @@ public class GameStarter : MonoBehaviour
             return previewScene;
         }
         
-        // Fallback to default starting scene
+        // 2. Check for selected SceneData in Project Window (Editor only)
+        #if UNITY_EDITOR
+        if (UnityEditor.Selection.activeObject is SceneData selectedScene)
+        {
+            Debug.Log($"GameStarter: Loading selected scene: {selectedScene.SceneName}");
+            return selectedScene;
+        }
+        #endif
+        
+        // 3. Fallback to default starting scene from Inspector
         if (_startingScene != null)
         {
             Debug.Log($"GameStarter: Loading default starting scene: {_startingScene.SceneName}");

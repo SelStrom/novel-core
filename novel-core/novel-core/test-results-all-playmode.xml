@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="91" result="Failed(Child)" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.3350009">
+  <test-suite type="TestSuite" id="1116" name="novel-core" fullname="novel-core" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.335001" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1104" name="NovelCore.Tests.Runtime.dll" fullname="/Users/selstrom/work/projects/novel-core/novel-core/novel-core/Library/ScriptAssemblies/NovelCore.Tests.Runtime.dll" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.331103" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="31429" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1105" name="NovelCore" fullname="NovelCore" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.330810" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1106" name="Tests" fullname="NovelCore.Tests" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.330562" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestSuite" id="1107" name="Runtime" fullname="NovelCore.Tests.Runtime" runstate="Runnable" testcasecount="91" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:19Z" duration="8.330368" total="91" passed="87" failed="4" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-suite type="TestSuite" id="1110" name="Core" fullname="NovelCore.Tests.Runtime.Core" runstate="Runnable" testcasecount="41" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:16Z" duration="5.287209" total="41" passed="40" failed="1" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestSuite" id="1112" name="DialogueSystem" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem" runstate="Runnable" testcasecount="22" result="Failed" site="Child" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:16Z" duration="5.041129" total="22" passed="21" failed="1" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-suite type="TestFixture" id="1079" name="DialogueSystemAutoAdvanceNextSceneTests" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:16Z" duration="4.517355" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1083" name="AutoAdvance_DisabledMidScene_StopsBeforeNextScene" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests.AutoAdvance_DisabledMidScene_StopsBeforeNextScene" methodname="AutoAdvance_DisabledMidScene_StopsBeforeNextScene" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" runstate="Runnable" seed="382085025" result="Passed" start-time="2026-03-09 18:48:11Z" end-time="2026-03-09 18:48:12Z" duration="1.306869" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Cancellable Auto Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue stopped
+]]></output>
+                  </test-case>
+                  <test-case id="1082" name="AutoAdvance_MultipleLines_TransitionsAfterLastLine" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests.AutoAdvance_MultipleLines_TransitionsAfterLastLine" methodname="AutoAdvance_MultipleLines_TransitionsAfterLastLine" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" runstate="Runnable" seed="74979912" result="Passed" start-time="2026-03-09 18:48:12Z" end-time="2026-03-09 18:48:14Z" duration="1.402816" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Multi-line Auto Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+]]></output>
+                  </test-case>
+                  <test-case id="1080" name="AutoAdvance_WithNextScene_TransitionsAutomatically" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests.AutoAdvance_WithNextScene_TransitionsAutomatically" methodname="AutoAdvance_WithNextScene_TransitionsAutomatically" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" runstate="Runnable" seed="2033604428" result="Passed" start-time="2026-03-09 18:48:14Z" end-time="2026-03-09 18:48:15Z" duration="1.201081" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Auto Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+]]></output>
+                  </test-case>
+                  <test-case id="1081" name="AutoAdvance_WithoutNextScene_CompletesDialogue" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests.AutoAdvance_WithoutNextScene_CompletesDialogue" methodname="AutoAdvance_WithoutNextScene_CompletesDialogue" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemAutoAdvanceNextSceneTests" runstate="Runnable" seed="698139212" result="Passed" start-time="2026-03-09 18:48:15Z" end-time="2026-03-09 18:48:16Z" duration="0.600619" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Auto Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                  </test-case>
+                </test-suite>
+                <test-suite type="TestFixture" id="1084" name="DialogueSystemNextSceneTests" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.509552" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <failure>
+                    <message><![CDATA[One or more child tests had errors]]></message>
+                  </failure>
+                  <test-case id="1085" name="NextScene_WhenDialogueCompletes_FiresNavigationEvent" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenDialogueCompletes_FiresNavigationEvent" methodname="NextScene_WhenDialogueCompletes_FiresNavigationEvent" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="152062785" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.201659" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+]]></output>
+                  </test-case>
+                  <test-case id="1087" name="NextScene_WhenLoadFails_CompletesDialogueGracefully" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenLoadFails_CompletesDialogueGracefully" methodname="NextScene_WhenLoadFails_CompletesDialogueGracefully" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="1327250722" result="Failed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.003349" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <failure>
+                      <message><![CDATA[Unhandled log message: '[Error] DialogueSystem: ✗ Failed to load target scene (returned null)'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                      <stack-trace><![CDATA[NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42:MoveNext () (at Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs:361)
+System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42> (NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42&)
+NovelCore.Runtime.Core.DialogueSystem.DialogueSystem:CompleteDialogue ()
+NovelCore.Runtime.Core.DialogueSystem.DialogueSystem:AdvanceDialogue () (at Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs:117)
+NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests/<NextScene_WhenLoadFails_CompletesDialogueGracefully>d__8:MoveNext () (at Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystem/DialogueSystemNextSceneTests.cs:153)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+]]></stack-trace>
+                    </failure>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✗ Failed to load target scene (returned null)
+]]></output>
+                  </test-case>
+                  <test-case id="1086" name="NextScene_WhenNoNextScene_CompletesWithoutNavigation" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WhenNoNextScene_CompletesWithoutNavigation" methodname="NextScene_WhenNoNextScene_CompletesWithoutNavigation" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="1827191371" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.101344" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Final Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                  </test-case>
+                  <test-case id="1088" name="NextScene_WithMultipleDialogueLines_TransitionsAfterAll" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests.NextScene_WithMultipleDialogueLines_TransitionsAfterAll" methodname="NextScene_WithMultipleDialogueLines_TransitionsAfterAll" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemNextSceneTests" runstate="Runnable" seed="1802864156" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.202151" asserts="0">
+                    <properties>
+                      <property name="_JOINTYPE" value="UnityCombinatorial" />
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Current Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+DialogueSystem: Displaying line line_003
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Next Scene
+]]></output>
+                  </test-case>
+                </test-suite>
+                <test-suite type="TestFixture" id="1089" name="DialogueSystemTests" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.013243" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1098" name="DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" methodname="DialogueSystem_AdvanceDialogue_AtLastLine_CompletesDialogue" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1510809819" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.002314" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                  </test-case>
+                  <test-case id="1097" name="DialogueSystem_AdvanceDialogue_IncrementsLineIndex" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_AdvanceDialogue_IncrementsLineIndex" methodname="DialogueSystem_AdvanceDialogue_IncrementsLineIndex" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="280042650" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001473" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+]]></output>
+                  </test-case>
+                  <test-case id="1093" name="DialogueSystem_Constructor_ThrowsOnNullAssetManager" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullAssetManager" methodname="DialogueSystem_Constructor_ThrowsOnNullAssetManager" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1263260847" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001177" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1090" name="DialogueSystem_Constructor_ThrowsOnNullAudioService" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullAudioService" methodname="DialogueSystem_Constructor_ThrowsOnNullAudioService" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="822857192" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000118" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1091" name="DialogueSystem_Constructor_ThrowsOnNullInputService" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullInputService" methodname="DialogueSystem_Constructor_ThrowsOnNullInputService" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1854019641" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000134" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1092" name="DialogueSystem_Constructor_ThrowsOnNullSceneManager" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_Constructor_ThrowsOnNullSceneManager" methodname="DialogueSystem_Constructor_ThrowsOnNullSceneManager" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1607611068" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000072" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1099" name="DialogueSystem_GetCurrentLine_ReturnsCorrectLine" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_GetCurrentLine_ReturnsCorrectLine" methodname="DialogueSystem_GetCurrentLine_ReturnsCorrectLine" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="228778800" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000795" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1101" name="DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" methodname="DialogueSystem_HasNextLine_AtLastLine_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1873621329" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000743" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1100" name="DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" methodname="DialogueSystem_HasNextLine_WithMultipleLines_ReturnsTrue" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="2023779886" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000707" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1103" name="DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" methodname="DialogueSystem_SkipCurrentLine_CallsAdvanceDialogue" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="2137621865" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001044" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Displaying line line_002
+]]></output>
+                  </test-case>
+                  <test-case id="1096" name="DialogueSystem_StartScene_WithInvalidScene_LogsError" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithInvalidScene_LogsError" methodname="DialogueSystem_StartScene_WithInvalidScene_LogsError" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="2035808557" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001047" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SceneData : sceneId is required
+DialogueSystem: Scene validation failed for Invalid Scene
+]]></output>
+                  </test-case>
+                  <test-case id="1095" name="DialogueSystem_StartScene_WithNullScene_LogsError" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithNullScene_LogsError" methodname="DialogueSystem_StartScene_WithNullScene_LogsError" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1015308716" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000458" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Cannot start null scene
+]]></output>
+                  </test-case>
+                  <test-case id="1094" name="DialogueSystem_StartScene_WithValidScene_SetsPlayingState" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StartScene_WithValidScene_SetsPlayingState" methodname="DialogueSystem_StartScene_WithValidScene_SetsPlayingState" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1806116906" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000740" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+]]></output>
+                  </test-case>
+                  <test-case id="1102" name="DialogueSystem_StopDialogue_ResetsState" fullname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests.DialogueSystem_StopDialogue_ResetsState" methodname="DialogueSystem_StopDialogue_ResetsState" classname="NovelCore.Tests.Runtime.Core.DialogueSystem.DialogueSystemTests" runstate="Runnable" seed="1600690297" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001039" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[DialogueSystem: Starting scene Test Scene
+DialogueSystem: Displaying line line_001
+DialogueSystem: Dialogue stopped
+]]></output>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+              <test-suite type="TestSuite" id="1111" name="SaveSystem" fullname="NovelCore.Tests.Runtime.Core.SaveSystem" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.245754" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-suite type="TestFixture" id="1059" name="SaveSystemTests" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" testcasecount="19" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.245293" total="19" passed="19" failed="0" inconclusive="0" skipped="0" asserts="0">
+                  <properties />
+                  <test-case id="1075" name="SaveSystem_AutoSaveAsync_SavesSuccessfully" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_AutoSaveAsync_SavesSuccessfully" methodname="SaveSystem_AutoSaveAsync_SavesSuccessfully" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="811350729" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.012271" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'autosave' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/autosave.save
+]]></output>
+                  </test-case>
+                  <test-case id="1077" name="SaveSystem_CreateSaveSnapshot_CreatesCorrectSnapshot" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_CreateSaveSnapshot_CreatesCorrectSnapshot" methodname="SaveSystem_CreateSaveSnapshot_CreatesCorrectSnapshot" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="933419866" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000423" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1066" name="SaveSystem_DeleteSave_WithExistingSave_DeletesSuccessfully" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_DeleteSave_WithExistingSave_DeletesSuccessfully" methodname="SaveSystem_DeleteSave_WithExistingSave_DeletesSuccessfully" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="616835940" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001882" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+SaveSystem: Deleted save from slot 'slot1'
+]]></output>
+                  </test-case>
+                  <test-case id="1067" name="SaveSystem_DeleteSave_WithNonExistentSave_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_DeleteSave_WithNonExistentSave_ReturnsFalse" methodname="SaveSystem_DeleteSave_WithNonExistentSave_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1092661772" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000718" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: No save found in slot 'nonexistent' to delete
+]]></output>
+                  </test-case>
+                  <test-case id="1068" name="SaveSystem_DeleteSave_WithNullSlotId_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_DeleteSave_WithNullSlotId_ReturnsFalse" methodname="SaveSystem_DeleteSave_WithNullSlotId_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1218014932" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000600" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Invalid slot ID
+]]></output>
+                  </test-case>
+                  <test-case id="1069" name="SaveSystem_GetAllSaveSlots_WithMultipleSaves_ReturnsAllSlots" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_GetAllSaveSlots_WithMultipleSaves_ReturnsAllSlots" methodname="SaveSystem_GetAllSaveSlots_WithMultipleSaves_ReturnsAllSlots" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="585981792" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.206436" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+SaveSystem: Saved to slot 'slot2' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot2.save
+SaveSystem: Saved to slot 'slot3' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot3.save
+]]></output>
+                  </test-case>
+                  <test-case id="1070" name="SaveSystem_GetAllSaveSlots_WithNoSaves_ReturnsEmptyArray" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_GetAllSaveSlots_WithNoSaves_ReturnsEmptyArray" methodname="SaveSystem_GetAllSaveSlots_WithNoSaves_ReturnsEmptyArray" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1528851304" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001042" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1073" name="SaveSystem_GetSaveSlotInfo_WithExistingSave_ReturnsCorrectInfo" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_GetSaveSlotInfo_WithExistingSave_ReturnsCorrectInfo" methodname="SaveSystem_GetSaveSlotInfo_WithExistingSave_ReturnsCorrectInfo" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="312538207" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001929" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+]]></output>
+                  </test-case>
+                  <test-case id="1074" name="SaveSystem_GetSaveSlotInfo_WithNonExistentSave_ReturnsEmptySlotInfo" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_GetSaveSlotInfo_WithNonExistentSave_ReturnsEmptySlotInfo" methodname="SaveSystem_GetSaveSlotInfo_WithNonExistentSave_ReturnsEmptySlotInfo" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="681027284" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000332" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                  <test-case id="1063" name="SaveSystem_LoadAsync_WithExistingSave_LoadsSuccessfully" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_LoadAsync_WithExistingSave_LoadsSuccessfully" methodname="SaveSystem_LoadAsync_WithExistingSave_LoadsSuccessfully" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="557031056" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.004843" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+SaveSystem: Loaded from slot 'slot1'
+]]></output>
+                  </test-case>
+                  <test-case id="1064" name="SaveSystem_LoadAsync_WithNonExistentSave_ReturnsNull" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_LoadAsync_WithNonExistentSave_ReturnsNull" methodname="SaveSystem_LoadAsync_WithNonExistentSave_ReturnsNull" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1350227774" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001311" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: No save found in slot 'nonexistent'
+]]></output>
+                  </test-case>
+                  <test-case id="1065" name="SaveSystem_LoadAsync_WithNullSlotId_ReturnsNull" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_LoadAsync_WithNullSlotId_ReturnsNull" methodname="SaveSystem_LoadAsync_WithNullSlotId_ReturnsNull" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1659191497" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001026" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Invalid slot ID
+]]></output>
+                  </test-case>
+                  <test-case id="1076" name="SaveSystem_LoadAutoSaveAsync_LoadsSuccessfully" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_LoadAutoSaveAsync_LoadsSuccessfully" methodname="SaveSystem_LoadAutoSaveAsync_LoadsSuccessfully" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1862815949" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001722" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'autosave' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/autosave.save
+SaveSystem: Loaded from slot 'autosave'
+]]></output>
+                  </test-case>
+                  <test-case id="1078" name="SaveSystem_SaveAndLoad_PreservesTimestamp" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveAndLoad_PreservesTimestamp" methodname="SaveSystem_SaveAndLoad_PreservesTimestamp" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1321879358" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.002968" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+SaveSystem: Loaded from slot 'slot1'
+]]></output>
+                  </test-case>
+                  <test-case id="1062" name="SaveSystem_SaveAsync_WithNullData_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveAsync_WithNullData_ReturnsFalse" methodname="SaveSystem_SaveAsync_WithNullData_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1582171550" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001271" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Cannot save null data
+]]></output>
+                  </test-case>
+                  <test-case id="1061" name="SaveSystem_SaveAsync_WithNullSlotId_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveAsync_WithNullSlotId_ReturnsFalse" methodname="SaveSystem_SaveAsync_WithNullSlotId_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1734989945" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001193" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Invalid slot ID
+]]></output>
+                  </test-case>
+                  <test-case id="1060" name="SaveSystem_SaveAsync_WithValidData_SavesSuccessfully" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveAsync_WithValidData_SavesSuccessfully" methodname="SaveSystem_SaveAsync_WithValidData_SavesSuccessfully" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="466486092" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001555" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+]]></output>
+                  </test-case>
+                  <test-case id="1071" name="SaveSystem_SaveExists_WithExistingSave_ReturnsTrue" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveExists_WithExistingSave_ReturnsTrue" methodname="SaveSystem_SaveExists_WithExistingSave_ReturnsTrue" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="189469305" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001142" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                    <output><![CDATA[SaveSystem: Saved to slot 'slot1' at /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestSaves/slot1.save
+]]></output>
+                  </test-case>
+                  <test-case id="1072" name="SaveSystem_SaveExists_WithNonExistentSave_ReturnsFalse" fullname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests.SaveSystem_SaveExists_WithNonExistentSave_ReturnsFalse" methodname="SaveSystem_SaveExists_WithNonExistentSave_ReturnsFalse" classname="NovelCore.Tests.Runtime.Core.SaveSystem.SaveSystemTests" runstate="Runnable" seed="1981428882" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000268" asserts="0">
+                    <properties>
+                      <property name="retryIteration" value="0" />
+                      <property name="repeatIteration" value="0" />
+                    </properties>
+                  </test-case>
+                </test-suite>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestSuite" id="1109" name="Data" fullname="NovelCore.Tests.Runtime.Data" runstate="Runnable" testcasecount="38" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.016388" total="38" passed="38" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-suite type="TestFixture" id="1016" name="CharacterDataTests" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.004737" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1017" name="CharacterData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_CreatedWithValidData_IsValid" methodname="CharacterData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="1777167810" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001052" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1025" name="CharacterData_DefaultScale_IsOne" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_DefaultScale_IsOne" methodname="CharacterData_DefaultScale_IsOne" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="2061223115" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000208" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1022" name="CharacterData_GetEmotion_ReturnsCorrectEmotion" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_GetEmotion_ReturnsCorrectEmotion" methodname="CharacterData_GetEmotion_ReturnsCorrectEmotion" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="403323993" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000398" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1023" name="CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" methodname="CharacterData_GetEmotion_WithInvalidKey_ReturnsNull" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="943593363" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000109" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1018" name="CharacterData_WithEmptyCharacterId_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_WithEmptyCharacterId_ValidateFails" methodname="CharacterData_WithEmptyCharacterId_ValidateFails" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="782916279" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000469" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : characterId is required
+]]></output>
+                </test-case>
+                <test-case id="1019" name="CharacterData_WithEmptyCharacterName_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_WithEmptyCharacterName_ValidateFails" methodname="CharacterData_WithEmptyCharacterName_ValidateFails" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="74210270" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000429" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : characterName is required
+]]></output>
+                </test-case>
+                <test-case id="1021" name="CharacterData_WithInvalidDefaultEmotion_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_WithInvalidDefaultEmotion_ValidateFails" methodname="CharacterData_WithInvalidDefaultEmotion_ValidateFails" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="549682137" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000426" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : Default emotion 'neutral' not found in emotions list
+]]></output>
+                </test-case>
+                <test-case id="1020" name="CharacterData_WithNoEmotions_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_WithNoEmotions_ValidateFails" methodname="CharacterData_WithNoEmotions_ValidateFails" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="1366907976" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000399" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : At least one emotion is required
+]]></output>
+                </test-case>
+                <test-case id="1024" name="CharacterData_WithSpineAnimation_ValidatesSpineData" fullname="NovelCore.Tests.Runtime.Data.CharacterDataTests.CharacterData_WithSpineAnimation_ValidatesSpineData" methodname="CharacterData_WithSpineAnimation_ValidatesSpineData" classname="NovelCore.Tests.Runtime.Data.CharacterDataTests" runstate="Runnable" seed="704553495" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000433" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[CharacterData : Spine animation type requires spineDataAsset
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1026" name="CharacterPlacementTests" fullname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" classname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000888" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1030" name="CharacterPlacement_CanHaveNegativeSortingOrder" fullname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests.CharacterPlacement_CanHaveNegativeSortingOrder" methodname="CharacterPlacement_CanHaveNegativeSortingOrder" classname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" runstate="Runnable" seed="1306959495" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000091" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1027" name="CharacterPlacement_CreatedWithValues_StoresCorrectly" fullname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests.CharacterPlacement_CreatedWithValues_StoresCorrectly" methodname="CharacterPlacement_CreatedWithValues_StoresCorrectly" classname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" runstate="Runnable" seed="956105360" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000095" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1028" name="CharacterPlacement_DefaultValues_AreZero" fullname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests.CharacterPlacement_DefaultValues_AreZero" methodname="CharacterPlacement_DefaultValues_AreZero" classname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" runstate="Runnable" seed="525760149" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000073" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1029" name="CharacterPlacement_WithNormalizedPosition_IsValid" fullname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests.CharacterPlacement_WithNormalizedPosition_IsValid" methodname="CharacterPlacement_WithNormalizedPosition_IsValid" classname="NovelCore.Tests.Runtime.Data.CharacterPlacementTests" runstate="Runnable" seed="602866251" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000084" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1031" name="ChoiceDataTests" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.004444" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1032" name="ChoiceData_CreatedWithTwoOptions_IsValid" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_CreatedWithTwoOptions_IsValid" methodname="ChoiceData_CreatedWithTwoOptions_IsValid" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="1980757621" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.001168" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1039" name="ChoiceData_DefaultTimerSeconds_IsZero" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_DefaultTimerSeconds_IsZero" methodname="ChoiceData_DefaultTimerSeconds_IsZero" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="714150272" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000293" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1036" name="ChoiceData_WithDuplicateOptionIds_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithDuplicateOptionIds_ValidateFails" methodname="ChoiceData_WithDuplicateOptionIds_ValidateFails" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="37537668" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000463" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Duplicate option IDs found
+]]></output>
+                </test-case>
+                <test-case id="1033" name="ChoiceData_WithEmptyChoiceId_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithEmptyChoiceId_ValidateFails" methodname="ChoiceData_WithEmptyChoiceId_ValidateFails" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="340473081" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000420" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : choiceId is required
+]]></output>
+                </test-case>
+                <test-case id="1034" name="ChoiceData_WithOneOption_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithOneOption_ValidateFails" methodname="ChoiceData_WithOneOption_ValidateFails" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="1058953868" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000402" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Must have between 2 and 6 options
+]]></output>
+                </test-case>
+                <test-case id="1035" name="ChoiceData_WithSevenOptions_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithSevenOptions_ValidateFails" methodname="ChoiceData_WithSevenOptions_ValidateFails" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="752015149" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000437" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Must have between 2 and 6 options
+]]></output>
+                </test-case>
+                <test-case id="1037" name="ChoiceData_WithTimer_StoresTimerValues" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithTimer_StoresTimerValues" methodname="ChoiceData_WithTimer_StoresTimerValues" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="104845647" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000131" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1038" name="ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.ChoiceDataTests.ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" methodname="ChoiceData_WithTimerAndInvalidDefaultIndex_ValidateFails" classname="NovelCore.Tests.Runtime.Data.ChoiceDataTests" runstate="Runnable" seed="939718234" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000420" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[ChoiceData : Invalid defaultOptionIndex for timed choice
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1040" name="DialogueLineDataTests" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.002978" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1041" name="DialogueLineData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_CreatedWithValidData_IsValid" methodname="DialogueLineData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="2011324299" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000182" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1047" name="DialogueLineData_DefaultDisplayDuration_IsNegativeOne" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_DefaultDisplayDuration_IsNegativeOne" methodname="DialogueLineData_DefaultDisplayDuration_IsNegativeOne" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="1819132685" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000080" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1048" name="DialogueLineData_DefaultEmotion_IsNeutral" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_DefaultEmotion_IsNeutral" methodname="DialogueLineData_DefaultEmotion_IsNeutral" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="1851301501" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000078" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1045" name="DialogueLineData_WithActionButNoParameters_ShowsWarning" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithActionButNoParameters_ShowsWarning" methodname="DialogueLineData_WithActionButNoParameters_ShowsWarning" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="1264040086" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000383" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : Character action specified but no parameters provided
+]]></output>
+                </test-case>
+                <test-case id="1044" name="DialogueLineData_WithCharacterAction_ReturnsCorrectAction" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithCharacterAction_ReturnsCorrectAction" methodname="DialogueLineData_WithCharacterAction_ReturnsCorrectAction" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="984039296" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000113" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1046" name="DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" methodname="DialogueLineData_WithDisplayDuration_ReturnsCorrectValue" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="1149403189" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000088" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1042" name="DialogueLineData_WithEmptyLineId_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithEmptyLineId_ValidateFails" methodname="DialogueLineData_WithEmptyLineId_ValidateFails" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="672848005" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000425" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : lineId is required
+]]></output>
+                </test-case>
+                <test-case id="1043" name="DialogueLineData_WithEmptyTextKey_ShowsWarning" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithEmptyTextKey_ShowsWarning" methodname="DialogueLineData_WithEmptyTextKey_ShowsWarning" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="782929243" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000382" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueLineData : textKey is empty, using fallback text
+]]></output>
+                </test-case>
+                <test-case id="1049" name="DialogueLineData_WithSoundEffect_ReturnsAssetReference" fullname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests.DialogueLineData_WithSoundEffect_ReturnsAssetReference" methodname="DialogueLineData_WithSoundEffect_ReturnsAssetReference" classname="NovelCore.Tests.Runtime.Data.DialogueLineDataTests" runstate="Runnable" seed="346733584" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000081" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1050" name="SceneDataTests" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.002737" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <test-case id="1051" name="SceneData_CreatedWithValidData_IsValid" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_CreatedWithValidData_IsValid" methodname="SceneData_CreatedWithValidData_IsValid" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="391222960" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000184" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1058" name="SceneData_DefaultAutoAdvance_IsFalse" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_DefaultAutoAdvance_IsFalse" methodname="SceneData_DefaultAutoAdvance_IsFalse" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="309333043" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000087" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1057" name="SceneData_DefaultTransitionDuration_IsHalfSecond" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_DefaultTransitionDuration_IsHalfSecond" methodname="SceneData_DefaultTransitionDuration_IsHalfSecond" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="1375331056" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000104" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1055" name="SceneData_WithAutoAdvance_ReturnsCorrectValues" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_WithAutoAdvance_ReturnsCorrectValues" methodname="SceneData_WithAutoAdvance_ReturnsCorrectValues" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="272641734" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000089" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1056" name="SceneData_WithCharacters_ReturnsCharactersList" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_WithCharacters_ReturnsCharactersList" methodname="SceneData_WithCharacters_ReturnsCharactersList" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="2119041383" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000392" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+                <test-case id="1052" name="SceneData_WithEmptySceneId_ValidateFails" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_WithEmptySceneId_ValidateFails" methodname="SceneData_WithEmptySceneId_ValidateFails" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="847520105" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000502" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : sceneId is required
+]]></output>
+                </test-case>
+                <test-case id="1053" name="SceneData_WithoutDialogueOrChoices_ShowsWarning" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_WithoutDialogueOrChoices_ShowsWarning" methodname="SceneData_WithoutDialogueOrChoices_ShowsWarning" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="129833750" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000385" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneData : No dialogue or choices defined
+]]></output>
+                </test-case>
+                <test-case id="1054" name="SceneData_WithTransitionType_ReturnsCorrectValue" fullname="NovelCore.Tests.Runtime.Data.SceneDataTests.SceneData_WithTransitionType_ReturnsCorrectValue" methodname="SceneData_WithTransitionType_ReturnsCorrectValue" classname="NovelCore.Tests.Runtime.Data.SceneDataTests" runstate="Runnable" seed="4041409" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:16Z" duration="0.000115" asserts="0">
+                  <properties>
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestSuite" id="1108" name="Integration" fullname="NovelCore.Tests.Runtime.Integration" runstate="Runnable" testcasecount="8" result="Failed" site="Child" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:19Z" duration="3.025453" total="8" passed="5" failed="3" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <failure>
+                <message><![CDATA[One or more child tests had errors]]></message>
+              </failure>
+              <test-suite type="TestFixture" id="1006" name="LinearSceneProgressionTests" fullname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" classname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:19Z" duration="3.011485" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-case id="1009" name="LinearFlow_LongChain_HandlesMultipleTransitions" fullname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests.LinearFlow_LongChain_HandlesMultipleTransitions" methodname="LinearFlow_LongChain_HandlesMultipleTransitions" classname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" runstate="Runnable" seed="1313015667" result="Passed" start-time="2026-03-09 18:48:16Z" end-time="2026-03-09 18:48:17Z" duration="1.004448" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueSystem: Starting scene Scene 1
+DialogueSystem: Displaying line line_0_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Scene 2
+DialogueSystem: Starting scene Scene 2
+DialogueSystem: Displaying line line_1_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Scene 3
+DialogueSystem: Starting scene Scene 3
+DialogueSystem: Displaying line line_2_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Scene 4
+DialogueSystem: Starting scene Scene 4
+DialogueSystem: Displaying line line_3_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Scene 5
+DialogueSystem: Starting scene Scene 5
+DialogueSystem: Displaying line line_4_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                </test-case>
+                <test-case id="1008" name="LinearFlow_WithAutoAdvance_ProgressesWithoutInput" fullname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests.LinearFlow_WithAutoAdvance_ProgressesWithoutInput" methodname="LinearFlow_WithAutoAdvance_ProgressesWithoutInput" classname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" runstate="Runnable" seed="272178115" result="Passed" start-time="2026-03-09 18:48:17Z" end-time="2026-03-09 18:48:19Z" duration="1.501074" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueSystem: Starting scene Auto Scene 1
+DialogueSystem: Displaying line line_1_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Auto Scene 2
+DialogueSystem: Starting scene Auto Scene 2
+DialogueSystem: Displaying line line_2_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                </test-case>
+                <test-case id="1010" name="LinearFlow_WithMissingScene_StopsGracefully" fullname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests.LinearFlow_WithMissingScene_StopsGracefully" methodname="LinearFlow_WithMissingScene_StopsGracefully" classname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" runstate="Runnable" seed="1290311314" result="Failed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.002072" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[Unhandled log message: '[Error] DialogueSystem: ✗ Failed to load target scene (returned null)'. Use UnityEngine.TestTools.LogAssert.Expect]]></message>
+                    <stack-trace><![CDATA[NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42:MoveNext () (at Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs:361)
+System.Runtime.CompilerServices.AsyncVoidMethodBuilder:Start<NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42> (NovelCore.Runtime.Core.DialogueSystem.DialogueSystem/<CompleteDialogue>d__42&)
+NovelCore.Runtime.Core.DialogueSystem.DialogueSystem:CompleteDialogue ()
+NovelCore.Runtime.Core.DialogueSystem.DialogueSystem:AdvanceDialogue () (at Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs:117)
+NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests/<LinearFlow_WithMissingScene_StopsGracefully>d__9:MoveNext () (at Assets/Scripts/NovelCore/Tests/Runtime/Integration/LinearSceneProgressionTests.cs:298)
+UnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr) (at /Users/bokken/build/output/unity/unity/Runtime/Export/Scripting/Coroutines.cs:17)
+
+]]></stack-trace>
+                  </failure>
+                  <output><![CDATA[DialogueSystem: Starting scene Scene 1
+DialogueSystem: Displaying line line_1_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✗ Failed to load target scene (returned null)
+]]></output>
+                </test-case>
+                <test-case id="1007" name="ThreeSceneLinearFlow_ProgressesCorrectly" fullname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests.ThreeSceneLinearFlow_ProgressesCorrectly" methodname="ThreeSceneLinearFlow_ProgressesCorrectly" classname="NovelCore.Tests.Runtime.Integration.LinearSceneProgressionTests" runstate="Runnable" seed="462769677" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.503086" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueSystem: Starting scene Introduction
+DialogueSystem: Displaying line line_1_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Middle
+DialogueSystem: Starting scene Middle
+DialogueSystem: Displaying line line_2_1
+DialogueSystem: Displaying line line_2_2
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: Using nextScene for linear progression
+DialogueSystem: Loading target scene...
+DialogueSystem: ✓ Successfully loaded next scene: Ending
+DialogueSystem: Starting scene Ending
+DialogueSystem: Displaying line line_3_1
+DialogueSystem: Dialogue complete - checking for scene transition
+DialogueSystem: No target scene determined, dialogue ending normally
+]]></output>
+                </test-case>
+              </test-suite>
+              <test-suite type="TestFixture" id="1011" name="SceneNavigationFlowTests" fullname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" classname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.013608" total="4" passed="2" failed="2" inconclusive="0" skipped="0" asserts="0">
+                <properties />
+                <failure>
+                  <message><![CDATA[One or more child tests had errors]]></message>
+                </failure>
+                <test-case id="1013" name="NavigationFlow_BranchingPath_ClearsForwardHistory" fullname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests.NavigationFlow_BranchingPath_ClearsForwardHistory" methodname="NavigationFlow_BranchingPath_ClearsForwardHistory" classname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" runstate="Runnable" seed="1762530659" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.002756" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: Navigated back to scene 'scene_002' (index: 1)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+SceneNavigationHistory: Removed 2 forward entries
+SceneNavigationHistory: Pushed entry for scene 'scene_alt' at line 0 (total: 2)
+]]></output>
+                </test-case>
+                <test-case id="1014" name="NavigationFlow_LongChain_MaintainsCorrectState" fullname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests.NavigationFlow_LongChain_MaintainsCorrectState" methodname="NavigationFlow_LongChain_MaintainsCorrectState" classname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" runstate="Runnable" seed="362630085" result="Failed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.005269" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Should be at scene 5 after going back 5 times
+  String lengths are both 9. Strings differ at index 8.
+  Expected: "scene_005"
+  But was:  "scene_006"
+  -------------------^
+]]></message>
+                    <stack-trace><![CDATA[at NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests+<NavigationFlow_LongChain_MaintainsCorrectState>d__9.MoveNext () [0x001fc] in /Users/selstrom/work/projects/novel-core/novel-core/novel-core/Assets/Scripts/NovelCore/Tests/Runtime/Integration/SceneNavigationFlowTests.cs:218
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0004e] in ./Library/PackageCache/com.unity.test-framework@24afccc4ed24/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                  </failure>
+                  <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: Pushed entry for scene 'scene_004' at line 0 (total: 4)
+SceneNavigationHistory: Pushed entry for scene 'scene_005' at line 0 (total: 5)
+SceneNavigationHistory: Pushed entry for scene 'scene_006' at line 0 (total: 6)
+SceneNavigationHistory: Pushed entry for scene 'scene_007' at line 0 (total: 7)
+SceneNavigationHistory: Pushed entry for scene 'scene_008' at line 0 (total: 8)
+SceneNavigationHistory: Pushed entry for scene 'scene_009' at line 0 (total: 9)
+SceneNavigationHistory: Pushed entry for scene 'scene_010' at line 0 (total: 10)
+SceneNavigationHistory: Navigated back to scene 'scene_009' (index: 8)
+SceneNavigationHistory: Navigated back to scene 'scene_008' (index: 7)
+SceneNavigationHistory: Navigated back to scene 'scene_007' (index: 6)
+SceneNavigationHistory: Navigated back to scene 'scene_006' (index: 5)
+SceneNavigationHistory: Navigated back to scene 'scene_005' (index: 4)
+SceneNavigationHistory: Navigated forward to scene 'scene_006' (index: 5)
+]]></output>
+                </test-case>
+                <test-case id="1015" name="NavigationFlow_PreservesDialogueLineIndex" fullname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests.NavigationFlow_PreservesDialogueLineIndex" methodname="NavigationFlow_PreservesDialogueLineIndex" classname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" runstate="Runnable" seed="1673639243" result="Failed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.001563" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <failure>
+                    <message><![CDATA[  Should preserve dialogue line index
+  Expected: 2
+  But was:  0
+]]></message>
+                    <stack-trace><![CDATA[at NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests+<NavigationFlow_PreservesDialogueLineIndex>d__10.MoveNext () [0x0012f] in /Users/selstrom/work/projects/novel-core/novel-core/novel-core/Assets/Scripts/NovelCore/Tests/Runtime/Integration/SceneNavigationFlowTests.cs:259
+at UnityEngine.TestTools.TestEnumerator+<Execute>d__7.MoveNext () [0x0004e] in ./Library/PackageCache/com.unity.test-framework@24afccc4ed24/UnityEngine.TestRunner/NUnitExtensions/Attributes/TestEnumerator.cs:44
+]]></stack-trace>
+                  </failure>
+                  <output><![CDATA[SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 2 (total: 1)
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+SceneNavigationHistory: Navigated forward to scene 'scene_002' (index: 1)
+]]></output>
+                </test-case>
+                <test-case id="1012" name="NavigationFlow_ThreeScenes_BackAndForward" fullname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests.NavigationFlow_ThreeScenes_BackAndForward" methodname="NavigationFlow_ThreeScenes_BackAndForward" classname="NovelCore.Tests.Runtime.Integration.SceneNavigationFlowTests" runstate="Runnable" seed="216340812" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.003189" asserts="0">
+                  <properties>
+                    <property name="_JOINTYPE" value="UnityCombinatorial" />
+                    <property name="retryIteration" value="0" />
+                    <property name="repeatIteration" value="0" />
+                  </properties>
+                  <output><![CDATA[DialogueSystem: Starting scene Scene 1
+DialogueSystem: Displaying line line_1_1
+SceneNavigationHistory: Pushed entry for scene 'scene_001' at line 0 (total: 1)
+DialogueSystem: Starting scene Scene 2
+DialogueSystem: Displaying line line_2_1
+SceneNavigationHistory: Pushed entry for scene 'scene_002' at line 0 (total: 2)
+DialogueSystem: Starting scene Scene 3
+DialogueSystem: Displaying line line_3_1
+SceneNavigationHistory: Pushed entry for scene 'scene_003' at line 0 (total: 3)
+SceneNavigationHistory: Navigated back to scene 'scene_002' (index: 1)
+SceneNavigationHistory: Navigated back to scene 'scene_001' (index: 0)
+SceneNavigationHistory: Navigated forward to scene 'scene_002' (index: 1)
+SceneNavigationHistory: Navigated forward to scene 'scene_003' (index: 2)
+]]></output>
+                </test-case>
+              </test-suite>
+            </test-suite>
+            <test-suite type="TestFixture" id="1001" name="SampleTest" fullname="NovelCore.Tests.Runtime.SampleTest" classname="NovelCore.Tests.Runtime.SampleTest" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.000933" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1004" name="CharacterDataBuilder_CreatesValidCharacterData" fullname="NovelCore.Tests.Runtime.SampleTest.CharacterDataBuilder_CreatesValidCharacterData" methodname="CharacterDataBuilder_CreatesValidCharacterData" classname="NovelCore.Tests.Runtime.SampleTest" runstate="Runnable" seed="848302600" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.000152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1005" name="DialogueLineDataBuilder_CreatesValidDialogueLineData" fullname="NovelCore.Tests.Runtime.SampleTest.DialogueLineDataBuilder_CreatesValidDialogueLineData" methodname="DialogueLineDataBuilder_CreatesValidDialogueLineData" classname="NovelCore.Tests.Runtime.SampleTest" runstate="Runnable" seed="1201508661" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.000103" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1002" name="SampleTest_Infrastructure_Works" fullname="NovelCore.Tests.Runtime.SampleTest.SampleTest_Infrastructure_Works" methodname="SampleTest_Infrastructure_Works" classname="NovelCore.Tests.Runtime.SampleTest" runstate="Runnable" seed="530744849" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.000057" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1003" name="SceneDataBuilder_CreatesValidSceneData" fullname="NovelCore.Tests.Runtime.SampleTest.SceneDataBuilder_CreatesValidSceneData" methodname="SceneDataBuilder_CreatesValidSceneData" classname="NovelCore.Tests.Runtime.SampleTest" runstate="Runnable" seed="1999989460" result="Passed" start-time="2026-03-09 18:48:19Z" end-time="2026-03-09 18:48:19Z" duration="0.000100" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: /Users/selstrom/Library/Application Support/DefaultCompany/novel-core/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

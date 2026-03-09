@@ -259,11 +259,124 @@ bool HasCircularReference(SceneData scene, HashSet<string> visited, HashSet<stri
 
 ---
 
+## Scene Navigation State Serialization Strategy (US3)
+
+**Purpose**: Enable save/load of scene navigation history for back/forward functionality
+
+### Serialization Format
+
+**Approach**: JSON via Unity's JsonUtility
+
+**Rationale**:
+- Built-in Unity serialization (no external dependencies)
+- Fast serialization/deserialization
+- IL2CPP compatible
+- Cross-platform support
+
+### Data Structure
+
+```csharp
+[Serializable]
+public class SceneNavigationState
+{
+    public List<SceneHistoryEntry> backHistory = new();
+    public List<SceneHistoryEntry> forwardHistory = new();
+    public int maxHistorySize = 50;
+}
+
+[Serializable]
+public class SceneHistoryEntry
+{
+    public string sceneId;
+    public int dialogueLineIndex;
+    // Note: gameStateSnapshot is Dictionary which requires custom serialization
+    // For v1: Store sceneId and dialogueIndex only
+    // For v2: Implement custom Dictionary serializer or use ScriptableObject reference
+}
+```
+
+### JsonUtility Limitations
+
+**Dictionary Serialization**: JsonUtility does NOT support Dictionary<TKey, TValue> directly
+
+**Solutions**:
+1. **v1 (Simple)**: Store only sceneId and dialogueIndex, reconstruct game state on load
+2. **v2 (Full State)**: Use SerializableDictionary wrapper class or Newtonsoft.Json
+
+**Chosen for v1**: Option 1 - Minimal state storage
+- Pros: Simple, JsonUtility compatible, small save file size
+- Cons: Game state not restored on back navigation (acceptable for visual novels)
+
+### Integration with SaveSystem
+
+```csharp
+// In SaveSystem.cs
+[Serializable]
+public class SaveData
+{
+    // Existing fields...
+    public SceneNavigationState navigationState;
+    
+    // Version field for migration
+    public string version = "1.1.0";
+}
+```
+
+### Serialization Example
+
+```json
+{
+  "version": "1.1.0",
+  "currentSceneId": "scene_003",
+  "dialogueLineIndex": 5,
+  "navigationState": {
+    "backHistory": [
+      { "sceneId": "scene_001", "dialogueLineIndex": 0 },
+      { "sceneId": "scene_002", "dialogueLineIndex": 3 }
+    ],
+    "forwardHistory": [],
+    "maxHistorySize": 50
+  }
+}
+```
+
+### Memory Footprint
+
+- **Per Entry**: ~50 bytes (sceneId string + dialogueIndex int)
+- **Max 50 Entries**: ~2.5 KB total
+- **Negligible Impact**: Well within mobile memory budget
+
+### Backward Compatibility
+
+**Old Saves (v1.0.0)**:
+- No navigationState field
+- Loads successfully (JsonUtility ignores missing fields)
+- Navigation history starts empty
+- No migration script needed
+
+**New Saves (v1.1.0)**:
+- Includes navigationState
+- Fully compatible with new code
+
+### Future Extensions
+
+**v2 - Full Game State Snapshot**:
+- Add gameStateSnapshot field to SceneHistoryEntry
+- Use custom Dictionary serializer or Newtonsoft.Json
+- Store flags/variables for exact state restoration
+
+**v3 - Character Positions**:
+- Add characterPositions to SceneHistoryEntry
+- Store Vector2 positions for visual continuity
+
+---
+
 **Research Status**: ✅ Complete  
 **Critical Findings**: 
 - No automatic scene transition mechanism exists
 - SaveSystem extensible for navigation state
 - Addressables supports efficient preloading
 - Circular reference detection straightforward with DFS
+- **Navigation state serialization**: JsonUtility with minimal state (sceneId + dialogueIndex)
 
-**Ready for**: Implementation Phase (User Story 1)
+**Ready for**: Implementation Phase (User Story 1, 3)

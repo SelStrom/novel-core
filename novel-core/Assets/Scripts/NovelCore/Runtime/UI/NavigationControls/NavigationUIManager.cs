@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using VContainer;
 using NovelCore.Runtime.Core.SceneManagement;
@@ -27,6 +28,15 @@ public class NavigationUIManager : MonoBehaviour
 
     private void Start()
     {
+        // Use coroutine to ensure initialization happens after VContainer injection
+        StartCoroutine(InitializeAfterInjection());
+    }
+
+    private IEnumerator InitializeAfterInjection()
+    {
+        // Wait one frame to ensure VContainer has completed injection
+        yield return null;
+        
         InitializeNavigationUI();
         SubscribeToNavigationEvents();
     }
@@ -59,14 +69,38 @@ public class NavigationUIManager : MonoBehaviour
 
         // Initialize the navigation UI with the scene manager
         _navigationUI.Initialize(_sceneManager);
+        
+        // Set navigation UI to render above dialogue box
+        EnsureNavigationUIOnTop();
+        
         _isInitialized = true;
 
         Debug.Log("NavigationUIManager: Successfully initialized SceneNavigationUI");
     }
 
+    /// <summary>
+    /// Ensures NavigationUI renders above other UI elements like DialogueBox.
+    /// </summary>
+    private void EnsureNavigationUIOnTop()
+    {
+        if (_navigationUI == null) return;
+
+        var rectTransform = _navigationUI.GetComponent<RectTransform>();
+        if (rectTransform != null && rectTransform.parent != null)
+        {
+            // Move to last in sibling order to render on top
+            rectTransform.SetAsLastSibling();
+            Debug.Log("NavigationUIManager: Set NavigationUI to render on top (last sibling)");
+        }
+    }
+
     private void SubscribeToNavigationEvents()
     {
-        if (_sceneManager == null) return;
+        if (_sceneManager == null)
+        {
+            Debug.LogError("NavigationUIManager: Cannot subscribe to events - ISceneManager is null");
+            return;
+        }
 
         // Subscribe to scene load complete event to restart dialogue
         _sceneManager.OnSceneLoadComplete += OnSceneNavigated;
@@ -75,14 +109,30 @@ public class NavigationUIManager : MonoBehaviour
 
     private void OnSceneNavigated(Data.Scenes.SceneData sceneData)
     {
-        if (_dialogueSystem == null || sceneData == null) return;
+        Debug.Log($"NavigationUIManager: OnSceneNavigated called for scene '{sceneData?.SceneName ?? "null"}'");
+        
+        if (_dialogueSystem == null)
+        {
+            Debug.LogError("NavigationUIManager: IDialogueSystem is null, cannot restart dialogue");
+            return;
+        }
+        
+        if (sceneData == null)
+        {
+            Debug.LogError("NavigationUIManager: sceneData is null, cannot restart dialogue");
+            return;
+        }
 
         // Restart dialogue for the navigated scene
         // This ensures dialogue system is in sync with the loaded scene
         if (!_dialogueSystem.IsPlaying || _dialogueSystem.CurrentScene != sceneData)
         {
-            Debug.Log($"NavigationUIManager: Restarting dialogue for scene '{sceneData.SceneName}'");
+            Debug.Log($"NavigationUIManager: Restarting dialogue for scene '{sceneData.SceneName}' (IsPlaying: {_dialogueSystem.IsPlaying}, CurrentScene: {_dialogueSystem.CurrentScene?.SceneName ?? "null"})");
             _dialogueSystem.StartScene(sceneData);
+        }
+        else
+        {
+            Debug.Log($"NavigationUIManager: Dialogue already playing for scene '{sceneData.SceneName}', skipping restart");
         }
     }
 
