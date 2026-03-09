@@ -188,15 +188,6 @@
         "com.unity.2d.aseprite": "1.1.10"
       }
     },
-    "com.unity.ide.rider": {
-      "version": "3.0.39",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ext.nunit": "1.0.6"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.ide.visualstudio": {
       "version": "2.0.27",
       "depth": 0,
@@ -359,7 +350,7 @@
       }
     },
     "com.unity.timeline": {
-      "version": "1.8.10",
+      "version": "1.8.11",
       "depth": 0,
       "source": "registry",
       "dependencies": {
