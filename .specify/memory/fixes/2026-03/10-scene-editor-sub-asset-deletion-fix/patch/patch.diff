@@ -1,0 +1,41 @@
+diff --git a/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs b/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
+index e5353f4..90261c3 100644
+--- a/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
++++ b/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
+@@ -304,8 +304,18 @@ namespace NovelCore.Editor.Windows
+ 
+                     if (GUILayout.Button("×", GUILayout.Width(25)))
+                     {
++                        var subAsset = dialogueProperty.GetArrayElementAtIndex(i).objectReferenceValue;
++                        
++                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
++                        {
++                            AssetDatabase.RemoveObjectFromAsset(subAsset);
++                            EditorUtility.SetDirty(_currentScene);
++                        }
++                        
+                         dialogueProperty.DeleteArrayElementAtIndex(i);
+                         serializedObject.ApplyModifiedProperties();
++                        AssetDatabase.SaveAssets();
++                        
+                         return;
+                     }
+ 
+@@ -399,8 +409,18 @@ namespace NovelCore.Editor.Windows
+ 
+                     if (GUILayout.Button("×", GUILayout.Width(25)))
+                     {
++                        var subAsset = choicesProperty.GetArrayElementAtIndex(i).objectReferenceValue;
++                        
++                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
++                        {
++                            AssetDatabase.RemoveObjectFromAsset(subAsset);
++                            EditorUtility.SetDirty(_currentScene);
++                        }
++                        
+                         choicesProperty.DeleteArrayElementAtIndex(i);
+                         serializedObject.ApplyModifiedProperties();
++                        AssetDatabase.SaveAssets();
++                        
+                         return;
+                     }

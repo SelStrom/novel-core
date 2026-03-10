@@ -1,0 +1,39 @@
+[2026-03-10 17:35] BugContextAgent: Analyzing GUI error bug
+
+[2026-03-10 17:35] Bug: GUI Error при удалении DialogLine/Choice
+[2026-03-10 17:35] Error Message: "Invalid GUILayout state in SceneEditorWindow view. Verify that all layout Begin/End calls match"
+
+[2026-03-10 17:35] Code Analysis: SceneEditorWindow.cs
+
+[2026-03-10 17:35] DrawDialogue() method (Lines 270-344):
+  Line 285: EditorGUILayout.BeginHorizontal() ← BEGIN
+  Lines 286-304: GUI elements (Toggle button, label)
+  Line 305-320: Delete button handler
+    Line 319: return; ← EARLY EXIT
+  Line 322: EditorGUILayout.EndHorizontal() ← END (UNREACHABLE if button clicked)
+
+[2026-03-10 17:35] DrawChoices() method (Lines 365-449):
+  Line 390: EditorGUILayout.BeginHorizontal() ← BEGIN
+  Lines 391-409: GUI elements
+  Line 410-425: Delete button handler
+    Line 424: return; ← EARLY EXIT
+  Line 427: EditorGUILayout.EndHorizontal() ← END (UNREACHABLE if button clicked)
+
+[2026-03-10 17:35] Root Cause Identified:
+  `return` statement exits method BEFORE `EndHorizontal()` is called.
+  Unity GUI system detects mismatched Begin/End calls → throws error.
+
+[2026-03-10 17:35] Pattern: Same issue exists in DrawCharacters() (line 231)
+
+[2026-03-10 17:35] This is a REGRESSION from previous fix (commit 7ef9131):
+  - Previous fix added deletion logic but included `return` statement
+  - `return` was copied from original buggy code pattern
+  - Developer did not notice GUI layout balance issue
+
+[2026-03-10 17:35] Failing Test: N/A (GUI error hard to unit test)
+  - Manual reproduction: Click "×" button → GUI error appears
+  - 100% reproducible in Unity Editor
+
+[2026-03-10 17:35] Conclusion: Bug is DETERMINISTICALLY REPRODUCIBLE
+  - Root cause: Early return before EndHorizontal()
+  - Fix: Remove `return` statement or call EndHorizontal() before return

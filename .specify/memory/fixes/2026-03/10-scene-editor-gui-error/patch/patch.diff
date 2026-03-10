@@ -1,0 +1,31 @@
+diff --git a/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs b/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
+index 90261c3..956b659 100644
+--- a/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
++++ b/novel-core/Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
+@@ -228,7 +228,7 @@ namespace NovelCore.Editor.Windows
+                     {
+                         charactersProperty.DeleteArrayElementAtIndex(i);
+                         serializedObject.ApplyModifiedProperties();
+-                        return;
++                        break;
+                     }
+ 
+                     EditorGUILayout.EndHorizontal();
+@@ -316,7 +316,7 @@ namespace NovelCore.Editor.Windows
+                         serializedObject.ApplyModifiedProperties();
+                         AssetDatabase.SaveAssets();
+                         
+-                        return;
++                        break;
+                     }
+ 
+                     EditorGUILayout.EndHorizontal();
+@@ -421,7 +421,7 @@ namespace NovelCore.Editor.Windows
+                         serializedObject.ApplyModifiedProperties();
+                         AssetDatabase.SaveAssets();
+                         
+-                        return;
++                        break;
+                     }
+ 
+                     EditorGUILayout.EndHorizontal();
