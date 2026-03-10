@@ -1,27 +1,25 @@
 <!--
 Sync Impact Report:
-- Version: 1.15.0 → 1.16.0 (MINOR: Added VContainer + GameObject best practices to Principle VI)
-- Modified Principles:
-  - Principle VI (Modular Architecture & Testing): Added VContainer MonoBehaviour registration guidance
-  - Principle VI (Modular Architecture & Testing): Added DI Singleton GameObject lifecycle requirements
+- Version: 1.16.0 → 1.17.0 (MINOR: Added Principle XI - File Naming Conventions)
+- Modified Principles: None
 - Added Sections:
-  - VContainer MonoBehaviour Registration: Explicit guidance to use RegisterComponentOnNewGameObject for MonoBehaviour
-  - DI Singleton GameObject Lifecycle: Requirement for DontDestroyOnLoad in Singleton services
+  - Principle XI (File Naming Conventions): C# files use PascalCase, Unity assets use snake_case
 - Removed Sections: None
 - Templates Requiring Updates:
-  ✅ GameLifetimeScope.cs: Already follows best practices after bc50296
-  ✅ SceneManager.cs: Already follows best practices after a030566
-  ⚠ Developer documentation: Should add VContainer registration checklist
-- Follow-up TODOs: 
-  - Create code review checklist for VContainer registrations
-  - Add to developer onboarding guide
-  - Consider adding to .editorconfig or analyzer rules
-- Source: Patterns identified from fixes 10-audio-di-null and 10-sample-project-backgrounds (2026-03-10)
+  ✅ plan-template.md: Constitution Check section references principles - no changes needed
+  ✅ spec-template.md: No naming convention references - no changes needed
+  ✅ tasks-template.md: No naming convention references - no changes needed
+  ⚠ Developer documentation: Should add file naming examples to quickstart.md
+- Follow-up TODOs:
+  - Add file naming examples to quickstart.md
+  - Update existing assets to snake_case if needed (audit required)
+  - Consider adding file naming linter/validator
+- Source: User requirement (2026-03-10)
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.16.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10
+**Version**: 1.17.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10
 
 ## Core Principles
 
@@ -165,6 +163,16 @@ The constructor MUST be built as composable, independently testable modules with
       -logFile - 2>&1
     ```
 - **MVP Exception**: Initial MVP release (v0.1.0-v0.3.0) MAY rely on manual testing only. Automated test suite MUST be implemented incrementally post-MVP, with >80% coverage achieved before production release (v1.0.0)
+- **Naming Conventions** (MANDATORY):
+  - **C# Files**: MUST use PascalCase (e.g., `SceneEditorWindow.cs`, `DialogueLineData.cs`)
+  - **Asset Files**: MUST use snake_case (e.g., `scene_01_introduction.asset`, `character_hero.asset`)
+  - **Sub-Assets**: MUST use snake_case with zero-padded index:
+    - DialogueLineData: `dialog_line_001`, `dialog_line_002`, etc.
+    - ChoiceData: `choice_001`, `choice_002`, etc.
+    - Pattern: `{type}_{index:D3}` where index is 1-based and zero-padded to 3 digits
+  - **Prefabs**: MUST use PascalCase (e.g., `DialogueBox.prefab`, `CharacterSprite.prefab`)
+  - **Scenes**: MUST use PascalCase (e.g., `MainMenu.unity`, `Gameplay.unity`)
+  - **Rationale**: Consistent naming improves discoverability, reduces cognitive load, and prevents file conflicts. PascalCase for code aligns with C# conventions. snake_case for assets improves readability in Unity Project Browser and aligns with common asset naming practices. Zero-padded indices ensure correct alphabetical sorting in Inspector and Project Browser.
 
 **Rationale**: Modular architecture without tests prevents parallel development, makes debugging difficult, and increases regression risk. Unit tests validate individual components in isolation, while integration tests catch cross-system bugs that unit tests miss (e.g., save system serializing data the dialogue system cannot deserialize). **Call stack analysis prevents regression bugs by ensuring developers understand the full impact of their changes before implementation** - a method might be called from multiple places with different assumptions about its behavior, and changing it without analyzing all call sites can break distant, seemingly unrelated functionality. **Explicit entry point (GameStarter) ensures predictable initialization order, proper dependency injection, and enables both full game testing (Play Mode) and rapid scene iteration (Scene Editor preview)**. Test-first development for critical paths ensures requirements are understood before implementation, reducing rework. EditMode tests are preferred because they execute faster (no Play Mode initialization), are more reliable (no Unity runtime variability), and provide immediate feedback during development. PlayMode tests are reserved for scenarios that genuinely require runtime environment (async I/O, Application APIs, integration tests, game initialization). This strategy reduces test execution time by 60-80% and eliminates PlayMode test flakiness for pure logic. Comprehensive testing enables: faster iteration cycles, confident refactoring, automated regression prevention, and easier onboarding (tests document expected behavior). **Mandatory test execution after task completion prevents regression bugs by validating that new code doesn't break existing functionality** - running the full test suite after each user story, feature phase, or bug fix catches integration issues early when they're cheap to fix. Batch mode test execution enables CI/CD automation and ensures tests can run in headless environments. Zero-tolerance for test failures ensures code quality gates are enforced consistently. This workflow transforms tests from optional validation into a required checkpoint, making regression prevention automatic rather than relying on developer discipline. MVP exception acknowledges that proving core functionality to stakeholders takes precedence over test infrastructure, while maintaining long-term quality standards for production releases.
 
@@ -354,6 +362,56 @@ Temporary output files and intermediate documentation MUST be organized in desig
 - **Documentation Retention**: Files in `.specify/memory/` SHOULD be retained for historical context and decision tracking
 
 **Rationale**: Separating temporary artifacts from permanent documentation prevents repository clutter and makes it clear which files are ephemeral vs. valuable knowledge. The `./temp/` directory provides a predictable location for automated tools (CI/CD, test runners) to write output without polluting the repository root. The `.specify/memory/` directory serves as a knowledge base for understanding past decisions, debugging patterns, and architectural evolution. This organization follows industry best practices (e.g., `target/` in Maven, `build/` in Gradle) and enables easy cleanup without risk of deleting important documentation.
+
+### XI. File Naming Conventions (NON-NEGOTIABLE)
+
+All files in the project MUST follow strict naming conventions to ensure consistency, readability, and compatibility with version control systems.
+
+- **C# Source Files**: MUST use PascalCase (UpperCamelCase) naming
+  - Class files: `DialogueSystem.cs`, `SceneManager.cs`, `CharacterData.cs`
+  - Interface files: `IDialogueSystem.cs`, `ISaveSystem.cs`
+  - Test files: `DialogueSystemTests.cs`, `SceneManagerTests.cs`
+  - Editor scripts: `SceneEditorWindow.cs`, `DialogueInspector.cs`
+  - All C# files MUST match the primary type name within (Unity requirement)
+- **Unity Asset Files**: MUST use snake_case (lowercase with underscores) naming
+  - Scenes: `scene_01_introduction.unity`, `scene_02_choice_point.unity`
+  - Prefabs: `dialogue_box.prefab`, `character_protagonist.prefab`, `ui_button_primary.prefab`
+  - ScriptableObjects: `character_data_protagonist.asset`, `scene_data_intro.asset`
+  - Materials: `material_ui_background.mat`, `material_sprite_default.mat`
+  - Textures/Sprites: `sprite_character_idle.png`, `background_forest.jpg`
+  - Audio: `audio_bgm_menu.mp3`, `audio_sfx_click.ogg`
+  - Fonts: `font_liberation_sans.ttf`
+  - Animation: `animation_fade_in.anim`, `animator_character.controller`
+- **Asset Naming Structure** (RECOMMENDED): Use `[category]_[descriptor]_[variant]` pattern
+  - Examples: `character_data_protagonist.asset`, `scene_data_intro.asset`, `sprite_ui_button_hover.png`
+  - Benefits: Natural sorting, clear categorization, easy bulk operations
+- **Meta Files**: Automatically generated by Unity - NEVER manually rename or create
+- **Directory Names**: MUST use PascalCase for consistency with C# namespaces
+  - `Assets/Scripts/NovelCore/Runtime/DialogueSystem/`
+  - `Assets/Content/Projects/Sample/Scenes/`
+  - `Assets/Resources/Prefabs/`
+- **Special Cases**:
+  - Unity package files: Follow Unity convention (`package.json`, `README.md`)
+  - Documentation files: Follow markdown convention (`quickstart.md`, `user-manual-ru.md`)
+  - Configuration files: Follow tool convention (`.gitignore`, `.editorconfig`)
+
+**Enforcement**:
+
+- Code reviews MUST reject PRs with incorrect file naming
+- Asset import pipeline SHOULD validate naming conventions and warn on violations
+- Rename refactoring MUST update all references (Unity handles this automatically for assets)
+
+**Rationale**: Consistent file naming improves:
+
+1. **Developer Experience**: Predictable naming reduces cognitive load when navigating codebase
+2. **Version Control**: snake_case for assets avoids Windows/macOS case sensitivity issues in git
+3. **Searchability**: Consistent patterns enable glob/regex filtering (`find . -name "character_*.asset"`)
+4. **Unity Best Practices**: PascalCase for C# matches Unity's coding standards and type naming requirements
+5. **Asset Organization**: snake_case with category prefixes groups related assets naturally in Project window
+6. **Cross-Platform Compatibility**: Lowercase asset names avoid issues with case-insensitive filesystems
+7. **Automation**: Structured naming enables scripted batch operations (e.g., "rename all `sprite_ui_*` textures")
+
+This dual convention (PascalCase for code, snake_case for assets) is industry-standard in Unity projects and prevents common pitfalls like type name mismatches, broken asset references on case-sensitive filesystems, and poor asset discoverability.
 
 ## Platform & Distribution Requirements
 
@@ -721,4 +779,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.16.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10
+**Version**: 1.17.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10

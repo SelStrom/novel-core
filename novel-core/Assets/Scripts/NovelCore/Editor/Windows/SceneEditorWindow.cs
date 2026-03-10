@@ -570,7 +570,7 @@ namespace NovelCore.Editor.Windows
         private void CreateNewDialogueLine(SerializedObject serializedObject, SerializedProperty dialogueProperty)
         {
             var newLine = CreateInstance<DialogueLineData>();
-            newLine.name = $"DialogueLine_{dialogueProperty.arraySize + 1}";
+            newLine.name = $"dialog_line_{(dialogueProperty.arraySize + 1):D3}";
 
             AssetDatabase.AddObjectToAsset(newLine, _currentScene);
             EditorUtility.SetDirty(_currentScene);
@@ -588,7 +588,7 @@ namespace NovelCore.Editor.Windows
         private void CreateNewChoice(SerializedObject serializedObject, SerializedProperty choicesProperty)
         {
             var newChoice = CreateInstance<ChoiceData>();
-            newChoice.name = $"Choice_{choicesProperty.arraySize + 1}";
+            newChoice.name = $"choice_{(choicesProperty.arraySize + 1):D3}";
 
             AssetDatabase.AddObjectToAsset(newChoice, _currentScene);
             EditorUtility.SetDirty(_currentScene);

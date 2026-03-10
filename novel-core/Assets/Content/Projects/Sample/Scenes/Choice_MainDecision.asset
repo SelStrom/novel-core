@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Choice_MainDecision
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 9cea72e1-56e6-4119-91fa-df2c1e3e0947
+  _id: 0765d714-1e96-42e3-acfe-11ee4fe6c7e3
   _choiceId: choice_main_001
   _promptTextKey: choice_prompt_001
   _fallbackPromptText: "\u0412\u044B\u0431\u0435\u0440\u0438 \u0441\u0432\u043E\u0439

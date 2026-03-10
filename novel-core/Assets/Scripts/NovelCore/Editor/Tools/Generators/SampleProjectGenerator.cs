@@ -472,7 +472,7 @@ public static class SampleProjectGenerator
     private static DialogueLineData CreateDialogueLine(DialogueContent content, string sceneFileName, int lineIndex)
     {
         DialogueLineData line = ScriptableObject.CreateInstance<DialogueLineData>();
-        line.name = $"{sceneFileName}_Line{lineIndex:D2}";
+        line.name = $"dialog_line_{lineIndex:D3}";
 
         SetPrivateField(line, "_lineId", content.lineId);
         SetPrivateField(line, "_emotion", content.emotion);

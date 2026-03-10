@@ -368,6 +368,76 @@ To reset the sample project:
 - Visual Studio / Rider will auto-format code on save
 - Press `Ctrl+K, Ctrl+D` (VS) or `Ctrl+Alt+L` (Rider) to format file
 
+### File Naming Conventions
+
+**CRITICAL**: This project enforces strict file naming conventions (Constitution Principle XI).
+
+**C# Source Files** - Use **PascalCase**:
+
+```
+✅ CORRECT:
+Assets/Scripts/NovelCore/Runtime/DialogueSystem.cs
+Assets/Scripts/NovelCore/Runtime/SceneManager.cs
+Assets/Scripts/NovelCore/Runtime/Data/CharacterData.cs
+Assets/Scripts/NovelCore/Editor/Windows/SceneEditorWindow.cs
+Assets/Scripts/NovelCore/Tests/Editor/DialogueSystemTests.cs
+
+❌ WRONG:
+Assets/Scripts/NovelCore/Runtime/dialogue_system.cs
+Assets/Scripts/NovelCore/Runtime/sceneManager.cs
+Assets/Scripts/NovelCore/Runtime/Data/character-data.cs
+```
+
+**Unity Asset Files** - Use **snake_case**:
+
+```
+✅ CORRECT:
+Assets/Content/Scenes/scene_01_introduction.unity
+Assets/Content/Prefabs/dialogue_box.prefab
+Assets/Content/Characters/character_protagonist.asset
+Assets/Content/Backgrounds/background_forest.png
+Assets/Content/Audio/audio_bgm_menu.mp3
+Assets/Resources/Materials/material_ui_background.mat
+
+❌ WRONG:
+Assets/Content/Scenes/Scene01Introduction.unity
+Assets/Content/Prefabs/DialogueBox.prefab
+Assets/Content/Characters/CharacterProtagonist.asset
+Assets/Content/Backgrounds/BackgroundForest.png
+```
+
+**Recommended Asset Naming Pattern**: `[category]_[descriptor]_[variant]`
+
+```
+Examples:
+- character_data_protagonist.asset
+- scene_data_intro.asset
+- sprite_ui_button_hover.png
+- audio_sfx_click.ogg
+- material_sprite_default.mat
+```
+
+**Directory Names** - Use **PascalCase**:
+
+```
+✅ CORRECT:
+Assets/Scripts/NovelCore/Runtime/DialogueSystem/
+Assets/Content/Projects/Sample/Scenes/
+Assets/Resources/Prefabs/
+
+❌ WRONG:
+Assets/Scripts/NovelCore/Runtime/dialogue_system/
+Assets/Content/Projects/sample/scenes/
+```
+
+**Rationale**:
+- **PascalCase for C#**: Matches Unity's coding standards and C# type naming requirements
+- **snake_case for assets**: Avoids Windows/macOS case sensitivity issues in version control
+- **Consistent patterns**: Enables glob filtering and batch operations (`character_*.asset`)
+- **Cross-platform safe**: Lowercase asset names prevent filesystem conflicts
+
+**See**: `.specify/memory/constitution.md` Principle XI for full details
+
 ### Phase 1: Core Systems (P1 - Basic Scene Playback)
 
 **Goal**: Implement minimum viable dialogue system

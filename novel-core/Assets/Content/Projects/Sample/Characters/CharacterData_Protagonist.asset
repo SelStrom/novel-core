@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData_Protagonist
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 6139df42-f9a8-4d40-846a-2d8a8d917c8b
+  _id: a90d00f0-e61f-40ee-89ba-3f480378061e
   _characterId: char_protagonist_001
   _characterName: Protagonist
   _description: 
