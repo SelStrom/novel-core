@@ -922,9 +922,11 @@ EOF
 
 ### Post-Commit Actions
 
-1. **Cleanup .fix/ directory**:
-   - Сохранить `.fix/bug_context/`, `.fix/tests/`, `.fix/patch/` в `.specify/memory/fixes/[bug-id]/`
-   - Удалить временные файлы (`.fix/agents/`, логи)
+1. **Archive fix documentation**:
+   - Сохранить `.fix/*` в `.specify/memory/fixes/YYYY-MM/DD-bug-name/`
+   - Naming format: `DD-component-issue-keyword` (e.g., `10-scene-manager-background-null`)
+   - Update `.specify/memory/fixes/README.md` index
+   - Run `.specify/scripts/update-fix-index.sh` для автоматического обновления
 
 2. **Update documentation** (если нужно):
    - Обновить `.specify/memory/testing-strategy.md` (если добавлен новый паттерн тестирования)
@@ -1001,11 +1003,17 @@ EOF
 После коммита перемещается в:
 ```
 .specify/memory/fixes/
-└── [bug-id]-[date]/
-    ├── bug_context/
-    ├── theories/
-    ├── tests/
-    └── patch/
+└── YYYY-MM/                    # Month directory
+    └── DD-bug-name/            # Fix directory
+        ├── bug_context/
+        ├── theories/
+        ├── tests/
+        └── patch/
+```
+
+**Example**:
+```
+.specify/memory/fixes/2026-03/10-audio-di-null/
 ```
 
 ## Execution Constraints
