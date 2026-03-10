@@ -303,4 +303,84 @@ public class DialogueLineDataBuilder
     }
 }
 
+/// <summary>
+/// Builder for creating test ChoiceData instances.
+/// </summary>
+public class ChoiceDataBuilder
+{
+    private string _choiceId = "test_choice";
+    private string _promptTextKey = "";
+    private string _fallbackPromptText = "Choose an option:";
+    private List<ChoiceOption> _options = new();
+    private float _timerSeconds = 0f;
+    private int _defaultOptionIndex = 0;
+
+    public ChoiceDataBuilder WithChoiceId(string choiceId)
+    {
+        _choiceId = choiceId;
+        return this;
+    }
+
+    public ChoiceDataBuilder WithPromptTextKey(string promptTextKey)
+    {
+        _promptTextKey = promptTextKey;
+        return this;
+    }
+
+    public ChoiceDataBuilder WithFallbackPromptText(string fallbackPromptText)
+    {
+        _fallbackPromptText = fallbackPromptText;
+        return this;
+    }
+
+    public ChoiceDataBuilder WithOption(ChoiceOption option)
+    {
+        _options.Add(option);
+        return this;
+    }
+
+    public ChoiceDataBuilder WithOption(string optionId, string fallbackText, AssetReference targetScene = null)
+    {
+        var option = new ChoiceOption
+        {
+            optionId = optionId,
+            textKey = "",
+            fallbackText = fallbackText,
+            targetScene = targetScene,
+            requiredChoices = new List<string>(),
+            isAvailable = true,
+            icon = null
+        };
+        _options.Add(option);
+        return this;
+    }
+
+    public ChoiceDataBuilder WithTimer(float timerSeconds, int defaultOptionIndex)
+    {
+        _timerSeconds = timerSeconds;
+        _defaultOptionIndex = defaultOptionIndex;
+        return this;
+    }
+
+    public ChoiceData Build()
+    {
+        var choiceData = ScriptableObject.CreateInstance<ChoiceData>();
+        
+        typeof(ChoiceData).GetField("_choiceId", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _choiceId);
+        typeof(ChoiceData).GetField("_promptTextKey", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _promptTextKey);
+        typeof(ChoiceData).GetField("_fallbackPromptText", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _fallbackPromptText);
+        typeof(ChoiceData).GetField("_options", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _options);
+        typeof(ChoiceData).GetField("_timerSeconds", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _timerSeconds);
+        typeof(ChoiceData).GetField("_defaultOptionIndex", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            ?.SetValue(choiceData, _defaultOptionIndex);
+
+        return choiceData;
+    }
+}
+
 }

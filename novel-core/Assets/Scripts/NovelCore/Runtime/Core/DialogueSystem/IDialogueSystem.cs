@@ -95,6 +95,34 @@ public interface IDialogueSystem
     /// </summary>
     /// <param name="deltaTime">Time since last frame in seconds.</param>
     void Update(float deltaTime);
+
+    /// <summary>
+    /// Get the full dialogue history (backlog) for review.
+    /// </summary>
+    /// <returns>Read-only list of dialogue lines that have been displayed.</returns>
+    System.Collections.Generic.IReadOnlyList<DialogueLineData> GetDialogueHistory();
+
+    /// <summary>
+    /// Clear the dialogue history (e.g., when starting a new game).
+    /// </summary>
+    void ClearDialogueHistory();
+
+    /// <summary>
+    /// Get the choice history for conditional branching.
+    /// </summary>
+    /// <returns>Read-only list of choice keys (choiceId_optionId).</returns>
+    System.Collections.Generic.IReadOnlyList<string> GetChoiceHistory();
+
+    /// <summary>
+    /// Check if a specific choice was made previously.
+    /// </summary>
+    /// <param name="choiceKey">Choice key (choiceId_optionId).</param>
+    bool HasMadeChoice(string choiceKey);
+
+    /// <summary>
+    /// Clear choice history (for new game).
+    /// </summary>
+    void ClearChoiceHistory();
 }
 
 }

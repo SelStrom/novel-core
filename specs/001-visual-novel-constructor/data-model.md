@@ -57,6 +57,8 @@ A single location/moment in the story with visual and narrative content.
 - `choices`: List<ChoiceData> (branching points)
 - `sceneTransition`: TransitionType enum (Fade, Slide, Cut, Custom)
 - `transitionDuration`: float (seconds)
+- `nextScene`: AssetReference<SceneData> (linear progression target, optional)
+- `transitionRules`: List<SceneTransitionRule> (conditional transitions, evaluated before nextScene)
 - `autoAdvance`: bool (skip wait for input)
 - `autoAdvanceDelay`: float (seconds between lines if autoAdvance)
 
@@ -72,6 +74,9 @@ A single location/moment in the story with visual and narrative content.
 - If `autoAdvance` true, `autoAdvanceDelay` must be > 0
 - Must have at least one `DialogueLineData` or one `ChoiceData`
 - Circular scene references detected and warned
+- If both `choices` and `nextScene` defined, choices take priority (nextScene ignored)
+- If both `transitionRules` and `choices` defined, choices take priority
+- Transition rules evaluated in priority order before `nextScene`
 
 **State Transitions**:
 - Created → Editing → Preview → Finalized
@@ -282,6 +287,43 @@ Platform-specific build settings.
 
 ## Supporting Data Types
 
+### SceneTransitionRule
+
+Conditional transition rule for scene navigation, evaluated in priority order.
+
+**Fields**:
+- `priority`: int (lower number = higher priority, e.g., 0 evaluated before 10)
+- `conditionExpression`: string (condition to evaluate, e.g., "hasKey == true", "affinity >= 50")
+- `targetScene`: AssetReference<SceneData> (scene to load if condition is met)
+- `description`: string (optional human-readable description for debugging)
+
+**Relationships**:
+- Belongs to `SceneData` (as part of `transitionRules` list)
+- References target `SceneData`
+
+**Validation Rules**:
+- `conditionExpression` must not be empty
+- `targetScene` must reference valid SceneData asset
+- Priority should be unique within scene (warning if duplicates)
+
+**Evaluation**:
+- Rules are sorted by priority (ascending) and evaluated in order
+- First rule where condition evaluates to `true` determines target scene
+- If no rules match, falls back to `SceneData.nextScene` (if set)
+- Requires `IGameStateManager` for condition evaluation
+
+**Condition Syntax**:
+```
+Simple expressions:
+- "flagName == true"
+- "flagName == false"
+- "variableName >= value"
+- "variableName <= value"
+- "variableName == value"
+```
+
+---
+
 ### AssetMetadata
 
 Tracks asset usage across project (for reference validation).
@@ -305,15 +347,20 @@ Tracks asset usage across project (for reference validation).
 
 ```
 ProjectConfig
-├── [1..N] SceneData
+├── [1] StartingScene → SceneData (entry point)
+├── [1..N] SceneData (all scenes in project)
 │   ├── [0..N] CharacterPlacement → CharacterData
 │   ├── [1..N] DialogueLineData → CharacterData (speaker)
-│   └── [0..N] ChoiceData
-│       └── [2..6] ChoiceOption → SceneData (target)
+│   ├── [0..N] ChoiceData
+│   │   └── [2..6] ChoiceOption → SceneData (target)
+│   ├── [0..1] NextScene → SceneData (linear progression)
+│   └── [0..N] SceneTransitionRule → SceneData (conditional transitions)
 ├── [0..N] CharacterData
-│   └── [1..N] CharacterEmotion (dictionary)
-├── [1] BuildConfig per platform
+│   └── [1..N] CharacterEmotion (list)
+├── [1..N] BuildConfig per platform
 └── [0..N] SaveData (runtime, not in project asset)
+    ├── projectId → ProjectConfig (which visual novel)
+    └── currentSceneId → SceneData (active scene)
 ```
 
 ---

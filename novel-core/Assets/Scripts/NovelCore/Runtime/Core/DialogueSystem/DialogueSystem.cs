@@ -33,6 +33,7 @@ public class DialogueSystem : IDialogueSystem
     private bool _isWaitingForChoice;
     private ChoiceData _currentChoice;
     private List<string> _choiceHistory = new();
+    private List<DialogueLineData> _dialogueHistory = new();
     private float _autoAdvanceTimer;
 
     public SceneData CurrentScene => _currentScene;
@@ -78,6 +79,9 @@ public class DialogueSystem : IDialogueSystem
         _isPlaying = true;
         _isWaitingForChoice = false;
         _autoAdvanceTimer = 0f;
+
+        // Note: We don't clear dialogue history here to allow backlog across scenes
+        // History can be cleared explicitly via ClearDialogueHistory() when starting a new game
 
         Debug.Log($"DialogueSystem: Starting scene {sceneData.SceneName}");
 
@@ -256,6 +260,9 @@ public class DialogueSystem : IDialogueSystem
             LoadAndPlaySFX(currentLine.SoundEffect);
         }
 
+        // Add to dialogue history
+        _dialogueHistory.Add(currentLine);
+
         // Notify listeners
         OnDialogueLineChanged?.Invoke(currentLine);
 
@@ -407,6 +414,23 @@ public class DialogueSystem : IDialogueSystem
     }
 
     /// <summary>
+    /// Get the full dialogue history (backlog) for review.
+    /// </summary>
+    public IReadOnlyList<DialogueLineData> GetDialogueHistory()
+    {
+        return _dialogueHistory.AsReadOnly();
+    }
+
+    /// <summary>
+    /// Clear the dialogue history (e.g., when starting a new game).
+    /// </summary>
+    public void ClearDialogueHistory()
+    {
+        _dialogueHistory.Clear();
+        Debug.Log("DialogueSystem: Dialogue history cleared");
+    }
+
+    /// <summary>
     /// Get the choice history for conditional branching.
     /// </summary>
     public IReadOnlyList<string> GetChoiceHistory() => _choiceHistory.AsReadOnly();
@@ -425,6 +449,7 @@ public class DialogueSystem : IDialogueSystem
     public void ClearChoiceHistory()
     {
         _choiceHistory.Clear();
+        Debug.Log("DialogueSystem: Choice history cleared");
     }
 
     /// <summary>

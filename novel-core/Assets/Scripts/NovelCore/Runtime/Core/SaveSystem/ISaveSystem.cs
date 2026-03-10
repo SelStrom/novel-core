@@ -53,32 +53,73 @@ namespace NovelCore.Runtime.Core.SaveSystem
     
     /// <summary>
     /// Data structure for game save state.
+    /// Conforms to data-model.md specification.
     /// </summary>
     [Serializable]
     public class SaveData
     {
-        public string saveVersion = "1.1";
-        public string currentSceneId;
-        public int currentDialogueIndex;
-        public string[] choiceHistory;
-        public DateTime saveTimestamp;
+        // Save metadata
+        public string saveVersion = "1.2";
+        public string saveId;
         public string saveSlotId;
         public string saveSlotName;
+        public DateTime saveTimestamp;
+        
+        // Project reference
+        public string projectId;
+        
+        // Current state
+        public string currentSceneId;
+        public int currentDialogueIndex;
         
         // Player progress
+        public string[] choiceHistory;
         public int playtimeSeconds;
+        
+        // Game state (flags and variables)
         public SerializableDictionary<string, bool> flags;
         public SerializableDictionary<string, int> variables;
         
         // Scene navigation history (v1.1+)
         public SceneNavigationState navigationState;
         
+        // Screenshot thumbnail for save slot UI (base64 encoded PNG)
+        public string screenshotThumbnail;
+        
         public SaveData()
         {
+            saveId = Guid.NewGuid().ToString();
             saveTimestamp = DateTime.Now;
             flags = new SerializableDictionary<string, bool>();
             variables = new SerializableDictionary<string, int>();
             navigationState = new SceneNavigationState();
+            choiceHistory = Array.Empty<string>();
+        }
+        
+        /// <summary>
+        /// Validates that the save data has required fields.
+        /// </summary>
+        public bool Validate()
+        {
+            if (string.IsNullOrEmpty(saveVersion))
+            {
+                Debug.LogError("SaveData: saveVersion is required");
+                return false;
+            }
+            
+            if (string.IsNullOrEmpty(projectId))
+            {
+                Debug.LogError("SaveData: projectId is required");
+                return false;
+            }
+            
+            if (string.IsNullOrEmpty(currentSceneId))
+            {
+                Debug.LogError("SaveData: currentSceneId is required");
+                return false;
+            }
+            
+            return true;
         }
     }
     
