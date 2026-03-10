@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7367629959562875791
+--- !u!114 &-7166660620158102985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene02_ChoicePoint_Line00
+  m_Name: dialog_line_001
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: ecf8c23e-c47d-48a4-842b-c61302b303ff
-  _lineId: line_choice_001
+  _id: 572d94f6-b012-4619-9720-3ac641c6c546
+  _lineId: line_choice_002
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -22,9 +22,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_choice_001
-  _fallbackText: "\u041F\u0440\u0438\u0448\u043B\u043E \u0432\u0440\u0435\u043C\u044F
-    \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0432\u044B\u0431\u043E\u0440."
+  _textKey: line_choice_002
+  _fallbackText: "\u041A\u0443\u0434\u0430 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
+    \u043F\u043E\u0439\u0442\u0438?"
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: edc01fb5-1cdd-4cec-89d4-024c83a71ae1
+  _id: 9efb3d71-c643-4cda-8057-9378c166ad27
   _sceneId: scene_choice_001
   _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
   _backgroundImage:
@@ -79,8 +79,8 @@ MonoBehaviour:
     initialEmotion: neutral
     sortingOrder: 0
   _dialogueLines:
-  - {fileID: -7367629959562875791}
-  - {fileID: 925454560243285615}
+  - {fileID: 3360857122537253434}
+  - {fileID: -7166660620158102985}
   _choices:
   - {fileID: 11400000, guid: 095bc7d5c8ad4401d9c777e227dadf52, type: 2}
   _transitionType: 1
@@ -94,7 +94,7 @@ MonoBehaviour:
   _transitionRules: []
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &925454560243285615
+--- !u!114 &3360857122537253434
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,11 +104,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene02_ChoicePoint_Line01
+  m_Name: dialog_line_000
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: fc06e8d4-363c-41cb-8e78-035bed9ac702
-  _lineId: line_choice_002
+  _id: 59820ebe-0cac-49e0-ab02-027c3fd1513a
+  _lineId: line_choice_001
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -116,9 +116,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_choice_002
-  _fallbackText: "\u041A\u0443\u0434\u0430 \u0442\u044B \u0445\u043E\u0447\u0435\u0448\u044C
-    \u043F\u043E\u0439\u0442\u0438?"
+  _textKey: line_choice_001
+  _fallbackText: "\u041F\u0440\u0438\u0448\u043B\u043E \u0432\u0440\u0435\u043C\u044F
+    \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0432\u044B\u0431\u043E\u0440."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 

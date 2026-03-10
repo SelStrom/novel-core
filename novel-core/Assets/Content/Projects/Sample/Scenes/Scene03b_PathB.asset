@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2530811272111190736
+--- !u!114 &-3702792889488691639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line01
+  m_Name: dialog_line_000
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: a928129b-9074-4e56-bf93-5c9fd981ebce
-  _lineId: line_path_b_002
+  _id: c7ca42a1-c066-4b20-8dce-6f045677bfa4
+  _lineId: line_path_b_001
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -22,10 +22,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_path_b_002
-  _fallbackText: "\u0423\u044E\u0442\u043D\u044B\u0439 \u0432\u0435\u0447\u0435\u0440
-    \u0441 \u043A\u043D\u0438\u0433\u043E\u0439 - \u0442\u043E\u0436\u0435 \u043D\u0435\u043F\u043B\u043E\u0445\u043E\u0439
-    \u0432\u0430\u0440\u0438\u0430\u043D\u0442."
+  _textKey: line_path_b_001
+  _fallbackText: "\u0422\u044B \u0440\u0435\u0448\u0438\u043B \u043E\u0441\u0442\u0430\u0442\u044C\u0441\u044F
+    \u0434\u043E\u043C\u0430."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -41,7 +40,7 @@ MonoBehaviour:
   _displayDuration: -1
   _characterAction: 0
   _actionParameters: 
---- !u!114 &-813804828516637131
+--- !u!114 &-629251646929047561
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,11 +50,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line02
+  m_Name: dialog_line_001
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: b08c45ba-3790-4d1d-8272-367594012b86
-  _lineId: line_path_b_003
+  _id: 49de750d-1d94-46d9-9c54-3e2fede8e349
+  _lineId: line_path_b_002
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -63,9 +62,10 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_path_b_003
-  _fallbackText: "[\u041D\u0435\u0439\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F
-    \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430 - Path B]"
+  _textKey: line_path_b_002
+  _fallbackText: "\u0423\u044E\u0442\u043D\u044B\u0439 \u0432\u0435\u0447\u0435\u0440
+    \u0441 \u043A\u043D\u0438\u0433\u043E\u0439 - \u0442\u043E\u0436\u0435 \u043D\u0435\u043F\u043B\u043E\u0445\u043E\u0439
+    \u0432\u0430\u0440\u0438\u0430\u043D\u0442."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: Scene03b_PathB
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 943d6c2e-5164-4a70-8582-9f01858cff87
+  _id: 98845959-f077-4d34-b2b9-76f83565873c
   _sceneId: scene_path_b_001
   _sceneName: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
   _backgroundImage:
@@ -120,9 +120,9 @@ MonoBehaviour:
     initialEmotion: neutral
     sortingOrder: 0
   _dialogueLines:
-  - {fileID: 1680367756858340}
-  - {fileID: -2530811272111190736}
-  - {fileID: -813804828516637131}
+  - {fileID: -3702792889488691639}
+  - {fileID: -629251646929047561}
+  - {fileID: 8187162249284014207}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -135,7 +135,7 @@ MonoBehaviour:
   _transitionRules: []
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &1680367756858340
+--- !u!114 &8187162249284014207
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +145,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line00
+  m_Name: dialog_line_002
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 7f96046a-474d-4480-aaec-d98ec106b808
-  _lineId: line_path_b_001
+  _id: 7318729c-940a-4a20-b837-0df155a9ebb7
+  _lineId: line_path_b_003
   _speaker:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -157,9 +157,9 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   _emotion: neutral
-  _textKey: line_path_b_001
-  _fallbackText: "\u0422\u044B \u0440\u0435\u0448\u0438\u043B \u043E\u0441\u0442\u0430\u0442\u044C\u0441\u044F
-    \u0434\u043E\u043C\u0430."
+  _textKey: line_path_b_003
+  _fallbackText: "[\u041D\u0435\u0439\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F
+    \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430 - Path B]"
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
