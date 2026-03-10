@@ -351,6 +351,17 @@ public class DialogueSystem : IDialogueSystem
         // Load target scene if determined
         if (targetSceneRef != null)
         {
+            // Validate AssetReference before attempting to load
+            // Check if AssetGUID is empty (invalid AssetReference)
+            // This prevents InvalidKeyException when trying to load invalid references
+            if (string.IsNullOrEmpty(targetSceneRef.AssetGUID))
+            {
+                Debug.LogWarning($"DialogueSystem: NextScene AssetReference is invalid (empty GUID). Completing dialogue.");
+                _isPlaying = false;
+                OnDialogueComplete?.Invoke();
+                return;
+            }
+            
             Debug.Log($"DialogueSystem: Loading target scene...");
             
             try
@@ -365,6 +376,7 @@ public class DialogueSystem : IDialogueSystem
                 }
                 else
                 {
+                    // Load returned null - could be invalid AssetReference or missing asset
                     Debug.LogError($"DialogueSystem: ✗ Failed to load target scene (returned null)");
                     _isPlaying = false;
                     OnDialogueComplete?.Invoke();

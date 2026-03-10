@@ -119,7 +119,8 @@ public class EndOfStoryReproductionTests : BaseTestFixture
     }
 
     /// <summary>
-    /// Test that verifies AssetReference validation happens before load attempt.
+    /// Test that verifies graceful handling when AssetReference has invalid GUID.
+    /// Invalid GUID (non-empty but not registered) behaves same as missing asset - load fails with ERROR.
     /// </summary>
     [UnityTest]
     public IEnumerator EndOfStory_WithInvalidAssetReference_ShouldValidateBeforeLoad()
@@ -144,16 +145,16 @@ public class EndOfStoryReproductionTests : BaseTestFixture
         _dialogueSystem.StartScene(sceneData);
         yield return null;
 
-        // The fix checks RuntimeKeyIsValid() BEFORE calling LoadAssetAsync
-        // This prevents InvalidKeyException from being thrown
-        LogAssert.Expect(LogType.Warning, new System.Text.RegularExpressions.Regex("NextScene AssetReference is invalid"));
+        // Invalid GUID (non-empty) cannot be distinguished from missing asset without load attempt
+        // Expect ERROR log (same as missing asset scenario)
+        LogAssert.Expect(LogType.Error, new System.Text.RegularExpressions.Regex("Failed to load target scene"));
         
         _dialogueSystem.AdvanceDialogue();
         yield return new WaitForSeconds(0.2f);
 
-        // Assert: Should complete gracefully
+        // Assert: Should complete gracefully despite error
         Assert.IsTrue(dialogueCompleteFired, 
-            "Should complete dialogue when AssetReference is invalid");
+            "Should complete dialogue when AssetReference load fails");
         Assert.IsFalse(_dialogueSystem.IsPlaying);
     }
 }

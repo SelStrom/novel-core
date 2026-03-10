@@ -101,6 +101,26 @@ public class MockAssetManager : IAssetManager
         {
             return false;
         }
+
+        // Handle AssetReference specially (same logic as LoadAssetAsync)
+        if (key is AssetReference assetRef)
+        {
+            // Try RuntimeKey first
+            var runtimeKey = assetRef.RuntimeKey;
+            if (runtimeKey != null && _loadedAssets.ContainsKey(runtimeKey.ToString()))
+            {
+                return true;
+            }
+            
+            // Fallback: try AssetGUID
+            if (!string.IsNullOrEmpty(assetRef.AssetGUID) && _loadedAssets.ContainsKey(assetRef.AssetGUID))
+            {
+                return true;
+            }
+            
+            return false;
+        }
+
         return _loadedAssets.ContainsKey(key.ToString());
     }
 }

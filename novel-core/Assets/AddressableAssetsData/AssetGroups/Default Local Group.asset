@@ -15,6 +15,21 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 3753524af11984518b2b5c8bca5263d7
   m_SerializeEntries:
+  - m_GUID: 063127e5997214bc188d21b870bb954d
+    m_Address: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 694205cb98d30435ba7515220af86032
+    m_Address: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 710fd90cc322246b9b6babc0662149f4
+    m_Address: "\u0412\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75eef63e9a34b4907878fc9315f6d3c0
     m_Address: Characters/Protagonist
     m_ReadOnly: 0
@@ -37,6 +52,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d733dd6941c0949c58db7175986fa56b
     m_Address: Characters/char_protagonist
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f09325196400b4ac395d8c07d2f9afce
+    m_Address: "\u041F\u0443\u0442\u044C A: \u041F\u0440\u043E\u0433\u0443\u043B\u043A\u0430"
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
