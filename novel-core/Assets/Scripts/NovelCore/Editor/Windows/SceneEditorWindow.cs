@@ -287,7 +287,7 @@ namespace NovelCore.Editor.Windows
                     var lineProp = dialogueProperty.GetArrayElementAtIndex(i);
                     var lineData = lineProp.objectReferenceValue as DialogueLineData;
 
-                    string label = lineData != null
+                    string label = lineData != null && !string.IsNullOrEmpty(lineData.FallbackText)
                         ? $"Line {i + 1}: {lineData.FallbackText.Substring(0, Math.Min(30, lineData.FallbackText.Length))}..."
                         : $"Line {i + 1}";
 
@@ -382,7 +382,7 @@ namespace NovelCore.Editor.Windows
                     var choiceProp = choicesProperty.GetArrayElementAtIndex(i);
                     var choiceData = choiceProp.objectReferenceValue as ChoiceData;
 
-                    string label = choiceData != null
+                    string label = choiceData != null && !string.IsNullOrEmpty(choiceData.FallbackPromptText)
                         ? $"Choice {i + 1}: {choiceData.FallbackPromptText}"
                         : $"Choice {i + 1}";
 
@@ -569,13 +569,11 @@ namespace NovelCore.Editor.Windows
 
         private void CreateNewDialogueLine(SerializedObject serializedObject, SerializedProperty dialogueProperty)
         {
-            string path = AssetDatabase.GetAssetPath(_currentScene);
-            string directory = System.IO.Path.GetDirectoryName(path);
-
             var newLine = CreateInstance<DialogueLineData>();
-            string linePath = AssetDatabase.GenerateUniqueAssetPath($"{directory}/DialogueLine.asset");
+            newLine.name = $"DialogueLine_{dialogueProperty.arraySize + 1}";
 
-            AssetDatabase.CreateAsset(newLine, linePath);
+            AssetDatabase.AddObjectToAsset(newLine, _currentScene);
+            EditorUtility.SetDirty(_currentScene);
             AssetDatabase.SaveAssets();
 
             dialogueProperty.arraySize++;
@@ -589,13 +587,11 @@ namespace NovelCore.Editor.Windows
 
         private void CreateNewChoice(SerializedObject serializedObject, SerializedProperty choicesProperty)
         {
-            string path = AssetDatabase.GetAssetPath(_currentScene);
-            string directory = System.IO.Path.GetDirectoryName(path);
-
             var newChoice = CreateInstance<ChoiceData>();
-            string choicePath = AssetDatabase.GenerateUniqueAssetPath($"{directory}/Choice.asset");
+            newChoice.name = $"Choice_{choicesProperty.arraySize + 1}";
 
-            AssetDatabase.CreateAsset(newChoice, choicePath);
+            AssetDatabase.AddObjectToAsset(newChoice, _currentScene);
+            EditorUtility.SetDirty(_currentScene);
             AssetDatabase.SaveAssets();
 
             choicesProperty.arraySize++;
