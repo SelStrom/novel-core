@@ -961,7 +961,16 @@ EOF
    - Обновить `.specify/memory/testing-strategy.md` (если добавлен новый паттерн тестирования)
    - Обновить spec.md (если был выбран SPEC_THEORY)
 
-3. **Report to user**:
+3. **Run Constitution review check**:
+   ```bash
+   .specify/scripts/check-constitution-updates.sh .specify/memory/fixes/YYYY-MM/DD-bug-name
+   ```
+   - Analyzes fix pattern
+   - Searches for similar fixes
+   - Recommends Constitution update if pattern detected (≥3 instances)
+   - Checks archiving threshold
+
+4. **Report to user**:
    ```markdown
    ## ✅ Fix Complete
 
