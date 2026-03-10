@@ -1,0 +1,54 @@
+diff --git a/novel-core/Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs b/novel-core/Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs
+index 8d0b87c..888fe65 100644
+--- a/novel-core/Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs
++++ b/novel-core/Assets/Scripts/NovelCore/Runtime/Core/AssetManagement/AddressablesAssetManager.cs
+@@ -40,10 +40,20 @@ public class AddressablesAssetManager : IAssetManager
+             // Handle different key types
+             if (key is AssetReference assetRef)
+             {
++                if (!assetRef.RuntimeKeyIsValid())
++                {
++                    Debug.LogWarning($"AddressablesAssetManager: AssetReference has invalid RuntimeKey (empty or missing asset)");
++                    return null;
++                }
+                 handle = Addressables.LoadAssetAsync<T>(assetRef);
+             }
+             else if (key is string stringKey)
+             {
++                if (string.IsNullOrEmpty(stringKey))
++                {
++                    Debug.LogWarning($"AddressablesAssetManager: String key is null or empty");
++                    return null;
++                }
+                 handle = Addressables.LoadAssetAsync<T>(stringKey);
+             }
+             else
+diff --git a/novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs b/novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs
+index 30b442e..0d42b0c 100644
+--- a/novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs
++++ b/novel-core/Assets/Scripts/NovelCore/Runtime/Core/DialogueSystem/DialogueSystem.cs
+@@ -341,8 +341,8 @@ public class DialogueSystem : IDialogueSystem
+             targetSceneRef = _currentScene.NextScene;
+         }
+ 
+-        // Load target scene if determined
+-        if (targetSceneRef != null)
++        // Load target scene if determined and valid
++        if (targetSceneRef != null && targetSceneRef.RuntimeKeyIsValid())
+         {
+             Debug.Log($"DialogueSystem: Loading target scene...");
+             
+@@ -372,7 +372,12 @@ public class DialogueSystem : IDialogueSystem
+         }
+         else
+         {
+-            // No target scene determined, complete dialogue normally
++            // No valid target scene determined, complete dialogue normally
++            if (targetSceneRef != null && !targetSceneRef.RuntimeKeyIsValid())
++            {
++                Debug.LogWarning("DialogueSystem: NextScene AssetReference is invalid (empty or missing asset). Story ending.");
++            }
++            
+             Debug.Log("DialogueSystem: No target scene determined, dialogue ending normally");
+             _isPlaying = false;
+             OnDialogueComplete?.Invoke();

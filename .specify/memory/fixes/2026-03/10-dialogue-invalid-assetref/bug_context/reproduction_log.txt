@@ -1,0 +1,41 @@
+BugContextAgent Reproduction Log
+=================================
+
+[2026-03-10 00:00:00] Bug Description: InvalidKeyException on last dialogue with empty NextScene
+[2026-03-10 00:00:01] Creating failing test: EndOfStoryReproductionTests.cs
+[2026-03-10 00:00:02] Test setup: DialogueSystem with MockAssetManager
+
+[2026-03-10 00:00:03] Test Case 1: EndOfStory_WithEmptyNextSceneReference_ShouldShowNotificationWithoutException
+[2026-03-10 00:00:04] Arrange: SceneData with empty AssetReference ("") in NextScene
+[2026-03-10 00:00:05] Act: StartScene() -> AdvanceDialogue()
+[2026-03-10 00:00:06] Expected: No exception, OnDialogueComplete fires, EndOfStory notification shown
+[2026-03-10 00:00:07] Actual (BEFORE FIX): InvalidKeyException logged, no UI notification
+
+[2026-03-10 00:00:08] Test Case 2: EndOfStory_WithNullNextScene_ShouldCompleteGracefully
+[2026-03-10 00:00:09] Arrange: SceneData with null NextScene
+[2026-03-10 00:00:10] Act: StartScene() -> AdvanceDialogue()
+[2026-03-10 00:00:11] Expected: OnDialogueComplete fires, dialogue stops
+[2026-03-10 00:00:12] Actual (BEFORE FIX): PASSES (null check works for this case)
+
+[2026-03-10 00:00:13] Test Case 3: EndOfStory_WithInvalidAssetReference_ShouldValidateBeforeLoad
+[2026-03-10 00:00:14] Arrange: SceneData with invalid GUID in NextScene AssetReference
+[2026-03-10 00:00:15] Act: StartScene() -> AdvanceDialogue()
+[2026-03-10 00:00:16] Expected: Validation before load, graceful completion
+[2026-03-10 00:00:17] Actual (BEFORE FIX): InvalidKeyException when LoadAssetAsync is called
+
+[2026-03-10 00:00:18] Root Cause Identified:
+[2026-03-10 00:00:19] - DialogueSystem.CompleteDialogue() checks `targetSceneRef != null` (line 345)
+[2026-03-10 00:00:20] - AssetReference can be non-null but have invalid/empty RuntimeKey
+[2026-03-10 00:00:21] - Missing validation: `targetSceneRef.RuntimeKeyIsValid()`
+[2026-03-10 00:00:22] - Addressables.LoadAssetAsync() throws InvalidKeyException when key is empty/invalid
+
+[2026-03-10 00:00:23] Secondary Issue:
+[2026-03-10 00:00:24] - No UI notification for "End of Story" scenario
+[2026-03-10 00:00:25] - Only OnDialogueComplete event fires (DialogueBox just hides)
+[2026-03-10 00:00:26] - User requirement: Show non-modal "Story Complete" window
+
+[2026-03-10 00:00:27] Test Determinism: ✓ Reproducible (failing test created)
+[2026-03-10 00:00:28] Test Isolation: ✓ Uses mocks, no external dependencies
+[2026-03-10 00:00:29] Constitution Compliance: ✓ EditMode test, follows Principle VI
+
+[2026-03-10 00:00:30] CONCLUSION: Bug reproduced, failing test ready

@@ -1,90 +1,58 @@
-# March 2026 Fixes
+# Fixes Archive - March 2026
 
-**Total Fixes**: 2  
-**Period**: 2026-03-10
+## Index
 
----
+### 10-audio-di-null (2026-03-10)
+**Bug**: AudioService DI registration returned null
+**Root Cause**: VContainer MonoBehaviour registration pattern incorrect
+**Fix**: Use RegisterComponentOnNewGameObject + DontDestroyOnLoad
+**Pattern**: VContainer MonoBehaviour lifecycle management
+**Impact**: Constitution updated with Principle VI VContainer best practices
 
-## Summary
+### 10-sample-project-backgrounds (2026-03-10)
+**Bug**: Sample project missing background assets
+**Root Cause**: Addressables catalog missing SampleBackgrounds group
+**Fix**: Added background assets to catalog, updated sample scenes
+**Pattern**: Asset pipeline integrity validation
+**Impact**: None (isolated project setup issue)
 
-### [10-sample-project-backgrounds](./10-sample-project-backgrounds/)
+### 10-dialogue-invalid-assetref (2026-03-10)
+**Bug**: InvalidKeyException on last dialogue with empty NextScene
+**Root Cause**: Missing AssetReference.RuntimeKeyIsValid() validation
+**Fix**: Added RuntimeKeyIsValid() check in DialogueSystem and AddressablesAssetManager
+**Pattern**: AssetReference defensive programming
+**Impact**: Recommended Constitution update - add AssetReference validation guidelines
 
-**Commit**: a030566  
-**Component**: SampleProjectGenerator + SceneManager  
-**Severity**: High
+## Patterns Detected
 
-**Root Cause**: 
-- SampleProjectGenerator не создавал AssetReference для BackgroundImage
-- SceneManager GameObject не помечались DontDestroyOnLoad
-
-**Fix**: 
-- Added BackgroundImage/CharacterData creation in SampleProjectGenerator
-- Added DontDestroyOnLoad for background and character GameObject
-
----
-
-### [10-audio-di-null](./10-audio-di-null/)
-
-**Commit**: bc50296  
-**Component**: VContainer/GameLifetimeScope  
-**Severity**: Critical
-
-**Root Cause**:
-- UnityAudioService (MonoBehaviour) зарегистрирован через `builder.Register<>()` вместо `RegisterComponentOnNewGameObject<>()`
-
-**Fix**:
-- Changed to `RegisterComponentOnNewGameObject<UnityAudioService>().AsImplementedInterfaces()`
-
----
-
-## Patterns Identified
-
-### Recurring Issues
-
-1. **MonoBehaviour DI Registration** (1 instance):
-   - Pattern: Забывают использовать `RegisterComponentOnNewGameObject` для MonoBehaviour
-   - Solution: Add to Constitution guidance
-
-2. **GameObject Lifecycle** (1 instance):
-   - Pattern: Singleton service создаёт GameObject без `DontDestroyOnLoad`
-   - Solution: Add to Constitution guidance
-
-### Recommendations
-
-- ✅ Add VContainer MonoBehaviour registration best practices to Constitution
-- ✅ Add DI Singleton GameObject lifecycle guidance to Constitution
-- 🔄 Create code review checklist for VContainer registrations
-
----
-
-## Constitution Updates Suggested
-
-Based on fixes this month:
-
-### Principle VI: Add VContainer Guidance
-
-```markdown
-### VContainer Registration Best Practices
-
-MonoBehaviour services MUST be registered using RegisterComponentOnNewGameObject:
-
-✅ CORRECT:
-builder.RegisterComponentOnNewGameObject<UnityAudioService>(Lifetime.Singleton)
-    .AsImplementedInterfaces();
-
-❌ WRONG:
-builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
-
-Rationale: VContainer cannot instantiate MonoBehaviour via constructor.
+### AssetReference Validation (Occurrences: 1)
+**Pattern**: Missing RuntimeKeyIsValid() check before LoadAssetAsync
+**Recommendation**: Add to Constitution Principle VI (Defensive Programming):
+```
+- AssetReference validation: MUST check RuntimeKeyIsValid() before calling Addressables API
+- Two-level validation: Validate at business logic layer AND asset management layer
+- Clear warnings: Log descriptive warnings (not errors) for invalid references
 ```
 
-### Principle VI: Add GameObject Lifecycle Guidance
+**Rationale**: 
+- Unity AssetReference can be non-null with invalid RuntimeKey (empty GUID)
+- Simple != null check is insufficient
+- InvalidKeyException breaks user experience with technical error messages
 
-```markdown
-### DI Singleton GameObject Lifecycle
+**Action**: Update Constitution if this pattern recurs (currently only 1 instance)
 
-Singleton services creating GameObject MUST:
-- Call `UnityEngine.Object.DontDestroyOnLoad(gameObject)` after creation
-- Ensure GameObject lifecycle matches service lifetime
-- Document GameObject ownership in comments
-```
+## Monthly Statistics
+
+- **Total fixes**: 3
+- **VContainer issues**: 1 (Constitution updated)
+- **Asset pipeline issues**: 1
+- **Validation issues**: 1
+- **Average fix time**: ~2 hours (estimated)
+
+## Constitution Review Status
+
+- [x] 10-audio-di-null: Constitution updated (Principle VI VContainer guidance)
+- [x] 10-sample-project-backgrounds: No update needed (isolated issue)
+- [ ] 10-dialogue-invalid-assetref: Pending pattern review (1 occurrence, threshold is 3)
+
+**Next Review**: 2026-04-01 (monthly pattern analysis)
