@@ -1,46 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7568691811236029909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line00
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 99b60c65-2c90-453a-97bf-54f47e2ee494
-  _lineId: line_path_b_001
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_path_b_001
-  _fallbackText: "\u0422\u044B \u0440\u0435\u0448\u0438\u043B \u043E\u0441\u0442\u0430\u0442\u044C\u0441\u044F
-    \u0434\u043E\u043C\u0430."
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
---- !u!114 &-6978878544687750348
+--- !u!114 &-1513125023048721873
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,7 +13,7 @@ MonoBehaviour:
   m_Name: Scene03b_PathB_Line02
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 51875ba5-228b-4580-8408-5c1488318a02
+  _id: 67ca6623-29f9-4cfa-a6fe-51c15444cc75
   _lineId: line_path_b_003
   _speaker:
     m_AssetGUID: 
@@ -65,47 +25,6 @@ MonoBehaviour:
   _textKey: line_path_b_003
   _fallbackText: "[\u041D\u0435\u0439\u0442\u0440\u0430\u043B\u044C\u043D\u0430\u044F
     \u043A\u043E\u043D\u0446\u043E\u0432\u043A\u0430 - Path B]"
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 
---- !u!114 &-6298286803557161764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene03b_PathB_Line01
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: f4b34af3-681b-4e11-95f7-ee4d60f14b8b
-  _lineId: line_path_b_002
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_path_b_002
-  _fallbackText: "\u0423\u044E\u0442\u043D\u044B\u0439 \u0432\u0435\u0447\u0435\u0440
-    \u0441 \u043A\u043D\u0438\u0433\u043E\u0439 - \u0442\u043E\u0436\u0435 \u043D\u0435\u043F\u043B\u043E\u0445\u043E\u0439
-    \u0432\u0430\u0440\u0438\u0430\u043D\u0442."
   _voiceClip:
     m_AssetGUID: 
     m_SubObjectName: 
@@ -134,11 +53,11 @@ MonoBehaviour:
   m_Name: Scene03b_PathB
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 6f0fe4ff-3de1-4663-994f-d5aca19aa141
+  _id: 0fa7e1ff-85cb-423f-a0b7-a6a7fe634595
   _sceneId: scene_path_b_001
   _sceneName: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
   _backgroundImage:
-    m_AssetGUID: 
+    m_AssetGUID: 976e48b6eb03642fdb5315df6c6a4857
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
@@ -149,11 +68,20 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _characters: []
+  _characters:
+  - character:
+      m_AssetGUID: 75eef63e9a34b4907878fc9315f6d3c0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    position: {x: 0.5, y: 0.5}
+    initialEmotion: neutral
+    sortingOrder: 0
   _dialogueLines:
-  - {fileID: -7568691811236029909}
-  - {fileID: -6298286803557161764}
-  - {fileID: -6978878544687750348}
+  - {fileID: 3330276750570109862}
+  - {fileID: 6671100189955634527}
+  - {fileID: -1513125023048721873}
   _choices: []
   _transitionType: 1
   _transitionDuration: 0.5
@@ -166,3 +94,84 @@ MonoBehaviour:
   _transitionRules: []
   _autoAdvance: 0
   _autoAdvanceDelay: 2
+--- !u!114 &3330276750570109862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene03b_PathB_Line00
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 3f37792d-930c-460c-b425-0729b7f00da0
+  _lineId: line_path_b_001
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_path_b_001
+  _fallbackText: "\u0422\u044B \u0440\u0435\u0448\u0438\u043B \u043E\u0441\u0442\u0430\u0442\u044C\u0441\u044F
+    \u0434\u043E\u043C\u0430."
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &6671100189955634527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene03b_PathB_Line01
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 55098623-45db-4207-ba6e-3abcd92f3e58
+  _lineId: line_path_b_002
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_path_b_002
+  _fallbackText: "\u0423\u044E\u0442\u043D\u044B\u0439 \u0432\u0435\u0447\u0435\u0440
+    \u0441 \u043A\u043D\u0438\u0433\u043E\u0439 - \u0442\u043E\u0436\u0435 \u043D\u0435\u043F\u043B\u043E\u0445\u043E\u0439
+    \u0432\u0430\u0440\u0438\u0430\u043D\u0442."
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 

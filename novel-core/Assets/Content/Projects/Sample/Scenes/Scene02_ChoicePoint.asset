@@ -1,6 +1,46 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7887537212006767480
+--- !u!114 &-1418227213955555992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
+  m_Name: Scene02_ChoicePoint_Line00
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: ccd7a58f-88d3-43da-a3d0-242062406612
+  _lineId: line_choice_001
+  _speaker:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _emotion: neutral
+  _textKey: line_choice_001
+  _fallbackText: "\u041F\u0440\u0438\u0448\u043B\u043E \u0432\u0440\u0435\u043C\u044F
+    \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0432\u044B\u0431\u043E\u0440."
+  _voiceClip:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _soundEffect:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _displayDuration: -1
+  _characterAction: 0
+  _actionParameters: 
+--- !u!114 &-375607622882984984
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13,7 +53,7 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint_Line01
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: d9ffae50-a375-4830-83c7-5b6f779f3267
+  _id: 37a87b31-74a5-4163-9e9d-045b9ee6bb59
   _lineId: line_choice_002
   _speaker:
     m_AssetGUID: 
@@ -53,11 +93,11 @@ MonoBehaviour:
   m_Name: Scene02_ChoicePoint
   m_EditorClassIdentifier: 
   _version: 1.0.0
-  _id: 8b852b12-a801-49f2-aacd-586b93312011
+  _id: b026c1f6-b832-4742-aa43-99ee44495a66
   _sceneId: scene_choice_001
   _sceneName: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
   _backgroundImage:
-    m_AssetGUID: 
+    m_AssetGUID: 85bf3a0051b09477db4aace41c90c906
     m_SubObjectName: 
     m_SubObjectType: 
     m_SubObjectGUID: 
@@ -68,12 +108,21 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  _characters: []
+  _characters:
+  - character:
+      m_AssetGUID: 75eef63e9a34b4907878fc9315f6d3c0
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    position: {x: 0.5, y: 0.5}
+    initialEmotion: neutral
+    sortingOrder: 0
   _dialogueLines:
-  - {fileID: 4701413091458858493}
-  - {fileID: -7887537212006767480}
+  - {fileID: -1418227213955555992}
+  - {fileID: -375607622882984984}
   _choices:
-  - {fileID: 11400000, guid: ff10cc9c3f14c4051a79717469464c7d, type: 2}
+  - {fileID: 11400000, guid: 095bc7d5c8ad4401d9c777e227dadf52, type: 2}
   _transitionType: 1
   _transitionDuration: 0.5
   _nextScene:
@@ -85,43 +134,3 @@ MonoBehaviour:
   _transitionRules: []
   _autoAdvance: 0
   _autoAdvanceDelay: 2
---- !u!114 &4701413091458858493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2437ae3050d38455cb1774d0be16788c, type: 3}
-  m_Name: Scene02_ChoicePoint_Line00
-  m_EditorClassIdentifier: 
-  _version: 1.0.0
-  _id: 25e288e3-7622-41f6-ab45-8558574666fc
-  _lineId: line_choice_001
-  _speaker:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _emotion: neutral
-  _textKey: line_choice_001
-  _fallbackText: "\u041F\u0440\u0438\u0448\u043B\u043E \u0432\u0440\u0435\u043C\u044F
-    \u0441\u0434\u0435\u043B\u0430\u0442\u044C \u0432\u044B\u0431\u043E\u0440."
-  _voiceClip:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _soundEffect:
-    m_AssetGUID: 
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_SubObjectGUID: 
-    m_EditorAssetChanged: 0
-  _displayDuration: -1
-  _characterAction: 0
-  _actionParameters: 

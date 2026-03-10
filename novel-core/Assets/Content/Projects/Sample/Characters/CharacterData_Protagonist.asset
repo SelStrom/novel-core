@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad45128a4602a4cd8bd15a3474a553e8, type: 3}
+  m_Name: CharacterData_Protagonist
+  m_EditorClassIdentifier: 
+  _version: 1.0.0
+  _id: 6139df42-f9a8-4d40-846a-2d8a8d917c8b
+  _characterId: char_protagonist_001
+  _characterName: Protagonist
+  _description: 
+  _defaultEmotion: neutral
+  _emotions:
+  - emotionName: neutral
+    sprite:
+      m_AssetGUID: d733dd6941c0949c58db7175986fa56b
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    spineSkin: 
+    spineAnimation: 
+  _animationType: 2
+  _spineDataAsset:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _defaultScale: {x: 1, y: 1}
