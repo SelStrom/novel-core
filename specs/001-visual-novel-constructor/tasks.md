@@ -520,21 +520,26 @@ Each iteration is a complete mini-milestone with:
 
 ---
 
-## 🏗️ ITERATION 17: Build Pipeline - Data Models (2 hours)
+## 🏗️ ITERATION 17: Build Pipeline Setup (1-2 hours)
 
-**Goal**: Can create BuildConfig ScriptableObject with platform-specific settings
+**Goal**: Unity Build Settings window configured for target platforms
 
-**Visible Result**: Inspector shows BuildConfig with platform dropdown, paths, SDK settings
+**Visible Result**: File → Build Settings shows all target platforms added with correct settings
 
 **Validation**:
-- Right-click → Create → NovelCore → BuildConfig
-- Inspector shows platform, bundle ID, scripting backend
-- Create separate configs for Windows/macOS/iOS/Android
-- Data persists
+- Open File → Build Settings in Unity
+- Verify all platforms present: PC/Mac/Linux Standalone, iOS, Android
+- Verify IL2CPP scripting backend selected for all platforms
+- Verify compression settings appropriate per platform
 
 **Tasks**:
-- [ ] T080 [P] [US5] Create BuildConfig ScriptableObject in `Assets/Scripts/NovelCore/Runtime/Data/BuildConfig.cs`
-- [ ] T081 [P] [US5] Create BuildPipelineWindow in `Assets/Scripts/NovelCore/Editor/Windows/BuildPipelineWindow.cs`
+- [ ] T080 [US5] Configure Build Settings via Unity Editor (MANUAL ONE-TIME)
+  - Add all target platforms (Windows, macOS, iOS, Android) to Build Settings
+  - Verify IL2CPP scripting backend for all platforms
+  - Set compression: LZ4 for development builds, LZMA for release
+  - Document configuration steps in quickstart.md
+
+**Note**: Unity 6 has comprehensive Build Settings window, eliminating need for custom BuildConfig ScriptableObject or BuildPipelineWindow. Platform-specific settings (bundle ID, version, signing) are managed through Player Settings (Edit → Project Settings → Player).
 
 ---
 
@@ -552,11 +557,11 @@ Each iteration is a complete mini-milestone with:
 - Repeat for macOS, iOS, Android
 
 **Tasks**:
-- [ ] T082 [US5] Implement Windows build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/WindowsBuilder.cs`
-- [ ] T083 [P] [US5] Implement macOS build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/MacOSBuilder.cs`
-- [ ] T084 [P] [US5] Implement iOS build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/iOSBuilder.cs`
-- [ ] T085 [P] [US5] Implement Android build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/AndroidBuilder.cs`
-- [ ] T086 [US5] Add platform-specific asset optimization (texture compression) in build pipeline
+- [ ] T081 [US5] Implement Windows build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/WindowsBuilder.cs`
+- [ ] T082 [P] [US5] Implement macOS build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/MacOSBuilder.cs`
+- [ ] T083 [P] [US5] Implement iOS build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/iOSBuilder.cs`
+- [ ] T084 [P] [US5] Implement Android build automation in `Assets/Scripts/NovelCore/Editor/Tools/BuildPipeline/AndroidBuilder.cs`
+- [ ] T085 [US5] Add platform-specific asset optimization (texture compression) in build pipeline
 
 ---
 
@@ -574,11 +579,11 @@ Each iteration is a complete mini-milestone with:
 - Test iOS/Android platform services
 
 **Tasks**:
-- [ ] T087 [P] [US5] Implement SteamPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/Steam/SteamPlatformService.cs`
-- [ ] T088 [P] [US5] Implement iOSPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/iOS/iOSPlatformService.cs`
-- [ ] T089 [P] [US5] Implement AndroidPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/Android/AndroidPlatformService.cs`
-- [ ] T090 [US5] Integrate Steamworks.NET for achievements and cloud saves
-- [ ] T096 [US5] Register platform services conditionally in VContainer based on build target
+- [ ] T086 [P] [US5] Implement SteamPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/Steam/SteamPlatformService.cs`
+- [ ] T087 [P] [US5] Implement iOSPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/iOS/iOSPlatformService.cs`
+- [ ] T088 [P] [US5] Implement AndroidPlatformService in `Assets/Scripts/NovelCore/Runtime/Platform/Android/AndroidPlatformService.cs`
+- [ ] T089 [US5] Integrate Steamworks.NET for achievements and cloud saves
+- [ ] T090 [US5] Register platform services conditionally in VContainer based on build target
 
 ---
 
@@ -596,9 +601,9 @@ Each iteration is a complete mini-milestone with:
 - Build errors show in window with actionable messages
 
 **Tasks**:
-- [ ] T091 [US5] Add build configuration UI to BuildPipelineWindow
-- [ ] T092 [US5] Implement "Build All Platforms" button with sequential builds
-- [ ] T093 [US5] Add build error reporting with actionable messages
+- [ ] T091 [US5] Implement "Build All Platforms" automation script with sequential builds
+- [ ] T092 [US5] Add build error reporting with actionable messages
+- [ ] T093 [US5] Add menu item "NovelCore → Build All Platforms" for batch builds
 
 ---
 
@@ -617,7 +622,10 @@ Each iteration is a complete mini-milestone with:
 
 **Tasks**:
 - [ ] T094 [P] [US5] Create AssetValidator tool in `Assets/Scripts/NovelCore/Editor/Tools/AssetValidator.cs`
-- [ ] T095 [US5] Implement pre-build validation (missing assets, broken links) in BuildPipelineWindow
+- [ ] T094.1 [P] [US5] Add validation for broken scene links (choice → non-existent scene)
+- [ ] T094.2 [P] [US5] Add validation for circular scene loops (detect loops with no exit path to ending)
+- [ ] T094.3 [P] [US5] Add validation for missing audio references (detect missing AudioClip assets)
+- [ ] T095 [US5] Implement pre-build validation runner (execute AssetValidator before build starts)
 
 ---
 
@@ -650,15 +658,21 @@ Each iteration is a complete mini-milestone with:
 
 **Validation**:
 - Add localization keys to DialogueLineData
-- Create Unity Localization tables (EN, RU, JA)
+- Create Unity Localization tables (EN, RU, JA) via Editor generator
 - Add translations
 - Play mode: switch language → dialogue updates
 - Build includes all languages
 
 **Tasks**:
-- [ ] T101 [P] Implement ILocalizationService interface in `Assets/Scripts/NovelCore/Runtime/Core/Localization/ILocalizationService.cs`
-- [ ] T102 Implement UnityLocalizationService wrapper in `Assets/Scripts/NovelCore/Runtime/Core/Localization/UnityLocalizationService.cs`
-- [ ] T103 Add localization key support to DialogueLineData
+- [ ] T096 [P] Implement ILocalizationService interface in `Assets/Scripts/NovelCore/Runtime/Core/Localization/ILocalizationService.cs`
+- [ ] T097 Implement UnityLocalizationService wrapper in `Assets/Scripts/NovelCore/Runtime/Core/Localization/UnityLocalizationService.cs`
+- [ ] T098 Add localization key support to DialogueLineData
+- [ ] T099 [P] Create LocalizationTableGenerator in `Assets/Scripts/NovelCore/Editor/Tools/Generators/LocalizationTableGenerator.cs`
+  - Generate Unity Localization String Tables for EN, RU, JA
+  - Add menu item "NovelCore → Generate Localization Tables"
+  - Use Unity Localization API (AddressableAssetSettings, LocalizationSettings)
+  - Create tables in `Assets/Content/Localization/` directory
+  - Auto-assign default locale (Russian as per Constitution Principle IX)
 
 ---
 
@@ -677,9 +691,9 @@ Each iteration is a complete mini-milestone with:
 - Ready to start creating
 
 **Tasks**:
-- [ ] T104 [P] Create ProjectSetup wizard in `Assets/Scripts/NovelCore/Editor/Tools/ProjectSetup/ProjectSetupWizard.cs`
-- [ ] T105 Implement new project creation workflow in ProjectSetupWizard
-- [ ] T106 [P] Add NovelCore menu items to Unity Editor menu bar (Window → NovelCore)
+- [ ] T100 [P] Create ProjectSetup wizard in `Assets/Scripts/NovelCore/Editor/Tools/ProjectSetup/ProjectSetupWizard.cs`
+- [ ] T101 Implement new project creation workflow in ProjectSetupWizard
+- [ ] T102 [P] Add NovelCore menu items to Unity Editor menu bar (Window → NovelCore)
 
 ---
 
@@ -698,8 +712,8 @@ Each iteration is a complete mini-milestone with:
 - Test on iPhone 12 / Intel HD 620
 
 **Tasks**:
-- [ ] T107 Performance profiling: Optimize sprite batching for 60 FPS target
-- [ ] T108 Memory profiling: Ensure <512MB RAM usage on mobile
+- [ ] T103 Performance profiling: Optimize sprite batching for 60 FPS target
+- [ ] T104 Memory profiling: Ensure <512MB RAM usage on mobile
 
 ---
 
@@ -717,9 +731,9 @@ Each iteration is a complete mini-milestone with:
 - 5-minute tutorial playable start to finish
 
 **Tasks**:
-- [ ] T109 [P] Code cleanup: Apply C# 10 features (file-scoped namespaces, record types)
-- [ ] T110 [P] Documentation: Update README.md with setup instructions
-- [ ] T111 Create sample visual novel project in `Assets/Content/Projects/SampleProject/`
+- [ ] T105 [P] Code cleanup: Apply C# 10 features (file-scoped namespaces, record types)
+- [ ] T106 [P] Documentation: Update README.md with setup instructions
+- [ ] T107 Create sample visual novel project in `Assets/Content/Projects/SampleProject/`
 
 ---
 
@@ -740,7 +754,7 @@ Each iteration is a complete mini-milestone with:
 - Performance meets targets on all platforms
 
 **Tasks**:
-- [ ] T112 Run platform build validation on Windows, macOS, iOS, Android
+- [ ] T108 Run platform build validation on Windows, macOS, iOS, Android
 
 ---
 
@@ -764,13 +778,13 @@ Each iteration is a complete mini-milestone with:
 - Mock framework (NSubstitute or similar) available for interface mocking
 
 **Tasks**:
-- [X] T113 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Runtime/NovelCore.Tests.Runtime.asmdef`
-- [X] T114 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Editor/NovelCore.Tests.Editor.asmdef`
-- [X] T115 [P] Configure test assembly references to NovelCore.Runtime and NovelCore.Editor assemblies
-- [X] T116 Install NSubstitute (or NUnit mocking framework) via Package Manager for interface mocking
-- [X] T117 [P] Create test fixtures base classes in `Assets/Scripts/NovelCore/Tests/Runtime/BaseTestFixture.cs`
-- [X] T118 [P] Create test data builders in `Assets/Scripts/NovelCore/Tests/Runtime/Builders/` for SceneData, CharacterData, DialogueLineData
-- [X] T119 Create sample test to verify infrastructure in `Assets/Scripts/NovelCore/Tests/Runtime/SampleTest.cs`
+- [X] T109 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Runtime/NovelCore.Tests.Runtime.asmdef`
+- [X] T110 [P] Create test assembly definitions: `Assets/Scripts/NovelCore/Tests/Editor/NovelCore.Tests.Editor.asmdef`
+- [X] T111 [P] Configure test assembly references to NovelCore.Runtime and NovelCore.Editor assemblies
+- [X] T112 Install NSubstitute (or NUnit mocking framework) via Package Manager for interface mocking
+- [X] T113 [P] Create test fixtures base classes in `Assets/Scripts/NovelCore/Tests/Runtime/BaseTestFixture.cs`
+- [X] T114 [P] Create test data builders in `Assets/Scripts/NovelCore/Tests/Runtime/Builders/` for SceneData, CharacterData, DialogueLineData
+- [X] T115 Create sample test to verify infrastructure in `Assets/Scripts/NovelCore/Tests/Runtime/SampleTest.cs`
 
 ---
 
@@ -788,14 +802,14 @@ Each iteration is a complete mini-milestone with:
 - No runtime initialization required for data model tests
 
 **Tasks**:
-- [X] T112a [P] Create `BaseTestFixture` for EditMode tests in `Assets/Scripts/NovelCore/Tests/Editor/BaseTestFixture.cs`
-- [X] T112b [P] Copy test data builders to Editor folder: `Assets/Scripts/NovelCore/Tests/Editor/Builders/TestDataBuilders.cs`
-- [X] T112c [P] Move data model tests to EditMode: `SceneDataTests`, `CharacterDataTests`, `DialogueLineDataTests`, `ChoiceDataTests`, `CharacterPlacementTests`
-- [X] T112d [P] Move DialogueSystem tests to EditMode: `DialogueSystemTests.cs` (pure C# logic, no Unity runtime needed)
-- [X] T112e Move builder tests (`SampleTest.cs`) to EditMode
-- [X] T112f Update `NovelCore.Tests.Editor.asmdef` to reference Addressables, NovelCore.Runtime, TestFramework
-- [X] T112g [P] Run EditMode tests to verify migration successful
-- [X] T112h Clean up old Runtime test files after confirming EditMode tests pass
+- [X] T115a [P] Create `BaseTestFixture` for EditMode tests in `Assets/Scripts/NovelCore/Tests/Editor/BaseTestFixture.cs`
+- [X] T115b [P] Copy test data builders to Editor folder: `Assets/Scripts/NovelCore/Tests/Editor/Builders/TestDataBuilders.cs`
+- [X] T115c [P] Move data model tests to EditMode: `SceneDataTests`, `CharacterDataTests`, `DialogueLineDataTests`, `ChoiceDataTests`, `CharacterPlacementTests`
+- [X] T115d [P] Move DialogueSystem tests to EditMode: `DialogueSystemTests.cs` (pure C# logic, no Unity runtime needed)
+- [X] T115e Move builder tests (`SampleTest.cs`) to EditMode
+- [X] T115f Update `NovelCore.Tests.Editor.asmdef` to reference Addressables, NovelCore.Runtime, TestFramework
+- [X] T115g [P] Run EditMode tests to verify migration successful
+- [X] T115h Clean up old Runtime test files after confirming EditMode tests pass
 
 **Rationale**: EditMode tests for ScriptableObject creation, data validation, and pure C# logic execute 60-80% faster than PlayMode tests and are more reliable (no Unity runtime variability). Only SaveSystemTests require PlayMode due to async/await operations and file I/O (`Application.persistentDataPath`, `Directory`/`File` APIs).
 
@@ -815,11 +829,11 @@ Each iteration is a complete mini-milestone with:
 - Code coverage report shows >80% for data model classes
 
 **Tasks**:
-- [X] T120 [P] Write unit tests for SceneData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/SceneDataTests.cs`
-- [X] T121 [P] Write unit tests for CharacterData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterDataTests.cs`
-- [X] T122 [P] Write unit tests for DialogueLineData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/DialogueLineDataTests.cs`
-- [X] T123 [P] Write unit tests for ChoiceData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/ChoiceDataTests.cs`
-- [X] T124 [P] Write unit tests for CharacterPlacement in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterPlacementTests.cs`
+- [X] T116 [P] Write unit tests for SceneData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/SceneDataTests.cs`
+- [X] T117 [P] Write unit tests for CharacterData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterDataTests.cs`
+- [X] T118 [P] Write unit tests for DialogueLineData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/DialogueLineDataTests.cs`
+- [X] T119 [P] Write unit tests for ChoiceData in `Assets/Scripts/NovelCore/Tests/Runtime/Data/ChoiceDataTests.cs`
+- [X] T120 [P] Write unit tests for CharacterPlacement in `Assets/Scripts/NovelCore/Tests/Runtime/Data/CharacterPlacementTests.cs`
 
 ---
 
@@ -838,12 +852,12 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for DialogueSystem
 
 **Tasks**:
-- [X] T125 [P] Write unit tests for DialogueSystem initialization in `Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystemTests.cs`
-- [X] T126 Write unit tests for dialogue advance logic (AdvanceDialogue, previous line, completion)
-- [X] T127 Write unit tests for choice point handling (ShowChoices, SelectChoice, track history)
-- [X] T128 Write unit tests for emotion switching during dialogue
-- [X] T129 Write unit tests for dialogue state serialization (for save system integration)
-- [X] T130 [P] Create mock implementations: MockAssetManager, MockSceneManager for test isolation
+- [X] T121 [P] Write unit tests for DialogueSystem initialization in `Assets/Scripts/NovelCore/Tests/Runtime/Core/DialogueSystemTests.cs`
+- [X] T122 Write unit tests for dialogue advance logic (AdvanceDialogue, previous line, completion)
+- [X] T123 Write unit tests for choice point handling (ShowChoices, SelectChoice, track history)
+- [X] T124 Write unit tests for emotion switching during dialogue
+- [X] T125 Write unit tests for dialogue state serialization (for save system integration)
+- [X] T126 [P] Create mock implementations: MockAssetManager, MockSceneManager for test isolation
 
 ---
 
@@ -862,11 +876,11 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for SaveSystem
 
 **Tasks**:
-- [X] T131 [P] Write unit tests for SaveSystem save operations in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SaveSystemTests.cs`
-- [X] T132 Write unit tests for SaveSystem load operations (valid saves, missing saves, corrupted saves)
-- [X] T133 Write unit tests for save format versioning (v1 → v2 migration scenarios)
-- [X] T134 Write unit tests for auto-save triggers (scene transitions, choice points)
-- [X] T135 Write unit tests for save slot management (create, delete, list slots)
+- [X] T127 [P] Write unit tests for SaveSystem save operations in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SaveSystemTests.cs`
+- [X] T128 Write unit tests for SaveSystem load operations (valid saves, missing saves, corrupted saves)
+- [X] T129 Write unit tests for save format versioning (v1 → v2 migration scenarios)
+- [X] T130 Write unit tests for auto-save triggers (scene transitions, choice points)
+- [X] T131 Write unit tests for save slot management (create, delete, list slots)
 
 ---
 
@@ -885,12 +899,12 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for AssetManager and SceneManager
 
 **Tasks**:
-- [ ] T136 [P] Write unit tests for AddressablesAssetManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/AssetManagementTests.cs`
-- [ ] T137 Write unit tests for asset loading (success, missing asset, invalid format)
-- [ ] T138 Write unit tests for asset reference tracking and cleanup
-- [ ] T139 [P] Write unit tests for SceneManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SceneManagementTests.cs`
-- [ ] T140 Write unit tests for scene loading, background rendering, character placement
-- [ ] T141 Write unit tests for scene transitions (Fade, Slide, Cut)
+- [ ] T132 [P] Write unit tests for AddressablesAssetManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/AssetManagementTests.cs`
+- [ ] T133 Write unit tests for asset loading (success, missing asset, invalid format)
+- [ ] T134 Write unit tests for asset reference tracking and cleanup
+- [ ] T135 [P] Write unit tests for SceneManager in `Assets/Scripts/NovelCore/Tests/Runtime/Core/SceneManagementTests.cs`
+- [ ] T136 Write unit tests for scene loading, background rendering, character placement
+- [ ] T137 Write unit tests for scene transitions (Fade, Slide, Cut)
 
 ---
 
@@ -908,10 +922,10 @@ Each iteration is a complete mini-milestone with:
 - Code coverage >80% for character animators
 
 **Tasks**:
-- [ ] T142 [P] Write unit tests for UnityCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/UnityCharacterAnimatorTests.cs`
-- [ ] T143 Write unit tests for emotion switching logic
-- [ ] T144 Write unit tests for character entrance/exit animations
-- [ ] T145 [P] Write unit tests for SpineCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/SpineCharacterAnimatorTests.cs`
+- [ ] T138 [P] Write unit tests for UnityCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/UnityCharacterAnimatorTests.cs`
+- [ ] T139 Write unit tests for emotion switching logic
+- [ ] T140 Write unit tests for character entrance/exit animations
+- [ ] T141 [P] Write unit tests for SpineCharacterAnimator in `Assets/Scripts/NovelCore/Tests/Runtime/Animation/SpineCharacterAnimatorTests.cs`
 
 ---
 
@@ -929,11 +943,11 @@ Each iteration is a complete mini-milestone with:
 - Tests verify auto-save triggers at choice points
 
 **Tasks**:
-- [ ] T146 [P] Write integration test: Save dialogue state mid-conversation in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/DialogueSaveIntegrationTests.cs`
-- [ ] T147 Write integration test: Load saved dialogue and verify state restoration
-- [ ] T148 Write integration test: Choice history persists across save/load
-- [ ] T149 Write integration test: Auto-save triggers on choice selection
-- [ ] T150 Write integration test: Multiple save slots maintain separate dialogue states
+- [ ] T142 [P] Write integration test: Save dialogue state mid-conversation in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/DialogueSaveIntegrationTests.cs`
+- [ ] T143 Write integration test: Load saved dialogue and verify state restoration
+- [ ] T144 Write integration test: Choice history persists across save/load
+- [ ] T145 Write integration test: Auto-save triggers on choice selection
+- [ ] T146 Write integration test: Multiple save slots maintain separate dialogue states
 
 ---
 
@@ -951,11 +965,11 @@ Each iteration is a complete mini-milestone with:
 - Tests verify asset cleanup on scene unload
 
 **Tasks**:
-- [ ] T151 [P] Write integration test: Load scene with background asset in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AssetSceneIntegrationTests.cs`
-- [ ] T152 Write integration test: Load scene with character sprites
-- [ ] T153 Write integration test: Missing asset detection and error handling
-- [ ] T154 Write integration test: Asset cleanup on scene transition
-- [ ] T155 Write integration test: Multiple scenes reference same asset (reference counting)
+- [ ] T147 [P] Write integration test: Load scene with background asset in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AssetSceneIntegrationTests.cs`
+- [ ] T148 Write integration test: Load scene with character sprites
+- [ ] T149 Write integration test: Missing asset detection and error handling
+- [ ] T150 Write integration test: Asset cleanup on scene transition
+- [ ] T151 Write integration test: Multiple scenes reference same asset (reference counting)
 
 ---
 
@@ -973,11 +987,11 @@ Each iteration is a complete mini-milestone with:
 - Tests verify audio stops on game quit/pause
 
 **Tasks**:
-- [ ] T156 [P] Write integration test: Background music plays on scene load in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AudioDialogueIntegrationTests.cs`
-- [ ] T157 Write integration test: SFX triggers on dialogue line
-- [ ] T158 Write integration test: Music fade-out on scene transition
-- [ ] T159 Write integration test: Audio volume controls affect playback
-- [ ] T160 Write integration test: Audio stops on game pause/quit
+- [ ] T152 [P] Write integration test: Background music plays on scene load in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/AudioDialogueIntegrationTests.cs`
+- [ ] T153 Write integration test: SFX triggers on dialogue line
+- [ ] T154 Write integration test: Music fade-out on scene transition
+- [ ] T155 Write integration test: Audio volume controls affect playback
+- [ ] T156 Write integration test: Audio stops on game pause/quit
 
 ---
 
@@ -995,11 +1009,11 @@ Each iteration is a complete mini-milestone with:
 - Tests verify touch input works identically to mouse (cross-platform parity)
 
 **Tasks**:
-- [ ] T161 [P] Write integration test: Click advances dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/InputUIIntegrationTests.cs`
-- [ ] T162 Write integration test: Click choice button navigates to scene
-- [ ] T163 Write integration test: Keyboard shortcuts (Space, ESC) work
-- [ ] T164 Write integration test: Touch input advances dialogue (mobile)
-- [ ] T165 Write integration test: Input blocked during scene transitions
+- [ ] T157 [P] Write integration test: Click advances dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/InputUIIntegrationTests.cs`
+- [ ] T158 Write integration test: Click choice button navigates to scene
+- [ ] T159 Write integration test: Keyboard shortcuts (Space, ESC) work
+- [ ] T160 Write integration test: Touch input advances dialogue (mobile)
+- [ ] T161 Write integration test: Input blocked during scene transitions
 
 ---
 
@@ -1017,11 +1031,11 @@ Each iteration is a complete mini-milestone with:
 - Tests verify platform service fallback if APIs unavailable
 
 **Tasks**:
-- [ ] T166 [P] Write integration test: Steam cloud save upload in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/PlatformServicesIntegrationTests.cs`
-- [ ] T167 Write integration test: Steam cloud save download and conflict resolution
-- [ ] T168 [P] Write integration test: iOS iCloud save sync
-- [ ] T169 [P] Write integration test: Android Google Play save sync
-- [ ] T170 Write integration test: Platform service fallback (offline mode)
+- [ ] T162 [P] Write integration test: Steam cloud save upload in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/PlatformServicesIntegrationTests.cs`
+- [ ] T163 Write integration test: Steam cloud save download and conflict resolution
+- [ ] T164 [P] Write integration test: iOS iCloud save sync
+- [ ] T165 [P] Write integration test: Android Google Play save sync
+- [ ] T166 Write integration test: Platform service fallback (offline mode)
 
 ---
 
@@ -1039,10 +1053,10 @@ Each iteration is a complete mini-milestone with:
 - Tests verify missing translations show fallback text
 
 **Tasks**:
-- [ ] T171 [P] Write integration test: Switch language updates dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/LocalizationIntegrationTests.cs`
-- [ ] T172 Write integration test: Switch language updates UI labels
-- [ ] T173 Write integration test: Missing translation shows fallback
-- [ ] T174 Write integration test: Localization persists across saves
+- [ ] T167 [P] Write integration test: Switch language updates dialogue in `Assets/Scripts/NovelCore/Tests/Runtime/Integration/LocalizationIntegrationTests.cs`
+- [ ] T168 Write integration test: Switch language updates UI labels
+- [ ] T169 Write integration test: Missing translation shows fallback
+- [ ] T170 Write integration test: Localization persists across saves
 
 ---
 
@@ -1064,14 +1078,14 @@ Each iteration is a complete mini-milestone with:
 - CI/CD pipeline blocks merges if tests fail
 
 **Tasks**:
-- [ ] T175 Install Unity Code Coverage package via Package Manager
-- [ ] T176 Configure code coverage for test assemblies in Unity Test Framework settings
-- [ ] T177 Run coverage report and identify gaps (<80% coverage) in core systems
-- [ ] T178 Write additional unit tests to fill coverage gaps
-- [ ] T179 Create regression test suite for P1 user story (Create Basic Scene) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US1_BasicSceneRegressionTests.cs`
-- [ ] T180 Create regression test suite for P2 user story (Branching Narrative) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US2_BranchingRegressionTests.cs`
-- [ ] T181 Configure CI/CD pipeline to run test suite on every commit (GitHub Actions or similar)
-- [ ] T182 Document test execution and coverage reporting in README.md
+- [ ] T171 Install Unity Code Coverage package via Package Manager
+- [ ] T172 Configure code coverage for test assemblies in Unity Test Framework settings
+- [ ] T173 Run coverage report and identify gaps (<80% coverage) in core systems
+- [ ] T174 Write additional unit tests to fill coverage gaps
+- [ ] T175 Create regression test suite for P1 user story (Create Basic Scene) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US1_BasicSceneRegressionTests.cs`
+- [ ] T176 Create regression test suite for P2 user story (Branching Narrative) in `Assets/Scripts/NovelCore/Tests/Runtime/Regression/US2_BranchingRegressionTests.cs`
+- [ ] T177 Configure CI/CD pipeline to run test suite on every commit (GitHub Actions or similar)
+- [ ] T178 Document test execution and coverage reporting in README.md
 
 ---
 
@@ -1098,19 +1112,19 @@ Each iteration is a complete mini-milestone with:
 | 14 | Audio Integration | 2-3h | Music + SFX in scenes |
 | 15 | Scene Transitions | 3h | Fade/slide effects |
 | 16 | Audio/Effects UI | 2h | Drag-and-drop audio in editor |
-| 17 | Build Config | 2h | BuildConfig data models |
+| 17 | Build Settings Setup | 1-2h | Configure Unity Build Settings |
 | 18 | Platform Builders | 4-5h | Build .exe/.app/.apk |
 | 19 | Platform Services | 3-4h | Steam/iOS/Android integration |
-| 20 | Build Pipeline UI | 2-3h | Build window with UI |
-| 21 | Pre-Build Validation | 2h | Asset validator |
+| 20 | Build Pipeline UI | 2-3h | Batch build automation |
+| 21 | Pre-Build Validation | 2-3h | Asset validator + edge cases |
 | 22 | Save System | 3-4h | Save/load with cloud sync |
-| 23 | Localization | 2-3h | Multi-language support |
+| 23 | Localization | 2-3h | Multi-language support + generator |
 | 24 | Project Wizard | 2h | New project setup wizard |
 | 25 | Performance | 3-4h | 60 FPS optimization |
 | 26 | Cleanup & Docs | 2-3h | Code polish, README |
 | 27 | Final Validation | 2-3h | **✅ MVP feature-complete** |
 
-**MVP Phase Total**: 27 iterations, 65-85 hours
+**MVP Phase Total**: 27 iterations, 64-84 hours
 
 ## Post-MVP Testing Phase (v0.4.0+) - MANDATORY
 
@@ -1135,10 +1149,10 @@ Each iteration is a complete mini-milestone with:
 ## Combined Total
 
 **Total Iterations**: 40 (MVP: 27, Testing: 13)  
-**Estimated Solo Duration**: 100-132 hours  
+**Estimated Solo Duration**: 99-131 hours  
 **MVP Checkpoint**: Iteration 7 (first 19 hours)  
-**MVP Feature-Complete**: Iteration 27 (65-85 hours)  
-**Production Ready (v1.0.0)**: Iteration 40 (100-132 hours, >80% test coverage)
+**MVP Feature-Complete**: Iteration 27 (64-84 hours)  
+**Production Ready (v1.0.0)**: Iteration 40 (99-131 hours, >80% test coverage)
 
 ---
 

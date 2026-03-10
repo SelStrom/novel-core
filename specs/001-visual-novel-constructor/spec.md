@@ -100,6 +100,30 @@ A content creator completes their visual novel and uses the build pipeline to pa
 - How does the system handle Unicode text (Japanese, Russian, emoji) in dialogue? System must support UTF-8 and render all characters correctly on all platforms.
 - What happens when a mobile build exceeds app store size limits? System should warn before build and suggest asset optimization strategies.
 
+## Glossary
+
+### Core Terminology
+
+- **VN Scene** (Visual Novel Scene): A logical story segment or moment in the visual novel narrative (implemented as `SceneData` ScriptableObject). Not to be confused with Unity Scene files.
+- **Unity Scene**: Unity Engine scene file (e.g., `SampleScene.unity`, `MainMenu.unity`) containing game objects and runtime initialization. The visual novel constructor uses a single Unity Scene with dynamic content loading.
+- **Choice Point**: A decision moment in the story where the player selects from 2-6 options, each leading to different story branches (implemented as `ChoiceData` ScriptableObject).
+- **Content Creator**: The primary user of the visual novel constructor — a writer, artist, or game designer who creates visual novels without programming knowledge.
+- **End-User**: The player who plays the published visual novel games created with the constructor.
+- **Scene Editor**: The Unity Editor window (`Window → NovelCore → Scene Editor`) where content creators build VN Scenes by adding dialogue, characters, and backgrounds.
+- **Story Flow**: The branching structure of VN Scenes connected by choices, visualized as a graph in the Story Flow window.
+- **Preview Mode**: Testing workflow where content creators can play individual VN Scenes in Unity Play Mode without full game initialization (via "Preview Scene" button in Scene Editor).
+
+### Technical Terms
+
+- **SceneData**: ScriptableObject asset representing a single VN Scene with background, characters, dialogue lines, and choices.
+- **CharacterData**: ScriptableObject asset representing a character with multiple emotion sprites/animations.
+- **DialogueLineData**: ScriptableObject asset representing a single line of spoken/narrated text with speaker, emotion, and audio triggers.
+- **ChoiceData**: ScriptableObject asset representing a decision point with 2-6 options linking to target VN Scenes.
+- **Addressables**: Unity's asset management system used for loading backgrounds, characters, and audio at runtime (ensures asset reference integrity).
+- **GameStarter**: The runtime entry point component that initializes dependency injection, loads the starting VN Scene, and begins gameplay.
+
+**Naming Convention**: This document uses "VN Scene" when referring to logical story segments (`SceneData`) and "Unity Scene" when referring to Unity Engine scene files (`.unity`). In code and assets, use `SceneData` to avoid confusion.
+
 ## Requirements *(mandatory)*
 
 ### Functional Requirements

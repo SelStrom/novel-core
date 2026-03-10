@@ -196,11 +196,102 @@ public struct ChoiceOption {
     public string optionId;                         // Unique within choice
     public string textKey;                          // Localization key
     public AssetReference<SceneData> targetScene;   // Destination scene
-    public List<string> requiredChoices;            // Previous choices needed
-    public bool isAvailable;                        // Runtime availability
+    public List<ChoiceCondition> conditions;        // Conditions for availability
+    public bool isAvailable;                        // Runtime availability (computed)
     public Sprite icon;                             // Optional icon
 }
 ```
+
+**Nested Type: ChoiceCondition**:
+```csharp
+[Serializable]
+public struct ChoiceCondition {
+    public ConditionType type;                      // RequireChoice, RequireVariable, RequireFlag
+    public string requiredChoiceId;                 // Previous choice that must be selected (if type == RequireChoice)
+    public int minimumOccurrences;                  // How many times choice must be made (default: 1)
+    public string variableName;                     // Variable name to check (if type == RequireVariable)
+    public ComparisonOperator comparison;           // GreaterThan, LessThan, Equal, NotEqual
+    public int comparisonValue;                     // Value to compare against
+}
+```
+
+**Enums**:
+```csharp
+public enum ConditionType {
+    RequireChoice,      // Must have selected specific previous choice
+    RequireVariable,    // Check game variable (e.g., affection >= 50)
+    RequireFlag         // Check boolean flag (e.g., hasKey == true)
+}
+
+public enum ComparisonOperator {
+    GreaterThan,        // >
+    GreaterOrEqual,     // >=
+    LessThan,           // <
+    LessOrEqual,        // <=
+    Equal,              // ==
+    NotEqual            // !=
+}
+```
+
+**Conditional Branching Evaluation**:
+
+1. **At Choice Display Time**:
+   - For each `ChoiceOption`, evaluate all `conditions`
+   - If ALL conditions pass, set `isAvailable = true`
+   - If ANY condition fails, set `isAvailable = false` (choice grayed out or hidden)
+
+2. **Condition Evaluation Logic**:
+   ```csharp
+   bool EvaluateCondition(ChoiceCondition condition, SaveData saveData) {
+       switch (condition.type) {
+           case RequireChoice:
+               int count = saveData.choiceHistory.Count(c => c == condition.requiredChoiceId);
+               return count >= condition.minimumOccurrences;
+           
+           case RequireVariable:
+               if (!saveData.variables.TryGetValue(condition.variableName, out var value)) 
+                   return false;
+               return CompareValues((int)value, condition.comparison, condition.comparisonValue);
+           
+           case RequireFlag:
+               if (!saveData.variables.TryGetValue(condition.variableName, out var flag)) 
+                   return false;
+               return (bool)flag == (condition.comparisonValue == 1);
+       }
+   }
+   ```
+
+3. **Multiple Conditions**:
+   - All conditions must pass (AND logic)
+   - For OR logic, duplicate choice with different conditions
+
+**Example Use Cases**:
+
+- **Romance Route Requirement**:
+  ```
+  Condition: RequireChoice
+  RequiredChoiceId: "choice_02_flirt_with_alice"
+  MinimumOccurrences: 3
+  → Choice only available if player flirted with Alice 3+ times
+  ```
+
+- **Affection Threshold**:
+  ```
+  Condition: RequireVariable
+  VariableName: "alice_affection"
+  Comparison: GreaterOrEqual
+  ComparisonValue: 75
+  → Choice only available if Alice's affection ≥ 75
+  ```
+
+- **Key Item Check**:
+  ```
+  Condition: RequireFlag
+  VariableName: "hasKey"
+  Comparison: Equal
+  ComparisonValue: 1 (true)
+  → Choice only available if player has the key
+  ```
 
 ---
 
@@ -282,6 +373,85 @@ Platform-specific build settings.
 - If `targetPlatform` is iOS, `mobileProvisionProfile` required
 - If `targetPlatform` is Android, `keystorePath` required
 - `steamAppId` required only if targeting Steam (Windows/macOS)
+
+---
+
+### 8. StoryFlowGraph
+
+Visual representation of VN Scene connections and branching structure for the Story Flow window.
+
+**Fields**:
+- `nodes`: List<SceneNode> (all VN Scenes in project as graph nodes)
+- `edges`: List<ChoiceEdge> (connections between scenes via choices)
+- `layout`: LayoutAlgorithm enum (Hierarchical, ForceDirected, Manual)
+- `rootSceneId`: string (starting scene, root of graph)
+
+**Relationships**:
+- Built from `ProjectConfig` by analyzing all `SceneData` and `ChoiceData` assets
+- Read-only visualization (editing happens in Scene Editor, not graph)
+
+**Validation Rules**:
+- Graph must be connected (all scenes reachable from root)
+- Warn if scenes have no path to ending (dead-end branches)
+- Detect circular loops and warn if no exit path exists
+
+**Nested Type: SceneNode**:
+```csharp
+[Serializable]
+public struct SceneNode {
+    public string sceneId;                    // SceneData.sceneId
+    public string sceneName;                  // Display name
+    public Vector2 position;                  // Graph coordinates (x, y)
+    public bool isStartingScene;              // Root node indicator
+    public bool isEnding;                     // Terminal node (no outgoing edges)
+    public int incomingEdgeCount;             // How many choices lead here
+    public int outgoingEdgeCount;             // How many choices from this scene
+}
+```
+
+**Nested Type: ChoiceEdge**:
+```csharp
+[Serializable]
+public struct ChoiceEdge {
+    public string sourceSceneId;              // Origin scene
+    public string targetSceneId;              // Destination scene
+    public string choiceText;                 // Option text (localization key)
+    public string choiceId;                   // ChoiceData.choiceId
+    public Color edgeColor;                   // Visual indicator for editor
+    public bool isConditional;                // Has requiredChoices conditions
+}
+```
+
+**Layout Algorithms**:
+
+- **Hierarchical** (default for <50 scenes):
+  - Starting scene at top
+  - Scenes arranged in levels by distance from root
+  - Minimizes edge crossings
+  - Best for linear stories with occasional branches
+
+- **Force-Directed** (for 50-200 scenes):
+  - Physics simulation (nodes repel, edges attract)
+  - Auto-arranges complex graphs
+  - Better for highly branched stories
+  - Performance: 60 FPS up to 200 nodes
+
+- **Manual** (user-positioned):
+  - Preserves creator-defined positions
+  - Saved in SceneNode.position
+  - Fallback if automated layouts unclear
+
+**Graph Rendering**:
+- Unity GraphView API for node/edge visualization
+- Zoom/pan controls (0.1x to 2.0x zoom range)
+- Minimap for navigation (200+ scene projects)
+- Click node → opens Scene Editor for that scene
+- Right-click node → context menu (Delete, Duplicate, Set as Starting Scene)
+
+**Performance Optimization**:
+- Virtualization for >100 scenes (only render visible nodes)
+- Edge batching (single draw call per edge type)
+- LOD: Simplify node rendering at low zoom levels
 
 ---
 
