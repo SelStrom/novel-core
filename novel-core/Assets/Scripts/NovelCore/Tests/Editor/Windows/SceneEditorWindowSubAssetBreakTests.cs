@@ -34,7 +34,42 @@ namespace NovelCore.Tests.Editor.Windows
             {
                 AssetDatabase.DeleteAsset(_testScenePath);
             }
+
+            CleanupAllTestAssets();
+            
             AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private void CleanupAllTestAssets()
+        {
+            string[] dialogueAssets = AssetDatabase.FindAssets("t:DialogueLineData", new[] { "Assets" });
+            foreach (string guid in dialogueAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("DialogueLine"))
+                {
+                    var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
+                    if (mainAsset is DialogueLineData)
+                    {
+                        AssetDatabase.DeleteAsset(path);
+                    }
+                }
+            }
+
+            string[] choiceAssets = AssetDatabase.FindAssets("t:ChoiceData", new[] { "Assets" });
+            foreach (string guid in choiceAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("Choice"))
+                {
+                    var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
+                    if (mainAsset is ChoiceData)
+                    {
+                        AssetDatabase.DeleteAsset(path);
+                    }
+                }
+            }
         }
 
         [Test]
@@ -57,8 +92,20 @@ namespace NovelCore.Tests.Editor.Windows
                 $"Expected {lineCount} sub-assets, found {subAssets.Length}");
 
             string directory = Path.GetDirectoryName(_testScenePath);
-            string[] standaloneAssets = AssetDatabase.FindAssets("DialogueLine t:DialogueLineData", new[] { directory });
-            Assert.That(standaloneAssets.Length, Is.EqualTo(0),
+            string[] allDialogueAssets = AssetDatabase.FindAssets("DialogueLine t:DialogueLineData", new[] { directory });
+            
+            int standaloneCount = 0;
+            foreach (string guid in allDialogueAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
+                if (mainAsset is DialogueLineData && !path.Equals(_testScenePath))
+                {
+                    standaloneCount++;
+                }
+            }
+            
+            Assert.That(standaloneCount, Is.EqualTo(0),
                 "No standalone DialogueLineData assets should exist");
         }
 
@@ -169,8 +216,20 @@ namespace NovelCore.Tests.Editor.Windows
                 "ChoiceData should be a sub-asset");
 
             string directory = Path.GetDirectoryName(_testScenePath);
-            string[] standaloneChoices = AssetDatabase.FindAssets("Choice t:ChoiceData", new[] { directory });
-            Assert.That(standaloneChoices.Length, Is.EqualTo(0),
+            string[] allChoiceAssets = AssetDatabase.FindAssets("Choice t:ChoiceData", new[] { directory });
+            
+            int standaloneCount = 0;
+            foreach (string guid in allChoiceAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var mainAsset = AssetDatabase.LoadMainAssetAtPath(path);
+                if (mainAsset is ChoiceData && !path.Equals(_testScenePath))
+                {
+                    standaloneCount++;
+                }
+            }
+            
+            Assert.That(standaloneCount, Is.EqualTo(0),
                 "No standalone ChoiceData assets should exist");
         }
 

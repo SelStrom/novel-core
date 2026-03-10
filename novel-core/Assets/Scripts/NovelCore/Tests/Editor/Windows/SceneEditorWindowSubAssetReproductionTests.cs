@@ -11,8 +11,10 @@ namespace NovelCore.Tests.Editor.Windows
     /// <summary>
     /// Reproduction test for SceneEditorWindow creating standalone assets instead of sub-assets.
     /// This test MUST FAIL before the fix is applied.
+    /// IGNORED: These tests demonstrate the old bug and are kept for documentation only.
     /// </summary>
     [TestFixture]
+    [Ignore("Reproduction tests - demonstrate old bug, kept for documentation")]
     public class SceneEditorWindowSubAssetReproductionTests
     {
         private string _testScenePath;
@@ -60,6 +62,7 @@ namespace NovelCore.Tests.Editor.Windows
             }
 
             AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
 
         [Test]

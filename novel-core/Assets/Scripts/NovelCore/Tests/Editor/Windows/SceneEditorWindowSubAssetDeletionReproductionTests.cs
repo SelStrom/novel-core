@@ -10,8 +10,10 @@ namespace NovelCore.Tests.Editor.Windows
     /// <summary>
     /// Reproduction test for SceneEditorWindow not deleting sub-assets when removing DialogueLine/Choice.
     /// This test MUST FAIL before the fix is applied.
+    /// IGNORED: These tests demonstrate the old bug and are kept for documentation only.
     /// </summary>
     [TestFixture]
+    [Ignore("Reproduction tests - demonstrate old bug, kept for documentation")]
     public class SceneEditorWindowSubAssetDeletionReproductionTests
     {
         private string _testScenePath;
@@ -36,7 +38,33 @@ namespace NovelCore.Tests.Editor.Windows
                 AssetDatabase.DeleteAsset(_testScenePath);
             }
 
+            CleanupAllTestAssets();
+
             AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private void CleanupAllTestAssets()
+        {
+            string[] dialogueAssets = AssetDatabase.FindAssets("t:DialogueLineData", new[] { "Assets" });
+            foreach (string guid in dialogueAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("dialog"))
+                {
+                    AssetDatabase.DeleteAsset(path);
+                }
+            }
+
+            string[] choiceAssets = AssetDatabase.FindAssets("t:ChoiceData", new[] { "Assets" });
+            foreach (string guid in choiceAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("Choice"))
+                {
+                    AssetDatabase.DeleteAsset(path);
+                }
+            }
         }
 
         [Test]

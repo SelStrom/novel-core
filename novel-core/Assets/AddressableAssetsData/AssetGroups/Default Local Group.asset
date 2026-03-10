@@ -15,21 +15,6 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 3753524af11984518b2b5c8bca5263d7
   m_SerializeEntries:
-  - m_GUID: 1bbd83ba824aa4f1cbd6ec22cbaac6c4
-    m_Address: "\u0412\u0432\u0435\u0434\u0435\u043D\u0438\u0435"
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 230c01670be5a4d848b0f0762a8a1484
-    m_Address: 'Test Scene 2: Middle'
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6a0add1c1b12a4900b9cceedb31c54ab
-    m_Address: 'Test Scene 3: End'
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75eef63e9a34b4907878fc9315f6d3c0
     m_Address: Characters/Protagonist
     m_ReadOnly: 0
@@ -45,33 +30,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2de8e9882e8d4675a9efda0440c3fcd
-    m_Address: "\u0422\u043E\u0447\u043A\u0430 \u0432\u044B\u0431\u043E\u0440\u0430"
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c3628b534901142bab84524b827a357a
     m_Address: Backgrounds/bg_street
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d6f0d7f6930104db096813e30536f24f
-    m_Address: "\u041F\u0443\u0442\u044C B: \u0414\u043E\u043C\u0430"
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d733dd6941c0949c58db7175986fa56b
     m_Address: Characters/char_protagonist
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: eb72e3d7b58f54c55a990351bc983c46
-    m_Address: "\u041F\u0443\u0442\u044C A: \u041F\u0440\u043E\u0433\u0443\u043B\u043A\u0430"
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f348d0faacded4ba2957858c8936f244
-    m_Address: 'Test Scene 1: Start'
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

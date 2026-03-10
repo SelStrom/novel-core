@@ -32,6 +32,34 @@ namespace NovelCore.Tests.Editor.Windows
             {
                 AssetDatabase.DeleteAsset(_testAssetPath);
             }
+
+            CleanupAllTestAssets();
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private void CleanupAllTestAssets()
+        {
+            string[] dialogueAssets = AssetDatabase.FindAssets("t:DialogueLineData", new[] { "Assets" });
+            foreach (string guid in dialogueAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("dialog"))
+                {
+                    AssetDatabase.DeleteAsset(path);
+                }
+            }
+
+            string[] choiceAssets = AssetDatabase.FindAssets("t:ChoiceData", new[] { "Assets" });
+            foreach (string guid in choiceAssets)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                if (path.Contains("Test") || path.Contains("Choice"))
+                {
+                    AssetDatabase.DeleteAsset(path);
+                }
+            }
         }
 
         /// <summary>
@@ -64,13 +92,13 @@ namespace NovelCore.Tests.Editor.Windows
             dialogueProperty.GetArrayElementAtIndex(0).objectReferenceValue = newDialogueLine;
             serializedScene.ApplyModifiedProperties();
 
-            // Act: Simulate label generation logic from SceneEditorWindow.DrawDialogue() line 290
-            // This is the code that throws NullReferenceException
+            // Act: Simulate label generation logic from SceneEditorWindow.DrawDialogue() line 299-300
+            // Testing the FIXED code (with null check)
             string generatedLabel = null;
             TestDelegate labelGeneration = () =>
             {
                 var lineData = newDialogueLine;
-                generatedLabel = lineData != null
+                generatedLabel = lineData != null && !string.IsNullOrEmpty(lineData.FallbackText)
                     ? $"Line 1: {lineData.FallbackText.Substring(0, System.Math.Min(30, lineData.FallbackText.Length))}..."
                     : $"Line 1";
             };
@@ -170,7 +198,7 @@ namespace NovelCore.Tests.Editor.Windows
             });
 
             // Assert
-            Assert.That(label, Is.EqualTo("Line 1: This is a very long dialogue ..."));
+            Assert.That(label, Is.EqualTo("Line 1: This is a very long dialogue l..."));
             Assert.That(label.Length, Is.LessThanOrEqualTo(50)); // "Line 1: " + 30 chars + "..."
         }
     }
