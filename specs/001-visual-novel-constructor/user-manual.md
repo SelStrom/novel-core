@@ -1,576 +1,765 @@
-# User Manual: Visual Novel Constructor
+# Руководство пользователя: Visual Novel Constructor
 
-**For**: Content Creators (Writers, Artists, Game Designers)  
-**Version**: 1.0  
-**Date**: 2026-03-06  
-**No Programming Required** ✨
-
----
-
-## Welcome!
-
-Welcome to the Visual Novel Constructor! This tool helps you create professional visual novels for Steam and mobile platforms **without writing any code**. If you can write a story and use basic computer applications, you can create a visual novel.
-
-**What you'll be able to do**:
-- Write branching stories with player choices
-- Add character sprites with emotions
-- Insert background images and music
-- Publish to Windows, macOS, iOS, and Android
-
-**What you don't need**:
-- Programming experience
-- Game development knowledge
-- Technical skills
-
-Let's get started! 🎮
+**Для**: Создателей контента (писателей, художников, геймдизайнеров)  
+**Версия**: 0.3.0  
+**Дата**: 2026-03-10  
+**Программирование не требуется** ✨
 
 ---
 
-## Table of Contents
+## Добро пожаловать!
 
-1. [Getting Started](#getting-started)
-2. [Creating Your First Scene](#creating-your-first-scene)
-3. [Writing Dialogue](#writing-dialogue)
-4. [Adding Characters](#adding-characters)
-5. [Creating Story Branches](#creating-story-branches)
-6. [Adding Audio](#adding-audio)
-7. [Previewing Your Novel](#previewing-your-novel)
-8. [Publishing Your Novel](#publishing-your-novel)
-9. [Troubleshooting](#troubleshooting)
-10. [Tips & Best Practices](#tips--best-practices)
+Добро пожаловать в Visual Novel Constructor! Этот инструмент помогает создавать профессиональные визуальные новеллы для Steam и мобильных платформ **без написания кода**. Если вы умеете писать истории и пользоваться базовыми компьютерными программами, вы можете создать визуальную новеллу.
+
+**Что вы сможете делать**:
+- Писать истории с разветвлениями и выбором игрока
+- Добавлять спрайты персонажей с эмоциями
+- Вставлять фоновые изображения и музыку
+- Публиковать на Windows, macOS, iOS и Android
+
+**Что вам не нужно**:
+- Опыт программирования
+- Знание разработки игр
+- Технические навыки
+
+Давайте начнём! 🎮
 
 ---
 
-## Getting Started
+## Содержание
 
-### Unity Project Location
+1. [Начало работы](#начало-работы)
+2. [Текущие возможности](#текущие-возможности)
+3. [Создание первой сцены](#создание-первой-сцены)
+4. [Написание диалогов](#написание-диалогов)
+5. [Добавление персонажей](#добавление-персонажей)
+6. [Создание разветвлений истории](#создание-разветвлений-истории)
+7. [Добавление аудио](#добавление-аудио)
+8. [Предпросмотр новеллы](#предпросмотр-новеллы)
+9. [Просмотр графа сюжета](#просмотр-графа-сюжета)
+10. [Устранение неполадок](#устранение-неполадок)
+11. [Советы и рекомендации](#советы-и-рекомендации)
 
-Your Unity project is located in the `novel-core` folder. This is where all your game files, scripts, and assets are stored.
+---
+
+## Начало работы
+
+### Расположение проекта Unity
+
+Ваш Unity проект находится в папке `novel-core`. Здесь хранятся все файлы игры, скрипты и ассеты.
 
 ```
-novel-core/                 # Your Unity project (repository root)
-├── Assets/                 # Game assets and code
-│   ├── Scripts/            # C# scripts
-│   ├── Content/            # Your visual novel content
-│   └── Resources/          # Game resources
-├── Packages/               # Unity packages
-└── ProjectSettings/        # Project configuration
+novel-core/                 # Ваш Unity проект (корень репозитория)
+├── Assets/                 # Игровые ассеты и код
+│   ├── Scripts/            # C# скрипты
+│   ├── Content/            # Контент вашей визуальной новеллы
+│   └── Resources/          # Игровые ресурсы
+├── Packages/               # Unity пакеты
+└── ProjectSettings/        # Настройки проекта
 ```
 
-**For Developers**: Ask your developer to set up the Unity project if not already done.
+**Для разработчиков**: Попросите разработчика настроить Unity проект, если он ещё не настроен.
 
-### Opening the Constructor
+### Открытие конструктора
 
-1. **Launch Unity** (the program your developer installed for you)
-2. **Open your project** (it should open automatically)
-3. **Wait for Unity to load** (you'll see a loading screen with a Unity logo)
+1. **Запустите Unity** (программа, которую установил для вас разработчик)
+2. **Откройте проект** (он должен открыться автоматически)
+3. **Дождитесь загрузки Unity** (вы увидите экран загрузки с логотипом Unity)
 
-### Understanding the Interface
+### Понимание интерфейса
 
-When Unity opens, you'll see several windows:
+Когда Unity откроется, вы увидите несколько окон:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  Menu Bar (NovelCore menu is here)                      │
+│  Меню (здесь находится меню Window/NovelCore)           │
 ├──────────────┬──────────────────────┬───────────────────┤
 │              │                      │                   │
 │  Hierarchy   │   Scene View         │   Inspector       │
-│  (List of    │   (What you see)     │   (Properties)    │
-│  objects)    │                      │                   │
+│  (Список     │   (То, что вы видите)│   (Свойства)      │
+│  объектов)   │                      │                   │
 │              │                      │                   │
 ├──────────────┴──────────────────────┴───────────────────┤
-│  Project (Your files and assets)                        │
+│  Project (Ваши файлы и ассеты)                          │
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Don't worry about most of these!** You'll mainly use the **NovelCore** menu.
+**Не беспокойтесь о большинстве из них!** В основном вы будете использовать меню **Window → NovelCore**.
 
-### Creating Your First Project
+### Быстрый старт с примером проекта
 
-1. Click **NovelCore → New Project** in the menu bar
-2. Enter your project details:
-   - **Project Name**: "My First Visual Novel"
-   - **Author**: Your name
-   - **Description**: Brief summary of your story
-3. Click **Create**
+Самый простой способ начать - создать пример проекта:
 
-Your project folder will appear in the **Content/Projects/** folder.
+1. Нажмите **NovelCore → Generate Sample Project** в меню
+2. Подтвердите создание
+3. Unity создаст полностью функциональную демо-новеллу с:
+   - 5 готовыми сценами
+   - Примерами диалогов
+   - Разветвлениями с выбором
+   - Демонстрационными персонажами
+4. Нажмите **Play** ▶️ для просмотра
 
----
-
-## Creating Your First Scene
-
-A **scene** is a single moment or location in your story. Think of it like a page in a book or a panel in a comic.
-
-### Step 1: Open Scene Editor
-
-1. Click **NovelCore → Scene Editor** in the menu
-2. A new window titled "Scene Editor" will open
-
-### Step 2: Create a New Scene
-
-1. Click **+ New Scene** button (top left)
-2. Fill in the details:
-   - **Scene Name**: "Opening Scene"
-   - **Scene ID**: `scene_001` (must be unique)
-
-### Step 3: Add a Background
-
-Every scene needs a background image.
-
-1. **Find your image**:
-   - Go to **Project** window at the bottom
-   - Navigate to **Content → Backgrounds**
-   - Your developer should have imported images here
-
-2. **Drag and drop**:
-   - Click and hold on your background image
-   - Drag it to the **Background** field in Scene Editor
-   - Release the mouse button
-
-**Tip**: If you don't see your images, ask your developer to import them. Supported formats: PNG, JPG
-
-### Step 4: Add Background Music (Optional)
-
-1. In **Project** window, go to **Content → Audio → Music**
-2. Drag a music file to the **Background Music** field
-3. Music will loop automatically during the scene
-
-### Step 5: Save Your Scene
-
-1. Click **Save Scene** button (bottom right)
-2. Your scene is now saved!
+Вы можете изучить созданные файлы в **Assets/Content/Projects/Sample/** и использовать их как шаблон для своих новелл.
 
 ---
 
-## Writing Dialogue
+## Текущие возможности
 
-Dialogue is the text that characters say in your visual novel.
+### ✅ Что уже работает (версия 0.3.0)
 
-### Adding Dialogue Lines
+**Создание контента**:
+- ✅ Визуальный редактор сцен (Scene Editor)
+- ✅ Редактор персонажей (Character Editor)
+- ✅ Добавление фоновых изображений
+- ✅ Добавление фоновой музыки
+- ✅ Размещение персонажей в сценах
+- ✅ Написание диалогов с указанием говорящего персонажа
+- ✅ Настройка эмоций персонажей для каждой реплики
+- ✅ Создание выборов с разветвлениями сюжета
+- ✅ Линейное продолжение сцен (Next Scene)
+- ✅ Автоматическое продвижение диалога (Auto Advance)
+- ✅ Настройка переходов между сценами
 
-1. In **Scene Editor**, find the **Dialogue Lines** section
-2. Click **+ Add Line** button
-3. Fill in the dialogue:
+**Визуализация и тестирование**:
+- ✅ Граф сюжета (Story Flow Window) с визуализацией связей
+- ✅ Валидация целостности проекта
+- ✅ Предпросмотр в Play Mode
+- ✅ Навигация по истории (кнопки Back и History)
+- ✅ Генератор примера проекта
 
-```
-┌─────────────────────────────────────────┐
-│ Speaker: [Select character or Narrator] │
-│ Text: "Hello! Welcome to my story."     │
-│ Emotion: neutral                         │
-└─────────────────────────────────────────┘
-```
+**Техническая основа**:
+- ✅ Система управления сценами
+- ✅ Система диалогов
+- ✅ Система выборов
+- ✅ Загрузка ассетов через Addressables
+- ✅ Воспроизведение фоновой музыки
+- ✅ UI компоненты (диалоговое окно, кнопки выбора)
 
-**Fields explained**:
-- **Speaker**: Who is talking? (Choose from your characters or "Narrator")
-- **Text**: What they say (type normally, like in a text editor)
-- **Emotion**: Character's facial expression (happy, sad, angry, etc.)
+### 🚧 В разработке (будущие версии)
 
-### Adding Multiple Lines
+**Аудио**:
+- 🚧 Звуковые эффекты для отдельных реплик диалога
+- 🚧 Озвучка персонажей
+- 🚧 Регулировка громкости для разных типов аудио
+- 🚧 Плавные переходы между музыкальными треками
 
-Keep clicking **+ Add Line** to add more dialogue. They will play in order from top to bottom.
+**Система сохранений**:
+- 🚧 Сохранение и загрузка прогресса
+- 🚧 Множественные слоты сохранений
+- 🚧 Автосохранение
+- 🚧 Облачные сохранения (Steam Cloud, iCloud, Google Play)
 
-**Example conversation**:
-```
-Line 1: Alice (happy): "Hi! I'm Alice."
-Line 2: Bob (neutral): "Nice to meet you, Alice."
-Line 3: Alice (excited): "Want to explore the forest?"
-```
+**Публикация**:
+- 🚧 Build Pipeline с UI
+- 🚧 Автоматизированная сборка для всех платформ
+- 🚧 Оптимизация ассетов
+- 🚧 Интеграция с Steam SDK (достижения)
 
-### Editing Dialogue
+**Дополнительные возможности**:
+- 🚧 Анимация появления/исчезновения персонажей
+- 🚧 Визуальные эффекты (дрожание экрана, вспышки)
+- 🚧 Текстовые эффекты (печатная машинка, дрожание текста)
+- 🚧 Условные переходы на основе выборов игрока
+- 🚧 Система переменных и флагов
+- 🚧 Локализация на несколько языков
 
-- **Change text**: Click on the text field and type
-- **Reorder lines**: Drag the ☰ handle on the left to move lines up/down
-- **Delete line**: Click the 🗑️ trash icon on the right
+### 📋 Рекомендуемый рабочий процесс
 
-### Narrator Text
+На данный момент рекомендуется:
 
-For narration (no character speaking):
-1. Set **Speaker** to "Narrator"
-2. The text will appear centered without a character portrait
+1. **Используйте Sample Project** как отправную точку
+2. **Создавайте новые сцены** постепенно, тестируя каждую
+3. **Используйте Story Flow** для визуализации структуры
+4. **Регулярно тестируйте** в Play Mode
+5. **Помечайте все ассеты** как Addressable
+6. **Сохраняйте проект** часто (Ctrl+S / Cmd+S)
+
+Функционал расширяется с каждой версией. Следите за обновлениями!
 
 ---
 
-## Adding Characters
+## Создание первой сцены
 
-Characters are the people (or creatures!) in your visual novel.
+**Сцена** - это один момент или локация в вашей истории. Думайте о ней как о странице в книге или панели в комиксе.
 
-### Step 1: Open Character Editor
+### Шаг 1: Откройте редактор сцен
 
-1. Click **NovelCore → Character Editor** in the menu
-2. A new window titled "Character Editor" will open
+1. Нажмите **Window → NovelCore → Scene Editor** в меню
+2. Откроется новое окно "Scene Editor"
 
-### Step 2: Create a New Character
+### Шаг 2: Создайте новую сцену
 
-1. Click **+ New Character** button
-2. Fill in the details:
-   - **Character Name**: "Alice"
-   - **Character ID**: `alice` (short, no spaces)
+1. Нажмите кнопку **New Scene** (вверху слева)
+2. Выберите папку для сохранения (рекомендуется `Assets/Content/Projects/YourProject/Scenes`)
+3. Введите имя файла (например, `Scene01_Opening`)
+4. Новая сцена будет создана и автоматически открыта
 
-### Step 3: Add Character Sprites
+### Шаг 3: Настройте информацию о сцене
 
-A sprite is the character's image. You need different sprites for different emotions.
+В секции **Scene Information**:
 
-1. **Add Neutral Emotion** (required):
-   - Click **+ Add Emotion**
-   - Emotion Name: `neutral`
-   - Drag sprite image from **Content → Characters → Alice** folder
-   - This is the default expression
+1. **Scene ID**: Уникальный идентификатор (например, `scene_001`)
+   - Должен быть уникальным
+   - Используется для ссылок между сценами
+2. **Scene Name**: Отображаемое имя (например, "Открытие")
+   - Используется в редакторе для удобства
 
-2. **Add More Emotions**:
-   - Click **+ Add Emotion** again
-   - Emotion Name: `happy`
-   - Drag the happy sprite image
-   - Repeat for: `sad`, `angry`, `surprised`, `worried`, etc.
+### Шаг 4: Добавьте фон
 
-**Tip**: You need at least one emotion (`neutral`). More emotions = more expressive characters!
+Каждой сцене нужно фоновое изображение.
 
-### Step 4: Position Character in Scene
+1. **Найдите изображение**:
+   - Перейдите в окно **Project** внизу
+   - Откройте **Assets → Content → Backgrounds**
+   - Ваш разработчик должен был импортировать сюда изображения
 
-1. Go back to **Scene Editor**
-2. In the **Characters** section, click **+ Add Character**
-3. Select your character (e.g., "Alice")
-4. Set position:
-   - **X Position**: 0.25 = left side, 0.5 = center, 0.75 = right side
-   - **Y Position**: Usually 0.5 (middle)
-5. Select **Initial Emotion** (what emotion they start with in this scene)
+2. **Перетащите**:
+   - Нажмите и удерживайте фоновое изображение
+   - Перетащите его в поле **Background Image** в секции **Visual Content**
+   - Отпустите кнопку мыши
 
-**Visual Guide**:
+**Совет**: Если вы не видите изображений, попросите разработчика импортировать их. Поддерживаемые форматы: PNG, JPG
+
+### Шаг 5: Добавьте фоновую музыку (опционально)
+
+1. В окне **Project** перейдите в **Assets → Content → Audio → Music**
+2. Перетащите музыкальный файл в поле **Background Music**
+3. Музыка будет автоматически зациклена во время сцены
+
+### Шаг 6: Сохраните сцену
+
+1. Нажмите кнопку **Save** (вверху)
+2. Ваша сцена сохранена!
+
+---
+
+## Написание диалогов
+
+Диалоги - это текст, который произносят персонажи в вашей визуальной новелле.
+
+### Добавление реплик диалога
+
+1. В **Scene Editor** найдите секцию **Dialogue**
+2. Нажмите кнопку **Add Dialogue Line**
+3. Заполните поля для каждой реплики:
+
+**Поля объяснены**:
+- **Speaker Character**: Кто говорит? (Выберите персонажа или оставьте None для повествователя)
+- **Text**: Что они говорят (вводите обычно, как в текстовом редакторе)
+- **Speaker Emotion**: Выражение лица персонажа (neutral, happy, sad, angry и т.д.)
+
+### Добавление нескольких реплик
+
+Продолжайте нажимать **Add Dialogue Line** для добавления новых реплик. Они будут воспроизводиться по порядку сверху вниз.
+
+**Пример диалога**:
 ```
-Screen Position:
+Реплика 1: Alice (happy): "Привет! Я Алиса."
+Реплика 2: Bob (neutral): "Приятно познакомиться, Алиса."
+Реплика 3: Alice (excited): "Хочешь исследовать лес?"
+```
+
+### Редактирование диалогов
+
+- **Изменить текст**: Кликните на поле с текстом и вводите
+- **Изменить персонажа**: Используйте выпадающий список Speaker Character
+- **Изменить эмоцию**: Введите название эмоции в поле Speaker Emotion
+- **Удалить реплику**: Нажмите кнопку **Remove** рядом с репликой
+
+### Текст повествователя
+
+Для повествования (без говорящего персонажа):
+1. Оставьте **Speaker Character** пустым (None)
+2. Текст будет отображаться без портрета персонажа
+
+**Важно**: Текст повествователя отображается так же, как диалог, но без указания имени говорящего.
+
+---
+
+## Добавление персонажей
+
+Персонажи - это люди (или существа!) в вашей визуальной новелле.
+
+### Шаг 1: Откройте редактор персонажей
+
+1. Нажмите **Window → NovelCore → Character Editor** в меню
+2. Откроется новое окно "Character Editor"
+
+### Шаг 2: Создайте нового персонажа
+
+1. Нажмите кнопку **New Character**
+2. Выберите папку для сохранения (рекомендуется `Assets/Content/Projects/YourProject/Characters`)
+3. Введите имя файла (например, `Alice`)
+4. Новый персонаж будет создан и автоматически открыт
+
+### Шаг 3: Настройте информацию о персонаже
+
+В секции **Basic Information**:
+
+1. **Character ID**: Уникальный идентификатор (например, `alice`)
+   - Должен быть уникальным
+   - Без пробелов, только латинские буквы
+2. **Display Name**: Отображаемое имя (например, "Алиса")
+   - Это имя будет показываться в диалогах
+
+### Шаг 4: Добавьте спрайты персонажа
+
+Спрайт - это изображение персонажа. Вам нужны разные спрайты для разных эмоций.
+
+1. **Добавьте базовую эмоцию** (обязательно):
+   - В секции **Emotions** нажмите **Add Emotion**
+   - Введите название эмоции: `neutral`
+   - Перетащите изображение спрайта из **Assets → Content → Characters → Alice**
+   - Это выражение по умолчанию
+
+2. **Добавьте больше эмоций**:
+   - Нажмите **Add Emotion** снова
+   - Введите название: `happy`
+   - Перетащите соответствующее изображение
+   - Повторите для: `sad`, `angry`, `surprised`, `worried` и т.д.
+
+**Совет**: Нужна хотя бы одна эмоция (`neutral`). Больше эмоций = более выразительные персонажи!
+
+### Шаг 5: Разместите персонажа в сцене
+
+1. Вернитесь в **Scene Editor**
+2. Выберите нужную сцену
+3. В секции **Characters** нажмите **Add Character**
+4. Настройте размещение персонажа:
+   - **Character**: Выберите созданного персонажа (например, Alice)
+   - **Position X**: 0.25 = слева, 0.5 = центр, 0.75 = справа
+   - **Position Y**: Обычно 0.0 (внизу)
+   - **Initial Emotion**: Начальная эмоция для этой сцены
+
+**Визуальная подсказка**:
+```
+Позиция на экране:
 ┌──────────────────────────────────┐
-│  0.0          0.5          1.0   │  ← X Position
+│  0.0          0.5          1.0   │  ← Position X
 │   ◀           ◀            ◀      │
-│  Left       Center       Right   │
+│  Слева      Центр        Справа  │
 └──────────────────────────────────┘
 ```
 
-### Step 5: Save Your Character
+### Шаг 6: Сохраните персонажа
 
-Click **Save Character** button in Character Editor.
-
----
-
-## Creating Story Branches
-
-Story branches let players make choices that affect the outcome.
-
-### Understanding Branches
-
-```
-Scene A: "Do you want to explore the forest?"
-   ├─ Choice 1: "Yes" → Scene B (Forest path)
-   └─ Choice 2: "No"  → Scene C (Stay in town)
-```
-
-### Adding a Choice Point
-
-1. In **Scene Editor**, scroll to **Choices** section
-2. Click **+ Add Choice**
-3. Fill in the choice:
-
-```
-┌─────────────────────────────────────────┐
-│ Question: "What do you want to do?"     │
-│                                          │
-│ Option 1:                                │
-│   Text: "Explore the forest"            │
-│   Goes To: [Select scene]               │
-│                                          │
-│ Option 2:                                │
-│   Text: "Stay in town"                  │
-│   Goes To: [Select scene]               │
-│                                          │
-│ [+ Add Option]                           │
-└─────────────────────────────────────────┘
-```
-
-**Fields explained**:
-- **Question**: Optional text shown before the choices (e.g., "What will you do?")
-- **Option Text**: The button text players click (e.g., "Go left")
-- **Goes To**: Which scene to play next (select from dropdown)
-
-### Creating Multiple Endings
-
-1. Create several "ending" scenes (e.g., `ending_good`, `ending_bad`)
-2. Add choices in earlier scenes that lead to different endings
-3. Use the **Story Flow** window to visualize your branches
-
-### Viewing Story Flow
-
-1. Click **NovelCore → Story Flow** in the menu
-2. You'll see a graph showing:
-   - Boxes = Scenes
-   - Arrows = Connections (dialogue flow or choices)
-
-**Example**:
-```
-┌─────────┐
-│ Scene 1 │───→ Dialogue
-└────┬────┘
-     │ Choice
-     ├───→┌─────────┐
-     │    │ Scene 2A│──→ Ending A
-     │    └─────────┘
-     │
-     └───→┌─────────┐
-          │ Scene 2B│──→ Ending B
-          └─────────┘
-```
-
-**Tip**: If you see a red warning icon on a scene, it means a choice points to a scene that doesn't exist yet. Create that scene or fix the choice!
+Нажмите кнопку **Save** в Character Editor.
 
 ---
 
-## Adding Audio
+## Создание разветвлений истории
 
-Audio makes your visual novel more immersive.
+Разветвления истории позволяют игрокам делать выбор, влияющий на развитие сюжета.
 
-### Types of Audio
+### Понимание разветвлений
 
-1. **Background Music**: Loops during a scene (e.g., peaceful town theme)
-2. **Sound Effects**: Play once for events (e.g., door opening, footsteps)
-3. **Voice Acting**: Character voices speaking dialogue (optional)
-
-### Adding Background Music
-
-1. In **Scene Editor**, find the **Background Music** field
-2. Drag music file from **Content → Audio → Music**
-3. Music will fade in when scene starts, fade out when scene ends
-
-**Tip**: Use .mp3 or .ogg files for best compatibility
-
-### Adding Sound Effects
-
-1. In **Dialogue Lines** section, select a dialogue line
-2. Find the **Sound Effect** field
-3. Drag sound file from **Content → Audio → SFX**
-4. Sound plays when that dialogue line appears
-
-**Examples**:
-- Door closing sound when dialogue says "She left the room."
-- Thunder sound when dialogue says "Suddenly, lightning struck!"
-- Phone ringing when dialogue says "The phone rang."
-
-### Adding Voice Acting
-
-If you have voice actors:
-1. In **Dialogue Lines** section, select a line
-2. Find the **Voice Clip** field
-3. Drag voice audio file from **Content → Audio → Voice**
-4. Voice plays when dialogue appears (text auto-advances when voice finishes)
-
-### Audio Tips
-
-- **Music**: Use calming music for peaceful scenes, tense music for dramatic scenes
-- **SFX**: Don't overuse! Only add sounds for important events
-- **Voice**: Make sure voice files match the text exactly (same language, same emotion)
-
----
-
-## Previewing Your Novel
-
-Always preview your work before publishing!
-
-### Quick Preview
-
-1. Click **NovelCore → Preview Scene** in the menu
-2. Unity will enter "Play Mode" (you'll see colored tint)
-3. Your scene will play like in the final game:
-   - Background appears
-   - Characters appear
-   - Dialogue plays
-   - Music plays
-4. Click the screen or press **Space** to advance dialogue
-5. If there are choices, click the choice buttons
-
-### Exiting Preview
-
-1. Click the **Play** button (▶) at the top of Unity to stop preview
-2. You're back in editing mode
-
-### Testing Story Branches
-
-1. Preview a scene with choices
-2. Make a choice (e.g., "Go left")
-3. Verify it goes to the correct next scene
-4. Stop preview and restart to test other choices
-
-**Important**: Any choices you make in preview don't save! Each preview starts fresh.
-
----
-
-## Publishing Your Novel
-
-When your visual novel is complete, it's time to publish!
-
-### Step 1: Open Build Window
-
-1. Click **NovelCore → Build Pipeline** in the menu
-2. A new window titled "Build Pipeline" will open
-
-### Step 2: Configure Build Settings
-
-Fill in your game information:
-- **Product Name**: "My Amazing Visual Novel"
-- **Company Name**: Your name or studio
-- **Version**: 1.0.0 (increase for updates: 1.1.0, 1.2.0, etc.)
-
-### Step 3: Select Platforms
-
-Check which platforms you want to publish to:
-- ☑ **Windows** (PC via Steam or itch.io)
-- ☑ **macOS** (Mac via Steam or itch.io)
-- ☑ **iOS** (iPhone/iPad via App Store)
-- ☑ **Android** (Google Play Store)
-
-**Note**: Building for iOS requires a Mac computer. Building for Android requires additional setup (ask your developer).
-
-### Step 4: Build Your Game
-
-1. Click **Build All Platforms** button (or **Build Windows** for just one)
-2. Wait for the build to complete (this can take 5-15 minutes)
-3. When finished, you'll see a success message
-
-### Step 5: Find Your Build
-
-Your built game will be in:
-- **Windows**: `Builds/Windows/` folder (contains `.exe` file)
-- **macOS**: `Builds/macOS/` folder (contains `.app` file)
-- **iOS**: `Builds/iOS/` folder (Xcode project, needs developer)
-- **Android**: `Builds/Android/` folder (`.apk` or `.aab` file)
-
-### Step 6: Test Your Build
-
-**Before publishing**:
-1. Navigate to the build folder (e.g., `Builds/Windows/`)
-2. Double-click the game executable to run it
-3. Play through your entire visual novel
-4. Check:
-   - All scenes work
-   - All choices work
-   - All audio plays
-   - All images show correctly
-   - No error messages appear
-
-### Publishing to Steam
-
-1. Create a **Steam Partner** account (https://partner.steamgames.com)
-2. Pay the $100 app submission fee (one-time)
-3. Follow Steam's upload instructions (use `Builds/Windows/` and `Builds/macOS/` folders)
-4. Submit for review
-
-**Note**: Your developer can help with the technical Steam upload process.
-
-### Publishing to Mobile
-
-**iOS (App Store)**:
-1. Need Apple Developer account ($99/year)
-2. Need Mac computer with Xcode
-3. Your developer must handle iOS build upload (requires code signing)
-
-**Android (Google Play)**:
-1. Need Google Play Developer account ($25 one-time)
-2. Upload the `.aab` file from `Builds/Android/`
-3. Fill in store listing (screenshots, description)
-4. Submit for review
-
----
-
-## Troubleshooting
-
-### My background image doesn't show
-
-**Fix**:
-1. Check the image is in **Content → Backgrounds** folder
-2. Right-click the image → **Addressables → Mark Addressable**
-3. Try dragging it to the Background field again
-
-### My character sprite doesn't appear
-
-**Fix**:
-1. Make sure you added at least the `neutral` emotion
-2. Check the sprite is in **Content → Characters** folder
-3. In Scene Editor, verify you added the character to the **Characters** list
-4. Verify the **Initial Emotion** is set to an emotion that exists (e.g., `neutral`)
-
-### Dialogue text doesn't show
-
-**Fix**:
-1. Check you added dialogue lines in **Scene Editor → Dialogue Lines**
-2. Verify the **Text** field is not empty
-3. Try previewing the scene again
-
-### Choice buttons don't appear
-
-**Fix**:
-1. Check you added choices in **Scene Editor → Choices**
-2. Verify each option has **Text** filled in
-3. Verify each option has **Goes To** scene selected
-4. Make sure the target scene exists
-
-### Music doesn't play
-
-**Fix**:
-1. Check audio file is in **Content → Audio → Music** folder
-2. Supported formats: .mp3, .ogg, .wav
-3. Right-click the audio → **Addressables → Mark Addressable**
-4. Try dragging it to the Background Music field again
-5. Check your computer volume is not muted
-
-### Build fails with error
-
-**Fix**:
-1. Click **NovelCore → Validate Project** (checks for errors)
-2. Read the error messages (they explain what's wrong)
-3. Common issues:
-   - Missing asset: Add the missing image/audio file
-   - Broken link: Fix the choice that points to non-existent scene
-   - Invalid character: Check character has at least `neutral` emotion
-4. If you can't fix it, ask your developer for help
-
-### Preview mode is stuck
-
-**Fix**:
-1. Click the **Play** button (▶) at the top to stop preview
-2. If Unity freezes, close and reopen Unity
-3. Save your work frequently (File → Save Project)
-
----
-
-## Tips & Best Practices
-
-### Writing Tips
-
-**✅ DO**:
-- Keep dialogue short (2-3 sentences per line)
-- Give each character a unique voice/personality
-- Use emotions to match the dialogue mood
-- Add narrator text for scene descriptions
-- Test every story branch
-
-**❌ DON'T**:
-- Write walls of text (players will skip it)
-- Forget to add choices (linear stories are boring)
-- Use too many sound effects (gets annoying)
-- Create dead-end branches (every path should reach an ending)
-
-### Asset Organization
-
-**Folder Structure**:
 ```
-Content/
-├── Backgrounds/
+Сцена A: "Хочешь исследовать лес?"
+   ├─ Выбор 1: "Да" → Сцена B (Путь в лесу)
+   └─ Выбор 2: "Нет"  → Сцена C (Остаться в городе)
+```
+
+### Добавление точки выбора
+
+1. В **Scene Editor** найдите секцию **Choices**
+2. Нажмите **Add Choice**
+3. Настройте выбор:
+   - **Choice Text**: Текст вопроса (например, "Что ты хочешь сделать?")
+   - **Choice ID**: Уникальный идентификатор (например, `choice_001`)
+
+4. Добавьте варианты ответа:
+   - Нажмите **Add Option** под выбором
+   - **Option Text**: Текст кнопки (например, "Исследовать лес")
+   - **Target Scene**: Сцена, на которую переходит игрок при выборе этого варианта
+   - Нажмите **Add Option** снова для второго варианта
+   - Повторите для всех вариантов (минимум 2)
+
+**Пример**:
+```
+Choice: "Куда ты пойдёшь?"
+  ├─ Option 1: "В лес" → Scene_Forest
+  └─ Option 2: "В город" → Scene_Town
+```
+
+### Создание нескольких концовок
+
+1. Создайте несколько "финальных" сцен (например, `ending_good`, `ending_bad`)
+2. Добавьте выборы в более ранних сценах, ведущие к разным концовкам
+3. Используйте окно **Story Flow** для визуализации ваших разветвлений
+
+### Линейное продолжение без выбора
+
+Если сцена не содержит выборов, вы можете указать следующую сцену для автоматического перехода:
+
+1. В секции **Scene Transition** найдите поле **Next Scene**
+2. Перетащите сюда следующую сцену из окна Project
+3. После завершения всех диалогов система автоматически перейдёт к указанной сцене
+
+**Важно**: Если в сцене есть выборы (Choices), поле Next Scene игнорируется - переходы будут через выборы.
+
+### Дополнительные настройки сцены
+
+В секции **Scene Transition** доступны следующие параметры:
+
+**Transition Type (Тип перехода)**:
+- **Fade**: Плавное затухание и появление (по умолчанию)
+- **None**: Мгновенный переход без эффекта
+
+**Transition Duration (Длительность перехода)**:
+- Время в секундах для воспроизведения эффекта перехода
+- По умолчанию: 0.5 секунд
+- Рекомендуемый диапазон: 0.2 - 1.0 секунд
+
+### Автоматическое продвижение диалога
+
+Вы можете настроить сцену для автоматического продвижения диалога без кликов:
+
+1. В секции **Scene Transition** найдите параметр **Auto Advance**
+2. Установите галочку для включения
+3. Настройте **Auto Advance Delay** (задержку в секундах между репликами)
+4. Рекомендуемое значение: 2.0-3.0 секунд
+
+**Совет**: Автоматическое продвижение полезно для:
+- Вступительных сцен без выборов
+- Кат-сцен и презентаций
+- Демонстрационных роликов
+
+**Важно**: Игрок всё ещё может кликнуть для мгновенного продвижения, даже если включено автоматическое продвижение.
+
+---
+
+## Добавление аудио
+
+Аудио делает вашу визуальную новеллу более погружающей.
+
+### Типы аудио
+
+1. **Фоновая музыка**: Зацикленная музыка во время сцены (например, мирная тема города)
+2. **Звуковые эффекты**: Проигрываются один раз для событий *(в разработке)*
+3. **Озвучка**: Голоса персонажей, произносящих диалоги *(в разработке)*
+
+### Добавление фоновой музыки
+
+1. В **Scene Editor** найдите секцию **Visual Content**
+2. Найдите поле **Background Music**
+3. Перетащите музыкальный файл из **Assets → Content → Audio → Music**
+4. Музыка будет плавно появляться при начале сцены и затухать при её завершении
+
+**Совет**: Используйте форматы .mp3 или .ogg для лучшей совместимости
+
+### Поддерживаемые форматы аудио
+
+**Музыка**:
+- **Формат**: .mp3, .ogg, .wav
+- **Битрейт**: 128-192 kbps рекомендуется
+- **Длительность**: Любая (будет зациклена)
+- **Размер файла**: Старайтесь держать под 10MB на трек
+
+**Звуковые эффекты** *(функционал в разработке)*:
+- **Формат**: .wav, .ogg
+- **Битрейт**: 96 kbps
+- **Длительность**: До 5 секунд
+- **Размер файла**: Старайтесь держать под 1MB на звук
+
+### Советы по использованию аудио
+
+- **Музыка**: Используйте спокойную музыку для мирных сцен, напряжённую для драматичных
+- **Смена музыки**: Музыка меняется автоматически при переходе между сценами
+- **Формат**: .ogg обычно даёт лучшее качество при меньшем размере файла, чем .mp3
+
+### Что будет доступно в будущих версиях
+
+- Звуковые эффекты для отдельных реплик диалога
+- Озвучка персонажей
+- Регулировка громкости для разных типов аудио
+- Плавные переходы между музыкальными треками
+
+---
+
+## Предпросмотр новеллы
+
+Всегда проверяйте свою работу перед публикацией!
+
+### Быстрый предпросмотр через Play Mode
+
+1. Убедитесь, что открыта Unity сцена **SampleScene** (или ваша основная сцена с GameStarter)
+2. Нажмите кнопку **Play** ▶️ вверху Unity
+3. Unity войдёт в "Play Mode" (вы увидите цветной оттенок на кнопках)
+4. Ваша новелла запустится как в финальной игре:
+   - Появится фон
+   - Появятся персонажи
+   - Начнётся воспроизведение диалогов
+   - Заиграет музыка
+5. Кликайте по экрану или нажимайте **Space** для продвижения диалога
+6. Если есть выборы, кликайте по кнопкам выбора
+
+### Выход из предпросмотра
+
+1. Нажмите кнопку **Play** (▶) вверху Unity для остановки предпросмотра
+2. Вы вернётесь в режим редактирования
+
+### Тестирование разветвлений истории
+
+1. Запустите Play Mode
+2. Дойдите до точки выбора
+3. Сделайте выбор (например, "Пойти налево")
+4. Проверьте, что переход ведёт к правильной следующей сцене
+5. Остановите предпросмотр и перезапустите для проверки других вариантов выбора
+
+**Важно**: Любые выборы, сделанные в предпросмотре, не сохраняются! Каждый предпросмотр начинается с начала.
+
+### Настройка стартовой сцены
+
+По умолчанию при запуске Play Mode загружается сцена, указанная в компоненте **GameStarter** на объекте в Unity сцене:
+
+1. В иерархии Unity найдите объект с компонентом `GameStarter`
+2. В Inspector найдите поле **Starting Scene**
+3. Перетащите сюда SceneData, с которой должна начинаться ваша новелла
+4. Нажмите **Play** для проверки
+
+### Навигация во время предпросмотра
+
+**Текущие возможности** (v0.3.0):
+- **Клик / Space**: Продвижение диалога
+- **Выбор**: Клик по кнопкам выбора
+- **Навигация**: Кнопки "Back" и "History" *(если включены в сцене)*
+
+### Настройка кнопок навигации
+
+В вашей сцене можно включить кнопки навигации для возврата назад и просмотра истории:
+
+1. Найдите объект **UIManager** в иерархии Unity сцены
+2. Найдите дочерний объект **NavigationUI**
+3. В Inspector найдите компонент **NavigationUIManager**
+4. Настройте параметры:
+   - **Enable Back Button**: Включить кнопку "Назад"
+   - **Enable History Button**: Включить кнопку "История"
+   - **Back Button Text**: Текст кнопки "Назад" (по умолчанию "◄ Back")
+   - **History Button Text**: Текст кнопки "История" (по умолчанию "History")
+
+**Кнопка "Back" (Назад)**:
+- Позволяет вернуться к предыдущей сцене
+- Работает только если вы уже перешли между сценами
+- На первой сцене кнопка неактивна
+
+**Кнопка "History" (История)**:
+- Показывает список всех посещённых сцен
+- Позволяет перепрыгнуть к любой ранее посещённой сцене
+- Полезно для тестирования разных путей
+
+**Запланировано в будущих версиях**:
+- Быстрая перемотка (Ctrl + клик)
+- Автовоспроизведение с настраиваемой скоростью
+- Пропуск уже прочитанных диалогов
+- Сохранение/загрузка прогресса
+
+---
+
+## Просмотр графа сюжета
+
+Story Flow Window помогает визуализировать структуру вашей истории и связи между сценами.
+
+### Открытие окна Story Flow
+
+1. Нажмите **Window → NovelCore → Story Flow** в меню
+2. Откроется окно с графом всех сцен вашего проекта
+
+### Что показывает граф
+
+Вы увидите визуальное представление вашей истории:
+- **Прямоугольники** = Сцены
+- **Синие стрелки** = Линейные переходы (через Next Scene)
+- **Зелёные стрелки** = Переходы через выбор (Choices)
+- **Красные значки** = Ошибки (например, ссылка на несуществующую сцену)
+
+### Использование инструментов
+
+**Панель инструментов**:
+- **Refresh**: Обновить список сцен (используйте после создания новых сцен)
+- **Auto Layout**: Автоматически расположить узлы на графе
+- **Validate**: Проверить все сцены на ошибки
+
+**Управление видом**:
+- **Zoom**: Ползунок для изменения масштаба (0.5x - 2.0x)
+- **Панорамирование**: Перетаскивайте фон мышью для перемещения по графу
+
+### Проверка целостности истории
+
+Story Flow Window помогает найти проблемы:
+
+**✅ Хорошие признаки**:
+- Все сцены соединены стрелками
+- Нет красных предупреждений
+- Все пути ведут к концовкам
+
+**⚠️ Проблемы для исправления**:
+- Красный значок на сцене - есть ошибка валидации
+- Сцена без входящих стрелок (кроме стартовой) - возможно, недостижима
+- Сцена без исходящих стрелок (кроме концовок) - тупиковая ветка
+
+### Советы по использованию
+
+1. **Регулярно проверяйте**: Открывайте Story Flow после добавления новых сцен
+2. **Используйте Auto Layout**: Если граф выглядит запутанным, нажмите Auto Layout
+3. **Проверяйте валидацию**: Кнопка Validate проверит все ссылки между сценами
+4. **Планируйте структуру**: Используйте граф для планирования разветвлений до создания сцен
+
+---
+
+## Публикация новеллы
+
+**Примечание**: Функционал сборки (Build Pipeline) находится в разработке и будет доступен в будущих версиях.
+
+### Текущий статус (v0.3.0)
+
+На данный момент проект находится в стадии MVP и сосредоточен на функционале создания контента. Полноценная система сборки и публикации будет добавлена в версиях v0.4.0+.
+
+### Что будет доступно в будущих версиях
+
+**Планируемый функционал**:
+- Автоматизированная сборка для Windows, macOS, iOS, Android
+- Настройка параметров сборки через UI
+- Оптимизация ассетов под каждую платформу
+- Интеграция с Steam SDK (достижения, облачные сохранения)
+- Упаковка для публикации в App Store и Google Play
+
+### Что можно сделать сейчас
+
+**Для тестирования на других устройствах**:
+1. Используйте стандартный Unity Build System:
+   - **File → Build Settings**
+   - Выберите платформу (Windows, macOS, Android)
+   - Нажмите **Build** или **Build And Run**
+2. Убедитесь, что все ваши SceneData помечены как Addressable
+3. Протестируйте сборку на целевом устройстве
+
+**Для разработчиков**:
+- Настройте Build Pipeline вручную согласно документации в `quickstart.md`
+- Используйте Unity Cloud Build для автоматизации
+- Настройте Addressables для корректной загрузки ассетов в сборке
+
+---
+
+## Устранение неполадок
+
+### Не отображается фоновое изображение
+
+**Решение**:
+1. Убедитесь, что изображение находится в папке **Assets/Content/Backgrounds**
+2. Правый клик на изображение → **Addressables → Mark Addressable**
+3. Попробуйте перетащить его в поле Background Image снова
+4. Проверьте формат: должен быть PNG или JPG
+
+### Не появляется спрайт персонажа
+
+**Решение**:
+1. Убедитесь, что у персонажа добавлена хотя бы эмоция `neutral`
+2. Проверьте, что спрайт находится в папке **Assets/Content/Characters**
+3. В Scene Editor убедитесь, что персонаж добавлен в секцию **Characters**
+4. Проверьте, что **Initial Emotion** указывает на существующую эмоцию
+5. Спрайт должен быть помечен как Addressable
+
+### Не показывается текст диалога
+
+**Решение**:
+1. Проверьте, что вы добавили реплики в **Scene Editor → Dialogue**
+2. Убедитесь, что поле **Text** не пустое
+3. Проверьте, что в Unity сцене есть объект с компонентом UIManager
+4. Попробуйте запустить предпросмотр снова
+
+### Не появляются кнопки выбора
+
+**Решение**:
+1. Проверьте, что вы добавили выбор в **Scene Editor → Choices**
+2. Убедитесь, что у каждого варианта заполнено поле **Option Text**
+3. Убедитесь, что у каждого варианта указана **Target Scene**
+4. Убедитесь, что целевая сцена существует
+5. Проверьте, что все диалоги воспроизведены (выбор появляется после диалогов)
+
+### Не играет музыка
+
+**Решение**:
+1. Проверьте, что аудио файл находится в **Assets/Content/Audio/Music**
+2. Поддерживаемые форматы: .mp3, .ogg, .wav
+3. Правый клик на аудио → **Addressables → Mark Addressable**
+4. Попробуйте перетащить его в поле Background Music снова
+5. Проверьте, что громкость компьютера не выключена
+6. Убедитесь, что в Unity сцене есть Audio Listener
+
+### Ошибка при запуске Play Mode
+
+**Решение**:
+1. Проверьте Console (Window → General → Console) на наличие ошибок
+2. Частые проблемы:
+   - Отсутствует UIManager в сцене - запустите Generate Sample Project
+   - Отсутствует GameStarter - добавьте компонент на объект в сцене
+   - Не указана Starting Scene в GameStarter - перетащите SceneData
+3. Используйте **Window → NovelCore → Story Flow → Validate** для проверки
+
+### Unity зависает в режиме предпросмотра
+
+**Решение**:
+1. Нажмите кнопку **Play** (▶) вверху для остановки
+2. Если Unity зависла, закройте и откройте Unity
+3. Сохраняйте работу часто (**Ctrl+S** / **Cmd+S**)
+4. Проверьте, нет ли циклических ссылок между сценами
+
+### Сцена не переходит к следующей
+
+**Решение**:
+1. Если в сцене есть Choices - переход происходит только через выбор
+2. Если нет Choices - убедитесь, что указано поле **Next Scene**
+3. Проверьте, что целевая сцена помечена как Addressable
+4. Убедитесь, что вы прошли все реплики диалога (кликайте до конца)
+
+### Персонаж показывает неправильную эмоцию
+
+**Решение**:
+1. В CharacterData проверьте, что эмоция с нужным названием добавлена
+2. В DialogueLineData проверьте точное написание названия эмоции в поле Speaker Emotion
+3. Названия эмоций чувствительны к регистру: `Happy` ≠ `happy`
+4. Используйте строчные буквы для консистентности: `happy`, `sad`, `angry`
+
+---
+
+## Советы и рекомендации
+
+### Советы по написанию
+
+**✅ ДЕЛАЙТЕ**:
+- Держите диалоги короткими (2-3 предложения на реплику)
+- Придайте каждому персонажу уникальный голос/характер
+- Используйте эмоции, соответствующие настроению диалога
+- Добавляйте текст повествователя для описания сцен
+- Тестируйте каждое разветвление истории
+
+**❌ НЕ ДЕЛАЙТЕ**:
+- Не пишите стены текста (игроки пропустят)
+- Не забывайте добавлять выборы (линейные истории скучны)
+- Не создавайте тупиковые ветки (каждый путь должен вести к концовке)
+- Не используйте слишком много персонажей одновременно (путаница)
+
+### Организация ассетов
+
+**Структура папок**:
+```
+Assets/Content/
+├── Projects/
+│   └── YourNovel/         # Ваша новелла
+│       ├── Scenes/        # SceneData файлы
+│       ├── Characters/    # CharacterData файлы
+│       └── Backgrounds/   # Фоны для вашей новеллы
+├── Backgrounds/           # Общие фоны
 │   ├── town_day.png
 │   ├── town_night.png
 │   └── forest.png
-├── Characters/
+├── Characters/            # Общие персонажи
 │   ├── Alice/
 │   │   ├── alice_neutral.png
 │   │   ├── alice_happy.png
 │   │   └── alice_sad.png
 │   └── Bob/
-│       └── ... (Bob's sprites)
+│       └── ... (спрайты Боба)
 └── Audio/
     ├── Music/
     │   ├── town_theme.mp3
@@ -580,179 +769,212 @@ Content/
         └── footsteps.wav
 ```
 
-**Naming Conventions**:
-- Use lowercase with underscores: `forest_morning.png` ✅
-- Avoid spaces: `Forest Morning.png` ❌
-- Avoid special characters: `forest#morning!.png` ❌
+**Правила именования**:
+- Используйте строчные буквы с подчёркиванием: `forest_morning.png` ✅
+- Избегайте пробелов: `Forest Morning.png` ❌
+- Избегайте спецсимволов: `forest#morning!.png` ❌
+- Используйте латинские буквы для имён файлов: `les.png` вместо `лес.png`
 
-### Performance Tips
+### Требования к изображениям
 
-**For Mobile**:
-- Keep images under 2048×2048 pixels
-- Use .jpg for backgrounds (smaller file size)
-- Use .png for characters (transparency needed)
-- Keep total project size under 500MB
+**Фоновые изображения**:
+- **Формат**: PNG или JPG
+- **Размер**: 1920×1080 (Full HD) или 1280×720 (HD)
+- **Соотношение сторон**: 16:9 (широкоэкранный)
+- **Размер файла**: До 5MB на изображение
 
-**For Steam**:
-- Use high-quality images (up to 4096×4096)
-- Use .ogg for music (better quality than .mp3)
-- No strict size limit, but avoid going over 5GB
+**Спрайты персонажей**:
+- **Формат**: PNG (с прозрачностью)
+- **Размер**: 512×1024 до 1024×2048 пикселей
+- **Фон**: Прозрачный (без фона)
+- **Размер файла**: До 2MB на спрайт
 
-### Saving Your Work
+### Советы по производительности
 
-**Save often!**:
-1. Press **Ctrl+S** (Windows) or **Cmd+S** (Mac) frequently
-2. Click **File → Save Project** before closing Unity
-3. Keep backups of your **Content/** folder (copy to external drive)
+**Для мобильных устройств**:
+- Держите изображения под 2048×2048 пикселей
+- Используйте .jpg для фонов (меньший размер файла)
+- Используйте .png для персонажей (нужна прозрачность)
+- Держите общий размер проекта под 500MB
 
-### Getting Help
+**Для Steam**:
+- Используйте качественные изображения (до 4096×4096)
+- Используйте .ogg для музыки (лучшее качество, чем .mp3)
+- Нет строгого ограничения размера, но избегайте превышения 5GB
 
-**If you're stuck**:
-1. Click **NovelCore → Help** → Opens this manual
-2. Click **NovelCore → Validate Project** → Checks for errors
-3. Ask your developer for technical help
-4. Join the community forum (link in Help menu)
+### Сохранение работы
+
+**Сохраняйте часто!**:
+1. Нажимайте **Ctrl+S** (Windows) или **Cmd+S** (Mac) часто
+2. Нажимайте **Save** в Scene Editor после изменений
+3. Нажимайте **Save** в Character Editor после изменений
+4. Нажимайте **File → Save Project** перед закрытием Unity
+5. Делайте резервные копии папки **Assets/Content/** (копируйте на внешний диск)
+
+### Работа с Addressables
+
+**Важно**: Все ассеты (изображения, аудио), используемые в новелле, должны быть помечены как Addressable:
+
+1. Правый клик на ассет в Project window
+2. Выберите **Addressables → Mark Addressable**
+3. Ассет получит значок с пометкой (обычно маленькая буква "A")
+
+Без этого ассеты не загрузятся во время воспроизведения!
+
+### Получение помощи
+
+**Если вы застряли**:
+1. Проверьте окно Console (Window → General → Console) на наличие ошибок
+2. Используйте **Window → NovelCore → Story Flow → Validate** для проверки целостности
+3. Просмотрите пример проекта (Generate Sample Project) для образца
+4. Обратитесь к разработчику за технической помощью
+5. Изучите документацию в папке `specs/001-visual-novel-constructor/`
 
 ---
 
-## Keyboard Shortcuts
-
-**Scene Editor**:
-- `Ctrl/Cmd + S`: Save scene
-- `Ctrl/Cmd + N`: New scene
-- `Ctrl/Cmd + D`: Duplicate selected item
-- `Delete`: Remove selected item
-
-**Preview Mode**:
-- `Space` or `Click`: Advance dialogue
-- `Ctrl/Cmd + Space`: Skip dialogue
-- `Esc`: Show menu
-- `Ctrl/Cmd + S`: Quick save
-- `Ctrl/Cmd + L`: Load save
+## Горячие клавиши
 
 **Unity**:
-- `Ctrl/Cmd + S`: Save project
-- `Ctrl/Cmd + Shift + S`: Save all
-- `Ctrl/Cmd + P`: Play/Stop preview
+- `Ctrl/Cmd + S`: Сохранить проект
+- `Ctrl/Cmd + P`: Запустить/остановить предпросмотр (Play Mode)
+- `Ctrl/Cmd + Shift + S`: Сохранить всё
+
+**Scene Editor / Character Editor**:
+- Используйте кнопки **Save** в окнах редакторов для сохранения
+
+**Режим предпросмотра (Play Mode)**:
+- `Space` или `Клик`: Продвижение диалога
+- Клик по кнопке выбора: Сделать выбор
 
 ---
 
-## Glossary
+## Глоссарий
 
-**Terms you'll see**:
+**Термины, которые вы встретите**:
 
-- **Scene**: A single moment or location in your story
-- **Dialogue Line**: One piece of text spoken by a character or narrator
-- **Character Sprite**: The image of a character
-- **Emotion**: A character's facial expression (happy, sad, etc.)
-- **Choice/Branch**: A decision point where players pick an option
-- **Background**: The image behind characters (location)
-- **Asset**: Any file (image, audio) used in your game
-- **Preview**: Testing your game inside Unity
-- **Build**: Creating the final game file for players
-- **Addressable**: A system that loads assets (you usually don't need to worry about this!)
-
----
-
-## Appendix: Image Requirements
-
-### Background Images
-
-- **Format**: PNG or JPG
-- **Size**: 1920×1080 (Full HD) or 1280×720 (HD)
-- **Aspect Ratio**: 16:9 (widescreen)
-- **File Size**: Keep under 5MB per image
-
-### Character Sprites
-
-- **Format**: PNG (with transparency)
-- **Size**: 512×1024 to 1024×2048 pixels
-- **Background**: Transparent (no background)
-- **File Size**: Keep under 2MB per sprite
-
-### Audio Files
-
-**Music**:
-- **Format**: .mp3 or .ogg
-- **Bitrate**: 128-192 kbps
-- **Length**: Any (will loop)
-- **File Size**: Keep under 10MB per track
-
-**Sound Effects**:
-- **Format**: .wav or .ogg
-- **Bitrate**: 96 kbps
-- **Length**: Under 5 seconds
-- **File Size**: Keep under 1MB per sound
+- **Scene (Сцена)**: Один момент или локация в вашей истории
+- **SceneData**: Файл с данными сцены (.asset файл)
+- **Dialogue Line (Реплика диалога)**: Один фрагмент текста, произнесённый персонажем или повествователем
+- **Character Sprite (Спрайт персонажа)**: Изображение персонажа
+- **CharacterData**: Файл с данными персонажа (.asset файл)
+- **Emotion (Эмоция)**: Выражение лица персонажа (neutral, happy, sad, angry и т.д.)
+- **Choice/Branch (Выбор/Разветвление)**: Точка принятия решения, где игроки выбирают вариант
+- **Background (Фон)**: Изображение за персонажами (локация)
+- **Asset (Ассет)**: Любой файл (изображение, аудио), используемый в игре
+- **Preview (Предпросмотр)**: Тестирование игры внутри Unity
+- **Play Mode (Режим воспроизведения)**: Режим Unity для тестирования игры
+- **Build (Сборка)**: Создание финального файла игры для игроков
+- **Addressable**: Система загрузки ассетов (все ваши изображения и аудио должны быть помечены как Addressable)
+- **GameStarter**: Компонент Unity, запускающий вашу новеллу
+- **UIManager**: Компонент Unity, управляющий пользовательским интерфейсом
 
 ---
 
-## Appendix: Common Workflows
+## Приложение: Типичные рабочие процессы
 
-### Workflow 1: Adding a New Scene
+### Процесс 1: Добавление новой сцены
 
-1. **NovelCore → Scene Editor**
-2. **+ New Scene**
-3. Drag background image
-4. Drag background music
-5. Add characters (if any)
-6. Add dialogue lines
-7. Add choices (if branching)
-8. **Save Scene**
-9. **Preview** to test
+1. **Window → NovelCore → Scene Editor**
+2. **New Scene**
+3. Выберите папку и имя файла
+4. Заполните Scene ID и Scene Name
+5. Перетащите фоновое изображение
+6. Перетащите фоновую музыку (опционально)
+7. Добавьте персонажей (если есть)
+8. Добавьте реплики диалога
+9. Добавьте выборы (если есть разветвления)
+10. Нажмите **Save**
+11. Запустите **Play Mode** для проверки
 
-**Time**: 10-20 minutes per scene
+**Время**: 10-20 минут на сцену
 
-### Workflow 2: Creating a Character
+### Процесс 2: Создание персонажа
 
-1. **NovelCore → Character Editor**
-2. **+ New Character**
-3. Enter name and ID
-4. Add `neutral` emotion sprite
-5. Add other emotions (happy, sad, etc.)
-6. **Save Character**
+1. **Window → NovelCore → Character Editor**
+2. **New Character**
+3. Выберите папку и имя файла
+4. Введите Character ID и Display Name
+5. Добавьте эмоцию `neutral` со спрайтом
+6. Добавьте другие эмоции (happy, sad и т.д.)
+7. Нажмите **Save**
 
-**Time**: 5-10 minutes per character
+**Время**: 5-10 минут на персонажа
 
-### Workflow 3: Updating Dialogue
+### Процесс 3: Обновление диалога
 
-1. **NovelCore → Scene Editor**
-2. Select your scene
-3. Find the dialogue line to edit
-4. Click the text field and type changes
-5. **Save Scene**
-6. **Preview** to verify
+1. **Window → NovelCore → Scene Editor**
+2. Выберите вашу сцену в Project window (сцена загрузится автоматически)
+3. Найдите реплику для редактирования в секции Dialogue
+4. Кликните на поле Text и введите изменения
+5. Нажмите **Save**
+6. Запустите **Play Mode** для проверки
 
-**Time**: 1-2 minutes per change
+**Время**: 1-2 минуты на изменение
 
-### Workflow 4: Publishing an Update
+### Процесс 4: Создание разветвлённой истории
 
-1. Make your changes to scenes/characters
-2. **Save All** (File → Save Project)
-3. **Validate Project** (NovelCore → Validate Project)
-4. Fix any errors
-5. **NovelCore → Build Pipeline**
-6. Increase version number (1.0.0 → 1.1.0)
-7. **Build All Platforms**
-8. Test all builds
-9. Upload to Steam/App Store/Google Play
+1. Создайте несколько сцен (например, Scene_Start, Scene_Left, Scene_Right, Scene_Ending)
+2. В Scene_Start добавьте выбор с двумя вариантами
+3. Первый вариант ведёт к Scene_Left
+4. Второй вариант ведёт к Scene_Right
+5. Оба Scene_Left и Scene_Right имеют Next Scene → Scene_Ending
+6. Откройте **Window → NovelCore → Story Flow** для визуализации
+7. Нажмите **Validate** для проверки целостности
+8. Протестируйте оба пути в Play Mode
 
-**Time**: 30-60 minutes (mostly build time)
+**Время**: 30-45 минут для простого разветвления
+
+### Процесс 5: Проверка проекта перед публикацией
+
+1. Внесите все изменения в сцены/персонажи
+2. Нажмите **File → Save Project**
+3. Откройте **Window → NovelCore → Story Flow**
+4. Нажмите **Validate** для проверки ошибок
+5. Исправьте найденные проблемы
+6. Протестируйте все пути в Play Mode
+7. Проверьте, что все ассеты помечены как Addressable
+8. (Функционал Build Pipeline будет доступен в будущих версиях)
+
+**Время**: 15-30 минут для проверки
 
 ---
 
-## Need More Help?
+## Нужна дополнительная помощь?
 
-**Resources**:
-- **Video Tutorials**: [Link to tutorial videos] (if available)
-- **Community Forum**: [Link to forum] (if available)
-- **Sample Project**: Open `Content/Projects/SampleProject` to see an example
-- **Developer Contact**: Ask your developer for technical support
+**Ресурсы**:
+- **Пример проекта**: Запустите **NovelCore → Generate Sample Project** для создания примера
+- **Документация для разработчиков**: См. `specs/001-visual-novel-constructor/quickstart.md`
+- **Story Flow**: Используйте **Window → NovelCore → Story Flow** для визуализации структуры
+- **Техническая поддержка**: Обратитесь к вашему разработчику
 
-**Remember**: You don't need to understand the technical parts. Focus on creating great stories! 📖✨
+**Помните**: Вам не нужно понимать технические детали. Сосредоточьтесь на создании отличных историй! 📖✨
 
 ---
 
-**Version History**:
-- **1.0** (2026-03-06): Initial release
+## Что изменилось в версиях
 
-**Made with ❤️ using Novel Core Constructor**
+**Версия 0.3.0** (2026-03-10):
+- ✅ Полностью функциональный редактор сцен (Scene Editor)
+- ✅ Редактор персонажей (Character Editor)
+- ✅ Визуализация графа сюжета (Story Flow Window)
+- ✅ Система диалогов с поддержкой персонажей и эмоций
+- ✅ Система выборов с разветвлениями
+- ✅ Предпросмотр в Play Mode
+- ✅ Генератор примера проекта
+- ✅ Навигация по истории (кнопки Back и History)
+- 🚧 Build Pipeline (в разработке)
+- 🚧 Звуковые эффекты для диалогов (в разработке)
+- 🚧 Озвучка персонажей (в разработке)
+
+**Версия 0.2.0** (2026-03-07):
+- Базовая система диалогов
+- UI компоненты
+- Система управления сценами
+
+**Версия 0.1.0** (2026-03-06):
+- Начальная настройка проекта
+- Базовая архитектура
+
+---
+
+**Создано с ❤️ для авторов визуальных новелл**
