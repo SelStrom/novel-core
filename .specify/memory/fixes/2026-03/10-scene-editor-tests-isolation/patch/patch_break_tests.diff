@@ -1,0 +1,50 @@
++
++        [Test]
++        public void MixDialogueLinesAndChoices_AllShouldBeSubAssets()
++        {
++            var line = ScriptableObject.CreateInstance<DialogueLineData>();
++            line.name = "Line_1";
++            AssetDatabase.AddObjectToAsset(line, _testScene);
++
++            var choice = ScriptableObject.CreateInstance<ChoiceData>();
++            choice.name = "Choice_1";
++            AssetDatabase.AddObjectToAsset(choice, _testScene);
++
++            EditorUtility.SetDirty(_testScene);
++            AssetDatabase.SaveAssets();
++
++            Object[] subAssets = AssetDatabase.LoadAllAssetRepresentationsAtPath(_testScenePath);
++            Assert.That(subAssets.Length, Is.EqualTo(2),
++                "Both DialogueLineData and ChoiceData should be sub-assets");
++
++            bool hasDialogueLine = System.Array.Exists(subAssets, obj => obj is DialogueLineData);
++            bool hasChoice = System.Array.Exists(subAssets, obj => obj is ChoiceData);
++
++            Assert.That(hasDialogueLine, Is.True, "Should have DialogueLineData sub-asset");
++            Assert.That(hasChoice, Is.True, "Should have ChoiceData sub-asset");
++        }
++
++        [Test]
++        public void BackwardCompatibility_ExternalReferences_ShouldStillLoad()
++        {
++            var externalLine = ScriptableObject.CreateInstance<DialogueLineData>();
++            string externalPath = "Assets/ExternalDialogueLine_BreakTest.asset";
++            AssetDatabase.CreateAsset(externalLine, externalPath);
++            AssetDatabase.SaveAssets();
++
++            try
++            {
++                var sceneData = AssetDatabase.LoadAssetAtPath<SceneData>(_testScenePath);
++                Assert.That(sceneData, Is.Not.Null, "SceneData should load");
++
++                var loadedExternal = AssetDatabase.LoadAssetAtPath<DialogueLineData>(externalPath);
++                Assert.That(loadedExternal, Is.Not.Null,
++                    "External DialogueLineData should still load (backward compatibility)");
++            }
++            finally
++            {
++                AssetDatabase.DeleteAsset(externalPath);
++            }
++        }
++    }
++}
