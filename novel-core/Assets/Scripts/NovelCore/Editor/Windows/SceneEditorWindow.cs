@@ -205,6 +205,8 @@ namespace NovelCore.Editor.Windows
 
                 var charactersProperty = serializedObject.FindProperty("_characters");
 
+                int indexToDelete = -1;
+
                 // List characters
                 for (int i = 0; i < charactersProperty.arraySize; i++)
                 {
@@ -226,9 +228,7 @@ namespace NovelCore.Editor.Windows
 
                     if (GUILayout.Button("×", GUILayout.Width(25)))
                     {
-                        charactersProperty.DeleteArrayElementAtIndex(i);
-                        serializedObject.ApplyModifiedProperties();
-                        return;
+                        indexToDelete = i;
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -246,6 +246,13 @@ namespace NovelCore.Editor.Windows
                 {
                     charactersProperty.arraySize++;
                     _selectedCharacterIndex = charactersProperty.arraySize - 1;
+                }
+
+                // Perform deletion AFTER all GUI is drawn
+                if (indexToDelete >= 0)
+                {
+                    charactersProperty.DeleteArrayElementAtIndex(indexToDelete);
+                    GUI.changed = true;
                 }
 
                 serializedObject.ApplyModifiedProperties();
@@ -279,6 +286,8 @@ namespace NovelCore.Editor.Windows
 
                 var dialogueProperty = serializedObject.FindProperty("_dialogueLines");
 
+                int indexToDelete = -1;
+
                 // List dialogue lines
                 for (int i = 0; i < dialogueProperty.arraySize; i++)
                 {
@@ -304,19 +313,7 @@ namespace NovelCore.Editor.Windows
 
                     if (GUILayout.Button("×", GUILayout.Width(25)))
                     {
-                        var subAsset = dialogueProperty.GetArrayElementAtIndex(i).objectReferenceValue;
-                        
-                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
-                        {
-                            AssetDatabase.RemoveObjectFromAsset(subAsset);
-                            EditorUtility.SetDirty(_currentScene);
-                        }
-                        
-                        dialogueProperty.DeleteArrayElementAtIndex(i);
-                        serializedObject.ApplyModifiedProperties();
-                        AssetDatabase.SaveAssets();
-                        
-                        return;
+                        indexToDelete = i;
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -333,6 +330,22 @@ namespace NovelCore.Editor.Windows
                 if (GUILayout.Button("+ Add Dialogue Line"))
                 {
                     CreateNewDialogueLine(serializedObject, dialogueProperty);
+                }
+
+                // Perform deletion AFTER all GUI is drawn
+                if (indexToDelete >= 0)
+                {
+                    var subAsset = dialogueProperty.GetArrayElementAtIndex(indexToDelete).objectReferenceValue;
+                    
+                    if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
+                    {
+                        AssetDatabase.RemoveObjectFromAsset(subAsset);
+                        EditorUtility.SetDirty(_currentScene);
+                    }
+                    
+                    dialogueProperty.DeleteArrayElementAtIndex(indexToDelete);
+                    AssetDatabase.SaveAssets();
+                    GUI.changed = true;
                 }
 
                 serializedObject.ApplyModifiedProperties();
@@ -384,6 +397,8 @@ namespace NovelCore.Editor.Windows
 
                 var choicesProperty = serializedObject.FindProperty("_choices");
 
+                int indexToDelete = -1;
+
                 // List choices
                 for (int i = 0; i < choicesProperty.arraySize; i++)
                 {
@@ -409,19 +424,7 @@ namespace NovelCore.Editor.Windows
 
                     if (GUILayout.Button("×", GUILayout.Width(25)))
                     {
-                        var subAsset = choicesProperty.GetArrayElementAtIndex(i).objectReferenceValue;
-                        
-                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
-                        {
-                            AssetDatabase.RemoveObjectFromAsset(subAsset);
-                            EditorUtility.SetDirty(_currentScene);
-                        }
-                        
-                        choicesProperty.DeleteArrayElementAtIndex(i);
-                        serializedObject.ApplyModifiedProperties();
-                        AssetDatabase.SaveAssets();
-                        
-                        return;
+                        indexToDelete = i;
                     }
 
                     EditorGUILayout.EndHorizontal();
@@ -438,6 +441,22 @@ namespace NovelCore.Editor.Windows
                 if (GUILayout.Button("+ Add Choice"))
                 {
                     CreateNewChoice(serializedObject, choicesProperty);
+                }
+
+                // Perform deletion AFTER all GUI is drawn
+                if (indexToDelete >= 0)
+                {
+                    var subAsset = choicesProperty.GetArrayElementAtIndex(indexToDelete).objectReferenceValue;
+                    
+                    if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
+                    {
+                        AssetDatabase.RemoveObjectFromAsset(subAsset);
+                        EditorUtility.SetDirty(_currentScene);
+                    }
+                    
+                    choicesProperty.DeleteArrayElementAtIndex(indexToDelete);
+                    AssetDatabase.SaveAssets();
+                    GUI.changed = true;
                 }
 
                 serializedObject.ApplyModifiedProperties();
