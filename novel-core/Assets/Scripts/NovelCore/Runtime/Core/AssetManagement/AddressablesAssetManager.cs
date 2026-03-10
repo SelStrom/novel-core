@@ -40,10 +40,20 @@ public class AddressablesAssetManager : IAssetManager
             // Handle different key types
             if (key is AssetReference assetRef)
             {
+                if (!assetRef.RuntimeKeyIsValid())
+                {
+                    Debug.LogWarning($"AddressablesAssetManager: AssetReference has invalid RuntimeKey (empty or missing asset)");
+                    return null;
+                }
                 handle = Addressables.LoadAssetAsync<T>(assetRef);
             }
             else if (key is string stringKey)
             {
+                if (string.IsNullOrEmpty(stringKey))
+                {
+                    Debug.LogWarning($"AddressablesAssetManager: String key is null or empty");
+                    return null;
+                }
                 handle = Addressables.LoadAssetAsync<T>(stringKey);
             }
             else

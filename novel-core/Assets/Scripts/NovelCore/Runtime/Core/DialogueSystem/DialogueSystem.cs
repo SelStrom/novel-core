@@ -341,8 +341,8 @@ public class DialogueSystem : IDialogueSystem
             targetSceneRef = _currentScene.NextScene;
         }
 
-        // Load target scene if determined
-        if (targetSceneRef != null)
+        // Load target scene if determined and valid
+        if (targetSceneRef != null && targetSceneRef.RuntimeKeyIsValid())
         {
             Debug.Log($"DialogueSystem: Loading target scene...");
             
@@ -372,7 +372,12 @@ public class DialogueSystem : IDialogueSystem
         }
         else
         {
-            // No target scene determined, complete dialogue normally
+            // No valid target scene determined, complete dialogue normally
+            if (targetSceneRef != null && !targetSceneRef.RuntimeKeyIsValid())
+            {
+                Debug.LogWarning("DialogueSystem: NextScene AssetReference is invalid (empty or missing asset). Story ending.");
+            }
+            
             Debug.Log("DialogueSystem: No target scene determined, dialogue ending normally");
             _isPlaying = false;
             OnDialogueComplete?.Invoke();
