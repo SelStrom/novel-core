@@ -29,8 +29,9 @@ public class GameLifetimeScope : LifetimeScope
         // Asset Management
         builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
 
-        // Audio System
-        builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
+        // Audio System (MonoBehaviour - will be created as GameObject)
+        builder.RegisterComponentOnNewGameObject<UnityAudioService>(Lifetime.Singleton)
+            .AsImplementedInterfaces();
 
         // Input Handling (MonoBehaviour - will be created as GameObject)
         builder.RegisterComponentOnNewGameObject<UnityInputService>(Lifetime.Singleton)
