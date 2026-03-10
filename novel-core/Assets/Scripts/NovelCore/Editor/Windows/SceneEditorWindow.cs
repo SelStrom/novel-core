@@ -304,8 +304,18 @@ namespace NovelCore.Editor.Windows
 
                     if (GUILayout.Button("×", GUILayout.Width(25)))
                     {
+                        var subAsset = dialogueProperty.GetArrayElementAtIndex(i).objectReferenceValue;
+                        
+                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
+                        {
+                            AssetDatabase.RemoveObjectFromAsset(subAsset);
+                            EditorUtility.SetDirty(_currentScene);
+                        }
+                        
                         dialogueProperty.DeleteArrayElementAtIndex(i);
                         serializedObject.ApplyModifiedProperties();
+                        AssetDatabase.SaveAssets();
+                        
                         return;
                     }
 
@@ -399,8 +409,18 @@ namespace NovelCore.Editor.Windows
 
                     if (GUILayout.Button("×", GUILayout.Width(25)))
                     {
+                        var subAsset = choicesProperty.GetArrayElementAtIndex(i).objectReferenceValue;
+                        
+                        if (subAsset != null && AssetDatabase.IsSubAsset(subAsset))
+                        {
+                            AssetDatabase.RemoveObjectFromAsset(subAsset);
+                            EditorUtility.SetDirty(_currentScene);
+                        }
+                        
                         choicesProperty.DeleteArrayElementAtIndex(i);
                         serializedObject.ApplyModifiedProperties();
+                        AssetDatabase.SaveAssets();
+                        
                         return;
                     }
 
