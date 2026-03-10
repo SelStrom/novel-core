@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using NovelCore.Runtime.Data.Scenes;
 using NovelCore.Runtime.Data.Dialogue;
 using NovelCore.Runtime.Data.Choices;
+using NovelCore.Runtime.Data.Characters;
 using NovelCore.Runtime.Core.SceneManagement;
 using NovelCore.Runtime.Core;
 using NovelCore.Runtime.UI;
@@ -61,9 +62,9 @@ public static class SampleProjectGenerator
 
         // Generate placeholder assets
         GeneratePlaceholderBackgrounds();
-        GeneratePlaceholderCharacters();
+        // GeneratePlaceholderCharacters() теперь вызывается внутри GenerateStoryScenes()
 
-        // Generate story data
+        // Generate story data (создает персонажей и сцены)
         var scenes = GenerateStoryScenes();
 
         // Mark all scenes as Addressable
@@ -136,13 +137,25 @@ public static class SampleProjectGenerator
         SetupBackgroundAsAddressable("bg_home");
     }
 
-    private static void GeneratePlaceholderCharacters()
+    private static Dictionary<string, CharacterData> GeneratePlaceholderCharacters()
     {
+        var characters = new Dictionary<string, CharacterData>();
+
         // Generate simple colored textures as placeholder characters
         CreateColoredTexture("char_protagonist", new Color(1f, 0.8f, 0.6f), CHARACTERS_DIR); // Skin tone
         
-        // Настроить персонажей как Addressables
+        // Настроить текстуры персонажей как Addressables
         SetupCharacterAsAddressable("char_protagonist");
+
+        // Создать CharacterData ScriptableObject
+        var protagonist = CreateCharacterData("char_protagonist_001", "Protagonist", "char_protagonist");
+        
+        // Настроить CharacterData как Addressable
+        MarkAssetAsAddressable(protagonist);
+        
+        characters["protagonist"] = protagonist;
+
+        return characters;
     }
 
     private static void CreateColoredTexture(string name, Color color, string directory)
@@ -185,9 +198,54 @@ public static class SampleProjectGenerator
         Debug.Log($"[SampleProjectGenerator] Created placeholder texture: {path}");
     }
 
+    private static CharacterData CreateCharacterData(string characterId, string characterName, string textureName)
+    {
+        CharacterData characterData = ScriptableObject.CreateInstance<CharacterData>();
+        characterData.name = $"CharacterData_{characterName}";
+
+        SetPrivateField(characterData, "_characterId", characterId);
+        SetPrivateField(characterData, "_characterName", characterName);
+        SetPrivateField(characterData, "_defaultEmotion", "neutral");
+        SetPrivateField(characterData, "_animationType", AnimationType.Static);
+
+        // Создать эмоцию "neutral"
+        string texturePath = $"{CHARACTERS_DIR}/{textureName}.png";
+        string textureGuid = AssetDatabase.AssetPathToGUID(texturePath);
+        
+        if (string.IsNullOrEmpty(textureGuid))
+        {
+            Debug.LogWarning($"[SampleProjectGenerator] Character texture not found: {texturePath}");
+        }
+        
+        var emotions = new List<CharacterEmotion>
+        {
+            new CharacterEmotion
+            {
+                emotionName = "neutral",
+                sprite = new AssetReference(textureGuid),
+                spineSkin = "",
+                spineAnimation = ""
+            }
+        };
+
+        SetPrivateField(characterData, "_emotions", emotions);
+
+        // Сохранить как asset
+        string assetPath = $"{CHARACTERS_DIR}/CharacterData_{characterName}.asset";
+        AssetDatabase.CreateAsset(characterData, assetPath);
+        AssetDatabase.SaveAssets();
+
+        Debug.Log($"[SampleProjectGenerator] Created CharacterData: {assetPath}");
+
+        return characterData;
+    }
+
     private static Dictionary<string, SceneData> GenerateStoryScenes()
     {
         var scenes = new Dictionary<string, SceneData>();
+        
+        // Сначала создать персонажей
+        var characters = GeneratePlaceholderCharacters();
 
         // Scene 1: Introduction
         scenes["scene1"] = CreateScene(
@@ -215,7 +273,9 @@ public static class SampleProjectGenerator
                     emotion = "neutral"
                 }
             },
-            "bg_room"
+            "bg_room",
+            characters,
+            new List<string> { "protagonist" }
         );
 
         // Scene 2: Choice Point
@@ -238,7 +298,9 @@ public static class SampleProjectGenerator
                     emotion = "neutral"
                 }
             },
-            "bg_room"
+            "bg_room",
+            characters,
+            new List<string> { "protagonist" }
         );
 
         // Scene 3a: Path A (Going outside)
@@ -267,7 +329,9 @@ public static class SampleProjectGenerator
                     emotion = "neutral"
                 }
             },
-            "bg_street"
+            "bg_street",
+            characters,
+            new List<string> { "protagonist" }
         );
 
         // Scene 3b: Path B (Staying home)
@@ -296,7 +360,9 @@ public static class SampleProjectGenerator
                     emotion = "neutral"
                 }
             },
-            "bg_home"
+            "bg_home",
+            characters,
+            new List<string> { "protagonist" }
         );
 
         return scenes;
@@ -307,7 +373,9 @@ public static class SampleProjectGenerator
         string sceneId,
         string sceneName,
         List<DialogueContent> dialogueContents,
-        string backgroundName)
+        string backgroundName,
+        Dictionary<string, CharacterData> characters = null,
+        List<string> characterKeys = null)
     {
         // Create SceneData asset
         SceneData scene = ScriptableObject.CreateInstance<SceneData>();
@@ -321,6 +389,24 @@ public static class SampleProjectGenerator
         SetPrivateField(scene, "_transitionDuration", 0.5f);
         SetPrivateField(scene, "_autoAdvance", false);
         SetPrivateField(scene, "_autoAdvanceDelay", 2.0f);
+
+        // Создать AssetReference для бэкграунда
+        if (!string.IsNullOrEmpty(backgroundName))
+        {
+            string bgPath = $"{BACKGROUNDS_DIR}/{backgroundName}.png";
+            string bgGuid = AssetDatabase.AssetPathToGUID(bgPath);
+            
+            if (!string.IsNullOrEmpty(bgGuid))
+            {
+                var backgroundRef = new AssetReference(bgGuid);
+                SetPrivateField(scene, "_backgroundImage", backgroundRef);
+                Debug.Log($"[SampleProjectGenerator] Set background for {sceneName}: {backgroundName}");
+            }
+            else
+            {
+                Debug.LogWarning($"[SampleProjectGenerator] Background not found: {bgPath}");
+            }
+        }
 
         // Save scene asset FIRST (required before adding sub-assets)
         string path = $"{SCENES_DIR}/{fileName}.asset";
@@ -340,7 +426,38 @@ public static class SampleProjectGenerator
         }
 
         SetPrivateField(scene, "_dialogueLines", dialogueLines);
-        SetPrivateField(scene, "_characters", new List<CharacterPlacement>());
+
+        // Создать CharacterPlacements
+        var characterPlacements = new List<CharacterPlacement>();
+        if (characters != null && characterKeys != null)
+        {
+            foreach (var key in characterKeys)
+            {
+                if (characters.TryGetValue(key, out var characterData))
+                {
+                    string charPath = AssetDatabase.GetAssetPath(characterData);
+                    string charGuid = AssetDatabase.AssetPathToGUID(charPath);
+
+                    if (!string.IsNullOrEmpty(charGuid))
+                    {
+                        characterPlacements.Add(new CharacterPlacement
+                        {
+                            character = new AssetReference(charGuid),
+                            position = new Vector2(0.5f, 0.5f),
+                            initialEmotion = "neutral",
+                            sortingOrder = 0
+                        });
+                        Debug.Log($"[SampleProjectGenerator] Added character '{key}' to {sceneName}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[SampleProjectGenerator] Character GUID not found for: {charPath}");
+                    }
+                }
+            }
+        }
+
+        SetPrivateField(scene, "_characters", characterPlacements);
         SetPrivateField(scene, "_choices", new List<ChoiceData>());
 
         // Mark scene as dirty and save
@@ -973,6 +1090,54 @@ public static class SampleProjectGenerator
         EditorUtility.SetDirty(settings);
 
         Debug.Log($"[SampleProjectGenerator] ✅ Marked as Addressable: {scene.SceneName} (GUID: {guid})");
+    }
+
+    /// <summary>
+    /// Marks a CharacterData asset as Addressable in the default group.
+    /// </summary>
+    private static void MarkAssetAsAddressable(CharacterData characterData)
+    {
+        if (characterData == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] Cannot mark null character as Addressable");
+            return;
+        }
+
+        string assetPath = AssetDatabase.GetAssetPath(characterData);
+        string guid = AssetDatabase.AssetPathToGUID(assetPath);
+
+        // Get Addressables settings
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] Addressables settings not found. Please initialize Addressables.");
+            return;
+        }
+
+        // Check if already addressable
+        var entry = settings.FindAssetEntry(guid);
+        if (entry != null)
+        {
+            Debug.Log($"[SampleProjectGenerator] ✓ Already Addressable: {characterData.CharacterName}");
+            return;
+        }
+
+        // Get default group (or create if needed)
+        var defaultGroup = settings.DefaultGroup;
+        if (defaultGroup == null)
+        {
+            Debug.LogError("[SampleProjectGenerator] No default Addressables group found");
+            return;
+        }
+
+        // Add asset to Addressables
+        entry = settings.CreateOrMoveEntry(guid, defaultGroup, false, false);
+        entry.address = $"Characters/{characterData.CharacterName}"; // Use character name with "Characters/" prefix as address
+
+        // Mark settings as dirty
+        EditorUtility.SetDirty(settings);
+
+        Debug.Log($"[SampleProjectGenerator] ✅ Marked as Addressable: {characterData.CharacterName} (GUID: {guid})");
     }
 
     /// <summary>

@@ -266,6 +266,10 @@ public class SceneManager : ISceneManager
         
         // Position background at origin
         _backgroundContainer.transform.position = Vector3.zero;
+        
+        // Prevent Unity from destroying background container on scene load
+        // (SceneManager is a Singleton, so background should persist)
+        UnityEngine.Object.DontDestroyOnLoad(_backgroundContainer);
 
         Debug.Log("SceneManager: Scene hierarchy initialized");
     }
@@ -289,6 +293,14 @@ public class SceneManager : ISceneManager
             {
                 Debug.LogWarning($"SceneManager: Failed to load background sprite for {sceneData.SceneName}");
                 return;
+            }
+
+            // Defensive check: Ensure background renderer still exists
+            // (This should not happen after DontDestroyOnLoad fix, but added for safety)
+            if (_backgroundRenderer == null)
+            {
+                Debug.LogError("SceneManager: Background renderer was destroyed! Re-initializing scene hierarchy...");
+                InitializeSceneHierarchy();
             }
 
             // Assign to renderer
@@ -344,6 +356,10 @@ public class SceneManager : ISceneManager
 
             // Create character GameObject
             var characterObj = new GameObject($"Character_{characterData.CharacterName}");
+            
+            // Prevent Unity from destroying character objects on scene load
+            // (SceneManager is a Singleton, characters should persist across scene transitions)
+            UnityEngine.Object.DontDestroyOnLoad(characterObj);
             
             // Position character
             Vector3 worldPosition = NormalizedToWorldPosition(placement.position);
