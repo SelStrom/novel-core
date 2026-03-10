@@ -928,7 +928,36 @@ EOF
    - Update `.specify/memory/fixes/README.md` index
    - Run `.specify/scripts/update-fix-index.sh` для автоматического обновления
 
-2. **Update documentation** (если нужно):
+2. **Check archiving period** (if needed):
+   - Count active fixes: `find .specify/memory/fixes -type d -name "[0-9][0-9]-*" | wc -l`
+   - If >100 fixes → run `.specify/scripts/archive-old-fixes.sh`
+   - If directory size >500MB → run archiving immediately
+
+3. **Constitution review** (MANDATORY after each fix):
+   - Review `.fix/theories/impl_theory.md` and `.fix/theories/spec_theory.md`
+   - Check if fix revealed:
+     - **API misuse pattern** → add best practices to Constitution
+     - **Recurring bug category** → add validation requirement to Constitution
+     - **Missing guidance** → add explicit rules to Constitution
+   - If 3+ similar fixes found → MUST update Constitution with preventive guidance
+   - Example patterns requiring Constitution update:
+     - Multiple VContainer registration errors → add VContainer best practices
+     - Multiple DontDestroyOnLoad missing → add GameObject lifecycle rules
+     - Multiple async/await issues → add async patterns guidance
+     - Multiple null checks missing → add defensive programming requirements
+
+4. **Plan review** (if SPEC_THEORY selected):
+   - Check if spec.md needs updates (contradictions, outdated requirements)
+   - Update plan.md if implementation approach changed
+   - Propagate changes to related specs
+
+5. **Monthly pattern analysis** (1st of each month):
+   - Review `.specify/memory/fixes/YYYY-MM/README.md`
+   - Identify recurring patterns (>3 instances)
+   - Update Constitution with preventive guidance
+   - Consider refactoring if component has >10 fixes
+
+6. **Update documentation** (если нужно):
    - Обновить `.specify/memory/testing-strategy.md` (если добавлен новый паттерн тестирования)
    - Обновить spec.md (если был выбран SPEC_THEORY)
 
@@ -954,6 +983,25 @@ EOF
    - Manually test the fix in Unity Editor (if needed)
    - Close issue [issue ID]
    - Monitor for related bugs
+   ```
+
+4. **Constitution Review Check** (MANDATORY):
+   - Analyze fix patterns from `.fix/theories/impl_theory.md`
+   - Check if similar fixes exist: `grep -r "[root cause category]" .specify/memory/fixes/`
+   - If 3+ similar fixes → recommend Constitution update
+   - Output:
+   ```markdown
+   ## 📋 Constitution Review
+
+   **Pattern Detected**: [API misuse / Missing validation / etc.]
+   **Occurrences**: [N] similar fixes found
+   **Recommendation**: 
+   - [ ] Add [specific guidance] to Constitution Principle [X]
+   - [ ] Update [spec.md / plan.md] with clarifications
+   
+   **Auto-check for archiving**:
+   - Total active fixes: [N]
+   - Action: [None / Run archive-old-fixes.sh]
    ```
 
 ## Directory Structure

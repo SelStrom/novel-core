@@ -1,19 +1,27 @@
 <!--
 Sync Impact Report:
-- Version: 1.14.0 → 1.15.0 (MINOR: Added Principle X - File Organization & Temporary Artifacts)
-- Modified Principles: None
+- Version: 1.15.0 → 1.16.0 (MINOR: Added VContainer + GameObject best practices to Principle VI)
+- Modified Principles:
+  - Principle VI (Modular Architecture & Testing): Added VContainer MonoBehaviour registration guidance
+  - Principle VI (Modular Architecture & Testing): Added DI Singleton GameObject lifecycle requirements
 - Added Sections:
-  - Principle X (File Organization & Temporary Artifacts): Defines storage locations for logs, test reports, and intermediate documentation
-  - Updated .gitignore: Added temp/ folder exclusion
+  - VContainer MonoBehaviour Registration: Explicit guidance to use RegisterComponentOnNewGameObject for MonoBehaviour
+  - DI Singleton GameObject Lifecycle: Requirement for DontDestroyOnLoad in Singleton services
+- Removed Sections: None
 - Templates Requiring Updates:
-  ✅ .gitignore: Updated with temp/ folder
-  ⚠ project-structure.md: Should document temp/ and .specify/memory/ usage
-- Follow-up TODOs: Update project-structure.md with new file organization rules
+  ✅ GameLifetimeScope.cs: Already follows best practices after bc50296
+  ✅ SceneManager.cs: Already follows best practices after a030566
+  ⚠ Developer documentation: Should add VContainer registration checklist
+- Follow-up TODOs: 
+  - Create code review checklist for VContainer registrations
+  - Add to developer onboarding guide
+  - Consider adding to .editorconfig or analyzer rules
+- Source: Patterns identified from fixes 10-audio-di-null and 10-sample-project-backgrounds (2026-03-10)
 -->
 
 # Novel Core Constructor Constitution
 
-**Version**: 1.15.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.16.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10
 
 ## Core Principles
 
@@ -100,6 +108,24 @@ The constructor MUST be built as composable, independently testable modules with
 - **Editor Extensions**: Custom editors MUST be optional and not required for runtime functionality
 - **Platform Abstraction**: Platform-specific code (Steam, iOS, Android APIs) MUST be isolated behind interfaces
 - **Dependency Injection**: Systems MUST use constructor injection or ScriptableObject configuration, avoiding singletons
+- **VContainer MonoBehaviour Registration**: MonoBehaviour services MUST be registered using `RegisterComponentOnNewGameObject<T>().AsImplementedInterfaces()`, NOT `Register<TInterface, TImplementation>()`. VContainer cannot instantiate MonoBehaviour via constructor. Example:
+  ```csharp
+  // ✅ CORRECT (MonoBehaviour)
+  builder.RegisterComponentOnNewGameObject<UnityAudioService>(Lifetime.Singleton)
+      .AsImplementedInterfaces();
+  
+  // ❌ WRONG (MonoBehaviour - will return null)
+  builder.Register<IAudioService, UnityAudioService>(Lifetime.Singleton);
+  
+  // ✅ CORRECT (POCO class)
+  builder.Register<IAssetManager, AddressablesAssetManager>(Lifetime.Singleton);
+  ```
+- **DI Singleton GameObject Lifecycle**: Singleton services that create Unity GameObject MUST call `UnityEngine.Object.DontDestroyOnLoad(gameObject)` immediately after GameObject creation to prevent Unity from destroying them on scene transitions. GameObject lifecycle MUST match service lifetime (Singleton → persists until app shutdown). Example:
+  ```csharp
+  // In SceneManager constructor or initialization
+  _backgroundContainer = new GameObject("Background");
+  UnityEngine.Object.DontDestroyOnLoad(_backgroundContainer); // ← REQUIRED for Singleton
+  ```
 - **Unit Testing**: Each module MUST have unit tests achieving >80% code coverage of business logic
 - **Integration Testing**: Cross-module contracts (e.g., dialogue system + save system) MUST have integration tests covering:
   - Data flow between modules
@@ -695,4 +721,4 @@ Violations of simplicity/modularity principles (Principle VI) MUST be justified 
 - **Debt Tracking**: Document as technical debt with remediation timeline
 - **Review Cadence**: Quarterly review of accumulated complexity debt
 
-**Version**: 1.15.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-09
+**Version**: 1.16.0 | **Ratified**: 2026-03-06 | **Last Amended**: 2026-03-10
