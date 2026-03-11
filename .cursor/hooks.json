@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "hooks": {
+    "subagentStart": [
+      {
+        "command": ".cursor/hooks/fix-subagent-start.sh",
+        "matcher": "bug-context|spec-theory|impl-theory|theory-arbitrator|fix-patcher|break-tester"
+      }
+    ],
+    "subagentStop": [
+      {
+        "command": ".cursor/hooks/fix-subagent-stop.sh",
+        "matcher": "bug-context|spec-theory|impl-theory|theory-arbitrator|fix-patcher|break-tester"
+      }
+    ]
+  }
+}
